@@ -36,27 +36,27 @@ shuffleMembers(membersPartnerData as Member[])
 <template>
   <div class="TeamPage">
     <TeamHero>
-      <template #title>认识团队</template>
-      <template #lead>Vue 及其生态系统发展的背后是一个国际化的团队，以下是部分团员的个人信息。</template>
+      <template #title>認識團隊</template>
+      <template #lead>Vue 及其生態系統發展的背後是一個國際化的團隊，以下是部分團員的個人信息。</template>
 
       <template #action>
-        <VTLink href="https://github.com/vuejs/governance/blob/master/Team-Charter.md">了解更多团队信息</VTLink>
+        <VTLink href="https://github.com/vuejs/governance/blob/master/Team-Charter.md">瞭解更多團隊信息</VTLink>
       </template>
     </TeamHero>
 
     <TeamList :members="membersCoreData as Member[]">
-      <template #title>核心团队成员</template>
-      <template #lead>核心团队成员是那些积极参与维护一个或多个核心项目的人。他们对 Vue 的生态系统做出了重大贡献，并对项目及其用户的成功做出了长期的承诺。</template>
+      <template #title>核心團隊成員</template>
+      <template #lead>核心團隊成員是積極參與維護一個或多個核心項目的人。他們對 Vue 的生態系統做出了重大貢獻，並對項目及其用戶的成功做出了長期的承諾。</template>
     </TeamList>
 
     <TeamList :members="membersEmeritiData as Member[]">
-      <template #title>名誉核心团队</template>
-      <template #lead>我们在此致敬过去曾做出过突出贡献的不再活跃的团队成员。</template>
+      <template #title>名譽核心團隊</template>
+      <template #lead>我們在此致敬過去曾做出過突出貢獻的不再活躍的團隊成員。</template>
     </TeamList>
 
     <TeamList :members="membersPartnerData as Member[]">
-      <template #title>社区伙伴</template>
-      <template #lead>一些 Vue 的社区成员让这里变得更加丰富多彩，有必要在此特别提及。我们与这些主要合作伙伴建立了更加亲密的关系，经常与他们就即将到来的功能和新闻展开协作。</template>
+      <template #title>社區夥伴</template>
+      <template #lead>一些 Vue 的社區成員讓這裡變得更加豐富多彩，有必要在此特別提及。我們與這些主要合作伙伴建立了更加親密的關係，經常與他們就即將到來的功能和新聞展開協作。</template>
     </TeamList>
   </div>
 </template>
