@@ -1,6 +1,6 @@
 ---
 page: true
-title: Vue.js - 渐进式 JavaScript 框架
+title: Vue.js - 漸進式 JavaScript 框架
 ---
 
 <script setup>
