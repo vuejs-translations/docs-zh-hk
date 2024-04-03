@@ -6,13 +6,13 @@
 
 ## 如何參與貢獻
 
-本倉庫是[英文文檔倉庫](https://github.com/vuejs-translations/docs-zh-cn)的鏡像翻譯倉庫。我們僅對原文進行內容同步與翻譯，**不包含**基於英文原版的擴展、刪減或演繹等。如對原文有任何意見或建議，歡迎到[英文文檔倉庫](https://github.com/vuejs/docs)提出 issue 或發起 PR。
+本倉庫是[英文文檔倉庫](https://github.com/vuejs-translations/docs-zh-cn)的鏡像翻譯倉庫。我們僅對原文進行內容同步與翻譯，**不包含**基於英文原版的補充、刪改或演繹等。如對原文有任何意見或建議，歡迎到[英文文檔倉庫](https://github.com/vuejs/docs)提出 issue 或發起 PR。
 
 有勞訪問我們的 [wiki](https://github.com/vuejs-translations/docs-zh-cn/wiki) 瞭解相關注意事項。
 
-目前網站處於維護狀態，我們會定期同步英文版的更新，包括文檔內容和前端代碼等。歡迎大家：
+目前網站處於長期維護狀態，我們會定期同步英文版的更新，包括文檔內容和前端代碼等。歡迎大家：
 
-- 同步英文站點最新的改動到這裡
+- 同步英文站點最新的改動到此處
 - 修復錯別字或錯誤的書寫格式
 - 發布有關譯法或書寫格式的 issue 討論
 - 翻譯有關部署或協作流程的 issue 討論
@@ -36,14 +36,6 @@ pnpm run dev
 ## 貢獻者列表
 
 最新的文檔/翻譯貢獻情況可以參閱 GitHub 提供的 [contributors](https://github.com/dy-xiaodong2022/docs-zh-hant/graphs/contributors) 頁面。
-
-以下是基於該倉庫中 PR 和 commit 統計並按總數量排序的所有貢獻者，[生成邏輯可在此查閱](https://github.com/ShenQingchuan/github-contributor-svg-generator)。
-
-<p align="center">
-  <a href="https://cdn.jsdelivr.net/gh/ShenQingchuan/github-contributor-svg-generator@main/.github-contributors/vuejs-translations_docs-zh-cn.svg">
-    <img src="https://cdn.jsdelivr.net/gh/ShenQingchuan/github-contributor-svg-generator@main/.github-contributors/vuejs-translations_docs-zh-cn.svg" />
-  </a>
-</p>
 
 ## 版權聲明
 
