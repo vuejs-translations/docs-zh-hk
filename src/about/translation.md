@@ -2,293 +2,293 @@
 aside: deep
 ---
 
-# 翻译说明
+# 翻譯說明
 
-该中文文档翻译由 [@ShenQingchuan](https://github.com/ShenQingchuan) 个人发起，随后作为 Vue 官方认可的中文翻译仓库，以团队的形式进行官方维护。最新的代码仓库链接是：https://github.com/vuejs-translations/docs-zh-cn
+此繁體中文文檔翻譯由 [@dy-xiaodong2022](https://github.com/dy-xiaodong2022/) 發起。
 
-## 翻译须知
+## 翻譯須知
 
-请移步至官方仓库的 [wiki 页面](https://github.com/vuejs-translations/docs-zh-cn/wiki/%E7%BF%BB%E8%AF%91%E9%A1%BB%E7%9F%A5)查阅。
+請暫時移步至簡體中文官方倉庫的[維基頁面](https://github.com/vuejs-translations/docs-zh-cn/wiki/%E7%BF%BB%E8%AF%91%E9%A1%BB%E7%9F%A5)查閱。
 
-## 协作指南
+## 協作指南
 
-请移步至官方仓库的 [wiki 页面](https://github.com/vuejs-translations/docs-zh-cn/wiki/%E5%8D%8F%E4%BD%9C%E6%8C%87%E5%8D%97)查阅。
+請暫時移步至簡體中文官方倉庫的[維基頁面](https://github.com/vuejs-translations/docs-zh-cn/wiki/%E5%8D%8F%E4%BD%9C%E6%8C%87%E5%8D%97)查閱。
 
-> 编写文档是一种换位思考的练习。我们并不是在描述客观现实，那是源代码已经做到了的。我们的工作是帮助塑造用户与 Vue 生态系统之间的关系。
+> 編寫文檔是一種需要換位思考的練習。我們並不是在描述客觀現實，那是源代碼已經做到了的。我們的工作是幫助塑造用戶與 Vue 生態系統之間的關係。
 
 <details>
-<summary>原版翻译说明，仅供备忘和归档</summary>
+<summary>原版翻譯說明，僅供備忘和歸檔</summary>
 
-## 基本原则
+## 基本原則
 
-翻译工作追求的无外乎 “信、达、雅” 三个字，因此我们总结了以下原则：
+翻譯工作追求的無外乎 “信、達、雅” 三個字，因此我們總結了以下原則：
 
-1. **忠实原文，通俗易懂**，保证正确是最基本的要求。此外，还应该尽可能将一些特定概念降维，使得入门级读者也能够流畅阅读。
+1. **忠實原文，通俗易懂**，保證正確是最基本的要求。此外，還應該儘可能將一些特定概念降維，使得入門級讀者也能夠流暢閱讀。
 
-2. **中文词汇优先，特殊概念次之**：要尽可能地将文档中的英语单词译作读者好理解的词汇。
+2. **中文詞彙優先，特殊概念次之**：要儘可能地將文檔中的英語單詞譯作讀者好理解的詞彙。
 
-   同时用词应尽可能地从前端开发领域已有的词汇中衍生。我们认为作为 Vue 文档的译者应承担这样一种职责：避免创建一套独立于标准 JavaScript 环境之外、Vue 专属的语境。
+   同時用詞應儘可能地從前端開發領域已有的詞彙中衍生。我們認為作為 Vue 文檔的譯者應承擔這樣一種職責：避免創建一套獨立於標準 JavaScript 環境之外、Vue 專屬的語境。
 
-   但也有例外的情况，某些英文单词我们倾向于选择不翻译、用原词。开发者常常与一部分英语单词打交道，许多英语单词甚至作为了开发框架或操作系统的专有名词，直接抛出这个单词也的确能够帮助用户更好的理解、锁定所讲的是什么概念。
+   但也有例外的情況，某些英文單詞我們傾向於選擇不翻譯、用原詞。開發者常常與一部分英語單詞打交道，許多英語單詞甚至作為了開發框架或操作系統的專有名詞，直接拋出這個單詞也的確能夠幫助用戶更好的理解、鎖定所講的是什麼概念。
 
-3. **更符合中文的表述方式**：我们必须正视英语和中文本身的差异与不同，由于表达方式和语法结构的区别，常常一个结构复杂的多重定语从句很难逐字逐词地直译成中文，翻译出的句子应符合母语者的叙述习惯，即尽可能避免英语式的倒装（哪怕讲述方式与作者原文有较大区别），表述尽可能口语化。最好的方式应该是将视线从单个句子中移出来，结合上下文先进行理解再用中文的习惯性表达将其重新复述出来。
+3. **更符合中文的表述方式**：我們必須正視英語和中文本身的差異與不同，由於表達方式和語法結構的區別，常常一個結構複雜的多重定語從句很難逐字逐詞地直譯成中文，翻譯出的句子應符合母語者的敘述習慣，即儘可能避免英語式的倒裝（哪怕講述方式與作者原文有較大區別），表述儘可能口語化。最好的方式應該是將視線從單個句子中移出來，結合上下文先進行理解再用中文的習慣性表達將其重新複述出來。
 
-## 格式规范
+## 格式規範
 
-### 提交规范
+### 提交規範
 
-可以参考 [这个网站](https://www.conventionalcommits.org/) 了解提交信息的既定书写格式：
+可以參考 [這個網站](https://www.conventionalcommits.org/) 瞭解提交信息的既定書寫格式：
 
 ```text
 <type>(<scope>): <subject>
 ^-------------^  ^-------^
 |                |
-|                +-> 主题。总结 commit 内容，用现在时书写。
+|                +-> 主題。總結 commit 內容，用現在時書寫。
 |
-+-------> 目的: chore, docs, feat, fix, refactor, style, 或 test。<scope> 为可选项。
++-------> 目的: chore, docs, feat, fix, refactor, style, 或 test。<scope> 為可選項。
 
-// 以下是 body 部分，这部分是可选的：
-  hash: (对应到官方英文文档的某次更新 commit hash)
-  time: (由 `new Date().toLocaleString()` 生成的时间戳)
+// 以下是 body 部分，這部分是可選的：
+  hash: (對應到官方英文文檔的某次更新 commit hash)
+  time: (由 `new Date().toLocaleString()` 生成的時間戳)
 ```
 
-- 如果你贡献提交的目的并不是与官方英文文档同步内容相关，为 `chore` 或其他类型，body 部分可以省略。
-- body 部分的信息只是为了在特定情况下方便溯源。
+- 如果你貢獻提交的目的並不是與官方英文文檔同步內容相關，為 `chore` 或其他類型，body 部分可以省略。
+- body 部分的信息只是為了在特定情況下方便溯源。
 
-#### 释义
+#### 釋義
 
-- feat: (新功能，面向用户)
-- fix: (bug 修复，面向用户)
-- docs: (编辑文档)
-- style: (格式，如全角半角；对生产环境没有影响)
-- refactor: (比如重命名变量)
-- test: (加入缺少的测试，对生产环境没有影响)
-- chore: (更新依赖等，对生产环境没有影响)
+- feat: (新功能，面向用戶)
+- fix: (bug 修復，面向用戶)
+- docs: (編輯文檔)
+- style: (格式，如全角半角；對生產環境沒有影響)
+- refactor: (比如重命名變量)
+- test: (加入缺少的測試，對生產環境沒有影響)
+- chore: (更新依賴等，對生產環境沒有影響)
 
-### 文档格式规范
+### 文檔格式規範
 
-#### 译注写法
+#### 譯註寫法
 
-1. 在原文需要加译者注的位置添加角标：
+1. 在原文需要加譯者注的位置添加角標：
 
 ```html
 ... <sup>[[1]](#footnote-1)</sup> ... <sup>[[2]](#footnote-2)</sup> ...
 ```
 
-2. 在文章最末尾加入译者注的内容，格式如下：
+2. 在文章最末尾加入譯者注的內容，格式如下：
 
 ```html
 <small>
-  __译者注__
+  __譯者注__
   <a id="footnote-1"></a>[1] ... <a id="footnote-2"></a>[2] ...
   <a id="footnote-3"></a>[3] ...
 </small>
 ```
 
-#### 标点符号
+#### 標點符號
 
-- 逗号、句号、分号、冒号、叹号、问号，统一使用全角字符：，。；：！？
-- 破折号使用：——
-- 引号统一使用 “ ” 和 ‘ ’
-- 括号统一使用全角括号 （）
-- 非注释部分的代码除外，保留英文标点符号。
+- 逗號、句號、分號、冒號、歎號、問號，統一使用全角字符：，。；：！？
+- 破折號使用：——
+- 引號統一使用 “ ” 和 ‘ ’
+- 括號統一使用全角括號 （）
+- 非註釋部分的代碼除外，保留英文標點符號。
 
-#### 内联代码或代码关键字
+#### 內聯代碼或代碼關鍵字
 
-- 务必用反引号（即英文输入法下，按键盘上 Tab 键上方的那个键）将内容括起来。
-- 包括代码注释中出现代码或代码关键字时，也要括起来。
+- 務必用反引號（即英文輸入法下，按鍵盤上 Tab 鍵上方的那個鍵）將內容括起來。
+- 包括代碼註釋中出現代碼或代碼關鍵字時，也要括起來。
 
 #### 空格的使用
 
-- 英文单词和英文单词之间要有一个空格
+- 英文單詞和英文單詞之間要有一個空格
   `something in English`
 
-- 中文和英文单词之间要有一个空格
-  `中文当中有 something 是英文`
+- 中文和英文單詞之間要有一個空格
+  `中文當中有 something 是英文`
 
-- 英文单词和标点符号之间没有空格
-  `这里是一句中文，something 又是英文`
+- 英文單詞和標點符號之間沒有空格
+  `這裡是一句中文，something 又是英文`
 
-#### 链接、斜体、粗体与行内代码等
+#### 鏈接、斜體、粗體與行內代碼等
 
-对于 Markdown 中上述的行内简单样式，为了保证 Vitepress 中良好的渲染效果，我们提倡在文档中使用如下的格式：
+對於 Markdown 中上述的行內簡單樣式，為了保證 Vitepress 中良好的渲染效果，我們提倡在文檔中使用如下的格式：
 
 ```markdown
-<!-- 链接 -->
+<!-- 鏈接 -->
 
-这是一个 [链接](https://github.com/vitejs/vite) 指向 Vite 官方仓库
+這是一個 [鏈接](https://github.com/vitejs/vite) 指向 Vite 官方倉庫
 
 <!-- 加粗 -->
 
-这是一个 **加粗** 的文字
+這是一個 **加粗** 的文字
 
-<!-- 斜体 -->
+<!-- 斜體 -->
 
-这是一个 _斜体_ 的文字 <!-- Good -->
-这是一个 _斜体_ 的文字 <!-- 不推荐，尽在下划线效果不可用时作为替代使用 -->
+這是一個 _斜體_ 的文字 <!-- Good -->
+這是一個 _斜體_ 的文字 <!-- 不推薦，盡在下劃線效果不可用時作為替代使用 -->
 
-<!-- 行内代码 -->
+<!-- 行內代碼 -->
 
-这是一个 `code` 行内代码
-假如后面就是标点符号 `code`：
+這是一個 `code` 行內代碼
+假如後面就是標點符號 `code`：
 ```
 
-你可能已经注意到，默认情况下，在两端我们都加上了空格。
+你可能已經注意到，默認情況下，在兩端我們都加上了空格。
 
-**此处的某些规则可能暂时和旧有的 [Vue.js 中文文档的风格](https://github.com/vuejs/cn.vuejs.org/wiki) 不太一致**，如果你曾参与过 Vue 中文文档相关工作，可能与你的习惯有一定区别。
+**此處的某些規則可能暫時和舊有的 [Vue.js 中文文檔的風格](https://github.com/vuejs/cn.vuejs.org/wiki) 不太一致**，如果你曾參與過 Vue 中文文檔相關工作，可能與你的習慣有一定區別。
 
-这是为了保证文档视图中不会出现字符靠太近而黏合的问题。
+這是為了保證文檔視圖中不會出現字符靠太近而黏合的問題。
 
-关于文档中的链接，针对以下两种 Markdown 书写：
+關於文檔中的鏈接，針對以下兩種 Markdown 書寫：
 
 ```markdown
-<!-- 链接前后带空格  -->
+<!-- 鏈接前後帶空格  -->
 
-Vite 支持了一套 [通用插件 API](./api-plugin) 扩展了 Rollup 的插件接口
+Vite 支持了一套 [通用插件 API](./api-plugin) 擴展了 Rollup 的插件接口
 
-<!-- 链接前后不带空格 -->
+<!-- 鏈接前後不帶空格 -->
 
-Vite 支持了一套[通用插件 API](./api-plugin)扩展了 Rollup 的插件接口
+Vite 支持了一套[通用插件 API](./api-plugin)擴展了 Rollup 的插件接口
 ```
 
-Vitepress 和 Vuepress 中对以上两种写法的渲染视觉效果为：
+Vitepress 和 Vuepress 中對以上兩種寫法的渲染視覺效果為：
 
-**链接前后带空格**
+**鏈接前後帶空格**
 
-![链接前后带空格](/images/link-with-around-spaces.png)
+![鏈接前後帶空格](/images/link-with-around-spaces.png)
 
-**链接前后不带空格**
+**鏈接前後不帶空格**
 
-![链接前后不带空格](/images/link-without-around-spaces.png)
+![鏈接前後不帶空格](/images/link-without-around-spaces.png)
 
-不带空格的形式 与 带空格相比，没有那么突出。
+不帶空格的形式 與 帶空格相比，沒有那麼突出。
 
-同样这类情况还包括 Markdown 中的斜体字：
+同樣這類情況還包括 Markdown 中的斜體字：
 
 ```markdown
-这是一个_斜体_尝试 <!-- Vitepress 和 Vuepress 中无效！  -->
+這是一個_斜體_嘗試 <!-- Vitepress 和 Vuepress 中無效！  -->
 
-这是一个*斜体*尝试 <!-- 前后无空格 -->
+這是一個*斜體*嘗試 <!-- 前後無空格 -->
 
-这是一个 *斜体* 尝试 <!-- 前后有空格 -->
+這是一個 *斜體* 嘗試 <!-- 前後有空格 -->
 ```
 
-下面是效果，不带空格的情况看上去中文字体的笔画之间会接在一起，变得很拥挤，观感较差。
+下面是效果，不帶空格的情況看上去中文字體的筆畫之間會接在一起，變得很擁擠，觀感較差。
 
-![斜体尝试](/images/italic-demo.png)
+![斜體嘗試](/images/italic-demo.png)
 
-#### 关于加粗和斜体格式的约定
+#### 關於加粗和斜體格式的約定
 
-根据 [GitHub Flavored Markdown Spec](https://github.github.com/gfm/#emphasis-and-strong-emphasis)，用成对的星号或下划线都可以用来代表加粗或斜体，但是使用下划线的时候存在更多的特殊条件限制，例如：
+根據 [GitHub Flavored Markdown Spec](https://github.github.com/gfm/#emphasis-and-strong-emphasis)，用成對的星號或下劃線都可以用來代表加粗或斜體，但是使用下劃線的時候存在更多的特殊條件限制，例如：
 
 > `5*6*78` → `<p>5<em>6</em>78</p>` https://github.github.com/gfm/#example-346
 >
 > `5_6_78` → `<p>5_6_78</p>` https://github.github.com/gfm/#example-351
 
-经过讨论，考虑到 GFM 的规范以及中文的特殊情况，决定：
+經過討論，考慮到 GFM 的規範以及中文的特殊情況，決定：
 
-- 中文翻译统一使用星号来标注加粗和斜体，而不是使用下划线，同时尊重英文版自身的用法。
-- 仍然不能正确渲染的地方，允许适当调整包含或不包含加粗或斜体部分两侧的标点符号。参见 [这个例子](https://github.com/vuejs/composition-api-rfc/pull/30/files)。
-- 仍然不能正确渲染的地方，手动使用 `<strong>` 或 `<em>` 标记。
+- 中文翻譯統一使用星號來標註加粗和斜體，而不是使用下劃線，同時尊重英文版自身的用法。
+- 仍然不能正確渲染的地方，允許適當調整包含或不包含加粗或斜體部分兩側的標點符號。參見 [這個例子](https://github.com/vuejs/composition-api-rfc/pull/30/files)。
+- 仍然不能正確渲染的地方，手動使用 `<strong>` 或 `<em>` 標記。
 
-## 术语翻译参考
+## 術語翻譯參考
 
-| 英文 | 建议翻译 | 备注 |
+| 英文 | 建議翻譯 | 備註 |
 | --- | --- | --- |
-| property | 属性 | 组件的属性（数据、计算属性等） |
-| attribute | _不翻译_ | 特指 HTML 元素上的属性 |
-| getter | _一般不翻译_ | 计算属性中作计算函数 |
-| setter | _一般不翻译_ | 计算属性中作设置函数 |
-| prop | _不翻译_ | |
-| ref | _不翻译_ | |
+| property | 屬性 | 組件的屬性（數據、計算屬性等） |
+| attribute | _不翻譯_ | 特指 HTML 元素上的屬性 |
+| getter | _一般不翻譯_ | 計算屬性中作計算函數 |
+| setter | _一般不翻譯_ | 計算屬性中作設置函數 |
+| prop | _不翻譯_ | |
+| ref | _不翻譯_ | |
 | feature/functionality | 功能 | |
 | directive | 指令 | |
 | mixin | 混入 | |
-| listen/listener | 监听/监听器 | |
-| observe/observer | 侦听/侦听器 | |
-| watch/watcher | 侦听/侦听器 | |
-| normalize (HTML code, ...) | 规范化 | |
-| standardize | 标准化 | |
-| fire/trigger (事件) | 触发 | |
-| emit (某个值或事件) | 抛出 | |
-| queue (v.) | 把……加入队列 | |
-| workaround (n.) | 变通办法 | |
-| workaround (v.) | 绕过 | |
-| convention | 约定 | |
+| listen/listener | 監聽/監聽器 | |
+| observe/observer | 偵聽/偵聽器 | |
+| watch/watcher | 偵聽/偵聽器 | |
+| normalize (HTML code, ...) | 規範化 | |
+| standardize | 標準化 | |
+| fire/trigger (事件) | 觸發 | |
+| emit (某個值或事件) | 拋出 | |
+| queue (v.) | 把……加入隊列 | |
+| workaround (n.) | 變通辦法 | |
+| workaround (v.) | 繞過 | |
+| convention | 約定 | |
 | parse | 解析 | |
 | stringify | 字符串化 | |
 | side effect | 副作用 | |
-| declarative | 声明式 | |
+| declarative | 聲明式 | |
 | imperative | 命令式 | |
-| handler | 处理函数 | |
+| handler | 處理函數 | |
 | you | 你 (而不用 “您”) | |
-| computed | 计算属性 | |
-| computed property | 计算属性 | |
-| guard | 守卫 | |
-| hook | 钩子 | |
-| selector | 选择器 | |
-| truthy | 真值 | 需加 MDN 的解释作为译注 |
-| falsy | 假值 | 需加 MDN 的解释作为译注 |
-| mutate/mutation | 变更 | |
-| immutable | 不可变 | |
-| mutable | 可变 | |
+| computed | 計算屬性 | |
+| computed property | 計算屬性 | |
+| guard | 守衛 | |
+| hook | 鉤子 | |
+| selector | 選擇器 | |
+| truthy | 真值 | 需加 MDN 的解釋作為譯註 |
+| falsy | 假值 | 需加 MDN 的解釋作為譯註 |
+| mutate/mutation | 變更 | |
+| immutable | 不可變 | |
+| mutable | 可變 | |
 
 - MDN - `truthy` → https://developer.mozilla.org/en-US/docs/Glossary/Truthy
 - MDN - `falsy` → https://developer.mozilla.org/en-US/docs/Glossary/Falsy
 
 ## 工作流
 
-### 更新内容同步策略
+### 更新內容同步策略
 
-此中文文档由 [印记中文](https://docschina.org/) 团队进行翻译，它们也是 Vite 官方中文文档背后的翻译维护团队。
+此中文文檔由 [印記中文](https://docschina.org/) 團隊進行翻譯，它們也是 Vite 官方中文文檔背後的翻譯維護團隊。
 
-[QC-L](https://github.com/QC-L) 曾在 Vue 文档的讨论区提出过这套 [中英文档同步工作流](https://github.com/vuejs/docs-next-zh-cn/discussions/522#discussioncomment-779521)，这也是 Vite 官方中文文档正在使用的一套工作流。
+[QC-L](https://github.com/QC-L) 曾在 Vue 文檔的討論區提出過這套 [中英文檔同步工作流](https://github.com/vuejs/docs-next-zh-cn/discussions/522#discussioncomment-779521)，這也是 Vite 官方中文文檔正在使用的一套工作流。
 
-- 保留英文文档的原始 commit 记录，以保证可以对后续的更新进行再翻译、合并
-- 由于 Vue 文档以 Markdown 书写，每一行成一个自然段。因此在 Markdown 文档中原则上应该保证中英文行号一一对应，以保证后续更新时位置不发生错乱
-- 由机器人每日定时从英文文档仓库同步新的提交，并生成 Pull Request 交由翻译团队 Review、翻译并最终合入中文文档
+- 保留英文文檔的原始 commit 記錄，以保證可以對後續的更新進行再翻譯、合併
+- 由於 Vue 文檔以 Markdown 書寫，每一行成一個自然段。因此在 Markdown 文檔中原則上應該保證中英文行號一一對應，以保證後續更新時位置不發生錯亂
+- 由機器人每日定時從英文文檔倉庫同步新的提交，並生成 Pull Request 交由翻譯團隊 Review、翻譯並最終合入中文文檔
 
-### 锚点链接的统一化
+### 錨點鏈接的統一化
 
 :::tip 插件支持
-我们提供了一个包含此项功能的 [Vue 官方文档翻译助手插件](https://marketplace.visualstudio.com/items?itemName=shenqingchuan.vue-docs-tr-helper)，你可以在 VSCode 中安装，并遵照 README 的指引来使用。
+我們提供了一個包含此項功能的 [Vue 官方文檔翻譯助手插件](https://marketplace.visualstudio.com/items?itemName=shenqingchuan.vue-docs-tr-helper)，你可以在 VSCode 中安裝，並遵照 README 的指引來使用。
 :::
 
-在 Markdown 文档中 `[title](link)` 形式的链接非常常用，而 Vue 文档中大量使用了这一语法，用来作章节的跳转。
+在 Markdown 文檔中 `[title](link)` 形式的鏈接非常常用，而 Vue 文檔中大量使用了這一語法，用來作章節的跳轉。
 
-链接中有时还会带有锚点（以 `#` 作前缀）用来定位到页面的对应位置，例如 `[props 大小写格式](/guide/components/props.html#prop-name-casing)`。
+鏈接中有時還會帶有錨點（以 `#` 作前綴）用來定位到頁面的對應位置，例如 `[props 大小寫格式](/guide/components/props.html#prop-name-casing)`。
 
-但是在 VitePress 中，由于锚点是对应 Markdown 内容中的 “标题行” 的，因此若改动了英文内容的标题行，别处引用此处的锚点就是失效了：
+但是在 VitePress 中，由於錨點是對應 Markdown 內容中的 “標題行” 的，因此若改動了英文內容的標題行，別處引用此處的錨點就是失效了：
 
 ```markdown
-<!-- 英文文档中该标题行为 -->
+<!-- 英文文檔中該標題行為 -->
 
 ## Props name casing
 
-<!-- 中文文档将标题翻译为 -->
+<!-- 中文文檔將標題翻譯為 -->
 
-## Props 大小写格式
+## Props 大小寫格式
 
-<!-- 此时这个链接在页面上无法正常跳转 -->
+<!-- 此時這個鏈接在頁面上無法正常跳轉 -->
 
-[props 大小写格式](/guide/components/props.html#prop-name-casing)
+[props 大小寫格式](/guide/components/props.html#prop-name-casing)
 ```
 
-若将链接中的锚点也改为中文内容的确可以暂时解决问题，但若后续该标题有改动，又需要修改所有引用了该锚点的地方，可维护性较差。
+若將鏈接中的錨點也改為中文內容的確可以暫時解決問題，但若後續該標題有改動，又需要修改所有引用了該錨點的地方，可維護性較差。
 
-因此我们提供了一种特殊的锚点标记：
+因此我們提供了一種特殊的錨點標記：
 
 ```markdown
-<!-- 标记的内容就是原来的锚点 -->
+<!-- 標記的內容就是原來的錨點 -->
 
-## Props 大小写格式 {#props-name-casing}
+## Props 大小寫格式 {#props-name-casing}
 ```
 
-我们会为 VitePress 提供处理这个标记的逻辑，保证它不会在页面上显示出来。
+我們會為 VitePress 提供處理這個標記的邏輯，保證它不會在頁面上顯示出來。
 
-但也有需要注意的例外情况：若按上面的方式为一篇文章的所有标题行都生成了标记，但文章中出现了两个相同的标记，比如 “类和 CSS 样式” 章节中的 “绑定对象” 小节，可以为其加上数字标记，保证其在文章中的唯一性。
+但也有需要注意的例外情況：若按上面的方式為一篇文章的所有標題行都生成了標記，但文章中出現了兩個相同的標記，比如 “類和 CSS 樣式” 章節中的 “綁定對象” 小節，可以為其加上數字標記，保證其在文章中的唯一性。
 
-此外，由于文章的总标题也被加上了锚点标记，导致在开发环境下，浏览器的标签页上会看到标记。但在构建发布时，我们运行了一个脚本，为文档的 frontmatter 中添加了不含标记的 `title`，因此读者将不会看到该标记。
+此外，由於文章的總標題也被加上了錨點標記，導致在開發環境下，瀏覽器的標籤頁上會看到標記。但在構建發佈時，我們運行了一個腳本，為文檔的 frontmatter 中添加了不含標記的 `title`，因此讀者將不會看到該標記。
 
 </details>
 
