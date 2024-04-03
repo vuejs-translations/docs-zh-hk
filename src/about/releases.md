@@ -13,67 +13,67 @@ onMounted(async () => {
 })
 </script>
 
-# 版本发布 {#releases}
+# 版本發佈 {#releases}
 
 <p v-if="version">
-当前 Vue 的最新稳定版本是 <strong>{{ version }}</strong>。
+當前 Vue 的最新穩定版本是 <strong>{{ version }}</strong>。
 </p>
 <p v-else>
-正在检测最新版本……
+正在檢測最新版本……
 </p>
 
-完整的过往发布记录可以在 [GitHub](https://github.com/vuejs/core/blob/main/CHANGELOG.md) 查阅。
+完整的過往發佈記錄可以在 [GitHub](https://github.com/vuejs/core/blob/main/CHANGELOG.md) 查閱。
 
-## 发布周期 {#release-cycle}
+## 發佈週期 {#release-cycle}
 
-Vue 并没有固定的发布周期。
+Vue 並沒有固定的發佈週期。
 
-- 补丁版本 (patch releases) 发布会及时按需进行。
+- 補丁版本 (patch releases) 發佈會及時按需進行。
 
-- 小版本 (minor releases) 发布总是会包含一些新特性，发布周期通常会在 3~6 个月之间，并会经历 beta 预发布阶段。
+- 小版本 (minor releases) 發佈總是會包含一些新特性，發佈週期通常會在 3~6 個月之間，並會經歷 beta 預發佈階段。
 
-- 大版本 (major releases) 发布会提前知会，且经历早期讨论和 alpha、beta 等预发布阶段。
+- 大版本 (major releases) 發佈會提前告知，且經歷早期討論和 alpha、beta 等預發佈階段。
 
-## 语义化版本控制的特殊情况 {#semantic-versioning-edge-cases}
+## 語義化版本控制的特殊情況 {#semantic-versioning-edge-cases}
 
-Vue 的发布会遵循[语义化版本控制](https://semver.org/)，同时伴随一些特殊情况。
+Vue 的發佈會遵循[語義化版本控制](https://semver.org/)，但同時伴隨一些特殊情況。
 
-### TypeScript 类型声明 {#typescript-definitions}
+### TypeScript 類型聲明 {#typescript-definitions}
 
-我们可能会在**小版本**发布之间包含 TypeScript 类型声明的不兼容变更，因为：
+我們可能會在**小版本**發佈之間包含 TypeScript 類型聲明的不兼容變更，因為：
 
-1. 有的时候 TypeScript 自身会在其小版本之间发布不兼容变更，我们不得不为了支持更新版本的 TypeScript 而调整自身的类型定义。
+1. 有時 TypeScript 自身會在其小版本之間發佈不兼容的變更，因此我們不得不為了支持更新版本的 TypeScript 而調整自身的類型定義。
 
-2. 我们也会偶尔需要使用最新版本的 TypeScript 中才可用的特性，并提升 TypeScript 的最低版本要求。
+2. 我們偶爾也需要使用最新版本的 TypeScript 中才可用的特性，並提升對應功能的 TypeScript 的最低版本要求。
 
-如果你正在使用 TypeScript，则可以使用一个语义化版本的范围来锁住当前的小版本，并在 Vue 新的小版本发布时进行手动升级。
+如果你正在使用 TypeScript，則可以使用一個語義化版本的範圍來鎖定當前的小版本，並在 Vue 新的小版本發佈時進行手動升級。
 
-### 编译后的代码和旧版运行时之间的兼容性 {#compiled-code-compatibility-with-older-runtime}
+### 編譯後的代碼和舊版運行時之間的兼容性 {#compiled-code-compatibility-with-older-runtime}
 
-较新**小版本**的 Vue 编译器可能会生成与较旧小版本的 Vue 运行时不兼容的代码。例如，由 Vue 3.2 编译器生成的代码可能不完全兼容 Vue 3.1 的运行时。
+較新**小版本**的 Vue 編譯器可能會生成與較舊小版本的 Vue 運行時不兼容的代碼。例如，由 Vue 3.2 編譯器生成的代碼可能不完全兼容 Vue 3.1 的運行時。
 
-只有库的作者需要考虑这个问题，因为编译器版本和运行时版本在应用中总是相同的。只有当你把预编译的 Vue 组件代码发布为一个包，而用户在一个使用旧版本 Vue 的项目中使用它时，才会发生版本不匹配。因此，你的包可能需要明确声明 Vue 的最低小版本要求。
+只有庫的作者需要考慮這個問題，因為編譯器版本和運行時版本在應用中總是相同的。只有當你把預編譯的 Vue 組件代碼發佈為一個包，而用戶在一個使用舊版本 Vue 的項目中使用它時，才會發生版本不匹配。因此，你的包可能需要明確指定 Vue 的最低小版本要求。
 
-## 预发布版本 {#pre-releases}
+## 預發佈版本 {#pre-releases}
 
-小版本发布通常会经历不定量的 beta 版。而大版本发布则会经历 alpha 和 beta 阶段。
+小版本發佈通常會經過不定量的 beta 版。而大版本發佈則會先經過 alpha 和 beta 階段。
 
-此外，我们每周都会从 GitHub 上的 `main` 和 `minor` 分支发布金丝雀版本。它们将作为不同的软件包发布以避免稳定通道的 npm 元数据变得臃肿。你可以分别通过 `npx install-vue@canary` 或 `npx install-vue@canary-minor` 安装它们。
+此外，我們每週都會從 GitHub 上的 `main` 和 `minor` 分支發佈金絲雀版本。它們將作為不同的軟件包發佈以避免穩定通道的 npm 元數據變得臃腫。你可以分別通過 `npx install-vue@canary` 或 `npx install-vue@canary-minor` 安裝它們。
 
-预发布版本 (pre releases) 是为了进行集成/稳定性测试，并让早期用户为不稳定的功能提供反馈。请不要在生产中使用预发布版本。所有的预发布版本都被认为是不稳定的，并且可能会在两者之间产生不兼容变更，所以在使用预发布版本时，一定要精确锁定版本号。
+預發佈版本 (pre releases) 是為了進行集成/穩定性測試，並讓早期用戶為不穩定的功能提供反饋。請不要在生產中使用預發佈版本。所有的預發佈版本都被認為是不穩定的，並且可能會在兩者之間產生不兼容變更，所以在使用預發佈版本時，一定要精確鎖定版本號。
 
-## 废弃的特性 {#deprecations}
+## 廢棄的特性 {#deprecations}
 
-我们可能会定期废弃那些在新的小版本中拥有更新更好的替代品的功能。被废弃的功能仍将继续工作，但会在进入废弃状态后的下一个大版本中被删除。
+我們可能會定期廢棄那些在新的小版本中擁有更新更好的替代品的功能。被廢棄的功能仍將繼續工作，但會在進入廢棄狀態後的下一個大版本中被刪除。
 
 ## RFC {#rfcs}
 
-具有可观表层 API 的新特性和 Vue 的重大变更都将经历**意见征集** (RFC) 流程。RFC 流程的目的是为新功能进入该框架提供一个一致且可控的路径，并给用户一个机会参与设计过程并提供反馈。
+具有可觀表層 API 的新特性和 Vue 的重大變更都將經歷**意見徵集** (RFC) 流程。RFC 流程的目的是為新功能進入該框架提供一個一致且可控的路徑，並給用戶一個機會參與設計過程並提供反饋。
 
-该 RFC 流程会在 GitHub 上的 [vuejs/rfcs](https://github.com/vuejs/rfcs) 仓库进行。
+該 RFC 流程會在 GitHub 上的 [vuejs/rfcs](https://github.com/vuejs/rfcs) 倉庫進行。
 
-## 试验性特性 {#experimental-features}
+## 試驗性特性 {#experimental-features}
 
-有些特性在 Vue 的稳定版本中已经发布并被记录了，但被标记为试验性的。试验性特性通常与某些 RFC 讨论相关联，这些讨论中的大部分设计问题已经在理论上得到了解决，但仍缺乏来自真实实践的反馈。
+有些特性在 Vue 的穩定版本中已經發布並被記錄，但被標記為試驗性的。試驗性特性通常與某些 RFC 討論相關聯，這些討論中的大部分設計問題已經在理論上得到了解決，但仍缺乏來自真實實踐的反饋。
 
-试验性特性的目的是允许用户通过在生产环境中测试它们来提供反馈，而不必使用不稳定的 Vue 版本。试验性特性本身是被认为不稳定的，只能以某种受控的方式使用，且该特性可预期地会在任何发布类型中发生变化。
+試驗性特性的目的是允許用戶通過在生產環境中測試它們來提供反饋，而不必使用不穩定的 Vue 版本。試驗性特性本身是被認為不穩定的，只能以某種受控的方式使用，且該特性可預期地會在任何發佈類型中發生變化。
