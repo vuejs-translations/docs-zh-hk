@@ -16,17 +16,17 @@ onMounted(async () => {
 <template>
   <section id="hero">
     <h1 class="tagline">
-      <span class="accent">渐进式</span>
+      <span class="accent">漸進式</span>
       <br />JavaScript 框架
     </h1>
     <p class="description">
-      易学易用，性能出色，适用场景丰富的 Web 前端框架。
+      易學易用，性能出色，適用場景豐富的 Web 前端框架。
     </p>
     <p class="actions">
       <!-- NOTE: hide the home video -->
       <!-- <VueMasteryModal /> -->
       <a class="get-started" href="/guide/introduction.html">
-        快速上手
+        快速開始
         <svg
           class="icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -39,13 +39,13 @@ onMounted(async () => {
           />
         </svg>
       </a>
-      <a class="setup" href="/guide/quick-start.html">安装</a>
+      <a class="setup" href="/guide/quick-start.html">安裝</a>
     </p>
   </section>
 
   <section id="special-sponsor">
     <template v-if="data && data.platinum_china">
-      <h3>中国区铂金赞助</h3>
+      <h3>中國區鉑金贊助</h3>
       <div id="special-sponsor-container">
         <template
           v-for="{
@@ -87,26 +87,25 @@ onMounted(async () => {
       </div>
     </template>
     <a v-else-if="data" class="lead" href="/sponsor/"
-      >中国区铂金赞助位 点击了解更多</a
+      >中國區鉑金贊助位 點擊瞭解更多</a
     >
   </section>
 
   <section id="highlights" class="vt-box-container">
     <div class="vt-box">
-      <h2>易学易用</h2>
+      <h2>易學易用</h2>
       <p>
-        基于标准 HTML、CSS 和 JavaScript 构建，提供容易上手的 API
-        和一流的文档。
+        基於標準 HTML、CSS 和 JavaScript 構建，提供易於使用的 API 和出色的文檔。
       </p>
     </div>
     <div class="vt-box">
       <h2>性能出色</h2>
-      <p>经过编译器优化、完全响应式的渲染系统，几乎不需要手动优化。</p>
+      <p>經過編譯器優化、完全響應式的渲染系統，幾乎不需要手動優化。</p>
     </div>
     <div class="vt-box">
-      <h2>灵活多变</h2>
+      <h2>靈活多變</h2>
       <p>
-        丰富的、可渐进式集成的生态系统，可以根据应用规模在库和框架间切换自如。
+        豐富的、可漸進式集成的生態系統，可以根據應用規模在庫和框架間切換自如。
       </p>
     </div>
   </section>
