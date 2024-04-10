@@ -4,9 +4,7 @@ import SiteMap from './SiteMap.vue'
 // import NewsLetter from './NewsLetter.vue'
 import { load, data, base } from './sponsors'
 import SponsorsGroup from './SponsorsGroup.vue'
-// NOTE: hide the home video
-// https://github.com/vuejs-translations/docs-zh-cn/issues/177
-// import VueMasteryModal from './VueMasteryModal.vue'
+import VueMasteryModal from './VueMasteryModal.vue'
 
 onMounted(async () => {
   await load()
@@ -23,8 +21,7 @@ onMounted(async () => {
       易學易用，性能出色，適用場景豐富的 Web 前端框架。
     </p>
     <p class="actions">
-      <!-- NOTE: hide the home video -->
-      <!-- <VueMasteryModal /> -->
+      <VueMasteryModal />
       <a class="get-started" href="/guide/introduction.html">
         快速開始
         <svg
