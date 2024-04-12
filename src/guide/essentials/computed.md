@@ -1,8 +1,8 @@
-# 计算属性 {#computed-properties}
+# 計算屬性 {#computed-properties}
 
-## 基础示例 {#basic-example}
+## 基礎示例 {#basic-example}
 
-模板中的表达式虽然方便，但也只能用来做简单的操作。如果在模板中写太多逻辑，会让模板变得臃肿，难以维护。比如说，我们有这样一个包含嵌套数组的对象：
+模板中的表達式雖然方便，但也只能用來做簡單的操作。如果在模板中書寫太多邏輯，會讓模板變得臃腫，難以維護。比如說，我們有這樣一個包含嵌套數組的對象：
 
 <div class="options-api">
 
@@ -39,16 +39,16 @@ const author = reactive({
 
 </div>
 
-我们想根据 `author` 是否已有一些书籍来展示不同的信息：
+我們想根據 `author` 是否已有一些書籍來展示不同的信息：
 
 ```vue-html
 <p>Has published books:</p>
 <span>{{ author.books.length > 0 ? 'Yes' : 'No' }}</span>
 ```
 
-这里的模板看起来有些复杂。我们必须认真看好一会儿才能明白它的计算依赖于 `author.books`。更重要的是，如果在模板中需要不止一次这样的计算，我们可不想将这样的代码在模板里重复好多遍。
+這裡的模板看起來有些複雜。我們必須認真看好一會兒才能明白它的計算依賴於 `author.books`。更重要的是，如果在模板中需要不止一次這樣的計算，我們可不想將這樣的代碼在模板裡重複好多遍。
 
-因此我们推荐使用**计算属性**来描述依赖响应式状态的复杂逻辑。这是重构后的示例：
+因此我們推薦使用**計算屬性**來描述依賴響應式狀態的複雜邏輯。這是重構後的示例：
 
 <div class="options-api">
 
@@ -67,9 +67,9 @@ export default {
     }
   },
   computed: {
-    // 一个计算属性的 getter
+    // 一個計算屬性的 getter
     publishedBooksMessage() {
-      // `this` 指向当前组件实例
+      // `this` 指向當前組件實例
       return this.author.books.length > 0 ? 'Yes' : 'No'
     }
   }
@@ -81,15 +81,15 @@ export default {
 <span>{{ publishedBooksMessage }}</span>
 ```
 
-[在演练场中尝试一下](https://play.vuejs.org/#eNqFkN1KxDAQhV/l0JsqaFfUq1IquwiKsF6JINaLbDNui20S8rO4lL676c82eCFCIDOZMzkzXxetlUoOjqI0ykypa2XzQtC3ktqC0ydzjUVXCIAzy87OpxjQZJ0WpwxgzlZSp+EBEKylFPGTrATuJcUXobST8sukeA8vQPzqCNe4xJofmCiJ48HV/FfbLLrxog0zdfmn4tYrXirC9mgs6WMcBB+nsJ+C8erHH0rZKmeJL0sot2tqUxHfDONuyRi2p4BggWCr2iQTgGTcLGlI7G2FHFe4Q/xGJoYn8SznQSbTQviTrRboPrHUqoZZ8hmQqfyRmTDFTC1bqalsFBN5183o/3NG33uvoWUwXYyi/gdTEpwK)
+[在演練場中嘗試一下](https://play.vuejs.org/#eNqFkN1KxDAQhV/l0JsqaFfUq1IquwiKsF6JINaLbDNui20S8rO4lL676c82eCFCIDOZMzkzXxetlUoOjqI0ykypa2XzQtC3ktqC0ydzjUVXCIAzy87OpxjQZJ0WpwxgzlZSp+EBEKylFPGTrATuJcUXobST8sukeA8vQPzqCNe4xJofmCiJ48HV/FfbLLrxog0zdfmn4tYrXirC9mgs6WMcBB+nsJ+C8erHH0rZKmeJL0sot2tqUxHfDONuyRi2p4BggWCr2iQTgGTcLGlI7G2FHFe4Q/xGJoYn8SznQSbTQviTrRboPrHUqoZZ8hmQqfyRmTDFTC1bqalsFBN5183o/3NG33uvoWUwXYyi/gdTEpwK)
 
-我们在这里定义了一个计算属性 `publishedBooksMessage`。
+我們在這裡定義了一個計算屬性 `publishedBooksMessage`。
 
-更改此应用的 `data` 中 `books` 数组的值后，可以看到 `publishedBooksMessage` 也会随之改变。
+更改此應用的 `data` 中 `books` 數組的值後，可以看到 `publishedBooksMessage` 也會隨之改變。
 
-在模板中使用计算属性的方式和一般的属性并无二致。Vue 会检测到 `this.publishedBooksMessage` 依赖于 `this.author.books`，所以当 `this.author.books` 改变时，任何依赖于 `this.publishedBooksMessage` 的绑定都将同时更新。
+在模板中使用計算屬性的方式和一般的屬性並無二致。Vue 會檢測到 `this.publishedBooksMessage` 依賴於 `this.author.books`，所以當 `this.author.books` 改變時，任何依賴於 `this.publishedBooksMessage` 的綁定都將同時更新。
 
-也可参考：[为计算属性标记类型](/guide/typescript/options-api#typing-computed-properties) <sup class="vt-badge ts" />
+也可參考：[為計算屬性標記類型](/guide/typescript/options-api#typing-computed-properties) <sup class="vt-badge ts" />
 
 </div>
 
@@ -108,7 +108,7 @@ const author = reactive({
   ]
 })
 
-// 一个计算属性 ref
+// 一個計算屬性 ref
 const publishedBooksMessage = computed(() => {
   return author.books.length > 0 ? 'Yes' : 'No'
 })
@@ -120,19 +120,19 @@ const publishedBooksMessage = computed(() => {
 </template>
 ```
 
-[在演练场中尝试一下](https://play.vuejs.org/#eNp1kE9Lw0AQxb/KI5dtoTainkoaaREUoZ5EEONhm0ybYLO77J9CCfnuzta0vdjbzr6Zeb95XbIwZroPlMySzJW2MR6OfDB5oZrWaOvRwZIsfbOnCUrdmuCpQo+N1S0ET4pCFarUynnI4GttMT9PjLpCAUq2NIN41bXCkyYxiZ9rrX/cDF/xDYiPQLjDDRbVXqqSHZ5DUw2tg3zP8lK6pvxHe2DtvSasDs6TPTAT8F2ofhzh0hTygm5pc+I1Yb1rXE3VMsKsyDm5JcY/9Y5GY8xzHI+wnIpVw4nTI/10R2rra+S4xSPEJzkBvvNNs310ztK/RDlLLjy1Zic9cQVkJn+R7gIwxJGlMXiWnZEq77orhH3Pq2NH9DjvTfpfSBSbmA==)
+[在演練場中嘗試一下](https://play.vuejs.org/#eNp1kE9Lw0AQxb/KI5dtoTainkoaaREUoZ5EEONhm0ybYLO77J9CCfnuzta0vdjbzr6Zeb95XbIwZroPlMySzJW2MR6OfDB5oZrWaOvRwZIsfbOnCUrdmuCpQo+N1S0ET4pCFarUynnI4GttMT9PjLpCAUq2NIN41bXCkyYxiZ9rrX/cDF/xDYiPQLjDDRbVXqqSHZ5DUw2tg3zP8lK6pvxHe2DtvSasDs6TPTAT8F2ofhzh0hTygm5pc+I1Yb1rXE3VMsKsyDm5JcY/9Y5GY8xzHI+wnIpVw4nTI/10R2rra+S4xSPEJzkBvvNNs310ztK/RDlLLjy1Zic9cQVkJn+R7gIwxJGlMXiWnZEq77orhH3Pq2NH9DjvTfpfSBSbmA==)
 
-我们在这里定义了一个计算属性 `publishedBooksMessage`。`computed()` 方法期望接收一个 getter 函数，返回值为一个**计算属性 ref**。和其他一般的 ref 类似，你可以通过 `publishedBooksMessage.value` 访问计算结果。计算属性 ref 也会在模板中自动解包，因此在模板表达式中引用时无需添加 `.value`。
+我們在這裡定義了一個計算屬性 `publishedBooksMessage`。`computed()` 方法期望接收一個 getter 函數，返回值為一個**計算屬性 ref**。和其他一般的 ref 類似，你可以通過 `publishedBooksMessage.value` 訪問計算結果。計算屬性 ref 也會在模板中自動解包，因此在模板表達式中引用時無需添加 `.value`。
 
-Vue 的计算属性会自动追踪响应式依赖。它会检测到 `publishedBooksMessage` 依赖于 `author.books`，所以当 `author.books` 改变时，任何依赖于 `publishedBooksMessage` 的绑定都会同时更新。
+Vue 的計算屬性會自動追蹤響應式依賴。它會檢測到 `publishedBooksMessage` 依賴於 `author.books`，所以當 `author.books` 改變時，任何依賴於 `publishedBooksMessage` 的綁定都會同時更新。
 
-也可参考：[为计算属性标注类型](/guide/typescript/composition-api#typing-computed) <sup class="vt-badge ts" />
+也可參考：[為計算屬性標註類型](/guide/typescript/composition-api#typing-computed) <sup class="vt-badge ts" />
 
 </div>
 
-## 计算属性缓存 vs 方法 {#computed-caching-vs-methods}
+## 計算屬性緩存 vs 方法 {#computed-caching-vs-methods}
 
-你可能注意到我们在表达式中像这样调用一个函数也会获得和计算属性相同的结果：
+你可能注意到我們在表達式中像這樣調用一個函數也會獲得和計算屬性相同的結果：
 
 ```vue-html
 <p>{{ calculateBooksMessage() }}</p>
@@ -141,7 +141,7 @@ Vue 的计算属性会自动追踪响应式依赖。它会检测到 `publishedBo
 <div class="options-api">
 
 ```js
-// 组件中
+// 組件中
 methods: {
   calculateBooksMessage() {
     return this.author.books.length > 0 ? 'Yes' : 'No'
@@ -154,7 +154,7 @@ methods: {
 <div class="composition-api">
 
 ```js
-// 组件中
+// 組件中
 function calculateBooksMessage() {
   return author.books.length > 0 ? 'Yes' : 'No'
 }
@@ -162,9 +162,9 @@ function calculateBooksMessage() {
 
 </div>
 
-若我们将同样的函数定义为一个方法而不是计算属性，两种方式在结果上确实是完全相同的，然而，不同之处在于**计算属性值会基于其响应式依赖被缓存**。一个计算属性仅会在其响应式依赖更新时才重新计算。这意味着只要 `author.books` 不改变，无论多少次访问 `publishedBooksMessage` 都会立即返回先前的计算结果，而不用重复执行 getter 函数。
+若我們將同樣的函數定義為一個方法而不是計算屬性，兩種方式在結果上確實是完全相同的，然而，不同之處在於**計算屬性值會基於其響應式依賴被緩存**。一個計算屬性僅會在其響應式依賴更新時才重新計算。這意味著只要 `author.books` 不改變，無論多少次訪問 `publishedBooksMessage` 都會立即返回先前的計算結果，而不用重複執行 getter 函數。
 
-这也解释了为什么下面的计算属性永远不会更新，因为 `Date.now()` 并不是一个响应式依赖：
+這也解釋了為什麼下面的計算屬性永遠不會更新，因為 `Date.now()` 並不是一個響應式依賴：
 
 <div class="options-api">
 
@@ -186,13 +186,13 @@ const now = computed(() => Date.now())
 
 </div>
 
-相比之下，方法调用**总是**会在重渲染发生时再次执行函数。
+相比之下，方法調用**總是**會在重渲染髮生時再次執行函數。
 
-为什么需要缓存呢？想象一下我们有一个非常耗性能的计算属性 `list`，需要循环一个巨大的数组并做许多计算逻辑，并且可能也有其他计算属性依赖于 `list`。没有缓存的话，我们会重复执行非常多次 `list` 的 getter，然而这实际上没有必要！如果你确定不需要缓存，那么也可以使用方法调用。
+為什麼需要緩存呢？想象一下我們有一個非常消耗性能的計算屬性 `list`，需要循環一個巨大的數組並做許多計算邏輯，並且可能也有其他計算屬性依賴於 `list`。沒有緩存的話，我們會重複執行非常多次 `list` 的 getter，然而這實際上沒有必要！如果你確定不需要緩存，那麼也可以使用方法調用。
 
-## 可写计算属性 {#writable-computed}
+## 可寫計算屬性 {#writable-computed}
 
-计算属性默认是只读的。当你尝试修改一个计算属性时，你会收到一个运行时警告。只在某些特殊场景中你可能才需要用到“可写”的属性，你可以通过同时提供 getter 和 setter 来创建：
+計算屬性默認是只讀的。當你嘗試修改一個計算屬性時，你會收到一個運行時警告。只在某些特殊場景中你可能才需要用到“可寫”的屬性，你可以通過同時提供 getter 和 setter 來創建：
 
 <div class="options-api">
 
@@ -212,7 +212,7 @@ export default {
       },
       // setter
       set(newValue) {
-        // 注意：我们这里使用的是解构赋值语法
+        // 注意：我們這裡使用的是解構賦值語法
         [this.firstName, this.lastName] = newValue.split(' ')
       }
     }
@@ -220,7 +220,7 @@ export default {
 }
 ```
 
-现在当你再运行 `this.fullName = 'John Doe'` 时，setter 会被调用而 `this.firstName` 和 `this.lastName` 会随之更新。
+現在當你再運行 `this.fullName = 'John Doe'` 時，setter 會被調用而 `this.firstName` 和 `this.lastName` 會隨之更新。
 
 </div>
 
@@ -240,23 +240,23 @@ const fullName = computed({
   },
   // setter
   set(newValue) {
-    // 注意：我们这里使用的是解构赋值语法
+    // 注意：我們這裡使用的是解構賦值語法
     [firstName.value, lastName.value] = newValue.split(' ')
   }
 })
 </script>
 ```
 
-现在当你再运行 `fullName.value = 'John Doe'` 时，setter 会被调用而 `firstName` 和 `lastName` 会随之更新。
+現在當你再運行 `fullName.value = 'John Doe'` 時，setter 會被調用而 `firstName` 和 `lastName` 會隨之更新。
 
 </div>
 
-## 最佳实践 {#best-practices}
+## 最佳實踐 {#best-practices}
 
-### Getter 不应有副作用 {#getters-should-be-side-effect-free}
+### Getter 不應有副作用 {#getters-should-be-side-effect-free}
 
-计算属性的 getter 应只做计算而没有任何其他的副作用，这一点非常重要，请务必牢记。举例来说，**不要改变其他状态、在 getter 中做异步请求或者更改 DOM**！一个计算属性的声明中描述的是如何根据其他值派生一个值。因此 getter 的职责应该仅为计算和返回该值。在之后的指引中我们会讨论如何使用[侦听器](./watchers)根据其他响应式状态的变更来创建副作用。
+計算屬性的 getter 應只做計算而沒有任何其他的副作用，這一點非常重要，請務必牢記。舉例來說，**不要改變其他狀態、在 getter 中做異步請求或者更改 DOM**！一個計算屬性的聲明中描述的是如何根據其他值派生一個值。因此 getter 的職責應該僅為計算和返回該值。在之後的指引中我們會討論如何使用[偵聽器](./watchers)根據其他響應式狀態的變更來創建副作用。
 
-### 避免直接修改计算属性值 {#avoid-mutating-computed-value}
+### 避免直接修改計算屬性值 {#avoid-mutating-computed-value}
 
-从计算属性返回的值是派生状态。可以把它看作是一个“临时快照”，每当源状态发生变化时，就会创建一个新的快照。更改快照是没有意义的，因此计算属性的返回值应该被视为只读的，并且永远不应该被更改——应该更新它所依赖的源状态以触发新的计算。
+從計算屬性返回的值是派生狀態。可以把它看作是一個“臨時快照”，每當源狀態發生變化時，就會創建一個新的快照。更改快照是沒有意義的，因此計算屬性的返回值應該被視為只讀的，並且永遠不應該被更改——應該更新它所依賴的源狀態以觸發新的計算。
