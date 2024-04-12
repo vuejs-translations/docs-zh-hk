@@ -1,4 +1,4 @@
-# 条件渲染 {#conditional-rendering}
+# 條件渲染 {#conditional-rendering}
 
 <script setup>
 import { ref } from 'vue'
@@ -7,7 +7,7 @@ const awesome = ref(true)
 
 ## `v-if` {#v-if}
 
-`v-if` 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回真值时才被渲染。
+`v-if` 指令用於條件性地渲染一塊內容。這塊內容只會在指令的表達式返回真值時才被渲染。
 
 ```vue-html
 <h1 v-if="awesome">Vue is awesome!</h1>
@@ -15,7 +15,7 @@ const awesome = ref(true)
 
 ## `v-else` {#v-else}
 
-你也可以使用 `v-else` 为 `v-if` 添加一个“else 区块”。
+你也可以使用 `v-else` 為 `v-if` 添加一個“else 區塊”。
 
 ```vue-html
 <button @click="awesome = !awesome">Toggle</button>
@@ -32,20 +32,20 @@ const awesome = ref(true)
 
 <div class="composition-api">
 
-[在演练场中尝试一下](https://play.vuejs.org/#eNpFjkEOgjAQRa8ydIMulLA1hegJ3LnqBskAjdA27RQXhHu4M/GEHsEiKLv5mfdf/sBOxux7j+zAuCutNAQOyZtcKNkZbQkGsFjBCJXVHcQBjYUSqtTKERR3dLpDyCZmQ9bjViiezKKgCIGwM21BGBIAv3oireBYtrK8ZYKtgmg5BctJ13WLPJnhr0YQb1Lod7JaS4G8eATpfjMinjTphC8wtg7zcwNKw/v5eC1fnvwnsfEDwaha7w==)
+[在演練場中嘗試一下](https://play.vuejs.org/#eNpFjkEOgjAQRa8ydIMulLA1hegJ3LnqBskAjdA27RQXhHu4M/GEHsEiKLv5mfdf/sBOxux7j+zAuCutNAQOyZtcKNkZbQkGsFjBCJXVHcQBjYUSqtTKERR3dLpDyCZmQ9bjViiezKKgCIGwM21BGBIAv3oireBYtrK8ZYKtgmg5BctJ13WLPJnhr0YQb1Lod7JaS4G8eATpfjMinjTphC8wtg7zcwNKw/v5eC1fnvwnsfEDwaha7w==)
 
 </div>
 <div class="options-api">
 
-[在演练场中尝试一下](https://play.vuejs.org/#eNpFjj0OwjAMha9iMsEAFWuVVnACNqYsoXV/RJpEqVOQqt6DDYkTcgRSWoplWX7y56fXs6O1u84jixlvM1dbSoXGuzWOIMdCekXQCw2QS5LrzbQLckje6VEJglDyhq1pMAZyHidkGG9hhObRYh0EYWOVJAwKgF88kdFwyFSdXRPBZidIYDWvgqVkylIhjyb4ayOIV3votnXxfwrk2SPU7S/PikfVfsRnGFWL6akCbeD9fLzmK4+WSGz4AA5dYQY=)
+[在演練場中嘗試一下](https://play.vuejs.org/#eNpFjj0OwjAMha9iMsEAFWuVVnACNqYsoXV/RJpEqVOQqt6DDYkTcgRSWoplWX7y56fXs6O1u84jixlvM1dbSoXGuzWOIMdCekXQCw2QS5LrzbQLckje6VEJglDyhq1pMAZyHidkGG9hhObRYh0EYWOVJAwKgF88kdFwyFSdXRPBZidIYDWvgqVkylIhjyb4ayOIV3votnXxfwrk2SPU7S/PikfVfsRnGFWL6akCbeD9fLzmK4+WSGz4AA5dYQY=)
 
 </div>
 
-一个 `v-else` 元素必须跟在一个 `v-if` 或者 `v-else-if` 元素后面，否则它将不会被识别。
+一個 `v-else` 元素必須跟在一個 `v-if` 或者 `v-else-if` 元素後面，否則它將不會被識別。
 
 ## `v-else-if` {#v-else-if}
 
-顾名思义，`v-else-if` 提供的是相应于 `v-if` 的“else if 区块”。它可以连续多次重复使用：
+顧名思義，`v-else-if` 提供的是相應於 `v-if` 的“else if 區塊”。它可以連續多次重複使用：
 
 ```vue-html
 <div v-if="type === 'A'">
@@ -62,11 +62,11 @@ const awesome = ref(true)
 </div>
 ```
 
-和 `v-else` 类似，一个使用 `v-else-if` 的元素必须紧跟在一个 `v-if` 或一个 `v-else-if` 元素后面。
+和 `v-else` 類似，一個使用 `v-else-if` 的元素必須緊跟在一個 `v-if` 或一個 `v-else-if` 元素後面。
 
 ## `<template>` 上的 `v-if` {#v-if-on-template}
 
-因为 `v-if` 是一个指令，他必须依附于某个元素。但如果我们想要切换不止一个元素呢？在这种情况下我们可以在一个 `<template>` 元素上使用 `v-if`，这只是一个不可见的包装器元素，最后渲染的结果并不会包含这个 `<template>` 元素。
+因為 `v-if` 是一個指令，他必須依附於某個元素。但如果我們想要切換不止一個元素呢？在這種情況下我們可以在一個 `<template>` 元素上使用 `v-if`，這只是一個不可見的包裝器元素，最後渲染的結果並不會包含這個 `<template>` 元素。
 
 ```vue-html
 <template v-if="ok">
@@ -80,30 +80,30 @@ const awesome = ref(true)
 
 ## `v-show` {#v-show}
 
-另一个可以用来按条件显示一个元素的指令是 `v-show`。其用法基本一样：
+另一個可以用來按條件顯示一個元素的指令是 `v-show`。其用法基本一樣：
 
 ```vue-html
 <h1 v-show="ok">Hello!</h1>
 ```
 
-不同之处在于 `v-show` 会在 DOM 渲染中保留该元素；`v-show` 仅切换了该元素上名为 `display` 的 CSS 属性。
+不同之處在於 `v-show` 會在 DOM 渲染中保留該元素；`v-show` 僅切換了該元素上名為 `display` 的 CSS 屬性。
 
 `v-show` 不支持在 `<template>` 元素上使用，也不能和 `v-else` 搭配使用。
 
 ## `v-if` vs. `v-show` {#v-if-vs-v-show}
 
-`v-if` 是“真实的”按条件渲染，因为它确保了在切换时，条件区块内的事件监听器和子组件都会被销毁与重建。
+`v-if` 是“真實的”按條件渲染，因為它確保了在切換時，條件區塊內的事件監聽器和子組件都會被銷毀與重建。
 
-`v-if` 也是**惰性**的：如果在初次渲染时条件值为 false，则不会做任何事。条件区块只有当条件首次变为 true 时才被渲染。
+`v-if` 也是**惰性**的：如果在初次渲染時條件值為 false，則不會做任何事。條件區塊只有當條件首次變為 true 時才被渲染。
 
-相比之下，`v-show` 简单许多，元素无论初始条件如何，始终会被渲染，只有 CSS `display` 属性会被切换。
+相比之下，`v-show` 簡單許多，元素無論初始條件如何，始終會被渲染，只有 CSS `display` 屬性會被切換。
 
-总的来说，`v-if` 有更高的切换开销，而 `v-show` 有更高的初始渲染开销。因此，如果需要频繁切换，则使用 `v-show` 较好；如果在运行时绑定条件很少改变，则 `v-if` 会更合适。
+總的來說，`v-if` 有更高的切換開銷，而 `v-show` 有更高的初始渲染開銷。因此，如果需要頻繁切換，則使用 `v-show` 較好；如果在運行時綁定條件很少改變，則 `v-if` 會更合適。
 
 ## `v-if` 和 `v-for` {#v-if-with-v-for}
 
 ::: warning 警告
-同时使用 `v-if` 和 `v-for` 是**不推荐的**，因为这样二者的优先级不明显。请查看[风格指南](/style-guide/rules-essential#avoid-v-if-with-v-for)获得更多信息。
+同時使用 `v-if` 和 `v-for` 是**不推薦的**，因為這樣二者的優先級不明顯。請查看[風格指南](/style-guide/rules-essential#avoid-v-if-with-v-for)獲得更多信息。
 :::
 
-当 `v-if` 和 `v-for` 同时存在于一个元素上的时候，`v-if` 会首先被执行。请查看[列表渲染指南](list#v-for-with-v-if)获取更多细节。
+當 `v-if` 和 `v-for` 同時存在於一個元素上的時候，`v-if` 會首先被執行。請查看[列表渲染指南](list#v-for-with-v-if)獲取更多細節。
