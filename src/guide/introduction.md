@@ -207,7 +207,7 @@ export default {
 ### 組合式 API (Composition API) {#composition-api}
 
 
-通過組合式 API，我們可以使用導入的 API 函數來描述組件邏輯。在單文件組件中，組合式 API 通常會與 [`<script setup>`](/api/sfc-script-setup) 搭配使用。這個 `setup` 屬性是一個標識，告訴 Vue 需要在編譯時進行一些處理，讓我們可以更簡潔地使用組合式 API。比如，`<script setup>` 中的導入和頂層變量/函數都能夠在模板中直接使用。
+通過組合式 API，我們可以使用導入的 API 函數來描述組件邏輯。在單文件組件中，組合式 API 通常會與 [`<script setup>`](/api/sfc-script-setup) 搭配使用。這個 `setup` 屬性是一個標識，告訴 Vue 需要在編譯時進行一些處理，讓我們可以更簡潔地使用組合式 API。例如，`<script setup>` 中的導入和頂層變量/函數都能夠在模板中直接使用。
 
 下面是使用了組合式 API 與 `<script setup>` 改造後和上面的模板完全一樣的組件：
 
