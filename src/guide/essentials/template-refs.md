@@ -1,25 +1,25 @@
 # 模板引用 {#template-refs}
 
-虽然 Vue 的声明性渲染模型为你抽象了大部分对 DOM 的直接操作，但在某些情况下，我们仍然需要直接访问底层 DOM 元素。要实现这一点，我们可以使用特殊的 `ref` attribute：
+雖然 Vue 的聲明性渲染模型為你抽象了大部分對 DOM 的直接操作，但在某些情況下，我們仍然需要直接訪問底層 DOM 元素。要實現這一點，我們可以使用特殊的 `ref` attribute：
 
 ```vue-html
 <input ref="input">
 ```
 
-`ref` 是一个特殊的 attribute，和 `v-for` 章节中提到的 `key` 类似。它允许我们在一个特定的 DOM 元素或子组件实例被挂载后，获得对它的直接引用。这可能很有用，比如说在组件挂载时将焦点设置到一个 input 元素上，或在一个元素上初始化一个第三方库。
+`ref` 是一個特殊的 attribute，和 `v-for` 章節中提到的 `key` 類似。它允許我們在一個特定的 DOM 元素或子組件實例被掛載後，獲得對它的直接引用。這可能很有用，例如說在組件掛載時將焦點設置到一個 input 元素上，或在一個元素上初始化一個第三方庫。
 
-## 访问模板引用 {#accessing-the-refs}
+## 訪問模板引用 {#accessing-the-refs}
 
 <div class="composition-api">
 
-为了通过组合式 API 获得该模板引用，我们需要声明一个匹配模板 ref attribute 值的 ref：
+為了通過組合式 API 獲得該模板引用，我們需要聲明一個匹配模板 ref attribute 值的 ref：
 
 ```vue
 <script setup>
 import { ref, onMounted } from 'vue'
 
-// 声明一个 ref 来存放该元素的引用
-// 必须和模板里的 ref 同名
+// 聲明一個 ref 來存放該元素的引用
+// 必須和模板裡的 ref 同名
 const input = ref(null)
 
 onMounted(() => {
@@ -32,7 +32,7 @@ onMounted(() => {
 </template>
 ```
 
-如果不使用 `<script setup>`，需确保从 `setup()` 返回 ref：
+如果不使用 `<script setup>`，需確保從 `setup()` 返回 ref：
 
 ```js{6}
 export default {
@@ -49,7 +49,7 @@ export default {
 </div>
 <div class="options-api">
 
-挂载结束后引用都会被暴露在 `this.$refs` 之上：
+掛載結束後引用都會被暴露在 `this.$refs` 之上：
 
 ```vue
 <script>
@@ -67,23 +67,23 @@ export default {
 
 </div>
 
-注意，你只可以**在组件挂载后**才能访问模板引用。如果你想在模板中的表达式上访问 <span class="options-api">`$refs.input`</span><span class="composition-api">`input`</span>，在初次渲染时会是 <span class="options-api">`undefined`</span><span class="composition-api">`null`</span>。这是因为在初次渲染前这个元素还不存在呢！
+注意，你只可以**在組件掛載後**才能訪問模板引用。如果你想在模板中的表達式上訪問 <span class="options-api">`$refs.input`</span><span class="composition-api">`input`</span>，在初次渲染時會是 <span class="options-api">`undefined`</span><span class="composition-api">`null`</span>，因為在初次渲染前這個元素還不存在！
 
 <div class="composition-api">
 
-如果你需要侦听一个模板引用 ref 的变化，确保考虑到其值为 `null` 的情况：
+如果你需要偵聽一個模板引用 ref 的變化，確保考慮到其值為 `null` 的情況：
 
 ```js
 watchEffect(() => {
   if (input.value) {
     input.value.focus()
   } else {
-    // 此时还未挂载，或此元素已经被卸载（例如通过 v-if 控制）
+    // 此時還未掛載，或此元素已經被卸載（例如通過 v-if 控制）
   }
 })
 ```
 
-也可参考：[为模板引用标注类型](/guide/typescript/composition-api#typing-template-refs) <sup class="vt-badge ts" />
+也可參考：[為模板引用標註類型](/guide/typescript/composition-api#typing-template-refs) <sup class="vt-badge ts" />
 
 </div>
 
@@ -93,7 +93,7 @@ watchEffect(() => {
 
 <div class="composition-api">
 
-当在 `v-for` 中使用模板引用时，对应的 ref 中包含的值是一个数组，它将在元素被挂载后包含对应整个列表的所有元素：
+當在 `v-for` 中使用模板引用時，對應的 ref 中包含的值是一個數組，它將在元素被掛載後包含對應整個列表的所有元素：
 
 ```vue
 <script setup>
@@ -117,12 +117,12 @@ onMounted(() => console.log(itemRefs.value))
 </template>
 ```
 
-[在演练场中尝试一下](https://play.vuejs.org/#eNpFjs1qwzAQhF9l0CU2uDZtb8UOlJ576bXqwaQyCGRJyCsTEHr3rGwnOehnd2e+nSQ+vW/XqMSH6JdL0J6wKIr+LK2evQuEhKCmBs5+u2hJ/SNjCm7GiV0naaW9OLsQjOZrKNrq97XBW4P3v/o51qTmHzUtd8k+e0CrqsZwRpIWGI0KVN0N7TqaqNp59JUuEt2SutKXY5elmimZT9/t2Tk1F+z0ZiTFFdBHs738Mxrry+TCIEWhQ9sttRQl0tEsK6U4HEBKW3LkfDA6o3dst3H77rFM5BtTfm/P)
+[在演練場中嘗試一下](https://play.vuejs.org/#eNpFjs1qwzAQhF9l0CU2uDZtb8UOlJ576bXqwaQyCGRJyCsTEHr3rGwnOehnd2e+nSQ+vW/XqMSH6JdL0J6wKIr+LK2evQuEhKCmBs5+u2hJ/SNjCm7GiV0naaW9OLsQjOZrKNrq97XBW4P3v/o51qTmHzUtd8k+e0CrqsZwRpIWGI0KVN0N7TqaqNp59JUuEt2SutKXY5elmimZT9/t2Tk1F+z0ZiTFFdBHs738Mxrry+TCIEWhQ9sttRQl0tEsK6U4HEBKW3LkfDA6o3dst3H77rFM5BtTfm/P)
 
 </div>
 <div class="options-api">
 
-当在 `v-for` 中使用模板引用时，相应的引用中包含的值是一个数组：
+當在 `v-for` 中使用模板引用時，相應的引用中包含的值是一個數組：
 
 ```vue
 <script>
@@ -149,27 +149,27 @@ export default {
 </template>
 ```
 
-[在演练场中尝试一下](https://play.vuejs.org/#eNpFjk0KwjAQha/yCC4Uaou6kyp4DuOi2KkGYhKSiQildzdNa4WQmTc/37xeXJwr35HEUdTh7pXjszT0cdYzWuqaqBm9NEDbcLPeTDngiaM3PwVoFfiI667AvsDhNpWHMQzF+L9sNEztH3C3JlhNpbaPNT9VKFeeulAqplfY5D1p0qurxVQSqel0w5QUUEedY8q0wnvbWX+SYgRAmWxIiuSzm4tBinkc6HvkuSE7TIBKq4lZZWhdLZfE8AWp4l3T)
+[在演練場中嘗試一下](https://play.vuejs.org/#eNpFjk0KwjAQha/yCC4Uaou6kyp4DuOi2KkGYhKSiQildzdNa4WQmTc/37xeXJwr35HEUdTh7pXjszT0cdYzWuqaqBm9NEDbcLPeTDngiaM3PwVoFfiI667AvsDhNpWHMQzF+L9sNEztH3C3JlhNpbaPNT9VKFeeulAqplfY5D1p0qurxVQSqel0w5QUUEedY8q0wnvbWX+SYgRAmWxIiuSzm4tBinkc6HvkuSE7TIBKq4lZZWhdLZfE8AWp4l3T)
 
 </div>
 
-应该注意的是，ref 数组**并不**保证与源数组相同的顺序。
+應該注意的是，ref 數組**並不**保證與源數組相同的順序。
 
-## 函数模板引用 {#function-refs}
+## 函數模板引用 {#function-refs}
 
-除了使用字符串值作名字，`ref` attribute 还可以绑定为一个函数，会在每次组件更新时都被调用。该函数会收到元素引用作为其第一个参数：
+除了使用字符串值作名字，`ref` attribute 還可以綁定為一個函數，會在每次組件更新時都被調用。該函數會收到元素引用作為其第一個參數：
 
 ```vue-html
-<input :ref="(el) => { /* 将 el 赋值给一个数据属性或 ref 变量 */ }">
+<input :ref="(el) => { /* 將 el 賦值給一個數據屬性或 ref 變量 */ }">
 ```
 
-注意我们这里需要使用动态的 `:ref` 绑定才能够传入一个函数。当绑定的元素被卸载时，函数也会被调用一次，此时的 `el` 参数会是 `null`。你当然也可以绑定一个组件方法而不是内联函数。
+注意我們這裡需要使用動態的 `:ref` 綁定才能夠傳入一個函數。當綁定的元素被卸載時，函數也會被調用一次，此時的 `el` 參數會是 `null`。你當然也可以綁定一個組件方法而不是內聯函數。
 
-## 组件上的 ref {#ref-on-component}
+## 組件上的 ref {#ref-on-component}
 
-> 这一小节假设你已了解[组件](/guide/essentials/component-basics)的相关知识，或者你也可以先跳过这里，之后再回来看。
+> 這一小節假設你已瞭解[組件](/guide/essentials/component-basics)的相關知識，或者你也可以先跳過這裡，之後再回來看。
 
-模板引用也可以被用在一个子组件上。这种情况下引用中获得的值是组件实例：
+模板引用也可以被用在一個子組件上。這種情況下引用中獲得的值是組件實例：
 
 <div class="composition-api">
 
@@ -181,7 +181,7 @@ import Child from './Child.vue'
 const child = ref(null)
 
 onMounted(() => {
-  // child.value 是 <Child /> 组件的实例
+  // child.value 是 <Child /> 組件的實例
 })
 </script>
 
@@ -202,7 +202,7 @@ export default {
     Child
   },
   mounted() {
-    // this.$refs.child 是 <Child /> 组件的实例
+    // this.$refs.child 是 <Child /> 組件的實例
   }
 }
 </script>
@@ -214,11 +214,11 @@ export default {
 
 </div>
 
-如果一个子组件使用的是选项式 API <span class="composition-api">或没有使用 `<script setup>`</span>，被引用的组件实例和该子组件的 `this` 完全一致，这意味着父组件对子组件的每一个属性和方法都有完全的访问权。这使得在父组件和子组件之间创建紧密耦合的实现细节变得很容易，当然也因此，应该只在绝对需要时才使用组件引用。大多数情况下，你应该首先使用标准的 props 和 emit 接口来实现父子组件交互。
+如果一個子組件使用的是選項式 API <span class="composition-api">或沒有使用 `<script setup>`</span>，被引用的組件實例和該子組件的 `this` 完全一致，這意味著父組件對子組件的每一個屬性和方法都有完全的訪問權。這使得在父組件和子組件之間創建緊密耦合的實現細節變得很容易，當然也因此，應該只在絕對需要時才使用組件引用。大多數情況下，你應該首先使用標準的 props 和 emit 接口來實現父子組件交互。
 
 <div class="composition-api">
 
-有一个例外的情况，使用了 `<script setup>` 的组件是**默认私有**的：一个父组件无法访问到一个使用了 `<script setup>` 的子组件中的任何东西，除非子组件在其中通过 `defineExpose` 宏显式暴露：
+有一個例外的情況，使用了 `<script setup>` 的組件是**默認私有**的：一個父組件無法訪問到一個使用了 `<script setup>` 的子組件中的任何東西，除非子組件在其中通過 `defineExpose` 宏顯式暴露：
 
 ```vue
 <script setup>
@@ -227,7 +227,7 @@ import { ref } from 'vue'
 const a = 1
 const b = ref(2)
 
-// 像 defineExpose 这样的编译器宏不需要导入
+// 像 defineExpose 這樣的編譯器宏不需要導入
 defineExpose({
   a,
   b
@@ -235,14 +235,14 @@ defineExpose({
 </script>
 ```
 
-当父组件通过模板引用获取到了该组件的实例时，得到的实例类型为 `{ a: number, b: number }` (ref 都会自动解包，和一般的实例一样)。
+當父組件通過模板引用獲取到了該組件的實例時，得到的實例類型為 `{ a: number, b: number }` (ref 都會自動解包，和一般的實例一樣)。
 
-TypeScript 用户请参考：[为组件的模板引用标注类型](/guide/typescript/composition-api#typing-component-template-refs) <sup class="vt-badge ts" />
+TypeScript 用戶請參考：[為組件的模板引用標註類型](/guide/typescript/composition-api#typing-component-template-refs) <sup class="vt-badge ts" />
 
 </div>
 <div class="options-api">
 
-`expose` 选项可以用于限制对子组件实例的访问：
+`expose` 選項可以用於限制對子組件實例的訪問：
 
 ```js
 export default {
@@ -264,6 +264,6 @@ export default {
 }
 ```
 
-在上面这个例子中，父组件通过模板引用访问到子组件实例后，仅能访问 `publicData` 和 `publicMethod`。
+在上面這個例子中，父組件通過模板引用訪問到子組件實例後，只能訪問 `publicData` 和 `publicMethod`。
 
 </div>
