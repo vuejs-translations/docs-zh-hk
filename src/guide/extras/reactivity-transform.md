@@ -1,20 +1,20 @@
-# 响应性语法糖 {#reactivity-transform}
+# 響應性語法糖 {#reactivity-transform}
 
-:::danger 已移除的实验性功能
-响应性语法糖曾经是一个实验性功能，且已在最新的 3.4 版本中被移除，请阅读[废弃原因](https://github.com/vuejs/rfcs/discussions/369#discussioncomment-5059028)。
+:::danger 已移除的實驗性功能
+響應性語法糖曾經是一個實驗性功能，且已在最新的 3.4 版本中被移除，請閱讀[廢棄原因](https://github.com/vuejs/rfcs/discussions/369#discussioncomment-5059028)。
 
-如果仍然打算使用它，你现在可以使用 [Vue Macros](https://vue-macros.sxzz.moe/features/reactivity-transform.html) 插件。
+如果仍然打算使用它，你現在可以使用 [Vue Macros](https://vue-macros.sxzz.moe/features/reactivity-transform.html) 插件。
 :::
 
-:::tip 组合式 API 特有
-响应性语法糖是组合式 API 特有的功能，且必须通过构建步骤使用。
+:::tip 組合式 API 特有
+響應性語法糖是組合式 API 特有的功能，且必須通過構建步驟使用。
 :::
 
-## ref vs. 响应式变量 {#refs-vs-reactive-variables}
+## ref vs. 響應式變量 {#refs-vs-reactive-variables}
 
-自从引入组合式 API 的概念以来，一个主要的未解决的问题就是 ref 和响应式对象到底用哪个。响应式对象存在解构丢失响应性的问题，而 ref 需要到处使用 `.value` 则感觉很繁琐，并且在没有类型系统的帮助时很容易漏掉 `.value`。
+自從引入組合式 API 的概念以來，一個主要的未解決的問題就是 ref 和響應式對象到底用哪個。響應式對象存在解構丟失響應性的問題，而 ref 需要到處使用 `.value` 則感覺很繁瑣，並且在沒有類型系統的幫助時很容易漏掉 `.value`。
 
-[Vue 的响应性语法糖](https://github.com/vuejs/core/tree/main/packages/reactivity-transform)是一个编译时的转换步骤，让我们可以像这样书写代码：
+[Vue 的響應性語法糖](https://github.com/vuejs/core/tree/main/packages/reactivity-transform)是一個編譯時的轉換步驟，讓我們可以像這樣書寫代碼：
 
 ```vue
 <script setup>
@@ -32,9 +32,9 @@ function increment() {
 </template>
 ```
 
-这里的这个 `$ref()` 方法是一个**编译时的宏命令**：它不是一个真实的、在运行时会调用的方法。而是用作 Vue 编译器的标记，表明最终的 `count` 变量需要是一个**响应式变量**。
+這裡的這個 `$ref()` 方法是一個**編譯時的宏命令**：它不是一個真實的、在運行時會調用的方法。而是用作 Vue 編譯器的標記，表明最終的 `count` 變量需要是一個**響應式變量**。
 
-响应式的变量可以像普通变量那样被访问和重新赋值，但这些操作在编译后都会变为带 `.value` 的 ref。比如上面例子中 `<script>` 部分的代码就被编译成了下面这样：
+響應式的變量可以像普通變量那樣被訪問和重新賦值，但這些操作在編譯後都會變為帶 `.value` 的 ref。例如上面例子中 `<script>` 部分的代碼就被編譯成了下面這樣：
 
 ```js{5,8}
 import { ref } from 'vue'
@@ -48,7 +48,7 @@ function increment() {
 }
 ```
 
-每一个会返回 ref 的响应式 API 都有一个相对应的、以 `$` 为前缀的宏函数。包括以下这些 API：
+每一個會返回 ref 的響應式 API 都有一個相對應的、以 `$` 為前綴的宏函數。包括以下這些 API：
 
 - [`ref`](/api/reactivity-core#ref) -> `$ref`
 - [`computed`](/api/reactivity-core#computed) -> `$computed`
@@ -56,7 +56,7 @@ function increment() {
 - [`customRef`](/api/reactivity-advanced#customref) -> `$customRef`
 - [`toRef`](/api/reactivity-utilities#toref) -> `$toRef`
 
-当启用响应性语法糖时，这些宏函数都是全局可用的、无需手动导入。但如果你想让它更明显，你也可以选择从 `vue/macros` 中引入它们：
+當啟用響應性語法糖時，這些宏函數都是全局可用的、無需手動導入。但如果你想讓它更明顯，你也可以選擇從 `vue/macros` 中引入它們：
 
 ```js
 import { $ref } from 'vue/macros'
@@ -64,9 +64,9 @@ import { $ref } from 'vue/macros'
 let count = $ref(0)
 ```
 
-## 通过 `$()` 解构 {#destructuring-with}
+## 通過 `$()` 解構 {#destructuring-with}
 
-我们常常会让一个组合函数返回一个含数个 ref 的对象，然后解构得到这些 ref。对于这种场景，响应性语法糖提供了一个 **`$()`** 宏：
+我們常常會讓一個組合函數返回一個含數個 ref 的對象，然後解構得到這些 ref。對於這種場景，響應性語法糖提供了一個 **`$()`** 宏：
 
 ```js
 import { useMouse } from '@vueuse/core'
@@ -76,7 +76,7 @@ const { x, y } = $(useMouse())
 console.log(x, y)
 ```
 
-编译输出为：
+編譯輸出為：
 
 ```js
 import { toRef } from 'vue'
@@ -89,13 +89,13 @@ const __temp = useMouse(),
 console.log(x.value, y.value)
 ```
 
-请注意如果 `x` 已经是一个 ref，`toRef(__temp, 'x')` 则会简单地返回它本身，而不会再创建新的 ref。如果一个被解构的值不是 ref (例如是一个函数)，也仍然可以使用，这个值会被包装进一个 ref，因此其他代码都会正常工作。
+請注意如果 `x` 已經是一個 ref，`toRef(__temp, 'x')` 則會簡單地返回它本身，而不會再創建新的 ref。如果一個被解構的值不是 ref (例如是一個函數)，也仍然可以使用，這個值會被包裝進一個 ref，因此其他代碼都會正常工作。
 
-对 `$()` 的解构在响应式对象**和**包含数个 ref 的对象都可用。
+對 `$()` 的解構在響應式對象**和**包含數個 ref 的對象都可用。
 
-## 用 `$()` 将现存的 ref 转换为响应式对象 {#convert-existing-refs-to-reactive-variables-with}
+## 用 `$()` 將現存的 ref 轉換為響應式對象 {#convert-existing-refs-to-reactive-variables-with}
 
-在某些场景中我们可能已经有了会返回 ref 的函数。然而，Vue 编译器并不能够提前知道该函数会返回一个 ref。那么此时可以使用 `$()` 宏来将现存的 ref 转换为响应式变量。
+在某些場景中我們可能已經有了會返回 ref 的函數。然而，Vue 編譯器並不能夠提前知道該函數會返回一個 ref。那麼此時可以使用 `$()` 宏來將現存的 ref 轉換為響應式變量。
 
 ```js
 function myCreateRef() {
@@ -105,15 +105,15 @@ function myCreateRef() {
 let count = $(myCreateRef())
 ```
 
-## 响应式 props 解构 {#reactive-props-destructure}
+## 響應式 props 解構 {#reactive-props-destructure}
 
-现在的 `<script setup>` 中对 `defineProps` 宏的使用有两个痛点：
+現在的 `<script setup>` 中對 `defineProps` 宏的使用有兩個痛點：
 
-1. 和 `.value` 类似，为了保持响应性，你始终需要以 `props.x` 的方式访问这些 prop。这意味着你不能够解构 `defineProps` 的返回值，因为得到的变量将不是响应式的、也不会更新。
+1. 和 `.value` 類似，為了保持響應性，你始終需要以 `props.x` 的方式訪問這些 prop。這意味著你不能夠解構 `defineProps` 的返回值，因為得到的變量將不是響應式的、也不會更新。
 
-2. 当使用[基于类型的 props 的声明](https://v3.vuejs.org/api/sfc-script-setup#type-only-props-emit-declarations)时，无法很方便地声明这些 prop 的默认值。为此我们提供了 `withDefaults()` 这个 API，但使用起来仍然很笨拙。
+2. 當使用[基於類型的 props 的聲明](https://v3.vuejs.org/api/sfc-script-setup#type-only-props-emit-declarations)時，無法很方便地聲明這些 prop 的默認值。為此我們提供了 `withDefaults()` 這個 API，但使用起來仍然很笨拙。
 
-当 `defineProps` 与解构一起使用时，我们可以通过应用编译时转换来解决这些问题，类似于我们之前看到的 `$()`：
+當 `defineProps` 與解構一起使用時，我們可以通過應用編譯時轉換來解決這些問題，類似於我們之前看到的 `$()`：
 
 ```html
 <script setup lang="ts">
@@ -125,21 +125,21 @@ let count = $(myCreateRef())
 
   const {
     msg,
-    // 默认值正常可用
+    // 默認值正常可用
     count = 1,
-    // 解构时命别名也可用
-    // 这里我们就将 `props.foo` 命别名为 `bar`
+    // 解構時命別名也可用
+    // 這裡我們就將 `props.foo` 命別名為 `bar`
     foo: bar
   } = defineProps<Props>()
 
   watchEffect(() => {
-    // 会在 props 变化时打印
+    // 會在 props 變化時打印
     console.log(msg, count, bar)
   })
 </script>
 ```
 
-上面的代码将被编译成下面这样的运行时声明：
+上面的代碼將被編譯成下面這樣的運行時聲明：
 
 ```js
 export default {
@@ -156,33 +156,33 @@ export default {
 }
 ```
 
-## 保持在函数间传递时的响应性 {#retaining-reactivity-across-function-boundaries}
+## 保持在函數間傳遞時的響應性 {#retaining-reactivity-across-function-boundaries}
 
-虽然响应式变量使我们可以不再受 `.value` 的困扰，但它也使得我们在函数间传递响应式变量时可能造成“响应性丢失”的问题。这可能在以下两种场景中出现：
+雖然響應式變量使我們可以不再受 `.value` 的困擾，但它也使得我們在函數間傳遞響應式變量時可能造成“響應性丟失”的問題。這可能在以下兩種場景中出現：
 
-### 以参数形式传入函数 {#passing-into-function-as-argument}
+### 以參數形式傳入函數 {#passing-into-function-as-argument}
 
-假设有一个期望接收一个 ref 对象为参数的函数：
+假設有一個期望接收一個 ref 對象為參數的函數：
 
 ```ts
 function trackChange(x: Ref<number>) {
   watch(x, (x) => {
-    console.log('x 改变了！')
+    console.log('x 改變了！')
   })
 }
 
 let count = $ref(0)
-trackChange(count) // 无效！
+trackChange(count) // 無效！
 ```
 
-上面的例子不会正常工作，因为代码被编译成了这样：
+上面的例子不會正常工作，因為代碼被編譯成了這樣：
 
 ```ts
 let count = ref(0)
 trackChange(count.value)
 ```
 
-这里的 `count.value` 是以一个 number 类型值的形式传入，然而 `trackChange` 期望接收的是一个真正的 ref。要解决这个问题，可以在将 `count` 作为参数传入之前，用 `$$()` 包装：
+這裡的 `count.value` 是以一個 number 類型值的形式傳入，然而 `trackChange` 期望接收的是一個真正的 ref。要解決這個問題，可以在將 `count` 作為參數傳入之前，用 `$$()` 包裝：
 
 ```diff
 let count = $ref(0)
@@ -190,7 +190,7 @@ let count = $ref(0)
 + trackChange($$(count))
 ```
 
-上面的代码将被编译成：
+上面的代碼將被編譯成：
 
 ```js
 import { ref } from 'vue'
@@ -199,18 +199,18 @@ let count = ref(0)
 trackChange(count)
 ```
 
-我们可以看到，`$$()` 的效果就像是一个**转义标识**：`$$()` 中的响应式变量不会追加上 `.value`。
+我們可以看到，`$$()` 的效果就像是一個**轉義標識**：`$$()` 中的響應式變量不會追加上 `.value`。
 
-### 作为函数返回值 {#returning-inside-function-scope}
+### 作為函數返回值 {#returning-inside-function-scope}
 
-如果将响应式变量直接放在返回值表达式中会丢失掉响应性：
+如果將響應式變量直接放在返回值表達式中會丟失掉響應性：
 
 ```ts
 function useMouse() {
   let x = $ref(0)
   let y = $ref(0)
 
-  // 监听 mousemove 事件
+  // 監聽 mousemove 事件
 
   // 不起效！
   return {
@@ -220,7 +220,7 @@ function useMouse() {
 }
 ```
 
-上面的语句将被翻译为：
+上面的語句將被翻譯為：
 
 ```ts
 return {
@@ -229,18 +229,18 @@ return {
 }
 ```
 
-为了保持响应性，我们需要返回的是真正的 ref，而不是返回时 ref 内的值。
+為了保持響應性，我們需要返回的是真正的 ref，而不是返回時 ref 內的值。
 
-我们还是可以使用 `$$()` 来解决这个问题。在这个例子中，`$$()` 可以直接用在要返回的对象上，`$$()` 调用时任何对响应式变量的引用都会保留为对相应 ref 的引用：
+我們仍然可以使用 `$$()` 來解決這個問題。在這個例子中，`$$()` 可以直接用在要返回的對象上，`$$()` 調用時任何對響應式變量的引用都會保留為對相應 ref 的引用：
 
 ```ts
 function useMouse() {
   let x = $ref(0)
   let y = $ref(0)
 
-  // 监听 mousemove 事件
+  // 監聽 mousemove 事件
 
-  // 修改后起效
+  // 修改後起效
   return $$({
     x,
     y
@@ -248,9 +248,9 @@ function useMouse() {
 }
 ```
 
-### 在已解构的 props 上使用 `$$()` {#using-on-destructured-props}
+### 在已解構的 props 上使用 `$$()` {#using-on-destructured-props}
 
-`$$()` 也适用于已解构的 props，因为它们也是响应式的变量。编译器会高效地通过 `toRef` 来做转换：
+`$$()` 也適用於已解構的 props，因為它們也是響應式的變量。編譯器會高效地通過 `toRef` 來做轉換：
 
 ```ts
 const { count } = defineProps<{ count: number }>()
@@ -258,7 +258,7 @@ const { count } = defineProps<{ count: number }>()
 passAsRef($$(count))
 ```
 
-编译结果为：
+編譯結果為：
 
 ```js
 setup(props) {
@@ -269,29 +269,29 @@ setup(props) {
 
 ## TypeScript 集成 <sup class="vt-badge ts" /> {#typescript-integration}
 
-Vue 为这些宏函数都提供了类型声明 (全局可用)，因此类型推导都会符合预期。它与标准的 TypeScript 语义没有不兼容之处，因此它的语法可以与所有现有的工具兼容。
+Vue 為這些宏函數都提供了類型聲明 (全局可用)，因此類型推導都會符合預期。它與標準的 TypeScript 語義沒有不兼容之處，因此它的語法可以與所有現有的工具兼容。
 
-这也意味着这些宏函数在任何 JS / TS 文件中都是合法的，不是仅能在 Vue SFC 中使用。
+這也意味著這些宏函數在任何 JS / TS 文件中都是合法的，不是僅能在 Vue SFC 中使用。
 
-因为这些宏函数都是全局可用的，它们的类型需要被显式地引用 (例如，在 `env.d.ts` 文件中)：
+因為這些宏函數都是全局可用的，它們的類型需要被顯式地引用 (例如，在 `env.d.ts` 文件中)：
 
 ```ts
 /// <reference types="vue/macros-global" />
 ```
 
-若你是从 `vue/macros` 中显式引入宏函数时，则不需要像这样全局声明。
+若你是從 `vue/macros` 中顯式引入宏函數時，則不需要像這樣全局聲明。
 
-## 显式启用 {#explicit-opt-in}
+## 顯式啟用 {#explicit-opt-in}
 
 :::danger Core 不再支持
-以下内容仅适用于 Vue 3.3 及以下版本。Vue core 3.4 及以上版本和 `@vitejs/plugin-vue` 5.0 及以上版本已经将其移除。如需继续使用，请迁移至 [Vue Macros](https://vue-macros.sxzz.moe/features/reactivity-transform.html)。
+以下內容僅適用於 Vue 3.3 及以下版本。Vue core 3.4 及以上版本和 `@vitejs/plugin-vue` 5.0 及以上版本已經將其移除。如需繼續使用，請遷移至 [Vue Macros](https://vue-macros.sxzz.moe/features/reactivity-transform.html)。
 :::
 
 ### Vite {#vite}
 
 - 需要 `@vitejs/plugin-vue@>=2.0.0`
-- 应用于 SFC 和 js(x)/ts(x) 文件。在执行转换之前，会对文件进行快速的使用检查，因此不使用宏的文件不会有性能损失。
-- 注意 `reactivityTransform` 现在是一个插件的顶层选项，而不再是位于 `script.refSugar` 之中了，因为它不仅仅只对 SFC 起效。
+- 應用於 SFC 和 js(x)/ts(x) 文件。在執行轉換之前，會對文件進行快速的使用檢查，因此不使用宏的文件不會有性能損失。
+- 注意 `reactivityTransform` 現在是一個插件的頂層選項，而不再是位於 `script.refSugar` 之中了，因為它不僅僅只對 SFC 起效。
 
 ```js
 // vite.config.js
@@ -306,7 +306,7 @@ export default {
 
 ### `vue-cli` {#vue-cli}
 
-- 目前仅对 SFC 起效
+- 目前僅對 SFC 起效
 - 需要 `vue-loader@>=17.0.0`
 
 ```js
@@ -326,9 +326,9 @@ module.exports = {
 }
 ```
 
-### 仅用 `webpack` + `vue-loader` {#plain-webpack-vue-loader}
+### 僅用 `webpack` + `vue-loader` {#plain-webpack-vue-loader}
 
-- 目前仅对 SFC 起效
+- 目前僅對 SFC 起效
 - 需要 `vue-loader@>=17.0.0`
 
 ```js
