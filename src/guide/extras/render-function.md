@@ -2,17 +2,17 @@
 outline: deep
 ---
 
-# 渲染函数 & JSX {#render-functions-jsx}
+# 渲染函數 & JSX {#render-functions-jsx}
 
-在绝大多数情况下，Vue 推荐使用模板语法来创建应用。然而在某些使用场景下，我们真的需要用到 JavaScript 完全的编程能力。这时**渲染函数**就派上用场了。
+在絕大多數情況下，Vue 推薦使用模板語法來創建應用。然而在某些使用場景下，我們真的需要用到 JavaScript 完全的編程能力。這時**渲染函數**就派上用場了。
 
-> 如果你还不熟悉虚拟 DOM 和渲染函数的概念的话，请确保先阅读[渲染机制](/guide/extras/rendering-mechanism)章节。
+> 如果你還不熟悉虛擬 DOM 和渲染函數的概念的話，請確保先閱讀[渲染機制](/guide/extras/rendering-mechanism)章節。
 
 ## 基本用法 {#basic-usage}
 
-### 创建 Vnodes {#creating-vnodes}
+### 創建 Vnodes {#creating-vnodes}
 
-Vue 提供了一个 `h()` 函数用于创建 vnodes：
+Vue 提供了一個 `h()` 函數用於創建 vnodes：
 
 ```js
 import { h } from 'vue'
@@ -26,42 +26,42 @@ const vnode = h(
 )
 ```
 
-`h()` 是 **hyperscript** 的简称——意思是“能生成 HTML (超文本标记语言) 的 JavaScript”。这个名字来源于许多虚拟 DOM 实现默认形成的约定。一个更准确的名称应该是 `createVnode()`，但当你需要多次使用渲染函数时，一个简短的名字会更省力。
+`h()` 是 **hyperscript** 的簡稱——意思是“能生成 HTML (超文本標記語言) 的 JavaScript”。這個名字來源於許多虛擬 DOM 實現默認形成的約定。一個更準確的名稱應該是 `createVnode()`，但當你需要多次使用渲染函數時，一個簡短的名字會更省力。
 
-`h()` 函数的使用方式非常的灵活：
+`h()` 函數的使用方式非常的靈活：
 
 ```js
-// 除了类型必填以外，其他的参数都是可选的
+// 除了類型必填以外，其他的參數都是可選的
 h('div')
 h('div', { id: 'foo' })
 
-// attribute 和 property 都能在 prop 中书写
-// Vue 会自动将它们分配到正确的位置
+// attribute 和 property 都能在 prop 中書寫
+// Vue 會自動將它們分配到正確的位置
 h('div', { class: 'bar', innerHTML: 'hello' })
 
-// 像 `.prop` 和 `.attr` 这样的的属性修饰符
-// 可以分别通过 `.` 和 `^` 前缀来添加
+// 像 `.prop` 和 `.attr` 這樣的的屬性修飾符
+// 可以分別通過 `.` 和 `^` 前綴來添加
 h('div', { '.name': 'some-name', '^width': '100' })
 
-// 类与样式可以像在模板中一样
-// 用数组或对象的形式书写
+// 類與樣式可以像在模板中一樣
+// 用數組或對象的形式書寫
 h('div', { class: [foo, { bar }], style: { color: 'red' } })
 
-// 事件监听器应以 onXxx 的形式书写
+// 事件監聽器應以 onXxx 的形式書寫
 h('div', { onClick: () => {} })
 
-// children 可以是一个字符串
+// children 可以是一個字符串
 h('div', { id: 'foo' }, 'hello')
 
-// 没有 props 时可以省略不写
+// 沒有 props 時可以省略不寫
 h('div', 'hello')
 h('div', [h('span', 'hello')])
 
-// children 数组可以同时包含 vnodes 与字符串
+// children 數組可以同時包含 vnodes 與字符串
 h('div', ['hello', h('span', 'hello')])
 ```
 
-得到的 vnode 为如下形式：
+得到的 vnode 為如下形式：
 
 ```js
 const vnode = h('div', { id: 'foo' }, [])
@@ -72,15 +72,15 @@ vnode.children // []
 vnode.key // null
 ```
 
-::: warning 注意事项
-完整的 `VNode` 接口包含其他内部属性，但是强烈建议避免使用这些没有在这里列举出的属性。这样能够避免因内部属性变更而导致的不兼容性问题。
+::: warning 注意事項
+完整的 `VNode` 接口包含其他內部屬性，但是強烈建議避免使用這些沒有在這裡列舉出的屬性。這樣能夠避免因內部屬性變更而導致的不兼容性問題。
 :::
 
-### 声明渲染函数 {#declaring-render-function}
+### 聲明渲染函數 {#declaring-render-function}
 
 <div class="composition-api">
 
-当组合式 API 与模板一起使用时，`setup()` 钩子的返回值是用于暴露数据给模板。然而当我们使用渲染函数时，可以直接把渲染函数返回：
+當組合式 API 與模板一起使用時，`setup()` 鉤子的返回值是用於暴露數據給模板。然而當我們使用渲染函數時，可以直接把渲染函數返回：
 
 ```js
 import { ref, h } from 'vue'
@@ -92,15 +92,15 @@ export default {
   setup(props) {
     const count = ref(1)
 
-    // 返回渲染函数
+    // 返回渲染函數
     return () => h('div', props.msg + count.value)
   }
 }
 ```
 
-在 `setup()` 内部声明的渲染函数天生能够访问在同一范围内声明的 props 和许多响应式状态。
+在 `setup()` 內部聲明的渲染函數天生能夠訪問在同一範圍內聲明的 props 和許多響應式狀態。
 
-除了返回一个 vnode，你还可以返回字符串或数组：
+除了返回一個 vnode，你還可以返回字符串或數組：
 
 ```js
 export default {
@@ -115,7 +115,7 @@ import { h } from 'vue'
 
 export default {
   setup() {
-    // 使用数组返回多个根节点
+    // 使用數組返回多個根節點
     return () => [
       h('div'),
       h('div'),
@@ -126,13 +126,13 @@ export default {
 ```
 
 ::: tip
-请确保返回的是一个函数而不是一个值！`setup()` 函数在每个组件中只会被调用一次，而返回的渲染函数将会被调用多次。
+請確保返回的是一個函數而不是一個值！`setup()` 函數在每個組件中只會被調用一次，而返回的渲染函數將會被調用多次。
 :::
 
 </div>
 <div class="options-api">
 
-我们可以使用 `render` 选项来声明渲染函数：
+我們可以使用 `render` 選項來聲明渲染函數：
 
 ```js
 import { h } from 'vue'
@@ -149,9 +149,9 @@ export default {
 }
 ```
 
-`render()` 函数可以访问同一个 `this` 组件实例。
+`render()` 函數可以訪問同一個 `this` 組件實例。
 
-除了返回一个单独的 vnode 之外，你还可以返回字符串或是数组：
+除了返回一個單獨的 vnode 之外，你還可以返回字符串或是數組：
 
 ```js
 export default {
@@ -166,7 +166,7 @@ import { h } from 'vue'
 
 export default {
   render() {
-    // 用数组来返回多个根节点
+    // 用數組來返回多個根節點
     return [
       h('div'),
       h('div'),
@@ -178,7 +178,7 @@ export default {
 
 </div>
 
-如果一个渲染函数组件不需要任何实例状态，为了简洁起见，它们也可以直接被声明为一个函数：
+如果一個渲染函數組件不需要任何實例狀態，為了簡潔起見，它們也可以直接被聲明為一個函數：
 
 ```js
 function Hello() {
@@ -186,24 +186,24 @@ function Hello() {
 }
 ```
 
-没错，这就是一个合法的 Vue 组件！参阅[函数式组件](#functional-components)来了解更多语法细节。
+沒錯，這就是一個合法的 Vue 組件！參閱[函數式組件](#functional-components)來了解更多語法細節。
 
-### Vnodes 必须唯一 {#vnodes-must-be-unique}
+### Vnodes 必須唯一 {#vnodes-must-be-unique}
 
-组件树中的 vnodes 必须是唯一的。下面是错误示范：
+組件樹中的 vnodes 必須是唯一的。下面是錯誤示範：
 
 ```js
 function render() {
   const p = h('p', 'hi')
   return h('div', [
-    // 啊哦，重复的 vnodes 是无效的
+    // 重複的 vnodes 是無效的
     p,
     p
   ])
 }
 ```
 
-如果你真的非常想在页面上渲染多个重复的元素或者组件，你可以使用一个工厂函数来做这件事。比如下面的这个渲染函数就可以完美渲染出 20 个相同的段落：
+如果你真的非常想在頁面上渲染多個重複的元素或者組件，你可以使用一個工廠函數來做這件事。例如下面的這個渲染函數就可以完美渲染出 20 個相同的段落：
 
 ```js
 function render() {
@@ -218,32 +218,32 @@ function render() {
 
 ## JSX / TSX {#jsx-tsx}
 
-[JSX](https://facebook.github.io/jsx/) 是 JavaScript 的一个类似 XML 的扩展，有了它，我们可以用以下的方式来书写代码：
+[JSX](https://facebook.github.io/jsx/) 是 JavaScript 的一個類似 XML 的擴展，有了它，我們可以用以下的方式來書寫代碼：
 
 ```jsx
 const vnode = <div>hello</div>
 ```
 
-在 JSX 表达式中，使用大括号来嵌入动态值：
+在 JSX 表達式中，使用大括號來嵌入動態值：
 
 ```jsx
 const vnode = <div id={dynamicId}>hello, {userName}</div>
 ```
 
-`create-vue` 和 Vue CLI 都有预置的 JSX 语法支持。如果你想手动配置 JSX，请参阅 [`@vue/babel-plugin-jsx`](https://github.com/vuejs/jsx-next) 文档获取更多细节。
+`create-vue` 和 Vue CLI 都有預置的 JSX 語法支持。如果你想手動配置 JSX，請參閱 [`@vue/babel-plugin-jsx`](https://github.com/vuejs/jsx-next) 文檔獲取更多細節。
 
-虽然最早是由 React 引入，但实际上 JSX 语法并没有定义运行时语义，并且能被编译成各种不同的输出形式。如果你之前使用过 JSX 语法，那么请注意 **Vue 的 JSX 转换方式与 React 中 JSX 的转换方式不同**，因此你不能在 Vue 应用中使用 React 的 JSX 转换。与 React JSX 语法的一些明显区别包括：
+雖然最早是由 React 引入，但實際上 JSX 語法並沒有定義運行時語義，並且能被編譯成各種不同的輸出形式。如果你之前使用過 JSX 語法，那麼請注意 **Vue 的 JSX 轉換方式與 React 中 JSX 的轉換方式不同**，因此你不能在 Vue 應用中使用 React 的 JSX 轉換。與 React JSX 語法的一些明顯區別包括：
 
-- 可以使用 HTML attributes 比如 `class` 和 `for` 作为 props - 不需要使用 `className` 或 `htmlFor`。
-- 传递子元素给组件 (比如 slots) 的[方式不同](#passing-slots)。
+- 可以使用 HTML attributes 例如 `class` 和 `for` 作為 props - 不需要使用 `className` 或 `htmlFor`。
+- 傳遞子元素給組件 (例如 slots) 的[方式不同](#passing-slots)。
 
-Vue 的类型定义也提供了 TSX 语法的类型推导支持。当使用 TSX 语法时，确保在 `tsconfig.json` 中配置了 `"jsx": "preserve"`，这样的 TypeScript 就能保证 Vue JSX 语法转换过程中的完整性。
+Vue 的類型定義也提供了 TSX 語法的類型推導支持。當使用 TSX 語法時，確保在 `tsconfig.json` 中配置了 `"jsx": "preserve"`，這樣的 TypeScript 就能保證 Vue JSX 語法轉換過程中的完整性。
 
-### JSX 类型推断 {#jsx-type-inference}
+### JSX 類型推斷 {#jsx-type-inference}
 
-与转换类似，Vue 的 JSX 也需要不同的类型定义。
+與轉換類似，Vue 的 JSX 也需要不同的類型定義。
 
-从 Vue 3.4 开始，Vue 不再隐式注册全局 `JSX` 命名空间。要指示 TypeScript 使用 Vue 的 JSX 类型定义，请确保在你的 `tsconfig.json` 中包含以下内容：
+從 Vue 3.4 開始，Vue 不再隱式註冊全局 `JSX` 命名空間。要指示 TypeScript 使用 Vue 的 JSX 類型定義，請確保在你的 `tsconfig.json` 中包含以下內容：
 
 ```json
 {
@@ -255,13 +255,13 @@ Vue 的类型定义也提供了 TSX 语法的类型推导支持。当使用 TSX 
 }
 ```
 
-你也可以通过在文件的顶部加入 `/* @jsxImportSource vue */` 注释来选择性地开启。
+你也可以通過在文件的頂部加入 `/* @jsxImportSource vue */` 註釋來選擇性地開啟。
 
-如果仍有代码依赖于全局存在的 `JSX` 命名空间，你可以在项目中通过显式导入或引用 `vue/jsx` 来保留 3.4 之前的全局行为，它注册了全局 `JSX` 命名空间。
+如果仍有代碼依賴於全局存在的 `JSX` 命名空間，你可以在項目中通過顯式導入或引用 `vue/jsx` 來保留 3.4 之前的全局行為，它註冊了全局 `JSX` 命名空間。
 
-## 渲染函数案例 {#render-function-recipes}
+## 渲染函數案例 {#render-function-recipes}
 
-下面我们提供了几个常见的用等价的渲染函数 / JSX 语法，实现模板功能的案例：
+下面我們提供了幾個常見的用等價的渲染函數 / JSX 語法，實現模板功能的案例：
 
 ### `v-if` {#v-if}
 
@@ -274,7 +274,7 @@ Vue 的类型定义也提供了 TSX 语法的类型推导支持。当使用 TSX 
 </div>
 ```
 
-等价于使用如下渲染函数 / JSX 语法：
+等價於使用如下渲染函數 / JSX 語法：
 
 <div class="composition-api">
 
@@ -311,7 +311,7 @@ h('div', [this.ok ? h('div', 'yes') : h('span', 'no')])
 </ul>
 ```
 
-等价于使用如下渲染函数 / JSX 语法：
+等價於使用如下渲染函數 / JSX 語法：
 
 <div class="composition-api">
 
@@ -357,7 +357,7 @@ h(
 
 ### `v-on` {#v-on}
 
-以 `on` 开头，并跟着大写字母的 props 会被当作事件监听器。比如，`onClick` 与模板中的 `@click` 等价。
+以 `on` 開頭，並跟著大寫字母的 props 會被當作事件監聽器。例如，`onClick` 與模板中的 `@click` 等價。
 
 ```js
 h(
@@ -381,22 +381,22 @@ h(
 </button>
 ```
 
-### 事件修饰符 {#event-modifiers}
+### 事件修飾符 {#event-modifiers}
 
-对于 `.passive`、`.capture` 和 `.once` 事件修饰符，可以使用驼峰写法将他们拼接在事件名后面：
+對於 `.passive`、`.capture` 和 `.once` 事件修飾符，可以使用駝峰命名法將他們拼接在事件名後面：
 
-实例：
+實例：
 
 ```js
 h('input', {
   onClickCapture() {
-    /* 捕捉模式中的监听器 */
+    /* 捕捉模式中的監聽器 */
   },
   onKeyupOnce() {
-    /* 只触发一次 */
+    /* 只觸發一次 */
   },
   onMouseoverOnceCapture() {
-    /* 单次 + 捕捉 */
+    /* 單次 + 捕捉 */
   }
 })
 ```
@@ -409,7 +409,7 @@ h('input', {
 />
 ```
 
-对于事件和按键修饰符，可以使用 [`withModifiers`](/api/render-function#withmodifiers) 函数：
+對於事件和按鍵修飾符，可以使用 [`withModifiers`](/api/render-function#withmodifiers) 函數：
 
 ```js
 import { withModifiers } from 'vue'
@@ -423,9 +423,9 @@ h('div', {
 <div onClick={withModifiers(() => {}, ['self'])} />
 ```
 
-### 组件 {#components}
+### 組件 {#components}
 
-在给组件创建 vnode 时，传递给 `h()` 函数的第一个参数应当是组件的定义。这意味着使用渲染函数时不再需要注册组件了 —— 可以直接使用导入的组件：
+在給組件創建 vnode 時，傳遞給 `h()` 函數的第一個參數應是組件的定義。這意味著使用渲染函數時不再需要註冊組件了 —— 可以直接使用導入的組件：
 
 ```js
 import Foo from './Foo.vue'
@@ -447,9 +447,9 @@ function render() {
 }
 ```
 
-不管是什么类型的文件，只要从中导入的是有效的 Vue 组件，`h` 就能正常运作。
+不管是什麼類型的文件，只要從中導入的是有效的 Vue 組件，`h` 就能正常運作。
 
-动态组件在渲染函数中也可直接使用：
+動態組件在渲染函數中也可直接使用：
 
 ```js
 import Foo from './Foo.vue'
@@ -466,20 +466,20 @@ function render() {
 }
 ```
 
-如果一个组件是用名字注册的，不能直接导入 (例如，由一个库全局注册)，可以使用 [`resolveComponent()`](/api/render-function#resolvecomponent) 来解决这个问题。
+如果一個組件是用名字註冊的，不能直接導入 (例如，由一個庫全局註冊)，可以使用 [`resolveComponent()`](/api/render-function#resolvecomponent) 來解決這個問題。
 
 ### 渲染插槽 {#rendering-slots}
 
 <div class="composition-api">
 
-在渲染函数中，插槽可以通过 `setup()` 的上下文来访问。每个 `slots` 对象中的插槽都是一个**返回 vnodes 数组的函数**：
+在渲染函數中，插槽可以通過 `setup()` 的上下文來訪問。每個 `slots` 對象中的插槽都是一個**返回 vnodes 數組的函數**：
 
 ```js
 export default {
   props: ['message'],
   setup(props, { slots }) {
     return () => [
-      // 默认插槽：
+      // 默認插槽：
       // <div><slot /></div>
       h('div', slots.default()),
 
@@ -496,10 +496,10 @@ export default {
 }
 ```
 
-等价 JSX 语法：
+等價 JSX 語法：
 
 ```jsx
-// 默认插槽
+// 默認插槽
 <div>{slots.default()}</div>
 
 // 具名插槽
@@ -509,7 +509,7 @@ export default {
 </div>
 <div class="options-api">
 
-在渲染函数中，可以通过 [this.$slots](/api/component-instance#slots) 来访问插槽：
+在渲染函數中，可以通過 [this.$slots](/api/component-instance#slots) 來訪問插槽：
 
 ```js
 export default {
@@ -531,7 +531,7 @@ export default {
 }
 ```
 
-等价 JSX 语法：
+等價 JSX 語法：
 
 ```jsx
 // <div><slot /></div>
@@ -543,17 +543,17 @@ export default {
 
 </div>
 
-### 传递插槽 {#passing-slots}
+### 傳遞插槽 {#passing-slots}
 
-向组件传递子元素的方式与向元素传递子元素的方式有些许不同。我们需要传递一个插槽函数或者是一个包含插槽函数的对象而非是数组，插槽函数的返回值同一个正常的渲染函数的返回值一样——并且在子组件中被访问时总是会被转化为一个 vnodes 数组。
+向組件傳遞子元素的方式與向元素傳遞子元素的方式有些許不同。我們需要傳遞一個插槽函數或者是一個包含插槽函數的對象而非是數組，插槽函數的返回值同一個正常的渲染函數的返回值一樣——並且在子組件中被訪問時總是會被轉化為一個 vnodes 數組。
 
 ```js
-// 单个默认插槽
+// 單個默認插槽
 h(MyComponent, () => 'hello')
 
 // 具名插槽
 // 注意 `null` 是必需的
-// 以避免 slot 对象被当成 prop 处理
+// 以避免 slot 對象被當成 prop 處理
 h(MyComponent, null, {
     default: () => 'default slot',
     foo: () => h('div', 'foo'),
@@ -561,10 +561,10 @@ h(MyComponent, null, {
 })
 ```
 
-等价 JSX 语法：
+等價 JSX 語法：
 
 ```jsx
-// 默认插槽
+// 默認插槽
 <MyComponent>{() => 'hello'}</MyComponent>
 
 // 具名插槽
@@ -575,14 +575,14 @@ h(MyComponent, null, {
 }}</MyComponent>
 ```
 
-插槽以函数的形式传递使得它们可以被子组件懒调用。这能确保它被注册为子组件的依赖关系，而不是父组件。这使得更新更加准确及有效。
+插槽以函數的形式傳遞使得它們可以被子組件懶調用。這能確保它被註冊為子組件的依賴關係，而不是父組件。這使得更新更加準確及有效。
 
 ### 作用域插槽 {#scoped-slots}
 
-为了在父组件中渲染作用域插槽，需要给子组件传递一个插槽。注意该插槽现在拥有一个 `text` 参数。该插槽将在子组件中被调用，同时子组件中的数据将向上传递给父组件。
+為了在父組件中渲染作用域插槽，需要給子組件傳遞一個插槽。注意該插槽現在擁有一個 `text` 參數。該插槽將在子組件中被調用，同時子組件中的數據將向上傳遞給父組件。
 
 ```js
-// 父组件
+// 父組件
 export default {
   setup() {
     return () => h(MyComp, null, {
@@ -592,10 +592,10 @@ export default {
 }
 ```
 
-记得传递 `null` 以避免插槽被误认为 prop：
+記得傳遞 `null` 以避免插槽被誤認為 prop：
 
 ```js
-// 子组件
+// 子組件
 export default {
   setup(props, { slots }) {
     const text = ref('hi')
@@ -604,7 +604,7 @@ export default {
 }
 ```
 
-等同于 JSX：
+等同於 JSX：
 
 ```jsx
 <MyComponent>{{
@@ -612,9 +612,9 @@ export default {
 }}</MyComponent>
 ```
 
-### 内置组件 {#built-in-components}
+### 內置組件 {#built-in-components}
 
-诸如 `<KeepAlive>`、`<Transition>`、`<TransitionGroup>`、`<Teleport>` 和 `<Suspense>` 等[内置组件](/api/built-in-components)在渲染函数中必须导入才能使用：
+諸如 `<KeepAlive>`、`<Transition>`、`<TransitionGroup>`、`<Teleport>` 和 `<Suspense>` 等[內置組件](/api/built-in-components)在渲染函數中必須導入才能使用：
 
 <div class="composition-api">
 
@@ -645,7 +645,7 @@ export default {
 
 ### `v-model` {#v-model}
 
-`v-model` 指令扩展为 `modelValue` 和 `onUpdate:modelValue` 在模板编译过程中，我们必须自己提供这些 props：
+`v-model` 指令擴展為 `modelValue` 和 `onUpdate:modelValue` 在模板編譯過程中，我們必須自己提供這些 props：
 
 <div class="composition-api">
 
@@ -681,14 +681,14 @@ export default {
 
 </div>
 
-### 自定义指令 {#custom-directives}
+### 自定義指令 {#custom-directives}
 
-可以使用 [`withDirectives`](/api/render-function#withdirectives) 将自定义指令应用于 vnode：
+可以使用 [`withDirectives`](/api/render-function#withdirectives) 將自定義指令應用於 vnode：
 
 ```js
 import { h, withDirectives } from 'vue'
 
-// 自定义指令
+// 自定義指令
 const pin = {
   mounted() { /* ... */ },
   updated() { /* ... */ }
@@ -700,13 +700,13 @@ const vnode = withDirectives(h('div'), [
 ])
 ```
 
-当一个指令是以名称注册并且不能被直接导入时，可以使用 [`resolveDirective`](/api/render-function#resolvedirective) 函数来解决这个问题。
+當一個指令是以名稱註冊並且不能被直接導入時，可以使用 [`resolveDirective`](/api/render-function#resolvedirective) 函數來解決這個問題。
 
 ### 模板引用 {#template-refs}
 
 <div class="composition-api">
 
-在组合式 API 中，模板引用通过将 `ref()` 本身作为一个属性传递给 vnode 来创建：
+在組合式 API 中，模板引用通過將 `ref()` 本身作為一個屬性傳遞給 vnode 來創建：
 
 ```js
 import { h, ref } from 'vue'
@@ -724,7 +724,7 @@ export default {
 </div>
 <div class="options-api">
 
-在选项式 API 中，模板引用通过在 vnode 参数中传递字符串类型的引用名称来创建：
+在選項式 API 中，模板引用通過在 vnode 參數中傳遞字符串類型的引用名稱來創建：
 
 ```js
 export default {
@@ -737,15 +737,15 @@ export default {
 
 </div>
 
-## 函数式组件 {#functional-components}
+## 函數式組件 {#functional-components}
 
-函数式组件是一种定义自身没有任何状态的组件的方式。它们很像纯函数：接收 props，返回 vnodes。函数式组件在渲染过程中不会创建组件实例 (也就是说，没有 `this`)，也不会触发常规的组件生命周期钩子。
+函數式組件是一種定義自身沒有任何狀態的組件的方式。它們很像純函數：接收 props，返回 vnodes。函數式組件在渲染過程中不會創建組件實例 (也就是說，沒有 `this`)，也不會觸發常規的組件生命週期鉤子。
 
-我们用一个普通的函数而不是一个选项对象来创建函数式组件。该函数实际上就是该组件的渲染函数。
+我們用一個普通的函數而不是一個選項對象來創建函數式組件。該函數實際上就是該組件的渲染函數。
 
 <div class="composition-api">
 
-函数式组件的签名与 `setup()` 钩子相同：
+函數式組件的簽名與 `setup()` 鉤子相同：
 
 ```js
 function MyComponent(props, { slots, emit, attrs }) {
@@ -756,7 +756,7 @@ function MyComponent(props, { slots, emit, attrs }) {
 </div>
 <div class="options-api">
 
-而因为函数式组件里没有 `this` 引用，Vue 会把 `props` 当作第一个参数传入：
+而因為函數式組件裡沒有 `this` 引用，Vue 會把 `props` 當作第一個參數傳入：
 
 ```js
 function MyComponent(props, context) {
@@ -764,32 +764,32 @@ function MyComponent(props, context) {
 }
 ```
 
-第二个参数 `context` 包含三个属性：`attrs`、`emit` 和 `slots`。它们分别相当于组件实例的 [`$attrs`](/api/component-instance#attrs)、[`$emit`](/api/component-instance#emit) 和 [`$slots`](/api/component-instance#slots) 这几个属性。
+第二個參數 `context` 包含三個屬性：`attrs`、`emit` 和 `slots`。它們分別相當於組件實例的 [`$attrs`](/api/component-instance#attrs)、[`$emit`](/api/component-instance#emit) 和 [`$slots`](/api/component-instance#slots) 這幾個屬性。
 
 </div>
 
-大多数常规组件的配置选项在函数式组件中都不可用，除了 [`props`](/api/options-state#props) 和 [`emits`](/api/options-state#emits)。我们可以给函数式组件添加对应的属性来声明它们：
+大多數常規組件的配置選項在函數式組件中都不可用，除了 [`props`](/api/options-state#props) 和 [`emits`](/api/options-state#emits)。我們可以給函數式組件添加對應的屬性來聲明它們：
 
 ```js
 MyComponent.props = ['value']
 MyComponent.emits = ['click']
 ```
 
-如果这个 `props` 选项没有被定义，那么被传入函数的 `props` 对象就会像 `attrs` 一样会包含所有 attribute。除非指定了 `props` 选项，否则每个 prop 的名字将不会基于驼峰命名法被一般化处理。
+如果這個 `props` 選項沒有被定義，那麼被傳入函數的 `props` 對象就會像 `attrs` 一樣會包含所有屬性。除非指定了 `props` 選項，否則每個 prop 的名字將不會基於駝峰命名法被一般化處理。
 
-对于有明确 `props` 的函数式组件，[attribute 透传](/guide/components/attrs)的原理与普通组件基本相同。然而，对于没有明确指定 `props` 的函数式组件，只有 `class`、`style` 和 `onXxx` 事件监听器将默认从 `attrs` 中继承。在这两种情况下，可以将 `inheritAttrs` 设置为 `false` 来禁用属性继承：
+對於有明確 `props` 的函數式組件，[屬性透傳](/guide/components/attrs)的原理與普通組件基本相同。然而，對於沒有明確指定 `props` 的函數式組件，只有 `class`、`style` 和 `onXxx` 事件監聽器將默認從 `attrs` 中繼承。在這兩種情況下，可以將 `inheritAttrs` 設置為 `false` 來禁用屬性繼承：
 
 ```js
 MyComponent.inheritAttrs = false
 ```
 
-函数式组件可以像普通组件一样被注册和使用。如果你将一个函数作为第一个参数传入 `h`，它将会被当作一个函数式组件来对待。
+函數式組件可以像普通組件一樣被註冊和使用。如果你將一個函數作為第一個參數傳入 `h`，它將會被當作一個函數式組件來對待。
 
-### 为函数式组件标注类型<sup class="vt-badge ts" /> {#typing-functional-components}
+### 為函數式組件標註類型<sup class="vt-badge ts" /> {#typing-functional-components}
 
-函数式组件可以根据它们是否有命名来标注类型。在单文件组件模板中，[Vue - Official 扩展](https://github.com/vuejs/language-tools)还支持对正确类型化的函数式组件进行类型检查。
+函數式組件可以根據它們是否有命名來標註類型。在單文件組件模板中，[Vue - Official 擴展](https://github.com/vuejs/language-tools)還支持對正確類型化的函數式組件進行類型檢查。
 
-**具名函数式组件**
+**具名函數式組件**
 
 ```tsx
 import type { SetupContext } from 'vue'
@@ -824,7 +824,7 @@ FComponent.emits = {
 }
 ```
 
-**匿名函数式组件**
+**匿名函數式組件**
 
 ```tsx
 import type { FunctionalComponent } from 'vue'
