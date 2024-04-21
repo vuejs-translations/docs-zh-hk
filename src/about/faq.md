@@ -2,7 +2,7 @@
 
 ## 誰在維護 Vue？ {#who-maintains-vue}
 
-Vue 是一個獨立的社區驅動的項目。它是由[尤雨溪](https://twitter.com/yuxiyou)在 2014 年作為其個人項目創建的。今天，Vue 由[來自世界各地的全職成員和志願者組成的團隊](/about/team)積極活躍地維護著，並由尤雨溪擔任項目負責人。你可以在[這部紀錄片](https://www.youtube.com/watch?v=OrxmtDw4pVI)中瞭解更多關於 Vue 的故事。
+Vue 是一個獨立的社區驅動的項目。它是由[尤雨溪](https://twitter.com/yuxiyou)在 2014 年作為其個人項目創建的。今天，Vue 由[來自世界各地的全職成員和志願者組成的團隊](/about/team)積極活躍地維護著，並由尤雨溪擔任項目負責人。你可以在[這部紀錄片](https://www.youtube.com/watch?v=OrxmtDw4pVI)中了解更多關於 Vue 的故事。
 
 自 2016 年以來，Vue 的發展主要是通過贊助來保障的，我們在財務上是可維續的。如果你或你的企業從 Vue 中受益，請考慮[贊助](/sponsor/)我們，以支持 Vue 的發展！
 
@@ -47,7 +47,7 @@ Vue 3 是性能最強的主流前端框架之一，可以輕鬆處理大多數 w
 
 請注意，像上面這樣的跑分的側重點在於原始渲染性能在特定情況下的優化，因此不能完全代表真實世界的性能結果。如果你更關心頁面加載性能，歡迎用 [WebPageTest](https://www.webpagetest.org/lighthouse) 或是 [PageSpeed Insights](https://pagespeed.web.dev/) 來測試本站。本文檔站是一個完全由 Vue 本身構建，通過靜態生成預渲染，並在客戶端進行 hydration 的單頁應用。它在模擬 4 倍 CPU 降速的 Moto G4 + 低速 4G 網絡的情況下依然能獲得 100 分的性能得分。
 
-你可以在[渲染機制](/guide/extras/rendering-mechanism)章節瞭解更多關於 Vue 如何自動優化運行時性能的信息，也可以在[性能優化指南](/guide/best-practices/performance)中瞭解如何在特別苛刻的情況下優化 Vue 應用。
+你可以在[渲染機制](/guide/extras/rendering-mechanism)章節了解更多關於 Vue 如何自動優化運行時性能的信息，也可以在[性能優化指南](/guide/best-practices/performance)中了解如何在特別苛刻的情況下優化 Vue 應用。
 
 ## Vue 體積小嗎？ {#is-vue-lightweight}
 
@@ -95,7 +95,7 @@ Vue 是在 Web Components 出現之前被創建的，Vue 在某些方面的設�
 
 Web Components 規範相對底層一些，因為它們是以自定義元素為中心的。作為一個框架，Vue 解決了更多上層的問題，如高效的 DOM 渲染、響應式狀態管理、工具鏈、客戶端路由和服務器端渲染等。
 
-Vue 完全支持在 Vue 組件中使用原生自定義元素，也支持將 Vue 組件導出為原生自定義元素——請參閱 [Vue 和 Web Components 指南](/guide/extras/web-components)以瞭解更多細節。
+Vue 完全支持在 Vue 組件中使用原生自定義元素，也支持將 Vue 組件導出為原生自定義元素——請參閱 [Vue 和 Web Components 指南](/guide/extras/web-components)以了解更多細節。
 
 <!-- ## TODO How does Vue compare to React? -->
 

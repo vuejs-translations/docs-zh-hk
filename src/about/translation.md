@@ -37,7 +37,7 @@ aside: deep
 
 ### 提交規範
 
-可以參考 [這個網站](https://www.conventionalcommits.org/) 瞭解提交信息的既定書寫格式：
+可以參考 [這個網站](https://www.conventionalcommits.org/) 了解提交信息的既定書寫格式：
 
 ```text
 <type>(<scope>): <subject>

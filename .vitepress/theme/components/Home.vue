@@ -84,7 +84,7 @@ onMounted(async () => {
       </div>
     </template>
     <a v-else-if="data" class="lead" href="/sponsor/"
-      >中國區鉑金贊助位 點擊瞭解更多</a
+      >中國區鉑金贊助位 點擊了解更多</a
     >
   </section>
 

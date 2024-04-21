@@ -174,7 +174,7 @@ import ButtonCounter from './ButtonCounter.vue'
 <button-counter></button-counter>
 ```
 
-請看 [DOM 內模板解析注意事項](#in-dom-template-parsing-caveats)瞭解更多細節。
+請看 [DOM 內模板解析注意事項](#in-dom-template-parsing-caveats)了解更多細節。
 
 ## 傳遞 props {#passing-props}
 
@@ -501,7 +501,7 @@ Something bad happened.
 
 ## 動態組件 {#dynamic-components}
 
-有些場景會需要在兩個組件間來回切換，比如 Tab 界面：
+有些場景會需要在兩個組件間來回切換，例如 Tab 界面：
 
 <div class="options-api">
 

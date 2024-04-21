@@ -273,7 +273,7 @@ Vue 默認按照“就地更新”的策略來更新通過 `v-for` 渲染的元�
 
 ## 組件上使用 `v-for` {#v-for-with-a-component}
 
-> 這一小節假設你已瞭解[組件](/guide/essentials/component-basics)的相關知識，或者你也可以先跳過這裡，之後再回來看。
+> 這一小節假設你已了解[組件](/guide/essentials/component-basics)的相關知識，或者你也可以先跳過這裡，之後再回來看。
 
 我們可以直接在組件上使用 `v-for`，和在一般的元素上使用沒有區別 (別忘記提供一個 `key`)：
 

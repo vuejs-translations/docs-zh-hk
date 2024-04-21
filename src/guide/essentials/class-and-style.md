@@ -241,7 +241,7 @@ Class 的綁定也是同樣的：
 <span>This is a child component</span>
 ```
 
-你可以在[透傳 Attribute](/guide/components/attrs) 一章中瞭解更多組件的 attribute 繼承的細節。
+你可以在[透傳 Attribute](/guide/components/attrs) 一章中了解更多組件的 attribute 繼承的細節。
 
 ## 綁定內聯樣式 {#binding-inline-styles}
 

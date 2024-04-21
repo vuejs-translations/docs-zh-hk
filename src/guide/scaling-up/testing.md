@@ -83,7 +83,7 @@ describe('increment', () => {
 ### 組合式函數 {#composables}
 
 有一類 Vue 應用中特有的函數被稱為 [組合式函數](/guide/reusability/composables)，在測試過程中可能需要特殊處理。
-你可以跳轉到下方查看 [測試組合式函數](#testing-composables) 瞭解更多細節。
+你可以跳轉到下方查看 [測試組合式函數](#testing-composables) 了解更多細節。
 
 ### 組件的單元測試 {#unit-testing-components}
 
@@ -95,7 +95,7 @@ describe('increment', () => {
 
 2. 黑盒：組件測試
 
-   黑盒測試不知曉一個組件的實現細節。這些測試儘可能少地模擬，以測試組件在整個系統中的集成情況。它們通常會渲染所有子組件，因而會被認為更像一種“集成測試”。請查看下方的[組件測試建議](#component-testing)作進一步瞭解。
+   黑盒測試不知曉一個組件的實現細節。這些測試儘可能少地模擬，以測試組件在整個系統中的集成情況。它們通常會渲染所有子組件，因而會被認為更像一種“集成測試”。請查看下方的[組件測試建議](#component-testing)作進一步了解。
 
 ### 推薦方案 {#recommendation}
 
@@ -124,7 +124,7 @@ describe('increment', () => {
 
   在下面的例子中，我們展示了一個步進器（Stepper）組件，它擁有一個標記為 `increment` 的可點擊的 DOM 元素。我們還傳入了一個名為 `max` 的 prop 防止步進器增長超過 `2`，因此如果我們點擊了按鈕 3 次，視圖將仍然顯示 `2`。
 
-  我們不瞭解這個步進器的實現細節，只知道“輸入”是這個 `max` prop，“輸出”是這個組件狀態所呈現出的視圖。
+  我們不了解這個步進器的實現細節，只知道“輸入”是這個 `max` prop，“輸出”是這個組件狀態所呈現出的視圖。
 
 <VTCodeGroup>
   <VTCodeGroupTab label="Vue Test Utils">
@@ -205,7 +205,7 @@ describe('increment', () => {
 
 - [Cypress 組件測試](https://on.cypress.io/component) 會預期其準確地渲染樣式或者觸發原生 DOM 事件。它可以搭配 [@testing-library/cypress](https://testing-library.com/docs/cypress-testing-library/intro) 這個庫一同進行測試。
 
-Vitest 和基於瀏覽器的運行器之間的主要區別是速度和執行上下文。簡而言之，基於瀏覽器的運行器，如 Cypress，可以捕捉到基於 Node 的運行器（如 Vitest）所不能捕捉的問題（例如樣式問題、原生 DOM 事件、Cookies、本地存儲和網絡故障），但基於瀏覽器的運行器比 Vitest *慢幾個數量級*，因為它們要執行打開瀏覽器，編譯樣式表以及其他步驟。Cypress 是一個基於瀏覽器的運行器，支持組件測試。請閱讀 [Vitest 文檔的“比較”這一章](https://vitest.dev/guide/comparisons.html#cypress) 瞭解 Vitest 和 Cypress 最新的比較信息。
+Vitest 和基於瀏覽器的運行器之間的主要區別是速度和執行上下文。簡而言之，基於瀏覽器的運行器，如 Cypress，可以捕捉到基於 Node 的運行器（如 Vitest）所不能捕捉的問題（例如樣式問題、原生 DOM 事件、Cookies、本地存儲和網絡故障），但基於瀏覽器的運行器比 Vitest *慢幾個數量級*，因為它們要執行打開瀏覽器，編譯樣式表以及其他步驟。Cypress 是一個基於瀏覽器的運行器，支持組件測試。請閱讀 [Vitest 文檔的“比較”這一章](https://vitest.dev/guide/comparisons.html#cypress) 了解 Vitest 和 Cypress 最新的比較信息。
 
 ### 組件掛載庫 {#mounting-libraries}
 
@@ -245,7 +245,7 @@ Vitest 和基於瀏覽器的運行器之間的主要區別是速度和執行上�
 
 #### 跨瀏覽器測試 {#cross-browser-testing}
 
-端到端測試的一個主要優點是你可以瞭解你的應用在多個不同瀏覽器上運行的情況。儘管理想情況應該是 100% 的跨瀏覽器覆蓋率，但很重要的一點是跨瀏覽器測試對團隊資源的回報是逐渐减小的，因為需要額外的時間和機器來持續運行它們。因此，在選擇應用所需的跨瀏覽器測試的數量時，注意權衡是很有必要的。
+端到端測試的一個主要優點是你可以了解你的應用在多個不同瀏覽器上運行的情況。儘管理想情況應該是 100% 的跨瀏覽器覆蓋率，但很重要的一點是跨瀏覽器測試對團隊資源的回報是逐渐减小的，因為需要額外的時間和機器來持續運行它們。因此，在選擇應用所需的跨瀏覽器測試的數量時，注意權衡是很有必要的。
 
 #### 更快的反饋 {#faster-feedback-loops}
 
@@ -257,7 +257,7 @@ Vitest 和基於瀏覽器的運行器之間的主要區別是速度和執行上�
 
 #### 無頭模式下的可見性 {#visibility-in-headless-mode}
 
-當端到端測試在 CI/CD 管道中運行時，它們通常在無頭瀏覽器（即不帶界面的瀏覽器）中運行。因此，當錯誤發生時，現代端到端測試框架的一個關鍵特性是能夠在不同的測試階段查看應用的快照、視頻，從而深入瞭解錯誤的原因。而在很早以前，要手動維護這些集成是非常繁瑣的。
+當端到端測試在 CI/CD 管道中運行時，它們通常在無頭瀏覽器（即不帶界面的瀏覽器）中運行。因此，當錯誤發生時，現代端到端測試框架的一個關鍵特性是能夠在不同的測試階段查看應用的快照、視頻，從而深入了解錯誤的原因。而在很早以前，要手動維護這些集成是非常繁瑣的。
 
 ### 推薦方案 {#recommendation-2}
 
@@ -267,7 +267,7 @@ Vitest 和基於瀏覽器的運行器之間的主要區別是速度和執行上�
 
 ### 其他選項 {#other-options-2}
 
-- [Playwright](https://playwright.dev/) 也是一個非常好的端到端測試解決方案，支持測試範圍更廣的瀏覽器品類（主要是 WebKit 型的）。查看這篇文章 [《為什麼選擇 Playwright》](https://playwright.dev/docs/why-playwright) 瞭解更多細節。
+- [Playwright](https://playwright.dev/) 也是一個非常好的端到端測試解決方案，支持測試範圍更廣的瀏覽器品類（主要是 WebKit 型的）。查看這篇文章 [《為什麼選擇 Playwright》](https://playwright.dev/docs/why-playwright) 了解更多細節。
 
 - [Nightwatch](https://nightwatchjs.org/) 是一個基於 [Selenium WebDriver](https://www.npmjs.com/package/selenium-webdriver) 的端到端測試解決方案。它的瀏覽器品類支持範圍是最廣的。
 

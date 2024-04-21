@@ -429,7 +429,7 @@ export default {
 <div class="vt-box-container next-steps">
   <a class="vt-box" href="/guide/essentials/application.html">
     <p class="next-steps-link">繼續閱讀該指南</p>
-    <p class="next-steps-caption">該指南會帶你深入瞭解框架所有方面的細節。</p>
+    <p class="next-steps-caption">該指南會帶你深入了解框架所有方面的細節。</p>
   </a>
   <a class="vt-box" href="/tutorial/">
     <p class="next-steps-link">嘗試互動教程</p>

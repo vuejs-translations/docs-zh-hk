@@ -167,7 +167,7 @@ export default {
 
 ## 組件上的 ref {#ref-on-component}
 
-> 這一小節假設你已瞭解[組件](/guide/essentials/component-basics)的相關知識，或者你也可以先跳過這裡，之後再回來看。
+> 這一小節假設你已了解[組件](/guide/essentials/component-basics)的相關知識，或者你也可以先跳過這裡，之後再回來看。
 
 模板引用也可以被用在一個子組件上。這種情況下引用中獲得的值是組件實例：
 

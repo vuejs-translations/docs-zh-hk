@@ -8,7 +8,7 @@
 
 本倉庫是[官方文檔倉庫](https://github.com/vuejs/docs)的鏡像翻譯倉庫。我們僅對原文進行內容同步與翻譯，**不包含**基於英文原版的補充、刪改或演繹等。如對原文有任何意見或建議，歡迎到[官方文檔倉庫](https://github.com/vuejs/docs)提出 issue 或發起 PR。
 
-有勞訪問我們的 [wiki](https://github.com/vuejs-translations/docs-zh-cn/wiki) 瞭解相關注意事項。
+有勞訪問我們的 [wiki](https://github.com/vuejs-translations/docs-zh-cn/wiki) 了解相關注意事項。
 
 目前網站處於長期維護狀態，我們會定期同步英文版的更新，包括文檔內容和前端代碼等。歡迎大家：
 

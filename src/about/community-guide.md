@@ -70,7 +70,7 @@ Vue 核心庫提供了一份[貢獻指南](https://github.com/vuejs/core/blob/ma
 
 我希望現在你正在使用你的首選語言閱讀這篇文檔，如果不是，你願意幫助我們翻譯它嗎？
 
-請參閱[翻譯指南](/translations/)，瞭解如何參與的細節。
+請參閱[翻譯指南](/translations/)，了解如何參與的細節。
 
 ### 領導社區 {#become-a-community-leader}
 

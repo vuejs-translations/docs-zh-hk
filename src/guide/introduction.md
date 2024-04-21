@@ -87,7 +87,7 @@ const count = ref(0)
 
 - **響應性**：Vue 會自動跟蹤 JavaScript 狀態並在其發生變化時響應式地更新 DOM。
 
-你可能已經有了些疑問——先別急，在後續的文檔中我們會詳細介紹每一個細節。現在，請繼續看下去，以確保你對 Vue 作為一個框架到底提供了什麼有一個宏觀的瞭解。
+你可能已經有了些疑問——先別急，在後續的文檔中我們會詳細介紹每一個細節。現在，請繼續看下去，以確保你對 Vue 作為一個框架到底提供了什麼有一個宏觀的了解。
 
 :::tip 預備知識
 文檔接下來的內容會假設你對 HTML、CSS 和 JavaScript 已經基本熟悉。如果你對前端開發完全陌生，最好不要直接從一個框架開始進行入門學習——建議掌握了基礎知識再回到這裡。如有需要，你可以通過這些 [JavaScript](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/A_re-introduction_to_JavaScript)、[HTML](https://developer.mozilla.org/zh-CN/docs/Learn/HTML/Introduction_to_HTML) 和 [CSS](https://developer.mozilla.org/zh-CN/docs/Learn/CSS/First_steps) 概述來檢驗你的知識水平。如果之前有其他框架的經驗會很有幫助，但並不是必須的。
@@ -106,7 +106,7 @@ Vue 是一個框架，也是一個生態。其功能覆蓋了大部分前端開�
 
 如果你是初學者，可能會覺得這些概念有些複雜。別擔心！理解教程和指南的內容只需要具備基礎的 HTML 和 JavaScript 知識。即使你不是這些方面的專家，也能夠跟得上。
 
-如果你是有經驗的開發者，希望瞭解如何以最合適的方式在項目中引入 Vue，或者是對上述的這些概念感到好奇，我們在[使用 Vue 的多種方式](/guide/extras/ways-of-using-vue)中討論了有關它們的更多細節。
+如果你是有經驗的開發者，希望了解如何以最合適的方式在項目中引入 Vue，或者是對上述的這些概念感到好奇，我們在[使用 Vue 的多種方式](/guide/extras/ways-of-using-vue)中討論了有關它們的更多細節。
 
 無論再怎樣靈活，Vue 的核心知識在所有這些用例中都是通用的。即使你現在只是一個初學者，隨著你的不斷成長，到未來有能力實現更復雜的項目時，這一路上獲得的知識依然會適用。如果你已經是一個老手，你可以根據實際場景來選擇使用 Vue 的最佳方式，在各種場景下都可以保持同樣的開發效率。這就是為什麼我們將 Vue 稱為“漸進式框架”：它是一個可以與你共同成長、適應你不同需求的框架。
 
@@ -160,7 +160,7 @@ button {
 
 </div>
 
-單文件組件是 Vue 的標誌性功能。如果你的用例需要進行構建，我們推薦用它來編寫 Vue 組件。你可以在後續相關章節裡瞭解更多關於[單文件組件的用法及用途](/guide/scaling-up/sfc)。但你暫時只需要知道 Vue 會幫忙處理所有這些構建工具的配置就好。
+單文件組件是 Vue 的標誌性功能。如果你的用例需要進行構建，我們推薦用它來編寫 Vue 組件。你可以在後續相關章節裡了解更多關於[單文件組件的用法及用途](/guide/scaling-up/sfc)。但你暫時只需要知道 Vue 會幫忙處理所有這些構建工具的配置就好。
 
 ## API 風格 {#api-styles}
 
@@ -244,7 +244,7 @@ onMounted(() => {
 
 組合式 API 的核心思想是直接在函數作用域內定義響應式狀態變量，並將從多個函數中得到的狀態組合起來處理複雜問題。這種形式更加自由，也需要你對 Vue 的響應式系統有更深的理解才能高效使用。相應的，它的靈活性也使得組織和重用邏輯的模式變得更加強大。
 
-在[組合式 API FAQ](/guide/extras/composition-api-faq) 章節中，你可以瞭解更多關於這兩種 API 風格的對比以及組合式 API 所帶來的潛在收益。
+在[組合式 API FAQ](/guide/extras/composition-api-faq) 章節中，你可以了解更多關於這兩種 API 風格的對比以及組合式 API 所帶來的潛在收益。
 
 如果你是使用 Vue 的新手，這裡是我們的大致建議：
 
@@ -273,7 +273,7 @@ onMounted(() => {
   </a>
   <a class="vt-box" href="/guide/quick-start.html">
     <p class="next-steps-link">繼續閱讀該指南</p>
-    <p class="next-steps-caption">該指南會帶你深入瞭解框架所有方面的細節。</p>
+    <p class="next-steps-caption">該指南會帶你深入了解框架所有方面的細節。</p>
   </a>
   <a class="vt-box" href="/examples/">
     <p class="next-steps-link">查看示例</p>
