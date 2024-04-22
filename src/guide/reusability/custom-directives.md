@@ -1,4 +1,4 @@
-# 自定义指令 {#custom-directives}
+# 自定義指令 {#custom-directives}
 
 <script setup>
 const vFocus = {
@@ -8,19 +8,19 @@ const vFocus = {
 }
 </script>
 
-## 介绍 {#introduction}
+## 介紹 {#introduction}
 
-除了 Vue 内置的一系列指令 (比如 `v-model` 或 `v-show`) 之外，Vue 还允许你注册自定义的指令 (Custom Directives)。
+除了 Vue 內置的一系列指令 (例如 `v-model` 或 `v-show`) 之外，Vue 還允許你註冊自定義的指令 (Custom Directives)。
 
-我们已经介绍了两种在 Vue 中重用代码的方式：[组件](/guide/essentials/component-basics)和[组合式函数](./composables)。组件是主要的构建模块，而组合式函数则侧重于有状态的逻辑。另一方面，自定义指令主要是为了重用涉及普通元素的底层 DOM 访问的逻辑。
+我們已經介紹了兩種在 Vue 中重用代碼的方式：[組件](/guide/essentials/component-basics)和[組合式函數](./composables)。組件是主要的構建模塊，而組合式函數則側重於有狀態的邏輯。另一方面，自定義指令主要是為了重用涉及普通元素的底層 DOM 訪問的邏輯。
 
-一个自定义指令由一个包含类似组件生命周期钩子的对象来定义。钩子函数会接收到指令所绑定元素作为其参数。下面是一个自定义指令的例子，当一个 input 元素被 Vue 插入到 DOM 中后，它会被自动聚焦：
+一個自定義指令由一個包含類似組件生命週期鉤子的對象來定義。鉤子函數會接收到指令所綁定元素作為其參數。下面是一個自定義指令的例子，當一個 input 元素被 Vue 插入到 DOM 中後，它會被自動聚焦：
 
 <div class="composition-api">
 
 ```vue
 <script setup>
-// 在模板中启用 v-focus
+// 在模板中啟用 v-focus
 const vFocus = {
   mounted: (el) => el.focus()
 }
@@ -42,7 +42,7 @@ const focus = {
 
 export default {
   directives: {
-    // 在模板中启用 v-focus
+    // 在模板中啟用 v-focus
     focus
   }
 }
@@ -58,13 +58,13 @@ export default {
   <input v-focus placeholder="This should be focused" />
 </div>
 
-假设你还未点击页面中的其他地方，那么上面这个 input 元素应该会被自动聚焦。该指令比 `autofocus` attribute 更有用，因为它不仅仅可以在页面加载完成后生效，还可以在 Vue 动态插入元素后生效。
+假設你還未點擊頁面中的其他地方，那麼上面這個 input 元素應該會被自動聚焦。該指令比 `autofocus` 屬性更有用，因為它不僅可以在頁面加載完成後生效，還可以在 Vue 動態插入元素後生效。
 
 <div class="composition-api">
 
-在 `<script setup>` 中，任何以 `v` 开头的驼峰式命名的变量都可以被用作一个自定义指令。在上面的例子中，`vFocus` 即可以在模板中以 `v-focus` 的形式使用。
+在 `<script setup>` 中，任何以 `v` 開頭的駝峰式命名的變量都可以被用作一個自定義指令。在上面的例子中，`vFocus` 即可以在模板中以 `v-focus` 的形式使用。
 
-在没有使用 `<script setup>` 的情况下，自定义指令需要通过 `directives` 选项注册：
+在沒有使用 `<script setup>` 的情況下，自定義指令需要通過 `directives` 選項註冊：
 
 ```js
 export default {
@@ -72,7 +72,7 @@ export default {
     /*...*/
   },
   directives: {
-    // 在模板中启用 v-focus
+    // 在模板中啟用 v-focus
     focus: {
       /* ... */
     }
@@ -84,103 +84,103 @@ export default {
 
 <div class="options-api">
 
-和组件类似，自定义指令在模板中使用前必须先注册。在上面的例子中，我们使用 `directives` 选项完成了指令的局部注册。
+和組件類似，自定義指令在模板中使用前必須先註冊。在上面的例子中，我們使用 `directives` 選項完成了指令的局部註冊。
 
 </div>
 
-将一个自定义指令全局注册到应用层级也是一种常见的做法：
+將一個自定義指令全局註冊到應用層級也是一種常見的做法：
 
 ```js
 const app = createApp({})
 
-// 使 v-focus 在所有组件中都可用
+// 使 v-focus 在所有組件中都可用
 app.directive('focus', {
   /* ... */
 })
 ```
 
 :::tip
-只有当所需功能只能通过直接的 DOM 操作来实现时，才应该使用自定义指令。其他情况下应该尽可能地使用 `v-bind` 这样的内置指令来声明式地使用模板，这样更高效，也对服务端渲染更友好。
+只有當所需功能只能通過直接的 DOM 操作來實現時，才應該使用自定義指令。其他情況下應該儘可能地使用 `v-bind` 這樣的內置指令來聲明式地使用模板，這樣更高效，也對服務端渲染更友好。
 :::
 
-## 指令钩子 {#directive-hooks}
+## 指令鉤子 {#directive-hooks}
 
-一个指令的定义对象可以提供几种钩子函数 (都是可选的)：
+一個指令的定義對象可以提供幾種鉤子函數 (都是可選的)：
 
 ```js
 const myDirective = {
-  // 在绑定元素的 attribute 前
-  // 或事件监听器应用前调用
+  // 在綁定元素的 attribute 前
+  // 或事件監聽器應用前調用
   created(el, binding, vnode, prevVnode) {
-    // 下面会介绍各个参数的细节
+    // 下面會介紹各個參數的細節
   },
-  // 在元素被插入到 DOM 前调用
+  // 在元素被插入到 DOM 前調用
   beforeMount(el, binding, vnode, prevVnode) {},
-  // 在绑定元素的父组件
-  // 及他自己的所有子节点都挂载完成后调用
+  // 在綁定元素的父組件
+  // 及他自己的所有子節點都掛載完成後調用
   mounted(el, binding, vnode, prevVnode) {},
-  // 绑定元素的父组件更新前调用
+  // 綁定元素的父組件更新前調用
   beforeUpdate(el, binding, vnode, prevVnode) {},
-  // 在绑定元素的父组件
-  // 及他自己的所有子节点都更新后调用
+  // 在綁定元素的父組件
+  // 及他自己的所有子節點都更新後調用
   updated(el, binding, vnode, prevVnode) {},
-  // 绑定元素的父组件卸载前调用
+  // 綁定元素的父組件卸載前調用
   beforeUnmount(el, binding, vnode, prevVnode) {},
-  // 绑定元素的父组件卸载后调用
+  // 綁定元素的父組件卸載後調用
   unmounted(el, binding, vnode, prevVnode) {}
 }
 ```
 
-### 钩子参数 {#hook-arguments}
+### 鉤子參數 {#hook-arguments}
 
-指令的钩子会传递以下几种参数：
+指令的鉤子會傳遞以下幾種參數：
 
-- `el`：指令绑定到的元素。这可以用于直接操作 DOM。
+- `el`：指令綁定到的元素。這可以用於直接操作 DOM。
 
-- `binding`：一个对象，包含以下属性。
+- `binding`：一個對象，包含以下屬性。
 
-  - `value`：传递给指令的值。例如在 `v-my-directive="1 + 1"` 中，值是 `2`。
-  - `oldValue`：之前的值，仅在 `beforeUpdate` 和 `updated` 中可用。无论值是否更改，它都可用。
-  - `arg`：传递给指令的参数 (如果有的话)。例如在 `v-my-directive:foo` 中，参数是 `"foo"`。
-  - `modifiers`：一个包含修饰符的对象 (如果有的话)。例如在 `v-my-directive.foo.bar` 中，修饰符对象是 `{ foo: true, bar: true }`。
-  - `instance`：使用该指令的组件实例。
-  - `dir`：指令的定义对象。
+  - `value`：傳遞給指令的值。例如在 `v-my-directive="1 + 1"` 中，值是 `2`。
+  - `oldValue`：之前的值，僅在 `beforeUpdate` 和 `updated` 中可用。無論值是否更改，它都可用。
+  - `arg`：傳遞給指令的參數 (如果有的話)。例如在 `v-my-directive:foo` 中，參數是 `"foo"`。
+  - `modifiers`：一個包含修飾符的對象 (如果有的話)。例如在 `v-my-directive.foo.bar` 中，修飾符對象是 `{ foo: true, bar: true }`。
+  - `instance`：使用該指令的組件實例。
+  - `dir`：指令的定義對象。
 
-- `vnode`：代表绑定元素的底层 VNode。
-- `prevVnode`：代表之前的渲染中指令所绑定元素的 VNode。仅在 `beforeUpdate` 和 `updated` 钩子中可用。
+- `vnode`：代表綁定元素的底層 VNode。
+- `prevVnode`：代表之前的渲染中指令所綁定元素的 VNode。僅在 `beforeUpdate` 和 `updated` 鉤子中可用。
 
-举例来说，像下面这样使用指令：
+舉例來說，像下面這樣使用指令：
 
 ```vue-html
 <div v-example:foo.bar="baz">
 ```
 
-`binding` 参数会是一个这样的对象：
+`binding` 參數會是一個這樣的對象：
 
 ```js
 {
   arg: 'foo',
   modifiers: { bar: true },
   value: /* `baz` 的值 */,
-  oldValue: /* 上一次更新时 `baz` 的值 */
+  oldValue: /* 上一次更新時 `baz` 的值 */
 }
 ```
 
-和内置指令类似，自定义指令的参数也可以是动态的。举例来说：
+和內置指令類似，自定義指令的參數也可以是動態的。舉例來說：
 
 ```vue-html
 <div v-example:[arg]="value"></div>
 ```
 
-这里指令的参数会基于组件的 `arg` 数据属性响应式地更新。
+這裡指令的參數會基於組件的 `arg` 數據屬性響應式地更新。
 
 :::tip Note
-除了 `el` 外，其他参数都是只读的，不要更改它们。若你需要在不同的钩子间共享信息，推荐通过元素的 [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) attribute 实现。
+除了 `el` 外，其他參數都是只讀的，不要修改它們。如你需要在不同的鉤子間共享信息，建議通過元素的 [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) 屬性實現。
 :::
 
-## 简化形式 {#function-shorthand}
+## 簡化形式 {#function-shorthand}
 
-对于自定义指令来说，一个很常见的情况是仅仅需要在 `mounted` 和 `updated` 上实现相同的行为，除此之外并不需要其他钩子。这种情况下我们可以直接用一个函数来定义指令，如下所示：
+對於自定義指令來說，一個很常見的情況是僅需要在 `mounted` 和 `updated` 上實現相同的行為，除此之外並不需要其他鉤子。這種情況下我們可以直接用一個函數來定義指令，如下所示：
 
 ```vue-html
 <div v-color="color"></div>
@@ -188,14 +188,14 @@ const myDirective = {
 
 ```js
 app.directive('color', (el, binding) => {
-  // 这会在 `mounted` 和 `updated` 时都调用
+  // 這會在 `mounted` 和 `updated` 時都調用
   el.style.color = binding.value
 })
 ```
 
-## 对象字面量 {#object-literals}
+## 對象字面量 {#object-literals}
 
-如果你的指令需要多个值，你可以向它传递一个 JavaScript 对象字面量。别忘了，指令也可以接收任何合法的 JavaScript 表达式。
+如果你的指令需要多個值，你可以向它傳遞一個 JavaScript 對象字面量。別忘了，指令也可以接收任何合法的 JavaScript 表達式。
 
 ```vue-html
 <div v-demo="{ color: 'white', text: 'hello!' }"></div>
@@ -208,9 +208,9 @@ app.directive('demo', (el, binding) => {
 })
 ```
 
-## 在组件上使用 {#usage-on-components}
+## 在組件上使用 {#usage-on-components}
 
-当在组件上使用自定义指令时，它会始终应用于组件的根节点，和[透传 attributes](/guide/components/attrs) 类似。
+當在組件上使用自定義指令時，它會始終應用於組件的根節點，和[透傳屬性](/guide/components/attrs) 類似。
 
 ```vue-html
 <MyComponent v-demo="test" />
@@ -219,9 +219,9 @@ app.directive('demo', (el, binding) => {
 ```vue-html
 <!-- MyComponent 的模板 -->
 
-<div> <!-- v-demo 指令会被应用在此处 -->
+<div> <!-- v-demo 指令會被應用在此處 -->
   <span>My component content</span>
 </div>
 ```
 
-需要注意的是组件可能含有多个根节点。当应用到一个多根组件时，指令将会被忽略且抛出一个警告。和 attribute 不同，指令不能通过 `v-bind="$attrs"` 来传递给一个不同的元素。总的来说，**不**推荐在组件上使用自定义指令。
+需要注意的是組件可能含有多個根節點。當應用到一個多根組件時，指令將會被忽略且拋出一個警告。和原生屬性不同，指令不能通過 `v-bind="$attrs"` 來傳遞給一個不同的元素。總的來說，**不**建議在組件上使用自定義指令。
