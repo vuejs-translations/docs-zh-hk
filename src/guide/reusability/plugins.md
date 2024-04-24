@@ -1,8 +1,8 @@
 # 插件 {#plugins}
 
-## 介绍 {#introduction}
+## 介紹 {#introduction}
 
-插件 (Plugins) 是一种能为 Vue 添加全局功能的工具代码。下面是如何安装一个插件的示例：
+插件 (Plugins) 是一種能為 Vue 添加全局功能的工具代碼。下面是如何安裝一個插件的示例：
 
 ```js
 import { createApp } from 'vue'
@@ -10,61 +10,61 @@ import { createApp } from 'vue'
 const app = createApp({})
 
 app.use(myPlugin, {
-  /* 可选的选项 */
+  /* 可選的選項 */
 })
 ```
 
-一个插件可以是一个拥有 `install()` 方法的对象，也可以直接是一个安装函数本身。安装函数会接收到安装它的[应用实例](/api/application)和传递给 `app.use()` 的额外选项作为参数：
+一個插件可以是一個擁有 `install()` 方法的對象，也可以直接是一個安裝函數本身。安裝函數會接收到安裝它的[應用實例](/api/application)和傳遞給 `app.use()` 的額外選項作為參數：
 
 ```js
 const myPlugin = {
   install(app, options) {
-    // 配置此应用
+    // 配置此應用
   }
 }
 ```
 
-插件没有严格定义的使用范围，但是插件发挥作用的常见场景主要包括以下几种：
+插件沒有嚴格定義的使用範圍，但是插件發揮作用的常見場景主要包括以下幾種：
 
-1. 通过 [`app.component()`](/api/application#app-component) 和 [`app.directive()`](/api/application#app-directive) 注册一到多个全局组件或自定义指令。
+1. 通過 [`app.component()`](/api/application#app-component) 和 [`app.directive()`](/api/application#app-directive) 註冊一到多個全局組件或自定義指令。
 
-2. 通过 [`app.provide()`](/api/application#app-provide) 使一个资源[可被注入](/guide/components/provide-inject)进整个应用。
+2. 通過 [`app.provide()`](/api/application#app-provide) 使一個資源[可被注入](/guide/components/provide-inject)進整個應用。
 
-3. 向 [`app.config.globalProperties`](/api/application#app-config-globalproperties) 中添加一些全局实例属性或方法
+3. 向 [`app.config.globalProperties`](/api/application#app-config-globalproperties) 中添加一些全局實例屬性或方法
 
-4. 一个可能上述三种都包含了的功能库 (例如 [vue-router](https://github.com/vuejs/vue-router-next))。
+4. 一個可能上述三種都包含了的功能庫 (例如 [vue-router](https://github.com/vuejs/vue-router-next))。
 
-## 编写一个插件 {#writing-a-plugin}
+## 編寫一個插件 {#writing-a-plugin}
 
-为了更好地理解如何构建 Vue.js 插件，我们可以试着写一个简单的 `i18n` ([国际化 (Internationalization)](https://en.wikipedia.org/wiki/Internationalization_and_localization) 的缩写) 插件。
+為了更好地理解如何構建 Vue.js 插件，我們可以試著寫一個簡單的 `i18n` ([國際化 (Internationalization)](https://en.wikipedia.org/wiki/Internationalization_and_localization) 的縮寫) 插件。
 
-让我们从设置插件对象开始。建议在一个单独的文件中创建并导出它，以保证更好地管理逻辑，如下所示：
+讓我們從設置插件對象開始。建議在一個單獨的文件中創建並導出它，以保證更好地管理邏輯，如下所示：
 
 ```js
 // plugins/i18n.js
 export default {
   install: (app, options) => {
-    // 在这里编写插件代码
+    // 在這裡編寫插件代碼
   }
 }
 ```
 
-我们希望有一个翻译函数，这个函数接收一个以 `.` 作为分隔符的 `key` 字符串，用来在用户提供的翻译字典中查找对应语言的文本。期望的使用方式如下：
+我們希望有一個翻譯函數，這個函數接收一個以 `.` 作為分隔符的 `key` 字符串，用來在用戶提供的翻譯字典中查找對應語言的文本。期望的使用方式如下：
 
 ```vue-html
 <h1>{{ $translate('greetings.hello') }}</h1>
 ```
 
-这个函数应当能够在任意模板中被全局调用。这一点可以通过在插件中将它添加到 `app.config.globalProperties` 上来实现：
+這個函數應當能夠在任意模板中被全局調用。這一點可以通過在插件中將它添加到 `app.config.globalProperties` 上來實現：
 
 ```js{4-11}
 // plugins/i18n.js
 export default {
   install: (app, options) => {
-    // 注入一个全局可用的 $translate() 方法
+    // 注入一個全局可用的 $translate() 方法
     app.config.globalProperties.$translate = (key) => {
-      // 获取 `options` 对象的深层属性
-      // 使用 `key` 作为索引
+      // 獲取 `options` 對象的深層屬性
+      // 使用 `key` 作為索引
       return key.split('.').reduce((o, i) => {
         if (o) return o[i]
       }, options)
@@ -73,9 +73,9 @@ export default {
 }
 ```
 
-我们的 `$translate` 函数会接收一个例如 `greetings.hello` 的字符串，在用户提供的翻译字典中查找，并返回翻译得到的值。
+我們的 `$translate` 函數會接收一個例如 `greetings.hello` 的字符串，在用戶提供的翻譯字典中查找，並返回翻譯得到的值。
 
-用于查找的翻译字典对象则应当在插件被安装时作为 `app.use()` 的额外参数被传入：
+用於查找的翻譯字典對象則應當在插件被安裝時作為 `app.use()` 的額外參數被傳入：
 
 ```js
 import i18nPlugin from './plugins/i18n'
@@ -87,17 +87,17 @@ app.use(i18nPlugin, {
 })
 ```
 
-这样，我们一开始的表达式 `$translate('greetings.hello')` 就会在运行时被替换为 `Bonjour!` 了。
+這樣，我們一開始的表達式 `$translate('greetings.hello')` 就會在運行時被替換為 `Bonjour!` 了。
 
-TypeScript 用户请参考：[扩展全局属性](/guide/typescript/options-api#augmenting-global-properties) <sup class="vt-badge ts" />
+TypeScript 用戶請參考：[擴展全局屬性](/guide/typescript/options-api#augmenting-global-properties) <sup class="vt-badge ts" />
 
 :::tip
-请谨慎使用全局属性，如果在整个应用中使用不同插件注入的太多全局属性，很容易让应用变得难以理解和维护。
+請謹慎使用全局屬性，如果在整個應用中使用不同插件注入的太多全局屬性，很容易讓應用變得難以理解和維護。
 :::
 
 ### 插件中的 Provide / Inject {#provide-inject-with-plugins}
 
-在插件中，我们可以通过 `provide` 来为插件用户供给一些内容。举例来说，我们可以将插件接收到的 `options` 参数提供给整个应用，让任何组件都能使用这个翻译字典对象。
+在插件中，我們可以通過 `provide` 來為插件用戶供給一些內容。舉例來說，我們可以將插件接收到的 `options` 參數提供給整個應用，讓任何組件都能使用這個翻譯字典對象。
 
 ```js{10}
 // plugins/i18n.js
@@ -108,7 +108,7 @@ export default {
 }
 ```
 
-现在，插件用户就可以在他们的组件中以 `i18n` 为 key 注入并访问插件的选项对象了。
+現在，插件用戶就可以在他們的組件中以 `i18n` 為 key 注入並訪問插件的選項對象了。
 
 <div class="composition-api">
 
