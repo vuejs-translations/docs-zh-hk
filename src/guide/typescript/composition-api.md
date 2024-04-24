@@ -1,12 +1,12 @@
-# TypeScript 与组合式 API {#typescript-with-composition-api}
+# TypeScript 與組合式 API {#typescript-with-composition-api}
 
-> 这一章假设你已经阅读了[搭配 TypeScript 使用 Vue](./overview) 的概览。
+> 這一章假設你已經閱讀了[搭配 TypeScript 使用 Vue](./overview) 的概覽。
 
-## 为组件的 props 标注类型 {#typing-component-props}
+## 為組件的 props 標註類型 {#typing-component-props}
 
 ### 使用 `<script setup>` {#using-script-setup}
 
-当使用 `<script setup>` 时，`defineProps()` 宏函数支持从它的参数中推导类型：
+當使用 `<script setup>` 時，`defineProps()` 宏函數支持從它的參數中推導類型：
 
 ```vue
 <script setup lang="ts">
@@ -20,9 +20,9 @@ props.bar // number | undefined
 </script>
 ```
 
-这被称之为“运行时声明”，因为传递给 `defineProps()` 的参数会作为运行时的 `props` 选项使用。
+這被稱之為“運行時聲明”，因為傳遞給 `defineProps()` 的參數會作為運行時的 `props` 選項使用。
 
-然而，通过泛型参数来定义 props 的类型通常更直接：
+然而，通過泛型參數來定義 props 的類型通常更直接：
 
 ```vue
 <script setup lang="ts">
@@ -33,11 +33,11 @@ const props = defineProps<{
 </script>
 ```
 
-这被称之为“基于类型的声明”。编译器会尽可能地尝试根据类型参数推导出等价的运行时选项。在这种场景下，我们第二个例子中编译出的运行时选项和第一个是完全一致的。
+這被稱之為“基於類型的聲明”。編譯器會盡可能地嘗試根據類型參數推導出等價的運行時選項。在這種場景下，我們第二個例子中編譯出的運行時選項和第一個是完全一致的。
 
-基于类型的声明或者运行时声明可以择一使用，但是不能同时使用。
+基於類型的聲明或者運行時聲明可以擇一使用，但是不能同時使用。
 
-我们也可以将 props 的类型移入一个单独的接口中：
+我們也可以將 props 的類型移入一個單獨的接口中：
 
 ```vue
 <script setup lang="ts">
@@ -50,7 +50,7 @@ const props = defineProps<Props>()
 </script>
 ```
 
-这同样适用于 `Props` 从另一个源文件中导入的情况。该功能要求 TypeScript 作为 Vue 的一个 peer dependency。
+這同樣適用於 `Props` 從另一個源文件中導入的情況。該功能要求 TypeScript 作為 Vue 的一個 peer dependency。
 
 ```vue
 <script setup lang="ts">
@@ -60,15 +60,15 @@ const props = defineProps<Props>()
 </script>
 ```
 
-#### 语法限制 {#syntax-limitations}
+#### 語法限制 {#syntax-limitations}
 
-在 3.2 及以下版本中，`defineProps()` 的泛型类型参数仅限于类型文字或对本地接口的引用。
+在 3.2 及以下版本中，`defineProps()` 的泛型類型參數僅限於類型文字或對本地接口的引用。
 
-这个限制在 3.3 中得到了解决。最新版本的 Vue 支持在类型参数位置引用导入和有限的复杂类型。但是，由于类型到运行时转换仍然基于 AST，一些需要实际类型分析的复杂类型，例如条件类型，还未支持。您可以使用条件类型来指定单个 prop 的类型，但不能用于整个 props 对象的类型。
+這個限制在 3.3 中得到了解決。最新版本的 Vue 支持在類型參數位置引用導入和有限的複雜類型。但是，由於類型到運行時轉換仍然基於 AST，一些需要實際類型分析的複雜類型，例如條件類型，還未支持。您可以使用條件類型來指定單個 prop 的類型，但不能用於整個 props 對象的類型。
 
-### Props 解构默认值 {#props-default-values}
+### Props 解構默認值 {#props-default-values}
 
-当使用基于类型的声明时，我们失去了为 props 声明默认值的能力。这可以通过 `withDefaults` 编译器宏解决：
+當使用基於類型的聲明時，我們失去了為 props 聲明默認值的能力。這可以通過 `withDefaults` 編譯器宏解決：
 
 ```ts
 export interface Props {
@@ -82,11 +82,11 @@ const props = withDefaults(defineProps<Props>(), {
 })
 ```
 
-这将被编译为等效的运行时 props `default` 选项。此外，`withDefaults` 帮助程序为默认值提供类型检查，并确保返回的 props 类型删除了已声明默认值的属性的可选标志。
+這將被編譯為等效的運行時 props `default` 選項。此外，`withDefaults` 幫助程序為默認值提供類型檢查，並確保返回的 props 類型刪除了已聲明默認值的屬性的可選標誌。
 
-### 非 `<script setup>` 场景下 {#without-script-setup}
+### 非 `<script setup>` 場景下 {#without-script-setup}
 
-如果没有使用 `<script setup>`，那么为了开启 props 的类型推导，必须使用 `defineComponent()`。传入 `setup()` 的 props 对象类型是从 `props` 选项中推导而来。
+如果沒有使用 `<script setup>`，那麼為了開啟 props 的類型推導，必須使用 `defineComponent()`。傳入 `setup()` 的 props 對象類型是從 `props` 選項中推導而來。
 
 ```ts
 import { defineComponent } from 'vue'
@@ -96,14 +96,14 @@ export default defineComponent({
     message: String
   },
   setup(props) {
-    props.message // <-- 类型：string
+    props.message // <-- 類型：string
   }
 })
 ```
 
-### 复杂的 prop 类型 {#complex-prop-types}
+### 複雜的 prop 類型 {#complex-prop-types}
 
-通过基于类型的声明，一个 prop 可以像使用其他任何类型一样使用一个复杂类型：
+通過基於類型的聲明，一個 prop 可以像使用其他任何類型一樣使用一個複雜類型：
 
 ```vue
 <script setup lang="ts">
@@ -119,7 +119,7 @@ const props = defineProps<{
 </script>
 ```
 
-对于运行时声明，我们可以使用 `PropType` 工具类型：
+對於運行時聲明，我們可以使用 `PropType` 工具類型：
 
 ```ts
 import type { PropType } from 'vue'
@@ -129,7 +129,7 @@ const props = defineProps({
 })
 ```
 
-其工作方式与直接指定 `props` 选项基本相同：
+其工作方式與直接指定 `props` 選項基本相同：
 
 ```ts
 import { defineComponent } from 'vue'
@@ -142,36 +142,36 @@ export default defineComponent({
 })
 ```
 
-`props` 选项通常用于 Options API，因此你会在[选项式 API 与 TypeScript](/guide/typescript/options-api#typing-component-props) 指南中找到更详细的例子。这些例子中展示的技术也适用于使用 `defineProps()` 的运行时声明。
+`props` 選項通常用於 Options API，因此你會在[選項式 API 與 TypeScript](/guide/typescript/options-api#typing-component-props) 指南中找到更詳細的例子。這些例子中展示的技術也適用於使用 `defineProps()` 的運行時聲明。
 
-## 为组件的 emits 标注类型 {#typing-component-emits}
+## 為組件的 emits 標註類型 {#typing-component-emits}
 
-在 `<script setup>` 中，`emit` 函数的类型标注也可以通过运行时声明或是类型声明进行：
+在 `<script setup>` 中，`emit` 函數的類型標註也可以通過運行時聲明或是類型聲明進行：
 
 ```vue
 <script setup lang="ts">
-// 运行时
+// 運行時
 const emit = defineEmits(['change', 'update'])
 
-// 基于选项
+// 基於選項
 const emit = defineEmits({
   change: (id: number) => {
     // 返回 `true` 或 `false`
-    // 表明验证通过或失败
+    // 表明驗證通過或失敗
   },
   update: (value: string) => {
     // 返回 `true` 或 `false`
-    // 表明验证通过或失败
+    // 表明驗證通過或失敗
   }
 })
 
-// 基于类型
+// 基於類型
 const emit = defineEmits<{
   (e: 'change', id: number): void
   (e: 'update', value: string): void
 }>()
 
-// 3.3+: 可选的、更简洁的语法
+// 3.3+: 可選的、更簡潔的語法
 const emit = defineEmits<{
   change: [id: number]
   update: [value: string]
@@ -179,14 +179,14 @@ const emit = defineEmits<{
 </script>
 ```
 
-类型参数可以是以下的一种：
+類型參數可以是以下的一種：
 
-1. 一个可调用的函数类型，但是写作一个包含[调用签名](https://www.typescriptlang.org/docs/handbook/2/functions.html#call-signatures)的类型字面量。它将被用作返回的 `emit` 函数的类型。
-2. 一个类型字面量，其中键是事件名称，值是数组或元组类型，表示事件的附加接受参数。上面的示例使用了具名元组，因此每个参数都可以有一个显式的名称。
+1. 一個可調用的函數類型，但是寫作一個包含[調用簽名](https://www.typescriptlang.org/docs/handbook/2/functions.html#call-signatures)的類型字面量。它將被用作返回的 `emit` 函數的類型。
+2. 一個類型字面量，其中鍵是事件名稱，值是數組或元組類型，表示事件的附加接受參數。上面的示例使用了具名元組，因此每個參數都可以有一個顯式的名稱。
 
-我们可以看到，基于类型的声明使我们可以对所触发事件的类型进行更细粒度的控制。
+我們可以看到，基於類型的聲明使我們可以對所觸發事件的類型進行更細粒度的控制。
 
-若没有使用 `<script setup>`，`defineComponent()` 也可以根据 `emits` 选项推导暴露在 setup 上下文中的 `emit` 函数的类型：
+若沒有使用 `<script setup>`，`defineComponent()` 也可以根據 `emits` 選項推導暴露在 setup 上下文中的 `emit` 函數的類型：
 
 ```ts
 import { defineComponent } from 'vue'
@@ -194,26 +194,26 @@ import { defineComponent } from 'vue'
 export default defineComponent({
   emits: ['change'],
   setup(props, { emit }) {
-    emit('change') // <-- 类型检查 / 自动补全
+    emit('change') // <-- 類型檢查 / 自動補全
   }
 })
 ```
 
-## 为 `ref()` 标注类型 {#typing-ref}
+## 為 `ref()` 標註類型 {#typing-ref}
 
-ref 会根据初始化时的值推导其类型：
+ref 會根據初始化時的值推導其類型：
 
 ```ts
 import { ref } from 'vue'
 
-// 推导出的类型：Ref<number>
+// 推導出的類型：Ref<number>
 const year = ref(2020)
 
 // => TS Error: Type 'string' is not assignable to type 'number'.
 year.value = '2020'
 ```
 
-有时我们可能想为 ref 内的值指定一个更复杂的类型，可以通过使用 `Ref` 这个类型：
+有時我們可能想為 ref 內的值指定一個更復雜的類型，可以通過使用 `Ref` 這個類型：
 
 ```ts
 import { ref } from 'vue'
@@ -224,34 +224,34 @@ const year: Ref<string | number> = ref('2020')
 year.value = 2020 // 成功！
 ```
 
-或者，在调用 `ref()` 时传入一个泛型参数，来覆盖默认的推导行为：
+或者，在調用 `ref()` 時傳入一個泛型參數，來覆蓋默認的推導行為：
 
 ```ts
-// 得到的类型：Ref<string | number>
+// 得到的類型：Ref<string | number>
 const year = ref<string | number>('2020')
 
 year.value = 2020 // 成功！
 ```
 
-如果你指定了一个泛型参数但没有给出初始值，那么最后得到的就将是一个包含 `undefined` 的联合类型：
+如果你指定了一個泛型參數但沒有給出初始值，那麼最後得到的就將是一個包含 `undefined` 的聯合類型：
 
 ```ts
-// 推导得到的类型：Ref<number | undefined>
+// 推導得到的類型：Ref<number | undefined>
 const n = ref<number>()
 ```
 
-## 为 `reactive()` 标注类型 {#typing-reactive}
+## 為 `reactive()` 標註類型 {#typing-reactive}
 
-`reactive()` 也会隐式地从它的参数中推导类型：
+`reactive()` 也會隱式地從它的參數中推導類型：
 
 ```ts
 import { reactive } from 'vue'
 
-// 推导得到的类型：{ title: string }
+// 推導得到的類型：{ title: string }
 const book = reactive({ title: 'Vue 3 指引' })
 ```
 
-要显式地标注一个 `reactive` 变量的类型，我们可以使用接口：
+要顯式地標註一個 `reactive` 變量的類型，我們可以使用接口：
 
 ```ts
 import { reactive } from 'vue'
@@ -265,41 +265,41 @@ const book: Book = reactive({ title: 'Vue 3 指引' })
 ```
 
 :::tip
-不推荐使用 `reactive()` 的泛型参数，因为处理了深层次 ref 解包的返回值与泛型参数的类型不同。
+不推薦使用 `reactive()` 的泛型參數，因為處理了深層次 ref 解包的返回值與泛型參數的類型不同。
 :::
 
-## 为 `computed()` 标注类型 {#typing-computed}
+## 為 `computed()` 標註類型 {#typing-computed}
 
-`computed()` 会自动从其计算函数的返回值上推导出类型：
+`computed()` 會自動從其計算函數的返回值上推導出類型：
 
 ```ts
 import { ref, computed } from 'vue'
 
 const count = ref(0)
 
-// 推导得到的类型：ComputedRef<number>
+// 推導得到的類型：ComputedRef<number>
 const double = computed(() => count.value * 2)
 
 // => TS Error: Property 'split' does not exist on type 'number'
 const result = double.value.split('')
 ```
 
-你还可以通过泛型参数显式指定类型：
+你還可以通過泛型參數顯式指定類型：
 
 ```ts
 const double = computed<number>(() => {
-  // 若返回值不是 number 类型则会报错
+  // 若返回值不是 number 類型則會報錯
 })
 ```
 
-## 为事件处理函数标注类型 {#typing-event-handlers}
+## 為事件處理函數標註類型 {#typing-event-handlers}
 
-在处理原生 DOM 事件时，应该为我们传递给事件处理函数的参数正确地标注类型。让我们看一下这个例子：
+在處理原生 DOM 事件時，應該為我們傳遞給事件處理函數的參數正確地標註類型。讓我們看一下這個例子：
 
 ```vue
 <script setup lang="ts">
 function handleChange(event) {
-  // `event` 隐式地标注为 `any` 类型
+  // `event` 隱式地標註為 `any` 類型
   console.log(event.target.value)
 }
 </script>
@@ -309,7 +309,7 @@ function handleChange(event) {
 </template>
 ```
 
-没有类型标注时，这个 `event` 参数会隐式地标注为 `any` 类型。这也会在 `tsconfig.json` 中配置了 `"strict": true` 或 `"noImplicitAny": true` 时报出一个 TS 错误。因此，建议显式地为事件处理函数的参数标注类型。此外，你在访问 `event` 上的属性时可能需要使用类型断言：
+沒有類型標註時，這個 `event` 參數會隱式地標註為 `any` 類型。這也會在 `tsconfig.json` 中配置了 `"strict": true` 或 `"noImplicitAny": true` 時報出一個 TS 錯誤。因此，建議顯式地為事件處理函數的參數標註類型。此外，你在訪問 `event` 上的屬性時可能需要使用類型斷言：
 
 ```ts
 function handleChange(event: Event) {
@@ -317,9 +317,9 @@ function handleChange(event: Event) {
 }
 ```
 
-## 为 provide / inject 标注类型 {#typing-provide-inject}
+## 為 provide / inject 標註類型 {#typing-provide-inject}
 
-provide 和 inject 通常会在不同的组件中运行。要正确地为注入的值标记类型，Vue 提供了一个 `InjectionKey` 接口，它是一个继承自 `Symbol` 的泛型类型，可以用来在提供者和消费者之间同步注入值的类型：
+provide 和 inject 通常會在不同的組件中運行。要正確地為注入的值標記類型，Vue 提供了一個 `InjectionKey` 接口，它是一個繼承自 `Symbol` 的泛型類型，可以用來在提供者和消費者之間同步注入值的類型：
 
 ```ts
 import { provide, inject } from 'vue'
@@ -327,36 +327,36 @@ import type { InjectionKey } from 'vue'
 
 const key = Symbol() as InjectionKey<string>
 
-provide(key, 'foo') // 若提供的是非字符串值会导致错误
+provide(key, 'foo') // 若提供的是非字符串值會導致錯誤
 
-const foo = inject(key) // foo 的类型：string | undefined
+const foo = inject(key) // foo 的類型：string | undefined
 ```
 
-建议将注入 key 的类型放在一个单独的文件中，这样它就可以被多个组件导入。
+建議將注入 key 的類型放在一個單獨的文件中，這樣它就可以被多個組件導入。
 
-当使用字符串注入 key 时，注入值的类型是 `unknown`，需要通过泛型参数显式声明：
+當使用字符串注入 key 時，注入值的類型是 `unknown`，需要通過泛型參數顯式聲明：
 
 ```ts
-const foo = inject<string>('foo') // 类型：string | undefined
+const foo = inject<string>('foo') // 類型：string | undefined
 ```
 
-注意注入的值仍然可以是 `undefined`，因为无法保证提供者一定会在运行时 provide 这个值。
+注意注入的值仍然可以是 `undefined`，因為無法保證提供者一定會在運行時 provide 這個值。
 
-当提供了一个默认值后，这个 `undefined` 类型就可以被移除：
+當提供了一個默認值後，這個 `undefined` 類型就可以被移除：
 
 ```ts
-const foo = inject<string>('foo', 'bar') // 类型：string
+const foo = inject<string>('foo', 'bar') // 類型：string
 ```
 
-如果你确定该值将始终被提供，则还可以强制转换该值：
+如果你確定該值將始終被提供，則還可以強制轉換該值：
 
 ```ts
 const foo = inject('foo') as string
 ```
 
-## 为模板引用标注类型 {#typing-template-refs}
+## 為模板引用標註類型 {#typing-template-refs}
 
-模板引用需要通过一个显式指定的泛型参数和一个初始值 `null` 来创建：
+模板引用需要通過一個顯式指定的泛型參數和一個初始值 `null` 來創建：
 
 ```vue
 <script setup lang="ts">
@@ -374,13 +374,13 @@ onMounted(() => {
 </template>
 ```
 
-可以通过类似于 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input#technical_summary) 的页面来获取正确的 DOM 接口。
+可以通過類似於 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input#technical_summary) 的頁面來獲取正確的 DOM 接口。
 
-注意为了严格的类型安全，有必要在访问 `el.value` 时使用可选链或类型守卫。这是因为直到组件被挂载前，这个 ref 的值都是初始的 `null`，并且在由于 `v-if` 的行为将引用的元素卸载时也可以被设置为 `null`。
+注意為了嚴格的類型安全，有必要在訪問 `el.value` 時使用可選鏈或類型守衛。這是因為直到組件被掛載前，這個 ref 的值都是初始的 `null`，並且在由於 `v-if` 的行為將引用的元素卸載時也可以被設置為 `null`。
 
-## 为组件模板引用标注类型 {#typing-component-template-refs}
+## 為組件模板引用標註類型 {#typing-component-template-refs}
 
-有时，你可能需要为一个子组件添加一个模板引用，以便调用它公开的方法。举例来说，我们有一个 `MyModal` 子组件，它有一个打开模态框的方法：
+有時，你可能需要為一個子組件添加一個模板引用，以便調用它公開的方法。舉例來說，我們有一個 `MyModal` 子組件，它有一個打開模態框的方法：
 
 ```vue
 <!-- MyModal.vue -->
@@ -396,7 +396,7 @@ defineExpose({
 </script>
 ```
 
-为了获取 `MyModal` 的类型，我们首先需要通过 `typeof` 得到其类型，再使用 TypeScript 内置的 `InstanceType` 工具类型来获取其实例类型：
+為了獲取 `MyModal` 的類型，我們首先需要通過 `typeof` 得到其類型，再使用 TypeScript 內置的 `InstanceType` 工具類型來獲取其實例類型：
 
 ```vue{5}
 <!-- App.vue -->
@@ -411,7 +411,7 @@ const openModal = () => {
 </script>
 ```
 
-如果组件的具体类型无法获得，或者你并不关心组件的具体类型，那么可以使用 `ComponentPublicInstance`。这只会包含所有组件都共享的属性，比如 `$el`。
+如果組件的具體類型無法獲得，或者你並不關心組件的具體類型，那麼可以使用 `ComponentPublicInstance`。這隻會包含所有組件都共享的屬性，例如 `$el`。
 
 ```ts
 import { ref } from 'vue'
