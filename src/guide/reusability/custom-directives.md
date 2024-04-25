@@ -210,7 +210,7 @@ app.directive('demo', (el, binding) => {
 
 ## 在組件上使用 {#usage-on-components}
 
-當在組件上使用自定義指令時，它會始終應用於組件的根節點，和[透傳屬性](/guide/components/attrs) 類似。
+當在組件上使用自定義指令時，它會始終應用於組件的根節點，和[透傳屬性](/guide/components/attrs)類似。
 
 ```vue-html
 <MyComponent v-demo="test" />
