@@ -18,13 +18,13 @@ if (typeof window !== 'undefined') {
 }
 </script>
 
-# 组件事件 {#component-events}
+# 組件事件 {#component-events}
 
-> 此章节假设你已经看过了[组件基础](/guide/essentials/component-basics)。若你还不了解组件是什么，请先阅读该章节。
+> 此章節假設你已經看過了[組件基礎](/guide/essentials/component-basics)。若你還不瞭解組件是什麼，請先閱讀該章節。
 
-## 触发与监听事件 {#emitting-and-listening-to-events}
+## 觸發與監聽事件 {#emitting-and-listening-to-events}
 
-在组件的模板表达式中，可以直接使用 `$emit` 方法触发自定义事件 (例如：在 `v-on` 的处理函数中)：
+在組件的模板表達式中，可以直接使用 `$emit` 方法觸發自定義事件 (例如：在 `v-on` 的處理函數中)：
 
 ```vue-html
 <!-- MyComponent -->
@@ -33,7 +33,7 @@ if (typeof window !== 'undefined') {
 
 <div class="options-api">
 
-`$emit()` 方法在组件实例上也同样以 `this.$emit()` 的形式可用：
+`$emit()` 方法在組件實例上也同樣以 `this.$emit()` 的形式可用：
 
 ```js
 export default {
@@ -47,27 +47,27 @@ export default {
 
 </div>
 
-父组件可以通过 `v-on` (缩写为 `@`) 来监听事件：
+父組件可以通過 `v-on` (縮寫為 `@`) 來監聽事件：
 
 ```vue-html
 <MyComponent @some-event="callback" />
 ```
 
-同样，组件的事件监听器也支持 `.once` 修饰符：
+同樣，組件的事件監聽器也支持 `.once` 修飾符：
 
 ```vue-html
 <MyComponent @some-event.once="callback" />
 ```
 
-像组件与 prop 一样，事件的名字也提供了自动的格式转换。注意这里我们触发了一个以 camelCase 形式命名的事件，但在父组件中可以使用 kebab-case 形式来监听。与 [prop 大小写格式](/guide/components/props#prop-name-casing)一样，在模板中我们也推荐使用 kebab-case 形式来编写监听器。
+像組件與 prop 一樣，事件的名字也提供了自動的格式轉換。注意這裡我們觸發了一個以 camelCase 形式命名的事件，但在父組件中可以使用 kebab-case 形式來監聽。與 [prop 大小寫格式](/guide/components/props#prop-name-casing)一樣，在模板中我們也推薦使用 kebab-case 形式來編寫監聽器。
 
 :::tip
-和原生 DOM 事件不一样，组件触发的事件**没有冒泡机制**。你只能监听直接子组件触发的事件。平级组件或是跨越多层嵌套的组件间通信，应使用一个外部的事件总线，或是使用一个[全局状态管理方案](/guide/scaling-up/state-management)。
+和原生 DOM 事件不一樣，組件觸發的事件**沒有冒泡機制**。你只能監聽直接子組件觸發的事件。平級組件或是跨越多層嵌套的組件間通信，應使用一個外部的事件總線，或是使用一個[全局狀態管理方案](/guide/scaling-up/state-management)。
 :::
 
-## 事件参数 {#event-arguments}
+## 事件參數 {#event-arguments}
 
-有时候我们会需要在触发事件时附带一个特定的值。举例来说，我们想要 `<BlogPost>` 组件来管理文本会缩放得多大。在这个场景下，我们可以给 `$emit` 提供一个额外的参数：
+有時候我們會需要在觸發事件時附帶一個特定的值。舉例來說，我們想要 `<BlogPost>` 組件來管理文本會縮放得多大。在這個場景下，我們可以給 `$emit` 提供一個額外的參數：
 
 ```vue-html
 <button @click="$emit('increaseBy', 1)">
@@ -75,19 +75,19 @@ export default {
 </button>
 ```
 
-然后我们在父组件中监听事件，我们可以先简单写一个内联的箭头函数作为监听器，此函数会接收到事件附带的参数：
+然後我們在父組件中監聽事件，我們可以先簡單寫一個內聯的箭頭函數作為監聽器，此函數會接收到事件附帶的參數：
 
 ```vue-html
 <MyButton @increase-by="(n) => count += n" />
 ```
 
-或者，也可以用一个组件方法来作为事件处理函数：
+或者，也可以用一個組件方法來作為事件處理函數：
 
 ```vue-html
 <MyButton @increase-by="increaseCount" />
 ```
 
-该方法也会接收到事件所传递的参数：
+該方法也會接收到事件所傳遞的參數：
 
 <div class="options-api">
 
@@ -111,12 +111,12 @@ function increaseCount(n) {
 </div>
 
 :::tip
-所有传入 `$emit()` 的额外参数都会被直接传向监听器。举例来说，`$emit('foo', 1, 2, 3)` 触发后，监听器函数将会收到这三个参数值。
+所有傳入 `$emit()` 的額外參數都會被直接傳向監聽器。舉例來說，`$emit('foo', 1, 2, 3)` 觸發後，監聽器函數將會收到這三個參數值。
 :::
 
-## 声明触发的事件 {#declaring-emitted-events}
+## 聲明觸發的事件 {#declaring-emitted-events}
 
-组件可以显式地通过 <span class="composition-api">[`defineEmits()`](/api/sfc-script-setup#defineprops-defineemits) 宏</span><span class="options-api">[`emits`](/api/options-state#emits) 选项</span>来声明它要触发的事件：
+組件可以顯式地通過 <span class="composition-api">[`defineEmits()`](/api/sfc-script-setup#defineprops-defineemits) 宏</span><span class="options-api">[`emits`](/api/options-state#emits) 選項</span>來聲明它要觸發的事件：
 
 <div class="composition-api">
 
@@ -126,7 +126,7 @@ defineEmits(['inFocus', 'submit'])
 </script>
 ```
 
-我们在 `<template>` 中使用的 `$emit` 方法不能在组件的 `<script setup>` 部分中使用，但 `defineEmits()` 会返回一个相同作用的函数供我们使用：
+我們在 `<template>` 中使用的 `$emit` 方法不能在組件的 `<script setup>` 部分中使用，但 `defineEmits()` 會返回一個相同作用的函數供我們使用：
 
 ```vue
 <script setup>
@@ -138,9 +138,9 @@ function buttonClick() {
 </script>
 ```
 
-`defineEmits()` 宏**不能**在子函数中使用。如上所示，它必须直接放置在 `<script setup>` 的顶级作用域下。
+`defineEmits()` 宏**不能**在子函數中使用。如上所示，它必須直接放置在 `<script setup>` 的頂級作用域下。
 
-如果你显式地使用了 `setup` 函数而不是 `<script setup>`，则事件需要通过 [`emits`](/api/options-state#emits) 选项来定义，`emit` 函数也被暴露在 `setup()` 的上下文对象上：
+如果你顯式地使用了 `setup` 函數而不是 `<script setup>`，則事件需要通過 [`emits`](/api/options-state#emits) 選項來定義，`emit` 函數也被暴露在 `setup()` 的上下文對象上：
 
 ```js
 export default {
@@ -151,7 +151,7 @@ export default {
 }
 ```
 
-与 `setup()` 上下文对象中的其他属性一样，`emit` 可以安全地被解构：
+與 `setup()` 上下文對象中的其他屬性一樣，`emit` 可以安全地被解構：
 
 ```js
 export default {
@@ -173,22 +173,22 @@ export default {
 
 </div>
 
-这个 `emits` 选项和 `defineEmits()` 宏还支持对象语法。通过 TypeScript 为参数指定类型，它允许我们对触发事件的参数进行验证：
+這個 `emits` 選項和 `defineEmits()` 宏還支持對象語法。通過 TypeScript 為參數指定類型，它允許我們對觸發事件的參數進行驗證：
 
 <div class="composition-api">
 
 ```vue
 <script setup lang="ts">
 const emit = defineEmits({
-  submit(payload: { email: string, password: string }) {
-    // 通过返回值为 `true` 还是为 `false` 来判断
-    // 验证是否通过
+  submit(payload: { email: string; password: string }) {
+    // 通過返回值為 `true` 還是為 `false` 來判斷
+    // 驗證是否通過
   }
 })
 </script>
 ```
 
-如果你正在搭配 TypeScript 使用 `<script setup>`，也可以使用纯类型标注来声明触发的事件：
+如果你正在搭配 TypeScript 使用 `<script setup>`，也可以使用純類型標註來聲明觸發的事件：
 
 ```vue
 <script setup lang="ts">
@@ -199,7 +199,7 @@ const emit = defineEmits<{
 </script>
 ```
 
-TypeScript 用户请参考：[如何为组件所抛出事件标注类型](/guide/typescript/composition-api#typing-component-emits) <sup class="vt-badge ts" />
+TypeScript 用戶請參考：[如何為組件所拋出事件標註類型](/guide/typescript/composition-api#typing-component-emits) <sup class="vt-badge ts" />
 
 </div>
 <div class="options-api">
@@ -208,38 +208,38 @@ TypeScript 用户请参考：[如何为组件所抛出事件标注类型](/guide
 export default {
   emits: {
     submit(payload: { email: string, password: string }) {
-      // 通过返回值为 `true` 还是为 `false` 来判断
-      // 验证是否通过
+      // 通過返回值為 `true` 還是為 `false` 來判斷
+      // 驗證是否通過
     }
   }
 }
 ```
 
-TypeScript 用户请参考：[如何为组件所抛出的事件标注类型](/guide/typescript/options-api#typing-component-emits)。<sup class="vt-badge ts" />
+TypeScript 用戶請參考：[如何為組件所拋出的事件標註類型](/guide/typescript/options-api#typing-component-emits)。<sup class="vt-badge ts" />
 
 </div>
 
-尽管事件声明是可选的，我们还是推荐你完整地声明所有要触发的事件，以此在代码中作为文档记录组件的用法。同时，事件声明能让 Vue 更好地将事件和[透传 attribute](/guide/components/attrs#v-on-listener-inheritance) 作出区分，从而避免一些由第三方代码触发的自定义 DOM 事件所导致的边界情况。
+儘管事件聲明是可選的，我們還是推薦你完整地聲明所有要觸發的事件，以此在代碼中作為文檔記錄組件的用法。同時，事件聲明能讓 Vue 更好地將事件和[透傳 attribute](/guide/components/attrs#v-on-listener-inheritance) 作出區分，從而避免一些由第三方代碼觸發的自定義 DOM 事件所導致的邊界情況。
 
 :::tip
-如果一个原生事件的名字 (例如 `click`) 被定义在 `emits` 选项中，则监听器只会监听组件触发的 `click` 事件而不会再响应原生的 `click` 事件。
+如果一個原生事件的名字 (例如 `click`) 被定義在 `emits` 選項中，則監聽器只會監聽組件觸發的 `click` 事件而不會再響應原生的 `click` 事件。
 :::
 
-## 事件校验 {#events-validation}
+## 事件校驗 {#events-validation}
 
-和对 props 添加类型校验的方式类似，所有触发的事件也可以使用对象形式来描述。
+和對 props 添加類型校驗的方式類似，所有觸發的事件也可以使用對象形式來描述。
 
-要为事件添加校验，那么事件可以被赋值为一个函数，接受的参数就是抛出事件时传入 <span class="options-api">`this.$emit`</span><span class="composition-api">`emit`</span> 的内容，返回一个布尔值来表明事件是否合法。
+要為事件添加校驗，那麼事件可以被賦值為一個函數，接受的參數就是拋出事件時傳入 <span class="options-api">`this.$emit`</span><span class="composition-api">`emit`</span> 的內容，返回一個布爾值來表明事件是否合法。
 
 <div class="composition-api">
 
 ```vue
 <script setup>
 const emit = defineEmits({
-  // 没有校验
+  // 沒有校驗
   click: null,
 
-  // 校验 submit 事件
+  // 校驗 submit 事件
   submit: ({ email, password }) => {
     if (email && password) {
       return true
@@ -262,10 +262,10 @@ function submitForm(email, password) {
 ```js
 export default {
   emits: {
-    // 没有校验
+    // 沒有校驗
     click: null,
 
-    // 校验 submit 事件
+    // 校驗 submit 事件
     submit: ({ email, password }) => {
       if (email && password) {
         return true
