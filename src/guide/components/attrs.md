@@ -8,7 +8,7 @@ outline: deep
 
 ## 屬性繼承 {#attribute-inheritance}
 
-“透傳屬性 [props](./props) 或 [emits](./events#defining-custom-events) 的屬性或者 `v-on` 事件監聽器。最常見的例子就是 `class`、`style` 和 `id`。
+“透傳屬性”[props](./props) 或 [emits](./events#defining-custom-events) 的屬性或者 `v-on` 事件監聽器。最常見的例子就是 `class`、`style` 和 `id`。
 
 當一個組件以單個元素為根作渲染時，透傳的屬性會自動被添加到根元素上。舉例來說，假如我們有一個 `<MyButton>` 組件，它的模板是這樣的：
 
