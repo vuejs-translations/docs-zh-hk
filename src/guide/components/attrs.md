@@ -4,7 +4,7 @@ outline: deep
 
 # 透傳屬性 {#fallthrough-attributes}
 
-> 此章節假設你已經看過了[組件基礎](/guide/essentials/component-basics)。若你還不瞭解組件是什麼，請先閱讀該章節。
+> 此章節假設你已經看過了[組件基礎](/guide/essentials/component-basics)。若你還不了解組件是什麼，請先閱讀該章節。
 
 ## 屬性繼承 {#attribute-inheritance}
 
