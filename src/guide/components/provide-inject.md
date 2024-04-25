@@ -1,18 +1,18 @@
-# 依赖注入 {#provide-inject}
+# 依賴注入 {#provide-inject}
 
-> 此章节假设你已经看过了[组件基础](/guide/essentials/component-basics)。若你还不了解组件是什么，请先阅读该章节。
+> 此章節假設你已經看過了[組件基礎](/guide/essentials/component-basics)。若你還不了解組件是什麼，請先閱讀該章節。
 
-## Prop 逐级透传问题 {#prop-drilling}
+## Prop 逐級透傳問題 {#prop-drilling}
 
-通常情况下，当我们需要从父组件向子组件传递数据时，会使用 [props](/guide/components/props)。想象一下这样的结构：有一些多层级嵌套的组件，形成了一颗巨大的组件树，而某个深层的子组件需要一个较远的祖先组件中的部分数据。在这种情况下，如果仅使用 props 则必须将其沿着组件链逐级传递下去，这会非常麻烦：
+通常情況下，當我們需要從父組件向子組件傳遞數據時，會使用 [props](/guide/components/props)。想象一下這樣的結構：有一些多層級嵌套的組件，形成了一顆巨大的組件樹，而某個深層的子組件需要一個較遠的祖先組件中的部分數據。在這種情況下，如果僅使用 props 則必須將其沿著組件鏈逐級傳遞下去，這會非常麻煩：
 
-![Prop 逐级透传的过程图示](./images/prop-drilling.png)
+![Prop 逐級透傳的過程圖示](./images/prop-drilling.png)
 
 <!-- https://www.figma.com/file/yNDTtReM2xVgjcGVRzChss/prop-drilling -->
 
-注意，虽然这里的 `<Footer>` 组件可能根本不关心这些 props，但为了使 `<DeepChild>` 能访问到它们，仍然需要定义并向下传递。如果组件链路非常长，可能会影响到更多这条路上的组件。这一问题被称为“prop 逐级透传”，显然是我们希望尽量避免的情况。
+注意，雖然這裡的 `<Footer>` 組件可能根本不關心這些 props，但為了使 `<DeepChild>` 能訪問到它們，仍然需要定義並向下傳遞。如果組件鏈路非常長，可能會影響到更多這條路上的組件。這一問題被稱為“prop 逐級透傳”，顯然是我們希望盡量避免的情況。
 
-`provide` 和 `inject` 可以帮助我们解决这一问题 <sup>[[1]](#footnote-1)</sup>。一个父组件相对于其所有的后代组件，会作为**依赖提供者**。任何后代的组件树，无论层级有多深，都可以**注入**由父组件提供给整条链路的依赖。
+`provide` 和 `inject` 可以幫助我們解決這一問題 <sup>[[1]](#footnote-1)</sup>。一個父組件相對於其所有的後代組件，會作為**依賴提供者**。任何後代的組件樹，無論層級有多深，都可以**注入**由父組件提供給整條鏈路的依賴。
 
 ![Provide/inject 模式](./images/provide-inject.png)
 
@@ -22,7 +22,7 @@
 
 <div class="composition-api">
 
-要为组件后代提供数据，需要使用到 [`provide()`](/api/composition-api-dependency-injection#provide) 函数：
+要為組件後代提供數據，需要使用到 [`provide()`](/api/composition-api-dependency-injection#provide) 函數：
 
 ```vue
 <script setup>
@@ -32,7 +32,7 @@ provide(/* 注入名 */ 'message', /* 值 */ 'hello!')
 </script>
 ```
 
-如果不使用 `<script setup>`，请确保 `provide()` 是在 `setup()` 同步调用的：
+如果不使用 `<script setup>`，請確保 `provide()` 是在 `setup()` 同步調用的：
 
 ```js
 import { provide } from 'vue'
@@ -44,9 +44,9 @@ export default {
 }
 ```
 
-`provide()` 函数接收两个参数。第一个参数被称为**注入名**，可以是一个字符串或是一个 `Symbol`。后代组件会用注入名来查找期望注入的值。一个组件可以多次调用 `provide()`，使用不同的注入名，注入不同的依赖值。
+`provide()` 函數接收兩個參數。第一個參數被稱為**注入名**，可以是一個字符串或是一個 `Symbol`。後代組件會用注入名來查找期望注入的值。一個組件可以多次調用 `provide()`，使用不同的注入名，注入不同的依賴值。
 
-第二个参数是提供的值，值可以是任意类型，包括响应式的状态，比如一个 ref：
+第二個參數是提供的值，值可以是任意類型，包括響應式的狀態，比如一個 ref：
 
 ```js
 import { ref, provide } from 'vue'
@@ -55,13 +55,13 @@ const count = ref(0)
 provide('key', count)
 ```
 
-提供的响应式状态使后代组件可以由此和提供者建立响应式的联系。
+提供的響應式狀態使後代組件可以由此和提供者建立響應式的聯繫。
 
 </div>
 
 <div class="options-api">
 
-要为组件后代提供数据，需要使用到 [`provide`](/api/options-composition#provide) 选项：
+要為組件後代提供數據，需要使用到 [`provide`](/api/options-composition#provide) 選項：
 
 ```js
 export default {
@@ -71,9 +71,9 @@ export default {
 }
 ```
 
-对于 `provide` 对象上的每一个属性，后代组件会用其 key 为注入名查找期望注入的值，属性的值就是要提供的数据。
+對於 `provide` 對象上的每一個屬性，後代組件會用其 key 為注入名查找期望注入的值，屬性的值就是要提供的數據。
 
-如果我们需要提供依赖当前组件实例的状态 (比如那些由 `data()` 定义的数据属性)，那么可以以函数形式使用 `provide`：
+如果我們需要提供依賴當前組件實例的狀態 (比如那些由 `data()` 定義的數據屬性)，那麼可以以函數形式使用 `provide`：
 
 ```js{7-12}
 export default {
@@ -83,7 +83,7 @@ export default {
     }
   },
   provide() {
-    // 使用函数的形式，可以访问到 `this`
+    // 使用函數的形式，可以訪問到 `this`
     return {
       message: this.message
     }
@@ -91,13 +91,13 @@ export default {
 }
 ```
 
-然而，请注意这**不会**使注入保持响应性。我们会在后续小节中讨论如何[让注入转变为响应式](#working-with-reactivity)。
+然而，請注意這**不會**使注入保持響應性。我們會在後續小節中討論如何[讓注入轉變為響應式](#working-with-reactivity)。
 
 </div>
 
-## 应用层 Provide {#app-level-provide}
+## 應用層 Provide {#app-level-provide}
 
-除了在一个组件中提供依赖，我们还可以在整个应用层面提供依赖：
+除了在一個組件中提供依賴，我們還可以在整個應用層面提供依賴：
 
 ```js
 import { createApp } from 'vue'
@@ -107,13 +107,13 @@ const app = createApp({})
 app.provide(/* 注入名 */ 'message', /* 值 */ 'hello!')
 ```
 
-在应用级别提供的数据在该应用内的所有组件中都可以注入。这在你编写[插件](/guide/reusability/plugins)时会特别有用，因为插件一般都不会使用组件形式来提供值。
+在應用級別提供的數據在該應用內的所有組件中都可以注入。這在你編寫[插件](/guide/reusability/plugins)時會特別有用，因為插件一般都不會使用組件形式來提供值。
 
 ## Inject (注入) {#inject}
 
 <div class="composition-api">
 
-要注入上层组件提供的数据，需使用 [`inject()`](/api/composition-api-dependency-injection#inject) 函数：
+要注入上層組件提供的數據，需使用 [`inject()`](/api/composition-api-dependency-injection#inject) 函數：
 
 ```vue
 <script setup>
@@ -123,11 +123,11 @@ const message = inject('message')
 </script>
 ```
 
-如果提供的值是一个 ref，注入进来的会是该 ref 对象，而**不会**自动解包为其内部的值。这使得注入方组件能够通过 ref 对象保持了和供给方的响应性链接。
+如果提供的值是一個 ref，注入進來的會是該 ref 對象，而**不會**自動解包為其內部的值。這使得注入方組件能夠通過 ref 對象保持了和供給方的響應性鏈接。
 
-[带有响应性的 provide + inject 完整示例](https://play.vuejs.org/#eNqFUUFugzAQ/MrKF1IpxfeIVKp66Kk/8MWFDXYFtmUbpArx967BhURRU9/WOzO7MzuxV+fKcUB2YlWovXYRAsbBvQije2d9hAk8Xo7gvB11gzDDxdseCuIUG+ZN6a7JjZIvVRIlgDCcw+d3pmvTglz1okJ499I0C3qB1dJQT9YRooVaSdNiACWdQ5OICj2WwtTWhAg9hiBbhHNSOxQKu84WT8LkNQ9FBhTHXyg1K75aJHNUROxdJyNSBVBp44YI43NvG+zOgmWWYGt7dcipqPhGZEe2ef07wN3lltD+lWN6tNkV/37+rdKjK2rzhRTt7f3u41xhe37/xJZGAL2PLECXa9NKdD/a6QTTtGnP88LgiXJtYv4BaLHhvg==)
+[帶有響應性的 provide + inject 完整示例](https://play.vuejs.org/#eNqFUUFugzAQ/MrKF1IpxfeIVKp66Kk/8MWFDXYFtmUbpArx967BhURRU9/WOzO7MzuxV+fKcUB2YlWovXYRAsbBvQije2d9hAk8Xo7gvB11gzDDxdseCuIUG+ZN6a7JjZIvVRIlgDCcw+d3pmvTglz1okJ499I0C3qB1dJQT9YRooVaSdNiACWdQ5OICj2WwtTWhAg9hiBbhHNSOxQKu84WT8LkNQ9FBhTHXyg1K75aJHNUROxdJyNSBVBp44YI43NvG+zOgmWWYGt7dcipqPhGZEe2ef07wN3lltD+lWN6tNkV/37+rdKjK2rzhRTt7f3u41xhe37/xJZGAL2PLECXa9NKdD/a6QTTtGnP88LgiXJtYv4BaLHhvg==)
 
-同样的，如果没有使用 `<script setup>`，`inject()` 需要在 `setup()` 内同步调用：
+同樣，如果沒有使用 `<script setup>`，`inject()` 需要在 `setup()` 內同步調用：
 
 ```js
 import { inject } from 'vue'
@@ -144,7 +144,7 @@ export default {
 
 <div class="options-api">
 
-要注入上层组件提供的数据，需使用 [`inject`](/api/options-composition#inject) 选项来声明：
+要注入上層組件提供的數據，需使用 [`inject`](/api/options-composition#inject) 選項來聲明：
 
 ```js
 export default {
@@ -155,14 +155,14 @@ export default {
 }
 ```
 
-注入会在组件自身的状态**之前**被解析，因此你可以在 `data()` 中访问到注入的属性：
+注入會在組件自身的狀態**之前**被解析，因此你可以在 `data()` 中訪問到注入的屬性：
 
 ```js
 export default {
   inject: ['message'],
   data() {
     return {
-      // 基于注入值的初始数据
+      // 基於注入值的初始數據
       fullMessage: this.message
     }
   }
@@ -171,47 +171,47 @@ export default {
 
 [完整的 provide + inject 示例](https://play.vuejs.org/#eNqNkcFqwzAQRH9l0EUthOhuRKH00FO/oO7B2JtERZaEvA4F43+vZCdOTAIJCImRdpi32kG8h7A99iQKobs6msBvpTNt8JHxcTC2wS76FnKrJpVLZelKR39TSUO7qreMoXRA7ZPPkeOuwHByj5v8EqI/moZeXudCIBL30Z0V0FLXVXsqIA9krU8R+XbMR9rS0mqhS4KpDbZiSgrQc5JKQqvlRWzEQnyvuc9YuWbd4eXq+TZn0IvzOeKr8FvsNcaK/R6Ocb9Uc4FvefpE+fMwP0wH8DU7wB77nIo6x6a2hvNEME5D0CpbrjnHf+8excI=)
 
-### 注入别名 \* {#injection-aliasing}
+### 注入別名 \* {#injection-aliasing}
 
-当以数组形式使用 `inject`，注入的属性会以同名的 key 暴露到组件实例上。在上面的例子中，提供的属性名为 `"message"`，注入后以 `this.message` 的形式暴露。访问的本地属性名和注入名是相同的。
+當以數組形式使用 `inject`，注入的屬性會以同名的 key 暴露到組件實例上。在上面的例子中，提供的屬性名為 `"message"`，注入後以 `this.message` 的形式暴露。訪問的本地屬性名和注入名是相同的。
 
-如果我们想要用一个不同的本地属性名注入该属性，我们需要在 `inject` 选项的属性上使用对象的形式：
+如果我們想要用一個不同的本地屬性名注入該屬性，我們需要在 `inject` 選項的屬性上使用對象的形式：
 
 ```js
 export default {
   inject: {
-    /* 本地属性名 */ localMessage: {
-      from: /* 注入来源名 */ 'message'
+    /* 本地屬性名 */ localMessage: {
+      from: /* 注入來源名 */ 'message'
     }
   }
 }
 ```
 
-这里，组件本地化了原注入名 `"message"` 所提供的属性，并将其暴露为 `this.localMessage`。
+這裡，組件本地化了原注入名 `"message"` 所提供的屬性，並將其暴露為 `this.localMessage`。
 
 </div>
 
-### 注入默认值 {#injection-default-values}
+### 注入默認值 {#injection-default-values}
 
-默认情况下，`inject` 假设传入的注入名会被某个祖先链上的组件提供。如果该注入名的确没有任何组件提供，则会抛出一个运行时警告。
+默認情況下，`inject` 假設傳入的注入名會被某個祖先鏈上的組件提供。如果該注入名的確沒有任何組件提供，則會拋出一個運行時警告。
 
-如果在注入一个值时不要求必须有提供者，那么我们应该声明一个默认值，和 props 类似：
+如果在注入一個值時不要求必須有提供者，那麼我們應該聲明一個默認值，和 props 類似：
 
 <div class="composition-api">
 
 ```js
-// 如果没有祖先组件提供 "message"
-// `value` 会是 "这是默认值"
-const value = inject('message', '这是默认值')
+// 如果沒有祖先組件提供 "message"
+// `value` 會是 "這是默認值"
+const value = inject('message', '這是默認值')
 ```
 
-在一些场景中，默认值可能需要通过调用一个函数或初始化一个类来取得。为了避免在用不到默认值的情况下进行不必要的计算或产生副作用，我们可以使用工厂函数来创建默认值：
+在一些場景中，默認值可能需要通過調用一個函數或初始化一個類來取得。為了避免在用不到默認值的情況下進行不必要的計算或產生副作用，我們可以使用工廠函數來創建默認值：
 
 ```js
 const value = inject('key', () => new ExpensiveClass(), true)
 ```
 
-第三个参数表示默认值应该被当作一个工厂函数。
+第三個參數表示默認值應該被當作一個工廠函數。
 
 </div>
 
@@ -219,16 +219,16 @@ const value = inject('key', () => new ExpensiveClass(), true)
 
 ```js
 export default {
-  // 当声明注入的默认值时
-  // 必须使用对象形式
+  // 當聲明注入的默認值時
+  // 必須使用對象形式
   inject: {
     message: {
-      from: 'message', // 当与原注入名同名时，这个属性是可选的
+      from: 'message', // 當與原注入名同名時，這個屬性是可選的
       default: 'default value'
     },
     user: {
-      // 对于非基础类型数据，如果创建开销比较大，或是需要确保每个组件实例
-      // 需要独立数据的，请使用工厂函数
+      // 對於非基礎類型數據，如果創建開銷比較大，或是需要確保每個組件實例
+      // 需要獨立數據的，請使用工廠函數
       default: () => ({ name: 'John' })
     }
   }
@@ -237,16 +237,16 @@ export default {
 
 </div>
 
-## 和响应式数据配合使用 {#working-with-reactivity}
+## 和響應式數據配合使用 {#working-with-reactivity}
 
 <div class="composition-api">
 
-当提供 / 注入响应式的数据时，**建议尽可能将任何对响应式状态的变更都保持在供给方组件中**。这样可以确保所提供状态的声明和变更操作都内聚在同一个组件内，使其更容易维护。
+當提供 / 注入響應式的數據時，**建議盡可能將任何對響應式狀態的變更都保持在提供方組件中**。這樣可以確保所提供狀態的聲明和變更操作都內聚在同一個組件內，使其更容易維護。
 
-有的时候，我们可能需要在注入方组件中更改数据。在这种情况下，我们推荐在供给方组件内声明并提供一个更改数据的方法函数：
+有的時候，我們可能需要在注入方組件中更改數據。在這種情況下，我們推薦在提供方組件內聲明並提供一個更改數據的方法函數：
 
 ```vue{7-9,13}
-<!-- 在供给方组件内 -->
+<!-- 在供給方組件內 -->
 <script setup>
 import { provide, ref } from 'vue'
 
@@ -264,7 +264,7 @@ provide('location', {
 ```
 
 ```vue{5}
-<!-- 在注入方组件 -->
+<!-- 在注入方組件 -->
 <script setup>
 import { inject } from 'vue'
 
@@ -276,7 +276,7 @@ const { location, updateLocation } = inject('location')
 </template>
 ```
 
-最后，如果你想确保提供的数据不能被注入方的组件更改，你可以使用 [`readonly()`](/api/reactivity-core#readonly) 来包装提供的值。
+最後，如果你想確保提供的數據不能被注入方的組件更改，你可以使用 [`readonly()`](/api/reactivity-core#readonly) 來包裝提供的值。
 
 ```vue
 <script setup>
@@ -291,7 +291,7 @@ provide('read-only-count', readonly(count))
 
 <div class="options-api">
 
-为保证注入方和供给方之间的响应性链接，我们需要使用 [computed()](/api/reactivity-core#computed) 函数提供一个计算属性：
+為保證注入方和提供方之間的響應性鏈接，我們需要使用 [computed()](/api/reactivity-core#computed) 函數提供一個計算屬性：
 
 ```js{10}
 import { computed } from 'vue'
@@ -304,24 +304,24 @@ export default {
   },
   provide() {
     return {
-      // 显式提供一个计算属性
+      // 顯式提供一個計算屬性
       message: computed(() => this.message)
     }
   }
 }
 ```
 
-[带有响应性的 provide + inject 完整示例](https://play.vuejs.org/#eNqNUctqwzAQ/JVFFyeQxnfjBEoPPfULqh6EtYlV9EKWTcH43ytZtmPTQA0CsdqZ2dlRT16tPXctkoKUTeWE9VeqhbLGeXirheRwc0ZBds7HKkKzBdBDZZRtPXIYJlzqU40/I4LjjbUyIKmGEWw0at8UgZrUh1PscObZ4ZhQAA596/RcAShsGnbHArIapTRBP74O8Up060wnOO5QmP0eAvZyBV+L5jw1j2tZqsMp8yWRUHhUVjKPoQIohQ460L0ow1FeKJlEKEnttFweijJfiORElhCf5f3umObb0B9PU/I7kk17PJj7FloN/2t7a2Pj/Zkdob+x8gV8ZlMs2de/8+14AXwkBngD9zgVqjg2rNXPvwjD+EdlHilrn8MvtvD1+Q==)
+[帶有響應性的 provide + inject 完整示例](https://play.vuejs.org/#eNqNUctqwzAQ/JVFFyeQxnfjBEoPPfULqh6EtYlV9EKWTcH43ytZtmPTQA0CsdqZ2dlRT16tPXctkoKUTeWE9VeqhbLGeXirheRwc0ZBds7HKkKzBdBDZZRtPXIYJlzqU40/I4LjjbUyIKmGEWw0at8UgZrUh1PscObZ4ZhQAA596/RcAShsGnbHArIapTRBP74O8Up060wnOO5QmP0eAvZyBV+L5jw1j2tZqsMp8yWRUHhUVjKPoQIohQ460L0ow1FeKJlEKEnttFweijJfiORElhCf5f3umObb0B9PU/I7kk17PJj7FloN/2t7a2Pj/Zkdob+x8gV8ZlMs2de/8+14AXwkBngD9zgVqjg2rNXPvwjD+EdlHilrn8MvtvD1+Q==)
 
-`computed()` 函数常用于组合式 API 风格的组件中，但它同样还可以用于补充选项式 API 风格的某些用例。你可以通过阅读[响应式系统基础](/guide/essentials/reactivity-fundamentals)和[计算属性](/guide/essentials/computed)两个章节了解更多组合式的 API 风格。
+`computed()` 函數常用於組合式 API 風格的組件中，但它同樣還可以用於補充選項式 API 風格的某些用例。你可以通過閱讀[響應式系統基礎](/guide/essentials/reactivity-fundamentals)和[計算屬性](/guide/essentials/computed)兩個章節了解更多組合式的 API 風格。
 
 </div>
 
 ## 使用 Symbol 作注入名 {#working-with-symbol-keys}
 
-至此，我们已经了解了如何使用字符串作为注入名。但如果你正在构建大型的应用，包含非常多的依赖提供，或者你正在编写提供给其他开发者使用的组件库，建议最好使用 Symbol 来作为注入名以避免潜在的冲突。
+至此，我們已經了解瞭如何使用字符串作為注入名。但如果你正在構建大型的應用，包含非常多的依賴提供，或者你正在編寫提供給其他開發者使用的組件庫，建議最好使用 Symbol 來作為注入名以避免潛在的衝突。
 
-我们通常推荐在一个单独的文件中导出这些注入名 Symbol：
+我們通常推薦在一個單獨的文件中導出這些注入名 Symbol：
 
 ```js
 // keys.js
@@ -331,38 +331,38 @@ export const myInjectionKey = Symbol()
 <div class="composition-api">
 
 ```js
-// 在供给方组件中
+// 在供給方組件中
 import { provide } from 'vue'
 import { myInjectionKey } from './keys.js'
 
 provide(myInjectionKey, { /*
-  要提供的数据
+  要提供的數據
 */ });
 ```
 
 ```js
-// 注入方组件
+// 注入方組件
 import { inject } from 'vue'
 import { myInjectionKey } from './keys.js'
 
 const injected = inject(myInjectionKey)
 ```
 
-TypeScript 用户请参考：[为 Provide / Inject 标注类型](/guide/typescript/composition-api#typing-provide-inject) <sup class="vt-badge ts" />
+TypeScript 用戶請參考：[為 Provide / Inject 標註類型](/guide/typescript/composition-api#typing-provide-inject) <sup class="vt-badge ts" />
 
 </div>
 
 <div class="options-api">
 
 ```js
-// 在供给方组件中
+// 在供給方組件中
 import { myInjectionKey } from './keys.js'
 
 export default {
   provide() {
     return {
       [myInjectionKey]: {
-        /* 要提供的数据 */
+        /* 要提供的數據 */
       }
     }
   }
@@ -370,7 +370,7 @@ export default {
 ```
 
 ```js
-// 注入方组件
+// 注入方組件
 import { myInjectionKey } from './keys.js'
 
 export default {
@@ -384,8 +384,8 @@ export default {
 
 <small>
 
-__译者注__
+__譯者注__
 
-<a id="footnote-1"></a>[1] 在本章及后续章节中，“**提供**”将成为对应 Provide 的一个专有概念
+<a id="footnote-1"></a>[1] 在本章及後續章節中，“**提供**”將成為對應 Provide 的一個專有概念
 
 </small>
