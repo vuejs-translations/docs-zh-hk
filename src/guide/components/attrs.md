@@ -2,113 +2,113 @@
 outline: deep
 ---
 
-# 透传 Attributes {#fallthrough-attributes}
+# 透傳屬性 {#fallthrough-attributes}
 
-> 此章节假设你已经看过了[组件基础](/guide/essentials/component-basics)。若你还不了解组件是什么，请先阅读该章节。
+> 此章節假設你已經看過了[組件基礎](/guide/essentials/component-basics)。若你還不瞭解組件是什麼，請先閱讀該章節。
 
-## Attributes 继承 {#attribute-inheritance}
+## 屬性繼承 {#attribute-inheritance}
 
-“透传 attribute”指的是传递给一个组件，却没有被该组件声明为 [props](./props) 或 [emits](./events#defining-custom-events) 的 attribute 或者 `v-on` 事件监听器。最常见的例子就是 `class`、`style` 和 `id`。
+“透傳屬性 [props](./props) 或 [emits](./events#defining-custom-events) 的屬性或者 `v-on` 事件監聽器。最常見的例子就是 `class`、`style` 和 `id`。
 
-当一个组件以单个元素为根作渲染时，透传的 attribute 会自动被添加到根元素上。举例来说，假如我们有一个 `<MyButton>` 组件，它的模板长这样：
+當一個組件以單個元素為根作渲染時，透傳的屬性會自動被添加到根元素上。舉例來說，假如我們有一個 `<MyButton>` 組件，它的模板是這樣的：
 
 ```vue-html
 <!-- <MyButton> 的模板 -->
 <button>click me</button>
 ```
 
-一个父组件使用了这个组件，并且传入了 `class`：
+一個父組件使用了這個組件，並且傳入了 `class`：
 
 ```vue-html
 <MyButton class="large" />
 ```
 
-最后渲染出的 DOM 结果是：
+最後渲染出的 DOM 結果是：
 
 ```html
 <button class="large">click me</button>
 ```
 
-这里，`<MyButton>` 并没有将 `class` 声明为一个它所接受的 prop，所以 `class` 被视作透传 attribute，自动透传到了 `<MyButton>` 的根元素上。
+這裡，`<MyButton>` 並沒有將 `class` 聲明為一個它所接受的 prop，所以 `class` 被視作透傳屬性 `<MyButton>` 的根元素上。
 
-### 对 `class` 和 `style` 的合并 {#class-and-style-merging}
+### 對 `class` 和 `style` 的合併 {#class-and-style-merging}
 
-如果一个子组件的根元素已经有了 `class` 或 `style` attribute，它会和从父组件上继承的值合并。如果我们将之前的 `<MyButton>` 组件的模板改成这样：
+如果一個子組件的根元素已經有了 `class` 或 `style` 屬性，它會和從父組件上繼承的值合併。如果我們將之前的 `<MyButton>` 組件的模板改成這樣：
 
 ```vue-html
 <!-- <MyButton> 的模板 -->
 <button class="btn">click me</button>
 ```
 
-则最后渲染出的 DOM 结果会变成：
+則最後渲染出的 DOM 結果會變成：
 
 ```html
 <button class="btn large">click me</button>
 ```
 
-### `v-on` 监听器继承 {#v-on-listener-inheritance}
+### `v-on` 監聽器繼承 {#v-on-listener-inheritance}
 
-同样的规则也适用于 `v-on` 事件监听器：
+同樣的規則也適用於 `v-on` 事件監聽器：
 
 ```vue-html
 <MyButton @click="onClick" />
 ```
 
-`click` 监听器会被添加到 `<MyButton>` 的根元素，即那个原生的 `<button>` 元素之上。当原生的 `<button>` 被点击，会触发父组件的 `onClick` 方法。同样的，如果原生 `button` 元素自身也通过 `v-on` 绑定了一个事件监听器，则这个监听器和从父组件继承的监听器都会被触发。
+`click` 監聽器會被添加到 `<MyButton>` 的根元素，即原生的 `<button>` 元素之上。當原生的 `<button>` 被點擊，會觸發父組件的 `onClick` 方法。同樣的，如果原生 `button` 元素自身也通過 `v-on` 綁定了一個事件監聽器，則這個監聽器和從父組件繼承的監聽器都會被觸發。
 
-### 深层组件继承 {#nested-component-inheritance}
+### 深層組件繼承 {#nested-component-inheritance}
 
-有些情况下一个组件会在根节点上渲染另一个组件。例如，我们重构一下 `<MyButton>`，让它在根节点上渲染 `<BaseButton>`：
+有些情況下一個組件會在根節點上渲染另一個組件。例如，我們重構一下 `<MyButton>`，讓它在根節點上渲染 `<BaseButton>`：
 
 ```vue-html
-<!-- <MyButton/> 的模板，只是渲染另一个组件 -->
+<!-- <MyButton/> 的模板，只是渲染另一個組件 -->
 <BaseButton />
 ```
 
-此时 `<MyButton>` 接收的透传 attribute 会直接继续传给 `<BaseButton>`。
+此時 `<MyButton>` 接收的透傳屬性會直接繼續傳給 `<BaseButton>`。
 
-请注意：
+請注意：
 
-1. 透传的 attribute 不会包含 `<MyButton>` 上声明过的 props 或是针对 `emits` 声明事件的 `v-on` 侦听函数，换句话说，声明过的 props 和侦听函数被 `<MyButton>`“消费”了。
+1. 透傳的屬性不會包含 `<MyButton>` 上聲明過的 props 或是針對 `emits` 聲明事件的 `v-on` 偵聽函數，換句話說，聲明過的 props 和偵聽函數被 `<MyButton>`“消費”了。
 
-2. 透传的 attribute 若符合声明，也可以作为 props 传入 `<BaseButton>`。
+2. 透傳的属性如符合聲明，也可以作為 props 傳入 `<BaseButton>`。
 
-## 禁用 Attributes 继承 {#disabling-attribute-inheritance}
+## 禁用屬性繼承 {#disabling-attribute-inheritance}
 
-如果你**不想要**一个组件自动地继承 attribute，你可以在组件选项中设置 `inheritAttrs: false`。
+如果你**不想要**一個組件自動地繼承屬性，你可以在組件選項中設置 `inheritAttrs: false`。
 
 <div class="composition-api">
 
- 从 3.3 开始你也可以直接在 `<script setup>` 中使用 [`defineOptions`](/api/sfc-script-setup#defineoptions)：
+ 從 3.3 開始你也可以直接在 `<script setup>` 中使用 [`defineOptions`](/api/sfc-script-setup#defineoptions)：
 
 ```vue
 <script setup>
 defineOptions({
   inheritAttrs: false
 })
-// ...setup 逻辑
+// ...setup 邏輯
 </script>
 ```
 
 </div>
 
-最常见的需要禁用 attribute 继承的场景就是 attribute 需要应用在根节点以外的其他元素上。通过设置 `inheritAttrs` 选项为 `false`，你可以完全控制透传进来的 attribute 被如何使用。
+最常見的需要禁用屬性繼承的場景便是屬性需要應用在根節點以外的其他元素上。通過設置 `inheritAttrs` 選項為 `false`，你可以完全控制透傳進來的屬性被如何使用。
 
-这些透传进来的 attribute 可以在模板的表达式中直接用 `$attrs` 访问到。
+這些透傳進來的屬性可以在模板的表達式中直接用 `$attrs` 訪問到。
 
 ```vue-html
 <span>Fallthrough attribute: {{ $attrs }}</span>
 ```
 
-这个 `$attrs` 对象包含了除组件所声明的 `props` 和 `emits` 之外的所有其他 attribute，例如 `class`，`style`，`v-on` 监听器等等。
+這個 `$attrs` 對象包含了除組件所聲明的 `props` 和 `emits` 之外的所有其他屬性，例如 `class`，`style`，`v-on` 監聽器等等。
 
-有几点需要注意：
+有幾點需要注意：
 
-- 和 props 有所不同，透传 attributes 在 JavaScript 中保留了它们原始的大小写，所以像 `foo-bar` 这样的一个 attribute 需要通过 `$attrs['foo-bar']` 来访问。
+- 和 props 有所不同，透傳屬性在 JavaScript 中保留了它們原始的大小寫，所以像 `foo-bar` 這樣的一個屬性需要通過 `$attrs['foo-bar']` 來訪問。
 
-- 像 `@click` 这样的一个 `v-on` 事件监听器将在此对象下被暴露为一个函数 `$attrs.onClick`。
+- 像 `@click` 這樣的一個 `v-on` 事件監聽器將在此對象下被暴露為一個函數 `$attrs.onClick`。
 
-现在我们要再次使用一下[之前小节](#attribute-inheritance)中的 `<MyButton>` 组件例子。有时候我们可能为了样式，需要在 `<button>` 元素外包装一层 `<div>`：
+現在我們要再次使用一下[之前小節](#attribute-inheritance)中的 `<MyButton>` 組件例子。有時候我們可能為了樣式，需要在 `<button>` 元素外包裝一層 `<div>`：
 
 ```vue-html
 <div class="btn-wrapper">
@@ -116,7 +116,7 @@ defineOptions({
 </div>
 ```
 
-我们想要所有像 `class` 和 `v-on` 监听器这样的透传 attribute 都应用在内部的 `<button>` 上而不是外层的 `<div>` 上。我们可以通过设定 `inheritAttrs: false` 和使用 `v-bind="$attrs"` 来实现：
+我們想要所有像 `class` 和 `v-on` 監聽器這樣的透傳屬性都應用在內部的 `<button>` 上而不是外層的 `<div>` 上。我們可以通過設定 `inheritAttrs: false` 和使用 `v-bind="$attrs"` 來實現：
 
 ```vue-html{2}
 <div class="btn-wrapper">
@@ -124,17 +124,17 @@ defineOptions({
 </div>
 ```
 
-小提示：[没有参数的 `v-bind`](/guide/essentials/template-syntax#dynamically-binding-multiple-attributes) 会将一个对象的所有属性都作为 attribute 应用到目标元素上。
+小提示：[沒有參數的 `v-bind`](/guide/essentials/template-syntax#dynamically-binding-multiple-attributes) 會將一個對象的所有屬性都作為屬性應用到目標元素上。
 
-## 多根节点的 Attributes 继承 {#attribute-inheritance-on-multiple-root-nodes}
+## 多根節點的屬性繼承 {#attribute-inheritance-on-multiple-root-nodes}
 
-和单根节点组件有所不同，有着多个根节点的组件没有自动 attribute 透传行为。如果 `$attrs` 没有被显式绑定，将会抛出一个运行时警告。
+和單根節點組件有所不同，有著多個根節點的組件沒有自動的屬性透傳行為。如果 `$attrs` 沒有被顯式綁定，將會拋出一個運行時警告。
 
 ```vue-html
 <CustomLayout id="custom-layout" @click="changeValue" />
 ```
 
-如果 `<CustomLayout>` 有下面这样的多根节点模板，由于 Vue 不知道要将 attribute 透传到哪里，所以会抛出一个警告。
+如果 `<CustomLayout>` 有下面這樣的多根節點模板，由於 Vue 不知道要將屬性透傳到哪裡，所以會拋出一個警告。
 
 ```vue-html
 <header>...</header>
@@ -142,7 +142,7 @@ defineOptions({
 <footer>...</footer>
 ```
 
-如果 `$attrs` 被显式绑定，则不会有警告：
+如果 `$attrs` 被顯式綁定，則不會有警告：
 
 ```vue-html{2}
 <header>...</header>
@@ -150,11 +150,11 @@ defineOptions({
 <footer>...</footer>
 ```
 
-## 在 JavaScript 中访问透传 Attributes {#accessing-fallthrough-attributes-in-javascript}
+## 在 JavaScript 中訪問透傳屬性 {#accessing-fallthrough-attributes-in-javascript}
 
 <div class="composition-api">
 
-如果需要，你可以在 `<script setup>` 中使用 `useAttrs()` API 来访问一个组件的所有透传 attribute：
+如果需要，你可以在 `<script setup>` 中使用 `useAttrs()` API 來訪問一個組件的所有透傳屬性：
 
 ```vue
 <script setup>
@@ -164,24 +164,24 @@ const attrs = useAttrs()
 </script>
 ```
 
-如果没有使用 `<script setup>`，`attrs` 会作为 `setup()` 上下文对象的一个属性暴露：
+如果沒有使用 `<script setup>`，`attrs` 會作為 `setup()` 上下文對象的一個屬性暴露：
 
 ```js
 export default {
   setup(props, ctx) {
-    // 透传 attribute 被暴露为 ctx.attrs
+    // 透傳屬性被暴露為 ctx.attrs
     console.log(ctx.attrs)
   }
 }
 ```
 
-需要注意的是，虽然这里的 `attrs` 对象总是反映为最新的透传 attribute，但它并不是响应式的 (考虑到性能因素)。你不能通过侦听器去监听它的变化。如果你需要响应性，可以使用 prop。或者你也可以使用 `onUpdated()` 使得在每次更新时结合最新的 `attrs` 执行副作用。
+需要注意的是，雖然這裡的 `attrs` 對象總是反映為最新的透傳屬性，但它並不是響應式的 (考慮到性能因素)。你不能通過偵聽器去監聽它的變化。如果你需要響應性，可以使用 prop。或者你也可以使用 `onUpdated()` 使得在每次更新時結合最新的 `attrs` 執行副作用。
 
 </div>
 
 <div class="options-api">
 
-如果需要，你可以通过 `$attrs` 这个实例属性来访问组件的所有透传 attribute：
+如果需要，你可以通過 `$attrs` 這個實例屬性來訪問組件的所有透傳屬性：
 
 ```js
 export default {
