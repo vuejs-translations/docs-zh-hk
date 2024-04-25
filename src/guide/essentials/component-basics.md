@@ -420,7 +420,7 @@ defineEmits(['enlarge-text'])
 
 </div>
 
-這聲明瞭一個組件可能觸發的所有事件，還可以對事件的參數進行[驗證](/guide/components/events#validate-emitted-events)。同時，這還可以讓 Vue 避免將它們作為原生事件監聽器隱式地應用於子組件的根元素。
+這聲明了一個組件可能觸發的所有事件，還可以對事件的參數進行[驗證](/guide/components/events#validate-emitted-events)。同時，這還可以讓 Vue 避免將它們作為原生事件監聽器隱式地應用於子組件的根元素。
 
 <div class="composition-api">
 
