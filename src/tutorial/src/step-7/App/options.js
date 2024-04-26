@@ -1,4 +1,4 @@
-// 给每个 todo 对象一个唯一的 id
+// 給每個 todo 對象一個唯一的 id
 let id = 0
 
 export default {
