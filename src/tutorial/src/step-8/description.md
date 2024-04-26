@@ -1,6 +1,6 @@
-# 计算属性 {#computed-property}
+# 計算屬性 {#computed-property}
 
-让我们在上一步的 todo 列表基础上继续。现在，我们已经给每一个 todo 添加了切换功能。这是通过给每一个 todo 对象添加 `done` 属性来实现的，并且使用了 `v-model` 将其绑定到复选框上：
+讓我們在上一步的 todo 列表基礎上繼續。現在，我們已經給每一個 todo 添加了切換功能。這是通過給每一個 todo 對象添加 `done` 屬性來實現的，並且使用了 `v-model` 將其綁定到複選框上：
 
 ```vue-html{2}
 <li v-for="todo in todos">
@@ -9,11 +9,11 @@
 </li>
 ```
 
-下一个可以添加的改进是隐藏已经完成的 todo。我们已经有了一个能够切换 `hideCompleted` 状态的按钮。但是应该如何基于状态渲染不同的列表项呢？
+下一個可以添加的改進是隱藏已經完成的 todo。我們已經有了一個能夠切換 `hideCompleted` 狀態的按鈕。但是應該如何基於狀態渲染不同的列表項呢？
 
 <div class="options-api">
 
-介绍一个新概念：<a target="_blank" href="/guide/essentials/computed.html">计算属性</a>。我们可以使用 `computed` 选项声明一个响应式的属性，它的值由其他属性计算而来：
+介紹一個新概念：<a target="_blank" href="/guide/essentials/computed.html">計算屬性</a>。我們可以使用 `computed` 選項聲明一個響應式的屬性，它的值由其他屬性計算而來：
 
 <div class="sfc">
 
@@ -22,7 +22,7 @@ export default {
   // ...
   computed: {
     filteredTodos() {
-      // 根据 `this.hideCompleted` 返回过滤后的 todo 项目
+      // 根據 `this.hideCompleted` 返回過濾後的 todo 項目
     }
   }
 }
@@ -36,7 +36,7 @@ createApp({
   // ...
   computed: {
     filteredTodos() {
-      // 根据 `this.hideCompleted` 返回过滤后的 todo 项目
+      // 根據 `this.hideCompleted` 返回過濾後的 todo 項目
     }
   }
 })
@@ -47,7 +47,7 @@ createApp({
 </div>
 <div class="composition-api">
 
-介绍一个新 API：<a target="_blank" href="/guide/essentials/computed.html">`computed()`</a>。它可以让我们创建一个计算属性 ref，这个 ref 会动态地根据其他响应式数据源来计算其 `.value`：
+介紹一個新 API：<a target="_blank" href="/guide/essentials/computed.html">`computed()`</a>。它可以讓我們創建一個計算屬性 ref，這個 ref 會動態地根據其他響應式數據源來計算其 `.value`：
 
 <div class="sfc">
 
@@ -60,8 +60,8 @@ const todos = ref([
 ])
 
 const filteredTodos = computed(() => {
-  // 根据 `todos.value` & `hideCompleted.value`
-  // 返回过滤后的 todo 项目
+  // 根據 `todos.value` & `hideCompleted.value`
+  // 返回過濾後的 todo 項目
 })
 ```
 
@@ -79,8 +79,8 @@ createApp({
     ])
 
     const filteredTodos = computed(() => {
-      // 根据 `todos.value` & `hideCompleted.value`
-      // 返回过滤后的 todo 项目
+      // 根據 `todos.value` & `hideCompleted.value`
+      // 返回過濾後的 todo 項目
     })
 
     return {
@@ -99,6 +99,6 @@ createApp({
 + <li v-for="todo in filteredTodos">
 ```
 
-计算属性会自动跟踪其计算中所使用的到的其他响应式状态，并将它们收集为自己的依赖。计算结果会被缓存，并只有在其依赖发生改变时才会被自动更新。
+計算屬性會自動跟蹤其計算中所使用的到的其他響應式狀態，並將它們收集為自己的依賴。計算結果會被緩存，並只有在其依賴發生改變時才會被自動更新。
 
-现在，试着添加 `filteredTodos` 计算属性并实现计算逻辑！如果实现正确，在隐藏已完成项目的状态下勾选一个 todo，它也应当被立即隐藏。
+現在，試著添加 `filteredTodos` 計算屬性並實現計算邏輯！如果實現正確，在隱藏已完成項目的狀態下勾選一個 todo，它也應當被立即隱藏。
