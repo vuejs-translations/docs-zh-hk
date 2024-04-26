@@ -1,14 +1,14 @@
 # Teleport {#teleport}
 
-`<Teleport>` 是一个内置组件，它可以将一个组件内部的一部分模板“传送”到该组件的 DOM 结构外层的位置去。
+`<Teleport>` 是一個內置組件，它可以將一個組件內部的一部分模板“傳送”到該組件的 DOM 結構外層的位置去。
 
 ## 基本用法 {#basic-usage}
 
-有时我们可能会遇到这样的场景：一个组件模板的一部分在逻辑上从属于该组件，但从整个应用视图的角度来看，它在 DOM 中应该被渲染在整个 Vue 应用外部的其他地方。
+有時我們可能會遇到這樣的場景：一個組件模板的一部分在邏輯上從屬於該組件，但從整個應用視圖的角度來看，它在 DOM 中應該被渲染在整個 Vue 應用外部的其他地方。
 
-这类场景最常见的例子就是全屏的模态框。理想情况下，我们希望触发模态框的按钮和模态框本身是在同一个组件中，因为它们都与组件的开关状态有关。但这意味着该模态框将与按钮一起渲染在应用 DOM 结构里很深的地方。这会导致该模态框的 CSS 布局代码很难写。
+這類場景最常見的例子就是全屏的模態框。理想情況下，我們希望觸發模態框的按鈕和模態框本身是在同一個組件中，因為它們都與組件的開關狀態有關。但這意味著該模態框將與按鈕一起渲染在應用 DOM 結構裡很深的地方。這會導致該模態框的 CSS 佈局代碼很難寫。
 
-试想下面这样的 HTML 结构：
+試想下面這樣的 HTML 結構：
 
 ```vue-html
 <div class="outer">
@@ -19,7 +19,7 @@
 </div>
 ```
 
-接下来我们来看看 `<MyModal>` 的实现：
+接下來我們來看看 `<MyModal>` 的實現：
 
 <div class="composition-api">
 
@@ -88,15 +88,15 @@ export default {
 
 </div>
 
-这个组件中有一个 `<button>` 按钮来触发打开模态框，和一个 class 名为 `.modal` 的 `<div>`，它包含了模态框的内容和一个用来关闭的按钮。
+這個組件中有一個 `<button>` 按鈕來觸發打開模態框，和一個 class 名為 `.modal` 的 `<div>`，它包含了模態框的內容和一個用來關閉的按鈕。
 
-当在初始 HTML 结构中使用这个组件时，会有一些潜在的问题：
+當在初始 HTML 結構中使用這個組件時，會有一些潛在的問題：
 
-- `position: fixed` 能够相对于浏览器窗口放置有一个条件，那就是不能有任何祖先元素设置了 `transform`、`perspective` 或者 `filter` 样式属性。也就是说如果我们想要用 CSS `transform` 为祖先节点 `<div class="outer">` 设置动画，就会不小心破坏模态框的布局！
+- `position: fixed` 能夠相對於瀏覽器窗口放置有一個條件，那就是不能有任何祖先元素設置了 `transform`、`perspective` 或者 `filter` 樣式屬性。也就是說如果我們想要用 CSS `transform` 為祖先節點 `<div class="outer">` 設置動畫，就會不小心破壞模態框的佈局！
 
-- 这个模态框的 `z-index` 受限于它的容器元素。如果有其他元素与 `<div class="outer">` 重叠并有更高的 `z-index`，则它会覆盖住我们的模态框。
+- 這個模態框的 `z-index` 受限於它的容器元素。如果有其他元素與 `<div class="outer">` 重疊並有更高的 `z-index`，則它會覆蓋住我們的模態框。
 
-`<Teleport>` 提供了一个更简单的方式来解决此类问题，让我们不需要再顾虑 DOM 结构的问题。让我们用 `<Teleport>` 改写一下 `<MyModal>`：
+`<Teleport>` 提供了一個更簡單的方式來解決此類問題，讓我們不需要再顧慮 DOM 結構的問題。讓我們用 `<Teleport>` 改寫一下 `<MyModal>`：
 
 ```vue-html{3,8}
 <button @click="open = true">Open Modal</button>
@@ -109,9 +109,9 @@ export default {
 </Teleport>
 ```
 
-`<Teleport>` 接收一个 `to` prop 来指定传送的目标。`to` 的值可以是一个 CSS 选择器字符串，也可以是一个 DOM 元素对象。这段代码的作用就是告诉 Vue“把以下模板片段**传送到 `body`** 标签下”。
+`<Teleport>` 接收一個 `to` prop 來指定傳送的目標。`to` 的值可以是一個 CSS 選擇器字符串，也可以是一個 DOM 元素對象。這段代碼的作用就是告訴 Vue“把以下模板片段**傳送到 `body`** 標籤下”。
 
-你可以点击下面这个按钮，然后通过浏览器的开发者工具，在 `<body>` 标签下找到模态框元素：
+你可以點擊下面這個按鈕，然後通過瀏覽器的開發者工具，在 `<body>` 標籤下找到模態框元素：
 
 <script setup>
 import { ref } from 'vue'
@@ -145,21 +145,21 @@ const open = ref(false)
 }
 </style>
 
-我们也可以将 `<Teleport>` 和 [`<Transition>`](./transition) 结合使用来创建一个带动画的模态框。你可以看看[这个示例](/examples/#modal)。
+我們也可以將 `<Teleport>` 和 [`<Transition>`](./transition) 結合使用來創建一個帶動畫的模態框。你可以看看[這個示例](/examples/#modal)。
 
 :::tip
-`<Teleport>` 挂载时，传送的 `to` 目标必须已经存在于 DOM 中。理想情况下，这应该是整个 Vue 应用 DOM 树外部的一个元素。如果目标元素也是由 Vue 渲染的，你需要确保在挂载 `<Teleport>` 之前先挂载该元素。
+`<Teleport>` 掛載時，傳送的 `to` 目標必須已經存在於 DOM 中。理想情況下，這應該是整個 Vue 應用 DOM 樹外部的一個元素。如果目標元素也是由 Vue 渲染的，你需要確保在掛載 `<Teleport>` 之前先掛載該元素。
 :::
 
-## 搭配组件使用 {#using-with-components}
+## 搭配組件使用 {#using-with-components}
 
-`<Teleport>` 只改变了渲染的 DOM 结构，它不会影响组件间的逻辑关系。也就是说，如果 `<Teleport>` 包含了一个组件，那么该组件始终和这个使用了 `<teleport>` 的组件保持逻辑上的父子关系。传入的 props 和触发的事件也会照常工作。
+`<Teleport>` 只改變了渲染的 DOM 結構，它不會影響組件間的邏輯關係。也就是說，如果 `<Teleport>` 包含了一個組件，那麼該組件始終和這個使用了 `<teleport>` 的組件保持邏輯上的父子關係。傳入的 props 和觸發的事件也會照常工作。
 
-这也意味着来自父组件的注入也会按预期工作，子组件将在 Vue Devtools 中嵌套在父级组件下面，而不是放在实际内容移动到的地方。
+這也意味著來自父組件的注入也會按預期工作，子組件將在 Vue Devtools 中嵌套在父級組件下面，而不是放在實際內容移動到的地方。
 
 ## 禁用 Teleport {#disabling-teleport}
 
-在某些场景下可能需要视情况禁用 `<Teleport>`。举例来说，我们想要在桌面端将一个组件当做浮层来渲染，但在移动端则当作行内组件。我们可以通过对 `<Teleport>` 动态地传入一个 `disabled` prop 来处理这两种不同情况。
+在某些場景下可能需要視情況禁用 `<Teleport>`。舉例來說，我們想要在桌面端將一個組件當做浮層來渲染，但在移動端則當作行內組件。我們可以通過對 `<Teleport>` 動態地傳入一個 `disabled` prop 來處理這兩種不同情況。
 
 ```vue-html
 <Teleport :disabled="isMobile">
@@ -167,13 +167,13 @@ const open = ref(false)
 </Teleport>
 ```
 
-这里的 `isMobile` 状态可以根据 CSS media query 的不同结果动态地更新。
+這裡的 `isMobile` 狀態可以根據 CSS media query 的不同結果動態地更新。
 
-## 多个 Teleport 共享目标 {#multiple-teleports-on-the-same-target}
+## 多個 Teleport 共享目標 {#multiple-teleports-on-the-same-target}
 
-一个可重用的模态框组件可能同时存在多个实例。对于此类场景，多个 `<Teleport>` 组件可以将其内容挂载在同一个目标元素上，而顺序就是简单的顺次追加，后挂载的将排在目标元素下更后面的位置上。
+一個可重用的模態框組件可能同時存在多個實例。對於此類場景，多個 `<Teleport>` 組件可以將其內容掛載在同一個目標元素上，而順序就是簡單的順次追加，後掛載的將排在目標元素下更後面的位置上。
 
-比如下面这样的用例：
+比如下面這樣的用例：
 
 ```vue-html
 <Teleport to="#modals">
@@ -184,7 +184,7 @@ const open = ref(false)
 </Teleport>
 ```
 
-渲染的结果为：
+渲染的結果為：
 
 ```html
 <div id="modals">
@@ -195,7 +195,7 @@ const open = ref(false)
 
 ---
 
-**参考**
+**參考**
 
-- [`<Teleport>` API 参考](/api/built-in-components#teleport)
-- [在 SSR 中处理 Teleports](/guide/scaling-up/ssr#teleports)
+- [`<Teleport>` API 參考](/api/built-in-components#teleport)
+- [在 SSR 中處理 Teleports](/guide/scaling-up/ssr#teleports)
