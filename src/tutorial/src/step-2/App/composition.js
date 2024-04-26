@@ -2,11 +2,11 @@ import { ref } from 'vue'
 
 export default {
   setup() {
-    // 组件逻辑
-    // 此处声明一些响应式状态
+    // 組件邏輯
+    // 此處聲明一些響應式狀態
 
     return {
-      // 暴露给模板
+      // 暴露給模板
     }
   }
 }
