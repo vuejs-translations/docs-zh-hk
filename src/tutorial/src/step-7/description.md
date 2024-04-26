@@ -12,7 +12,7 @@
 
 這裡的 `todo` 是一個局部變量，表示當前正在迭代的數組元素。它只能在 `v-for` 所綁定的元素上或是其內部訪問，就像函數的作用域一樣。
 
-注意，我們還給每個 todo 對象設置了唯一的 `id`，並且將它作為<a target="_blank" href="/api/built-in-special-attributes.html#key">特殊的 `key` 屬性</a> 綁定到每個 `<li>`。`key` 使得 Vue 能夠精確的移動每個 `<li>`，以匹配對應的對象在數組中的位置。
+注意，我們還給每個 todo 對象設置了唯一的 `id`，並且將它作為<a target="_blank" href="/api/built-in-special-attributes.html#key">特殊的 `key` 屬性</a>綁定到每個 `<li>`。`key` 使得 Vue 能夠精確的移動每個 `<li>`，以匹配對應的對象在數組中的位置。
 
 更新列表有兩種方式：
 
