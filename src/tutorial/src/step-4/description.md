@@ -1,12 +1,12 @@
-# 事件监听 {#event-listeners}
+# 事件監聽 {#event-listeners}
 
-我们可以使用 `v-on` 指令监听 DOM 事件：
+我們可以使用 `v-on` 指令監聽 DOM 事件：
 
 ```vue-html
 <button v-on:click="increment">{{ count }}</button>
 ```
 
-因为其经常使用，`v-on` 也有一个简写语法：
+因為其經常使用，`v-on` 也有一個簡寫語法：
 
 ```vue-html
 <button @click="increment">{{ count }}</button>
@@ -14,7 +14,7 @@
 
 <div class="options-api">
 
-此处，`increment` 引用了一个使用 `methods` 选项声明的函数：
+此處，`increment` 引用了一個使用 `methods` 選項聲明的函數：
 
 <div class="sfc">
 
@@ -27,7 +27,7 @@ export default {
   },
   methods: {
     increment() {
-      // 更新组件状态
+      // 更新組件狀態
       this.count++
     }
   }
@@ -46,7 +46,7 @@ createApp({
   },
   methods: {
     increment() {
-      // 更新组件状态
+      // 更新組件狀態
       this.count++
     }
   }
@@ -55,7 +55,7 @@ createApp({
 
 </div>
 
-在方法中，我们可以使用 `this` 来访问组件实例。组件实例会暴露 `data` 中声明的数据属性。我们可以通过改变这些属性的值来更新组件状态。
+在方法中，我們可以使用 `this` 來訪問組件實例。組件實例會暴露 `data` 中聲明的數據屬性。我們可以通過改變這些屬性的值來更新組件狀態。
 
 </div>
 
@@ -63,7 +63,7 @@ createApp({
 
 <div class="sfc">
 
-此处，`increment` 引用了一个在 `<script setup>` 中声明的函数：
+此處，`increment` 引用了一個在 `<script setup>` 中聲明的函數：
 
 ```vue{6-9}
 <script setup>
@@ -72,7 +72,7 @@ import { ref } from 'vue'
 const count = ref(0)
 
 function increment() {
-  // 更新组件状态
+  // 更新組件狀態
   count.value++
 }
 </script>
@@ -82,14 +82,14 @@ function increment() {
 
 <div class="html">
 
-此处，`increment` 引用了一个从 `setup()` 对象返回的方法：
+此處，`increment` 引用了一個從 `setup()` 對象返回的方法：
 
 ```js{$}
 setup() {
   const count = ref(0)
 
   function increment(e) {
-    // 更新组件状态
+    // 更新組件狀態
     count.value++
   }
 
@@ -102,10 +102,10 @@ setup() {
 
 </div>
 
-在函数中，我们可以通过修改 ref 来更新组件状态。
+在函數中，我們可以通過修改 ref 來更新組件狀態。
 
 </div>
 
-事件处理函数也可以使用内置表达式，并且可以使用修饰符简化常见任务。这些细节包含在<a target="_blank" href="/guide/essentials/event-handling.html">指南 - 事件处理</a>。
+事件處理函數也可以使用內置表達式，並且可以使用修飾符簡化常見任務。這些細節包含在<a target="_blank" href="/guide/essentials/event-handling.html">指南 - 事件處理</a>。
 
-现在，尝试自行实现 `increment` <span class="options-api">方法</span><span class="composition-api">函数</span>并通过使用 `v-on` 将其绑定到按钮上。
+現在，嘗試自行實現 `increment` <span class="options-api">方法</span><span class="composition-api">函數</span>並通過使用 `v-on` 將其綁定到按鈕上。
