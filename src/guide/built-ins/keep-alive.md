@@ -4,82 +4,82 @@ import SwitchComponent from './keep-alive-demos/SwitchComponent.vue'
 
 # KeepAlive {#keepalive}
 
-`<KeepAlive>` 是一个内置组件，它的功能是在多个组件间动态切换时缓存被移除的组件实例。
+`<KeepAlive>` 是一個內置組件，它的功能是在多個組件間動態切換時緩存被移除的組件實例。
 
 ## 基本使用 {#basic-usage}
 
-在组件基础章节中，我们已经介绍了通过特殊的 `<component>` 元素来实现[动态组件](/guide/essentials/component-basics#dynamic-components)的用法：
+在組件基礎章節中，我們已經介紹了通過特殊的 `<component>` 元素來實現[動態組件](/guide/essentials/component-basics#dynamic-components)的用法：
 
 ```vue-html
 <component :is="activeComponent" />
 ```
 
-默认情况下，一个组件实例在被替换掉后会被销毁。这会导致它丢失其中所有已变化的状态——当这个组件再一次被显示时，会创建一个只带有初始状态的新实例。
+默認情況下，一個組件實例在被替換掉後會被銷毀。這會導致它丟失其中所有已變化的狀態——當這個組件再一次被顯示時，會創建一個只帶有初始狀態的新實例。
 
-在下面的例子中，你会看到两个有状态的组件——A 有一个计数器，而 B 有一个通过 `v-model` 同步 input 框输入内容的文字展示。尝试先更改一下任意一个组件的状态，然后切走，再切回来：
+在下面的例子中，你會看到兩個有狀態的組件——A 有一個計數器，而 B 有一個通過 `v-model` 同步 input 框輸入內容的文字展示。嘗試先更改一下任意一個組件的狀態，然後切走，再切回來：
 
 <SwitchComponent />
 
-你会发现在切回来之后，之前已更改的状态都被重置了。
+你會發現在切回來之後，之前已更改的狀態都被重置了。
 
-在切换时创建新的组件实例通常是有意义的，但在这个例子中，我们的确想要组件能在被“切走”的时候保留它们的状态。要解决这个问题，我们可以用 `<KeepAlive>` 内置组件将这些动态组件包装起来：
+在切換時創建新的組件實例通常是有意義的，但在這個例子中，我們的確想要組件能在被“切走”的時候保留它們的狀態。要解決這個問題，我們可以用 `<KeepAlive>` 內置組件將這些動態組件包裝起來：
 
 ```vue-html
-<!-- 非活跃的组件将会被缓存！ -->
+<!-- 非活躍的組件將會被緩存！ -->
 <KeepAlive>
   <component :is="activeComponent" />
 </KeepAlive>
 ```
 
-现在，在组件切换时状态也能被保留了：
+現在，在組件切換時狀態也能被保留了：
 
 <SwitchComponent use-KeepAlive />
 
 <div class="composition-api">
 
-[在演练场中尝试一下](https://play.vuejs.org/#eNqtUsFOwzAM/RWrl4IGC+cqq2h3RFw495K12YhIk6hJi1DVf8dJSllBaAJxi+2XZz8/j0lhzHboeZIl1NadMA4sd73JKyVaozsHI9hnJqV+feJHmODY6RZS/JEuiL1uTTEXtiREnnINKFeAcgZUqtbKOqj7ruPKwe6s2VVguq4UJXEynAkDx1sjmeMYAdBGDFBLZu2uShre6ioJeaxIduAyp0KZ3oF7MxwRHWsEQmC4bXXDJWbmxpjLBiZ7DwptMUFyKCiJNP/BWUbO8gvnA+emkGKIgkKqRrRWfh+Z8MIWwpySpfbxn6wJKMGV4IuSs0UlN1HVJae7bxYvBuk+2IOIq7sLnph8P9u5DJv5VfpWWLaGqTzwZTCOM/M0IaMvBMihd04ruK+lqF/8Ajxms8EFbCiJxR8khsP6ncQosLWnWV6a/kUf2nqu75Fby04chA0iPftaYryhz6NBRLjdtajpHZTWPio=)
+[在演練場中嘗試一下](https://play.vuejs.org/#eNqtUsFOwzAM/RWrl4IGC+cqq2h3RFw495K12YhIk6hJi1DVf8dJSllBaAJxi+2XZz8/j0lhzHboeZIl1NadMA4sd73JKyVaozsHI9hnJqV+feJHmODY6RZS/JEuiL1uTTEXtiREnnINKFeAcgZUqtbKOqj7ruPKwe6s2VVguq4UJXEynAkDx1sjmeMYAdBGDFBLZu2uShre6ioJeaxIduAyp0KZ3oF7MxwRHWsEQmC4bXXDJWbmxpjLBiZ7DwptMUFyKCiJNP/BWUbO8gvnA+emkGKIgkKqRrRWfh+Z8MIWwpySpfbxn6wJKMGV4IuSs0UlN1HVJae7bxYvBuk+2IOIq7sLnph8P9u5DJv5VfpWWLaGqTzwZTCOM/M0IaMvBMihd04ruK+lqF/8Ajxms8EFbCiJxR8khsP6ncQosLWnWV6a/kUf2nqu75Fby04chA0iPftaYryhz6NBRLjdtajpHZTWPio=)
 
 </div>
 <div class="options-api">
 
-[在演练场中尝试一下](https://play.vuejs.org/#eNqtU8tugzAQ/JUVl7RKWveMXFTIseofcHHAiawasPxArRD/3rVNSEhbpVUrIWB3x7PM7jAkuVL3veNJmlBTaaFsVraiUZ22sO0alcNedw2s7kmIPHS1ABQLQDEBAMqWvwVQzffMSQuDz1aI6VreWpPCEBtsJppx4wE1s+zmNoIBNLdOt8cIjzut8XAKq3A0NAIY/QNveFEyi8DA8kZJZjlGALQWPVSSGfNYJjVvujIJeaxItuMyo6JVzoJ9VxwRmtUCIdDfNV3NJWam5j7HpPOY8BEYkwxySiLLP1AWkbK4oHzmXOVS9FFOSM3jhFR4WTNfRslcO54nSwJKcCD4RsnZmJJNFPXJEl8t88quOuc39fCrHalsGyWcnJL62apYNoq12UQ8DLEFjCMy+kKA7Jy1XQtPlRTVqx+Jx6zXOJI1JbH4jejg3T+KbswBzXnFlz9Tjes/V/3CjWEHDsL/OYNvdCE8Wu3kLUQEhy+ljh+brFFu)
+[在演練場中嘗試一下](https://play.vuejs.org/#eNqtU8tugzAQ/JUVl7RKWveMXFTIseofcHHAiawasPxArRD/3rVNSEhbpVUrIWB3x7PM7jAkuVL3veNJmlBTaaFsVraiUZ22sO0alcNedw2s7kmIPHS1ABQLQDEBAMqWvwVQzffMSQuDz1aI6VreWpPCEBtsJppx4wE1s+zmNoIBNLdOt8cIjzut8XAKq3A0NAIY/QNveFEyi8DA8kZJZjlGALQWPVSSGfNYJjVvujIJeaxItuMyo6JVzoJ9VxwRmtUCIdDfNV3NJWam5j7HpPOY8BEYkwxySiLLP1AWkbK4oHzmXOVS9FFOSM3jhFR4WTNfRslcO54nSwJKcCD4RsnZmJJNFPXJEl8t88quOuc39fCrHalsGyWcnJL62apYNoq12UQ8DLEFjCMy+kKA7Jy1XQtPlRTVqx+Jx6zXOJI1JbH4jejg3T+KbswBzXnFlz9Tjes/V/3CjWEHDsL/OYNvdCE8Wu3kLUQEhy+ljh+brFFu)
 
 </div>
 
 :::tip
-在 [DOM 内模板](/guide/essentials/component-basics#in-dom-template-parsing-caveats)中使用时，它应该被写为 `<keep-alive>`。
+在 [DOM 內模板](/guide/essentials/component-basics#in-dom-template-parsing-caveats)中使用時，它應該被寫為 `<keep-alive>`。
 :::
 
 ## 包含/排除 {#include-exclude}
 
-`<KeepAlive>` 默认会缓存内部的所有组件实例，但我们可以通过 `include` 和 `exclude` prop 来定制该行为。这两个 prop 的值都可以是一个以英文逗号分隔的字符串、一个正则表达式，或是包含这两种类型的一个数组：
+`<KeepAlive>` 默認會緩存內部的所有組件實例，但我們可以通過 `include` 和 `exclude` prop 來定製該行為。這兩個 prop 的值都可以是一個以英文逗號分隔的字符串、一個正則表達式，或是包含這兩種類型的一個數組：
 
 ```vue-html
-<!-- 以英文逗号分隔的字符串 -->
+<!-- 以英文逗號分隔的字符串 -->
 <KeepAlive include="a,b">
   <component :is="view" />
 </KeepAlive>
 
-<!-- 正则表达式 (需使用 `v-bind`) -->
+<!-- 正則表達式 (需使用 `v-bind`) -->
 <KeepAlive :include="/a|b/">
   <component :is="view" />
 </KeepAlive>
 
-<!-- 数组 (需使用 `v-bind`) -->
+<!-- 數組 (需使用 `v-bind`) -->
 <KeepAlive :include="['a', 'b']">
   <component :is="view" />
 </KeepAlive>
 ```
 
-它会根据组件的 [`name`](/api/options-misc#name) 选项进行匹配，所以组件如果想要条件性地被 `KeepAlive` 缓存，就必须显式声明一个 `name` 选项。
+它會根據組件的 [`name`](/api/options-misc#name) 選項進行匹配，所以組件如果想要條件性地被 `KeepAlive` 緩存，就必須顯式聲明一個 `name` 選項。
 
 :::tip
-在 3.2.34 或以上的版本中，使用 `<script setup>` 的单文件组件会自动根据文件名生成对应的 `name` 选项，无需再手动声明。
+在 3.2.34 或以上的版本中，使用 `<script setup>` 的單文件組件會自動根據文件名生成對應的 `name` 選項，無需再手動聲明。
 :::
 
-## 最大缓存实例数 {#max-cached-instances}
+## 最大緩存實例數 {#max-cached-instances}
 
-我们可以通过传入 `max` prop 来限制可被缓存的最大组件实例数。`<KeepAlive>` 的行为在指定了 `max` 后类似一个 [LRU 缓存](<https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_recently_used_(LRU)>)：如果缓存的实例数量即将超过指定的那个最大数量，则最久没有被访问的缓存实例将被销毁，以便为新的实例腾出空间。
+我們可以通過傳入 `max` prop 來限制可被緩存的最大組件實例數。`<KeepAlive>` 的行為在指定了 `max` 後類似一個 [LRU 緩存](<https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_recently_used_(LRU)>)：如果緩存的實例數量即將超過指定的那個最大數量，則最久沒有被訪問的緩存實例將被銷燬，以便為新的實例騰出空間。
 
 ```vue-html
 <KeepAlive :max="10">
@@ -87,26 +87,26 @@ import SwitchComponent from './keep-alive-demos/SwitchComponent.vue'
 </KeepAlive>
 ```
 
-## 缓存实例的生命周期 {#lifecycle-of-cached-instance}
+## 緩存實例的生命週期 {#lifecycle-of-cached-instance}
 
-当一个组件实例从 DOM 上移除但因为被 `<KeepAlive>` 缓存而仍作为组件树的一部分时，它将变为**不活跃**状态而不是被卸载。当一个组件实例作为缓存树的一部分插入到 DOM 中时，它将重新**被激活**。
+當一個組件實例從 DOM 上移除但因為被 `<KeepAlive>` 緩存而仍作為組件樹的一部分時，它將變為**不活躍**狀態而不是被卸載。當一個組件實例作為緩存樹的一部分插入到 DOM 中時，它將重新**被激活**。
 
 <div class="composition-api">
 
-一个持续存在的组件可以通过 [`onActivated()`](/api/composition-api-lifecycle#onactivated) 和 [`onDeactivated()`](/api/composition-api-lifecycle#ondeactivated) 注册相应的两个状态的生命周期钩子：
+一個持續存在的組件可以通過 [`onActivated()`](/api/composition-api-lifecycle#onactivated) 和 [`onDeactivated()`](/api/composition-api-lifecycle#ondeactivated) 註冊相應的兩個狀態的生命週期鉤子：
 
 ```vue
 <script setup>
 import { onActivated, onDeactivated } from 'vue'
 
 onActivated(() => {
-  // 调用时机为首次挂载
-  // 以及每次从缓存中被重新插入时
+  // 調用時機為首次掛載
+  // 以及每次從緩存中被重新插入時
 })
 
 onDeactivated(() => {
-  // 在从 DOM 上移除、进入缓存
-  // 以及组件卸载时调用
+  // 在從 DOM 上移除、進入緩存
+  // 以及組件卸載時調用
 })
 </script>
 ```
@@ -114,31 +114,31 @@ onDeactivated(() => {
 </div>
 <div class="options-api">
 
-一个持续存在的组件可以通过 [`activated`](/api/options-lifecycle#activated) 和 [`deactivated`](/api/options-lifecycle#deactivated) 选项来注册相应的两个状态的生命周期钩子：
+一個持續存在的組件可以通過 [`activated`](/api/options-lifecycle#activated) 和 [`deactivated`](/api/options-lifecycle#deactivated) 選項來註冊相應的兩個狀態的生命週期鉤子：
 
 ```js
 export default {
   activated() {
-    // 在首次挂载、
-    // 以及每次从缓存中被重新插入的时候调用
+    // 在首次掛載、
+    // 以及每次從緩存中被重新插入的時候調用
   },
   deactivated() {
-    // 在从 DOM 上移除、进入缓存
-    // 以及组件卸载时调用
+    // 在從 DOM 上移除、進入緩存
+    // 以及組件卸載時調用
   }
 }
 ```
 
 </div>
 
-请注意：
+請注意：
 
-- <span class="composition-api">`onActivated`</span><span class="options-api">`activated`</span> 在组件挂载时也会调用，并且 <span class="composition-api">`onDeactivated`</span><span class="options-api">`deactivated`</span> 在组件卸载时也会调用。
+- <span class="composition-api">`onActivated`</span><span class="options-api">`activated`</span> 在組件掛載時也會調用，並且 <span class="composition-api">`onDeactivated`</span><span class="options-api">`deactivated`</span> 在組件卸載時也會調用。
 
-- 这两个钩子不仅适用于 `<KeepAlive>` 缓存的根组件，也适用于缓存树中的后代组件。
+- 這兩個鉤子不僅適用於 `<KeepAlive>` 緩存的根組件，也適用於緩存樹中的後代組件。
 
 ---
 
-**参考**
+**參考**
 
-- [`<KeepAlive>` API 参考](/api/built-in-components#keepalive)
+- [`<KeepAlive>` API 參考](/api/built-in-components#keepalive)
