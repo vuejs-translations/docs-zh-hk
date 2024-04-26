@@ -1,8 +1,8 @@
-# 生命周期和模板引用 {#lifecycle-and-template-refs}
+# 生命週期和模板引用 {#lifecycle-and-template-refs}
 
-目前为止，Vue 为我们处理了所有的 DOM 更新，这要归功于响应性和声明式渲染。然而，有时我们也会不可避免地需要手动操作 DOM。
+目前為止，Vue 為我們處理了所有的 DOM 更新，這要歸功於響應性和聲明式渲染。然而，有時我們也會不可避免地需要手動操作 DOM。
 
-这时我们需要使用**模板引用**——也就是指向模板中一个 DOM 元素的 ref。我们需要通过<a target="_blank" href="/api/built-in-special-attributes.html#ref">这个特殊的 `ref` attribute</a> 来实现模板引用：
+這時我們需要使用**模板引用**——也就是指向模板中一個 DOM 元素的 ref。我們需要通過<a target="_blank" href="/api/built-in-special-attributes.html#ref">這個特殊的 `ref` 屬性</a> 來實現模板引用：
 
 ```vue-html
 <p ref="pElementRef">hello</p>
@@ -10,7 +10,7 @@
 
 <div class="composition-api">
 
-要访问该引用，我们需要声明<span class="html">并暴露</span>一个同名的 ref：
+要訪問該引用，我們需要聲明<span class="html">並暴露</span>一個同名的 ref：
 
 <div class="sfc">
 
@@ -33,9 +33,9 @@ setup() {
 
 </div>
 
-注意这个 ref 使用 `null` 值来初始化。这是因为当 <span class="sfc">`<script setup>`</span><span class="html">`setup()`</span> 执行时，DOM 元素还不存在。模板引用 ref 只能在组件**挂载**后访问。
+注意這個 ref 使用 `null` 值來初始化。這是因為當 <span class="sfc">`<script setup>`</span><span class="html">`setup()`</span> 執行時，DOM 元素還不存在。模板引用 ref 只能在組件**掛載**後訪問。
 
-要在挂载之后执行代码，我们可以使用 `onMounted()` 函数：
+要在掛載之後執行代碼，我們可以使用 `onMounted()` 函數：
 
 <div class="sfc">
 
@@ -43,7 +43,7 @@ setup() {
 import { onMounted } from 'vue'
 
 onMounted(() => {
-  // 此时组件已经挂载。
+  // 此時組件已經掛載。
 })
 ```
 
@@ -56,7 +56,7 @@ import { onMounted } from 'vue'
 createApp({
   setup() {
     onMounted(() => {
-      // 此时组件已经挂载。
+      // 此時組件已經掛載。
     })
   }
 })
@@ -67,16 +67,16 @@ createApp({
 
 <div class="options-api">
 
-此元素将作为 `this.$refs.pElementRef` 暴露在 `this.$refs` 上。然而，你只能在组件**挂载**之后访问它。
+此元素將作為 `this.$refs.pElementRef` 暴露在 `this.$refs` 上。然而，你只能在組件**掛載**之後訪問它。
 
-要在挂载之后执行代码，我们可以使用 `mounted` 选项：
+要在掛載之後執行代碼，我們可以使用 `mounted` 選項：
 
 <div class="sfc">
 
 ```js
 export default {
   mounted() {
-    // 此时组件已经挂载。
+    // 此時組件已經掛載。
   }
 }
 ```
@@ -87,7 +87,7 @@ export default {
 ```js
 createApp({
   mounted() {
-    // 此时组件已经挂载。
+    // 此時組件已經掛載。
   }
 })
 ```
@@ -95,6 +95,6 @@ createApp({
 </div>
 </div>
 
-这被称为**生命周期钩子**——它允许我们注册一个在组件的特定生命周期调用的回调函数。还有一些其他的钩子如 <span class="options-api">`created` 和 `updated`</span><span class="composition-api">`onUpdated` 和 `onUnmounted`</span>。更多细节请查阅<a target="_blank" href="/guide/essentials/lifecycle.html#lifecycle-diagram">生命周期图示</a>。
+這被稱為**生命週期鉤子**——它允許我們註冊一個在組件的特定生命週期調用的回調函數。還有一些其他的鉤子如 <span class="options-api">`created` 和 `updated`</span><span class="composition-api">`onUpdated` 和 `onUnmounted`</span>。更多細節請查閱<a target="_blank" href="/guide/essentials/lifecycle.html#lifecycle-diagram">生命週期圖示</a>。
 
-现在，尝试添加一个 <span class="options-api">`mounted`</span><span class="composition-api">`onMounted`</span> 钩子，然后通过 <span class="options-api">`this.$refs.pElementRef`</span><span class="composition-api">`pElementRef.value`</span> 访问 `<p>`，并直接对其执行一些 DOM 操作。(例如修改它的 `textContent`)。
+現在，嘗試添加一個 <span class="options-api">`mounted`</span><span class="composition-api">`onMounted`</span> 鉤子，然後通過 <span class="options-api">`this.$refs.pElementRef`</span><span class="composition-api">`pElementRef.value`</span> 訪問 `<p>`，並直接對其執行一些 DOM 操作。(例如修改它的 `textContent`)。
