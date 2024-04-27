@@ -32,7 +32,7 @@ const description = computed(() => {
 
     <div class="action">
       <VTLink class="action-link" :href="provider.seeMoreUrl" no-icon>
-        查看更多来自 {{ provider.name }} 的主题
+        查看更多來自 {{ provider.name }} 的主題
       </VTLink>
     </div>
   </section>

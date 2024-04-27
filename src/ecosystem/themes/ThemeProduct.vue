@@ -21,7 +21,7 @@ const props = defineProps<{
 
         <div class="price">
           <p v-if="product.price > 0" class="value">${{ product.price }}</p>
-          <p v-else class="free">免费</p>
+          <p v-else class="free">免費</p>
         </div>
       </div>
     </article>
