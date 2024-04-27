@@ -1,6 +1,6 @@
 # Props {#props}
 
-子组件可以通过 **props** 从父组件接受动态数据。首先，需要声明它所接受的 props：
+子組件可以通過 **props** 從父組件接受動態數據。首先，需要聲明它所接受的 props：
 
 <div class="composition-api">
 <div class="sfc">
@@ -14,25 +14,25 @@ const props = defineProps({
 </script>
 ```
 
-注意 `defineProps()` 是一个编译时宏，并不需要导入。一旦声明，`msg` prop 就可以在子组件的模板中使用。它也可以通过 `defineProps()` 所返回的对象在 JavaScript 中访问。
+注意 `defineProps()` 是一個編譯時宏，並不需要導入。一旦聲明，`msg` prop 就可以在子組件的模板中使用。它也可以通過 `defineProps()` 所返回的對象在 JavaScript 中訪問。
 
 </div>
 
 <div class="html">
 
 ```js
-// 在子组件中
+// 在子組件中
 export default {
   props: {
     msg: String
   },
   setup(props) {
-    // 访问 props.msg
+    // 訪問 props.msg
   }
 }
 ```
 
-一旦声明，`msg` prop 就会暴露在 `this` 上，并可以在子组件的模板中使用。接收到的 props 会作为第一个参数传递给 `setup()`。
+一旦聲明，`msg` prop 就會暴露在 `this` 上，並可以在子組件的模板中使用。接收到的 props 會作為第一個參數傳遞給 `setup()`。
 
 </div>
 
@@ -41,7 +41,7 @@ export default {
 <div class="options-api">
 
 ```js
-// 在子组件中
+// 在子組件中
 export default {
   props: {
     msg: String
@@ -49,11 +49,11 @@ export default {
 }
 ```
 
-一旦声明，`msg` prop 就会暴露在 `this` 上，并可以在子组件的模板中使用。
+一旦聲明，`msg` prop 就會暴露在 `this` 上，並可以在子組件的模板中使用。
 
 </div>
 
-父组件可以像声明 HTML attributes 一样传递 props。若要传递动态值，也可以使用 `v-bind` 语法：
+父組件可以像聲明 HTML 屬性一樣傳遞 props。若要傳遞動態值，也可以使用 `v-bind` 語法：
 
 <div class="sfc">
 
@@ -70,4 +70,4 @@ export default {
 
 </div>
 
-现在在编辑器中自己尝试一下吧。
+現在在編輯器中自己嘗試一下吧。
