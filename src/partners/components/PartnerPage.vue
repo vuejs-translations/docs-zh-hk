@@ -37,14 +37,14 @@ function genMailLink(email: string) {
 
     <div class="actions">
       <a :href="website.url" target="_blank" @click="track"
-        >访问网站</a
+        >訪問網站</a
       >
       <a
         class="contact"
         :href="genMailLink(contact)"
         target="_blank"
         @click="track"
-        >联系方式</a
+        >聯繫方式</a
       >
     </div>
 

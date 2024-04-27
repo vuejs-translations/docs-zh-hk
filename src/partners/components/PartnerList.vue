@@ -55,7 +55,7 @@ function shuffle(array: Array<any>) {
       href="./all.html"
       v-if="showLinkToAll && filtered.length % 2"
     >
-      浏览和搜索<br />所有合作伙伴
+      瀏覽和搜索<br />所有合作伙伴
     </a>
   </div>
 </template>

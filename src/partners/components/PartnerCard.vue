@@ -43,7 +43,7 @@ const {
 
       <p>{{ intro }}</p>
 
-      <h4 v-if="hero">精通的领域</h4>
+      <h4 v-if="hero">精通的領域</h4>
       <p v-if="hero">
         <span class="proficiency" v-for="p in proficiencies">{{ p }}</span>
       </p>
