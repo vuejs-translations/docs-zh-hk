@@ -10,7 +10,7 @@ defineProps<{
   <table>
     <thead>
       <tr>
-        <th>错误码</th>
+        <th>錯誤碼</th>
         <th>信息</th>
       </tr>
     </thead>

@@ -9,22 +9,22 @@ onMounted(() => {
 })
 </script>
 
-# 生产环境错误代码参考 {#error-reference}
+# 生產環境錯誤代碼參考 {#error-reference}
 
-## 运行时错误 {#runtime-errors}
+## 運行時錯誤 {#runtime-errors}
 
-在生产环境中，传递给以下错误处理程序 API 的第三个参数是一个短代码，而不是含有完整信息的字符串：
+在生產環境中，傳遞給以下錯誤處理程序 API 的第三個參數是一個短代碼，而不是含有完整信息的字符串：
 
 - [`app.config.errorHandler`](/api/application#app-config-errorhandler)
-- [`onErrorCaptured`](/api/composition-api-lifecycle#onerrorcaptured) (组合式 API)
-- [`errorCaptured`](/api/options-lifecycle#errorcaptured) (选项式 API)
+- [`onErrorCaptured`](/api/composition-api-lifecycle#onerrorcaptured) (組合式 API)
+- [`errorCaptured`](/api/options-lifecycle#errorcaptured) (選項式 API)
 
-下表提供了代码和其原始的完整信息字符串的映射。
+下表提供了代碼和其原始的完整信息字符串的映射。
 
 <ErrorsTable kind="runtime" :errors="data.runtime" :highlight="highlight" />
 
-## 编译错误 {#compiler-errors}
+## 編譯錯誤 {#compiler-errors}
 
-下表提供了生产环境的编译错误代码与其原始消息的映射。
+下表提供了生產環境的編譯錯誤代碼與其原始消息的映射。
 
 <ErrorsTable kind="compiler" :errors="data.compiler" :highlight="highlight" />
