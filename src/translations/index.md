@@ -2,28 +2,28 @@
 aside: false
 ---
 
-# 多语言及翻译 {#translations}
+# 多語言及翻譯 {#translations}
 
-## 多语言版本 {#available-languages}
+## 多語言版本 {#available-languages}
 
-- [简体中文](https://cn.vuejs.org/) [[源码](https://github.com/vuejs-translations/docs-zh-cn)]
-- [English / 英语](https://vuejs.org/) [[源码](https://github.com/vuejs/docs)]
-- [日本語 / 日语](https://ja.vuejs.org/) [[源码](https://github.com/vuejs-translations/docs-ja)]
-- [Українська / 乌克兰语](https://ua.vuejs.org/) [[源码](https://github.com/vuejs-translations/docs-uk)]
-- [Français / 法语](https://fr.vuejs.org) [[源码](https://github.com/vuejs-translations/docs-fr)]
-- [한국어 / 韩语](https://ko.vuejs.org) [[源码](https://github.com/vuejs-translations/docs-ko)]
-- [Português / 葡萄牙语](https://pt.vuejs.org) [[源码](https://github.com/vuejs-translations/docs-pt)]
-- [বাংলা / 孟加拉语](https://bn.vuejs.org) [[源码](https://github.com/vuejs-translations/docs-bn)]
-- [Italiano / 意大利语](https://it.vuejs.org) [[源码](https://github.com/vuejs-translations/docs-it)]
+- [簡體中文](https://cn.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-zh-cn)]
+- [English / 英語](https://vuejs.org/) [[源碼](https://github.com/vuejs/docs)]
+- [日本語 / 日語](https://ja.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-ja)]
+- [Українська / 烏克蘭語](https://ua.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-uk)]
+- [Français / 法語](https://fr.vuejs.org) [[源碼](https://github.com/vuejs-translations/docs-fr)]
+- [한국어 / 韓語](https://ko.vuejs.org) [[源碼](https://github.com/vuejs-translations/docs-ko)]
+- [Português / 葡萄牙語](https://pt.vuejs.org) [[源碼](https://github.com/vuejs-translations/docs-pt)]
+- [বাংলা / 孟加拉語](https://bn.vuejs.org) [[源碼](https://github.com/vuejs-translations/docs-bn)]
+- [Italiano / 意大利語](https://it.vuejs.org) [[源碼](https://github.com/vuejs-translations/docs-it)]
 
-## 翻译中的语言 {#work-in-progress-languages}
+## 翻譯中的語言 {#work-in-progress-languages}
 
-- [فارسی / 波斯语](https://fa.vuejs.org/) [[源码](https://github.com/vuejs-translations/docs-fa)]
-- [Čeština / 捷克语](https://cs.vuejs.org/) [[源码](https://github.com/vuejs-translations/docs-cs)]
-- [العربية / 阿拉伯语](https://ar.vuejs.org/) [[源码](https://github.com/vuejs-translations/docs-ar)]
+- [فارسی / 波斯語](https://fa.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-fa)]
+- [Čeština / 捷克語](https://cs.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-cs)]
+- [العربية / 阿拉伯語](https://ar.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-ar)]
 
-## 启动新的翻译 {#starting-a-new-translation}
+## 啟動新的翻譯 {#starting-a-new-translation}
 
-近期 Vue 的文档经历了一次大的版本升级，所以其他语言的翻译版本仍不可用或进行中。
+近期 Vue 的文檔經歷了一次大的版本升級，所以其他語言的翻譯版本仍不可用或進行中。
 
-我们希望通过社区的努力提供更多语言的翻译。这些工作是在 [vuejs-translations](https://github.com/vuejs-translations/) GitHub 组织进行的。如果你对此感兴趣，请查看[翻译指南](https://github.com/vuejs-translations/guidelines/blob/main/README.md)。
+我們希望通過社區的努力提供更多語言的翻譯。這些工作是在 [vuejs-translations](https://github.com/vuejs-translations/) GitHub 組織進行的。如果你對此感興趣，請查看[翻譯指南](https://github.com/vuejs-translations/guidelines/blob/main/README.md)。
