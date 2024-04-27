@@ -34,7 +34,7 @@ const nav: ThemeConfig['nav'] = [
     link: '/api/'
   },
   {
-    text: '演習場',
+    text: '演練場',
     link: 'https://play.vuejs.org'
   },
   {
