@@ -1,16 +1,16 @@
 # Emits {#emits}
 
-除了接收 props，子组件还可以向父组件触发事件：
+除了接收 props，子組件還可以向父組件觸發事件：
 
 <div class="composition-api">
 <div class="sfc">
 
 ```vue
 <script setup>
-// 声明触发的事件
+// 聲明觸發的事件
 const emit = defineEmits(['response'])
 
-// 带参数触发
+// 帶參數觸發
 emit('response', 'hello from child')
 </script>
 ```
@@ -21,10 +21,10 @@ emit('response', 'hello from child')
 
 ```js
 export default {
-  // 声明触发的事件
+  // 聲明觸發的事件
   emits: ['response'],
   setup(props, { emit }) {
-    // 带参数触发
+    // 帶參數觸發
     emit('response', 'hello from child')
   }
 }
@@ -38,10 +38,10 @@ export default {
 
 ```js
 export default {
-  // 声明触发的事件
+  // 聲明觸發的事件
   emits: ['response'],
   created() {
-    // 带参数触发
+    // 帶參數觸發
     this.$emit('response', 'hello from child')
   }
 }
@@ -49,9 +49,9 @@ export default {
 
 </div>
 
-<span class="options-api">`this.$emit()`</span><span class="composition-api">`emit()`</span> 的第一个参数是事件的名称。其他所有参数都将传递给事件监听器。
+<span class="options-api">`this.$emit()`</span><span class="composition-api">`emit()`</span> 的第一個參數是事件的名稱。其他所有參數都將傳遞給事件監聽器。
 
-父组件可以使用 `v-on` 监听子组件触发的事件——这里的处理函数接收了子组件触发事件时的额外参数并将它赋值给了本地状态：
+父組件可以使用 `v-on` 監聽子組件觸發的事件——這裡的處理函數接收了子組件觸發事件時的額外參數並將它賦值給了本地狀態：
 
 <div class="sfc">
 
@@ -68,4 +68,4 @@ export default {
 
 </div>
 
-现在在编辑器中自己尝试一下吧。
+現在在編輯器中自己嘗試一下吧。
