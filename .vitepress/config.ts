@@ -198,7 +198,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
         { text: '事件', link: '/guide/components/events' },
         { text: '組件 v-model', link: '/guide/components/v-model' },
         {
-          text: '透傳 Attributes',
+          text: '透傳屬性',
           link: '/guide/components/attrs'
         },
         { text: '插槽', link: '/guide/components/slots' },
