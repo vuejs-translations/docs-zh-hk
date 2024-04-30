@@ -5,7 +5,7 @@ import { VTLink } from '@vue/theme'
 <template>
   <section id="newsletter" class="NewsLetter">
     <div class="container">
-      <h2 class="title">订阅我们的每周新闻。</h2>
+      <h2 class="title">訂閱我們的每週新聞。</h2>
 
       <div class="form">
         <form
@@ -22,7 +22,7 @@ import { VTLink } from '@vue/theme'
             id="member_email"
             name="member[email]"
             type="email"
-            placeholder="邮箱地址"
+            placeholder="郵箱地址"
             required
           />
 
@@ -32,7 +32,7 @@ import { VTLink } from '@vue/theme'
               id="member_submit"
               name="member[subscribe]"
               type="submit"
-              value="订阅"
+              value="訂閱"
             />
           </div>
         </form>
@@ -44,9 +44,9 @@ import { VTLink } from '@vue/theme'
           class="link"
           href="https://news.vuejs.org/"
           no-icon
-          >news.vuejs.org</VTLink> 阅读之前的期刊并收听我们的播客。你也可以在
-        <VTLink class="link" href="https://twitter.com/vuejs" no-icon>Twitter</VTLink> 关注我们，或加入我们的
-        <VTLink class="link" href="https://discord.com/invite/vue" no-icon>Discord</VTLink> 家园。
+          >news.vuejs.org</VTLink> 閱讀之前的期刊並收聽我們的播客。你也可以在
+        <VTLink class="link" href="https://twitter.com/vuejs" no-icon>Twitter</VTLink> 關注我們，或加入我們的
+        <VTLink class="link" href="https://discord.com/invite/vue" no-icon>Discord</VTLink> 家園。
       </p>
     </div>
   </section>

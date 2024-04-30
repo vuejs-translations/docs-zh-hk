@@ -62,35 +62,35 @@ function useToggleFn(
   <div v-if="show" class="preference-switch">
     <button
       class="toggle"
-      aria-label="偏好切换开关"
+      aria-label="偏好切換開關"
       aria-controls="preference-switches"
       :aria-expanded="isOpen"
       @click="toggleOpen"
       @mousedown="removeOutline"
       @blur="restoreOutline"
     >
-      <span>API 风格偏好</span>
+      <span>API 風格偏好</span>
       <VTIconChevronDown class="vt-link-icon" :class="{ open: isOpen }" />
     </button>
     <div id="preference-switches" :hidden="!isOpen" :aria-hidden="!isOpen">
       <div class="switch-container">
         <label class="options-label" @click="toggleCompositionAPI(false)"
-          >选项式</label
+          >選項式</label
         >
         <VTSwitch
           class="api-switch"
-          aria-label="偏好组合式 API"
+          aria-label="偏好組合式 API"
           :aria-checked="preferComposition"
           @click="toggleCompositionAPI()"
         />
         <label
           class="composition-label"
           @click="toggleCompositionAPI(true)"
-          >组合式</label
+          >組合式</label
         >
         <a
           class="switch-link"
-          title="关于 API 风格偏好"
+          title="關於 API 風格偏好"
           href="/guide/introduction.html#api-styles"
           @click="closeSideBar"
           >?</a
@@ -101,14 +101,14 @@ function useToggleFn(
         <label class="no-sfc-label" @click="toggleSFC(false)">HTML</label>
         <VTSwitch
           class="sfc-switch"
-          aria-label="偏好单文件组件"
+          aria-label="偏好單文件組件"
           :aria-checked="preferSFC"
           @click="toggleSFC()"
         />
-        <label class="sfc-label" @click="toggleSFC(true)">单文件组件</label>
+        <label class="sfc-label" @click="toggleSFC(true)">單文件組件</label>
         <a
           class="switch-link"
-          title="关于单文件组件"
+          title="關於單文件組件"
           href="/guide/scaling-up/sfc.html"
           @click="closeSideBar"
           >?</a

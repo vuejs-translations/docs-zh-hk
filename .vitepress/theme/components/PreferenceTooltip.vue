@@ -99,27 +99,27 @@ function dismiss() {
   <Transition name="fly-in">
     <div class="preference-tooltip" v-if="show">
       <template v-if="source === 'default'">
-        <p>现在将默认使用组合式 API 风格。</p>
+        <p>現在將默認使用組合式 API 風格。</p>
         <p>
-          一些页面根据所选的 API 风格将包含不同的内容。可以通过此开关在它们之间切换。
+          一些頁面根據所選的 API 風格將包含不同的內容。可以通過此開關在它們之間切換。
         </p>
       </template>
       <template v-if="source && source.startsWith('url')">
         <p>
-          正在显示
-          {{ preferComposition ? '组合式' : '选项式' }} API 的内容，这是因为
+          正在顯示
+          {{ preferComposition ? '組合式' : '選項式' }} API 的內容，這是因為
           {{
             source === 'url-query'
-              ? '通过 URL 查询参数指定了。'
-              : '目标章节仅适用于此 API。'
+              ? '通過 URL 查詢參數指定了。'
+              : '目標章節僅適用於此 API。'
           }}
         </p>
         <p>
-          这与你已保存的首选项不同，且仅会影响当前的浏览会话。
+          這與你已保存的首選項不同，且僅會影響當前的瀏覽會話。
         </p>
       </template>
       <p class="actions">
-        <a href="/guide/introduction#api-styles">了解详情</a>
+        <a href="/guide/introduction#api-styles">了解詳情</a>
         <button @click="dismiss">知道了</button>
       </p>
       <div class="arrow-top"></div>

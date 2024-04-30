@@ -6,7 +6,7 @@
       rel="sponsored noopener"
       :title="title"
     >
-      <slot>在 Vue School 上观看免费课程</slot>
+      <slot>在 Vue School 上觀看免費課程</slot>
     </a>
   </div>
 </template>
