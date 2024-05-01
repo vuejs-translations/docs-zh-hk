@@ -21,9 +21,7 @@
 
 ### 注意事項
 
-**請不要直接使用任何翻譯工具直接翻譯文檔，即使是為了節省時間，也應在提交前對翻譯內容進行校對。**
-
-**這包括在此倉庫初始階段中的由簡體中文翻譯為繁體中文的過程。**
+**請在提交前對翻譯內容進行[校對](https://github.com/vuejs-translations/docs-zh-hk/wiki/%E7%BF%BB%E8%AD%AF%E8%A6%8F%E7%AF%84)。**
 
 ## 如何在本地編輯和預覽該網站
 
@@ -45,4 +43,4 @@ pnpm run dev
 
 ## 版權聲明
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知識共享許可協議" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品採用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知識共享署名-非商業性使用-相同方式共享 4.0 國際許可協議  (CC BY-NC-SA 4.0) </a>進行許可。
+<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知識共享許可協議" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品採用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知識共享署名-非商業性使用-相同方式共享 4.0 國際許可協議 (CC BY-NC-SA 4.0) </a>進行許可。
