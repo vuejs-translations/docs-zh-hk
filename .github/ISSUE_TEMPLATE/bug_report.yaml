@@ -1,39 +1,39 @@
-name: 问题报告
-description: 报告本站点相关的问题。请认真阅读并填写，否则 issue 将可能被直接关闭。
+name: 問題報告
+description: 報告本站點相關的問題。請注意閱讀注意事項，否則 issue 將可能被直接關閉。
 labels: []
 assignees: []
 body:
   - type: markdown
     attributes:
       value: |
-        这里是 Vue.js 3 官方中文 [cn.vuejs.org](https://cn.vuejs.org/) 仓库，仅处理：
-        1. 文档翻译相关；
-        2. 网络环境和本地化；
-        3. 其他与本仓库直接相关的问题，如译法讨论、流程优化等。
+        這裡是 Vue.js 3 官方中文 [hk.vuejs.org](https://docs-zh-hk.vercel.app/) 倉庫，僅處理：
+        1. 文檔翻譯相關；
+        2. 網絡環境和本地化；
+        3. 其他與本倉庫直接相關的問題，如譯法討論、流程優化等。
 
   - type: checkboxes
     id: terms
     attributes:
-      label: 提问须知
-      description: 请认真阅读以上说明后，勾选以下字段。
+      label: 提問須知
+      description: 請認真閱讀以上說明後，勾選以下字段。
       options:
-        - label: 我确定这是官方版本 [cn.vuejs.org](https://cn.vuejs.org/) 的 issue，而不是其他非官方翻译版本
+        - label: 我確定這是官方版本 [hk.vuejs.org](https://docs-zh-hk.vercel.app/) 的 issue，而不是其他非官方翻譯版本
           required: true
-        - label: 我确定这是翻译问题，而不是英文原文的问题 (英文原文的问题请移步至[英文文档仓库](https://github.com/vuejs/docs)讨论，相关结论我们会定期从英文版同步)
+        - label: 我確定這是翻譯問題，而不是英文原文的問題 (英文原文的問題請移步至[英文文檔倉庫](https://github.com/vuejs/docs)討論，相關結論我們會定期從英文版同步)
           required: true
-        - label: 我确定这不是 Vue.js 使用方面的问题 (此类问题请在我们的[论坛](https://forum.vuejs.org/c/chinese/7)、[Discord 聊天室](https://chat.vuejs.org/) 或 [StackOverflow](https://stackoverflow.com/tags/vue.js) 上发帖求助)
+        - label: 我確定這不是 Vue.js 使用方面的問題 (此類問題請在 Vue.js 官方的[論壇](https://forum.vuejs.org/c/chinese/7)、[Discord 聊天室](https://chat.vuejs.org/) 或 [StackOverflow](https://stackoverflow.com/tags/vue.js) 上發帖求助)
           required: true
 
   - type: dropdown
     id: issuetype
     attributes:
-      label: 问题类型
-      description: 请选择本 issue 所涉及的问题类型。
+      label: 問題類型
+      description: 請選擇本 issue 所涉及的問題類型。
       options:
-        - 文档翻译相关
-        - 网络环境和本地化
-        - 译法讨论
-        - 流程优化
+        - 文檔翻譯相關
+        - 網絡環境和本地化
+        - 譯法討論
+        - 流程優化
         - 其他
     validations:
       required: true
@@ -41,8 +41,8 @@ body:
   - type: textarea
     id: desc
     attributes:
-      label: 问题描述
-      description: 请描述问题，**截图+有效链接更佳**。
+      label: 問題描述
+      description: 請描述問題，**截圖+有效鏈接更佳**。
     validations:
       required: true
 
