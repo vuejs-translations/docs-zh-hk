@@ -385,13 +385,18 @@ defineProps({
     type: String,
     required: true
   },
-  // Number 類型的默認值
+  // Required but nullable string
   propD: {
+    type: [String, null],
+    required: true
+  },
+  // Number with a default value
+  propE: {
     type: Number,
     default: 100
   },
-  // 對象類型的默認值
-  propE: {
+  // Object with a default value
+  propF: {
     type: Object,
     // 對象或數組的默認值
     // 必須從一個工廠函數返回。
@@ -400,16 +405,16 @@ defineProps({
       return { message: 'hello' }
     }
   },
-  // 自定義類型校驗函數
-  // 在 3.4+ 中完整的 props 作為第二個參數傳入
-  propF: {
+  // Custom validator function
+  // full props passed as 2nd argument in 3.4+
+  propG: {
     validator(value, props) {
       // The value must match one of these strings
       return ['success', 'warning', 'danger'].includes(value)
     }
   },
-  // 函數類型的默認值
-  propG: {
+  // Function with a default value
+  propH: {
     type: Function,
     // 不像對象或數組的默認，這不是一個
     // 工廠函數。這會是一個用來作為默認值的函數
@@ -440,13 +445,18 @@ export default {
       type: String,
       required: true
     },
-    // Number 類型的默認值
+    // Required but nullable string
     propD: {
+      type: [String, null],
+      required: true
+    },
+    // Number with a default value
+    propE: {
       type: Number,
       default: 100
     },
-    // 對象類型的默認值
-    propE: {
+    // Object with a default value
+    propF: {
       type: Object,
       // 對象或者數組應當用工廠函數返回。
       // 工廠函數會收到組件所接收的原始 props
@@ -455,16 +465,16 @@ export default {
         return { message: 'hello' }
       }
     },
-    // 自定義類型校驗函數
-    // 在 3.4+ 中完整的 props 作為第二個參數傳入
-    propF: {
+    // Custom validator function
+    // full props passed as 2nd argument in 3.4+
+    propG: {
       validator(value, props) {
         // The value must match one of these strings
         return ['success', 'warning', 'danger'].includes(value)
       }
     },
-    // 函數類型的默認值
-    propG: {
+    // Function with a default value
+    propH: {
       type: Function,
       // 不像對象或數組的默認，這不是一個
       // 工廠函數。這會是一個用來作為默認值的函數
@@ -553,6 +563,39 @@ export default {
 
 Vue 會通過 `instanceof Person` 來校驗 `author` prop 的值是否是 `Person` 類的一個實例。
 
+### Nullable Type {#nullable-type}
+
+If the type is required but nullable, you can use the array syntax that includes `null`:
+
+<div class="composition-api">
+
+```js
+defineProps({
+  id: {
+    type: [String, null],
+    required: true
+  }
+})
+```
+
+</div>
+<div class="options-api">
+
+```js
+export default {
+  props: {
+    id: {
+      type: [String, null],
+      required: true
+    }
+  }
+}
+```
+
+</div>
+
+Note that if `type` is just `null` without using the array syntax, it will allow any type.
+
 ## Boolean 類型轉換 {#boolean-casting}
 
 為了更貼近原生 boolean attributes 的行為，聲明為 `Boolean` 類型的 props 有特別的類型轉換規則。以帶有如下聲明的 `<MyComponent>` 組件為例：
@@ -597,17 +640,17 @@ export default {
 defineProps({
   disabled: [Boolean, Number]
 })
-  
+
 // disabled 將被轉換為 true
 defineProps({
   disabled: [Boolean, String]
 })
-  
+
 // disabled 將被轉換為 true
 defineProps({
   disabled: [Number, Boolean]
 })
-  
+
 // disabled 將被解析為空字符串 (disabled="")
 defineProps({
   disabled: [String, Boolean]
@@ -625,20 +668,20 @@ export default {
   }
 }
   
-// disabled 將被轉換為 true
+// disabled will be casted to true
 export default {
   props: {
     disabled: [Boolean, String]
   }
 }
   
-// disabled 將被轉換為 true
+// disabled will be casted to true
 export default {
   props: {
     disabled: [Number, Boolean]
   }
 }
-  
+
 // disabled 將被解析為空字符串 (disabled="")
 export default {
   props: {

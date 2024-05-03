@@ -67,7 +67,7 @@ whenDepsChange(update)
 
 我們無法直接追蹤對上述示例中局部變量的讀寫，原生 JavaScript 沒有提供任何機制能做到這一點。**但是**，我們是可以追蹤**對象屬性**的讀寫的。
 
-在 JavaScript 中有兩種劫持 property 訪問的方式：[getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get) / [setters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set) 和 [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)。Vue 2 使用 getter / setters 完全是出於支持舊版本瀏覽器的限制。而在 Vue 3 中則使用了 Proxy 來創建響應式對象，僅將 getter / setter 用於 ref。下面的偽代碼將會說明它們是如何工作的：
+在 JavaScript 中有兩種劫持 property 訪問的方式：[getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description) / [setters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set#description) 和 [Proxies](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy)。Vue 2 使用 getter / setters 完全是出於支持舊版本瀏覽器的限制。而在 Vue 3 中則使用了 Proxy 來創建響應式對象，僅將 getter / setter 用於 ref。下面的偽代碼將會說明它們是如何工作的：
 
 ```js{4,9,17,22}
 function reactive(obj) {
@@ -191,7 +191,7 @@ import { ref, watchEffect } from 'vue'
 const count = ref(0)
 
 watchEffect(() => {
-  document.body.innerHTML = `計數：${count.value}`
+  document.body.innerHTML = `Count is: ${count.value}`
 })
 
 // 更新 DOM
@@ -407,9 +407,9 @@ export function useMachine(options) {
 - [Preact 信號](https://preactjs.com/guide/v10/signals/)
 - [Qwik 信號](https://qwik.builder.io/docs/components/state/#usesignal)
 
-從根本上說，信號是與 Vue 中的 ref 相同的響應性基礎類型。它是一個在訪問時跟蹤依賴、在變更時觸發副作用的值容器。這種基於響應性基礎類型的範式在前端領域並不是一個特別新的概念：它可以追溯到十多年前的 [Knockout observables](https://knockoutjs.com/documentation/observables.html) 和 [Meteor Tracker](https://docs.meteor.com/api/tracker.html) 等實現。Vue 的選項式 API 和 React 的狀態管理庫 [MobX](https://mobx.js.org/) 也是基於同樣的原則，只不過將基礎類型這部分隱藏在了對象屬性背後。
+Fundamentally, signals are the same kind of reactivity primitive as Vue refs. It's a value container that provides dependency tracking on access, and side-effect triggering on mutation. This reactivity-primitive-based paradigm isn't a particularly new concept in the frontend world: it dates back to implementations like [Knockout observables](https://knockoutjs.com/documentation/observables.html) and [Meteor Tracker](https://docs.meteor.com/api/tracker.html) from more than a decade ago. Vue Options API and the React state management library [MobX](https://mobx.js.org/) are also based on the same principles, but hide the primitives behind object properties.
 
-雖然這並不是信號的必要特徵，但如今這個概念經常與細粒度訂閱和更新的渲染模型一起討論。由於使用了虛擬 DOM，Vue 目前[依靠編譯器來實現類似的優化](/guide/extras/rendering-mechanism#compiler-informed-virtual-dom)。然而，我們也在探索一種新的受 Solid 啟發的編譯策略 (Vapor Mode)，它不依賴於虛擬 DOM，而是更多地利用 Vue 的內置響應性系統。
+Although not a necessary trait for something to qualify as signals, today the concept is often discussed alongside the rendering model where updates are performed through fine-grained subscriptions. Due to the use of Virtual DOM, Vue currently [relies on compilers to achieve similar optimizations](/guide/extras/rendering-mechanism#compiler-informed-virtual-dom). However, we are also exploring a new Solid-inspired compilation strategy, called [Vapor Mode](https://github.com/vuejs/core-vapor), that does not rely on Virtual DOM and takes more advantage of Vue's built-in reactivity system.
 
 ### API 設計權衡 {#api-design-trade-offs}
 

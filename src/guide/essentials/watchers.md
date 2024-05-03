@@ -109,7 +109,7 @@ watch(question, async (newQuestion, oldQuestion) => {
 
 ### 偵聽數據源類型 {#watch-source-types}
 
-`watch` 的第一個參數可以是不同形式的“數據源”：它可以是一個 ref (包括計算屬性)、一個響應式對象、一個 getter 函數、或多個數據源組成的數組：
+`watch`'s first argument can be different types of reactive "sources": it can be a ref (including computed refs), a reactive object, a [getter function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description), or an array of multiple sources:
 
 ```js
 const x = ref(0)
@@ -141,7 +141,7 @@ const obj = reactive({ count: 0 })
 
 // 錯誤，因為 watch() 得到的參數是一個 number
 watch(obj.count, (count) => {
-  console.log(`count is: ${count}`)
+  console.log(`Count is: ${count}`)
 })
 ```
 
@@ -152,7 +152,7 @@ watch(obj.count, (count) => {
 watch(
   () => obj.count,
   (count) => {
-    console.log(`count is: ${count}`)
+    console.log(`Count is: ${count}`)
   }
 )
 ```
@@ -272,13 +272,12 @@ watch(
 
 </div>
 
-
 ## 一次性偵聽器 <sup class="vt-badge" data-text="3.4+" /> {#once-watchers}
 
 每當被偵聽源發生變化時，偵聽器的回調就會執行。如果希望回調只在源變化時觸發一次，請使用 `once: true` 選項。
 
 <div class="options-api">
-  
+
 ```js
 export default {
   watch: {

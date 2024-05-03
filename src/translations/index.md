@@ -15,12 +15,13 @@ aside: false
 - [Português / 葡萄牙語](https://pt.vuejs.org) [[源碼](https://github.com/vuejs-translations/docs-pt)]
 - [বাংলা / 孟加拉語](https://bn.vuejs.org) [[源碼](https://github.com/vuejs-translations/docs-bn)]
 - [Italiano / 意大利語](https://it.vuejs.org) [[源碼](https://github.com/vuejs-translations/docs-it)]
+- [فارسی / Persian](https://fa.vuejs.org) [[source](https://github.com/vuejs-translations/docs-fa)]
+- [Русский / Russian](https://ru.vuejs.org/) [[source](https://github.com/vuejs-translations/docs-ru)]
+- [Čeština / Czech](https://cs.vuejs.org/) [[source](https://github.com/vuejs-translations/docs-cs)]
 
 ## 翻譯中的語言 {#work-in-progress-languages}
 
-- [فارسی / 波斯語](https://fa.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-fa)]
-- [Čeština / 捷克語](https://cs.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-cs)]
-- [العربية / 阿拉伯語](https://ar.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-ar)]
+- [العربية / Arabic](https://ar.vuejs.org/) [[source](https://github.com/vuejs-translations/docs-ar)]
 
 ## 啟動新的翻譯 {#starting-a-new-translation}
 

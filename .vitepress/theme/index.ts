@@ -8,27 +8,25 @@ import {
   filterHeadersByPreference
 } from './components/preferences'
 import SponsorsAside from './components/SponsorsAside.vue'
-// import VueSchoolLink from './components/VueSchoolLink.vue'
+import VueSchoolLink from './components/VueSchoolLink.vue'
 // import Banner from './components/Banner.vue'
-import WwAds from './components/WwAds.vue'
 // import TextAd from './components/TextAd.vue'
+import VueMasteryBanner from './components/VueMasteryBanner.vue'
 
 export default Object.assign({}, VPTheme, {
   Layout: () => {
     // @ts-ignore
     return h(VPTheme.Layout, null, {
-      // banner: () => h(Banner),
+      banner: () => h(VueMasteryBanner),
       'sidebar-top': () => h(PreferenceSwitch),
-      'aside-mid': () => h(SponsorsAside),
-      'aside-bottom': () => h(WwAds),
-      // 'content-top': () => h(TextAd)
+      'aside-mid': () => h(SponsorsAside)
     })
   },
   enhanceApp({ app }: { app: App }) {
     app.provide('prefer-composition', preferComposition)
     app.provide('prefer-sfc', preferSFC)
     app.provide('filter-headers', filterHeadersByPreference)
-    // app.component('VueSchoolLink', VueSchoolLink)
+    app.component('VueSchoolLink', VueSchoolLink)
     // app.component('TextAd', TextAd)
   }
 })

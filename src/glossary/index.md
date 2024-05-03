@@ -265,19 +265,19 @@ Vue 只能在響應式作用內部跟蹤響應式依賴關係。如果在響應�
 詳見：
 - [指南 - 深入響應式系統](/guide/extras/reactivity-in-depth.html)
 
-## 響應性 (reactivity) {#reactivity}
+## reactivity {#reactivity}
 
-通常來說，*響應性*是指在數據變化時自動執行操作的能力。例如，當數據值變化時更新 DOM，或進行網絡請求。
+In general, *reactivity* refers to the ability to automatically perform actions in response to data changes. For example, updating the DOM or making a network request when a data value changes.
 
-在 Vue 上下文中，響應性用於描述一組功能。這些功能組合在一起形成一個*響應性系統*，並通過[響應性 API](#reactivity-api) 暴露出來。
+In a Vue context, reactivity is used to describe a collection of features. Those features combine to form a *reactivity system*, which is exposed via the [Reactivity API](#reactivity-api).
 
-實現一個響應性系統的方式有很多種。例如，可以通過代碼的靜態分析來確定其依賴關係。但是，Vue 沒有采用這種形式的響應性系統。
+There are various different ways that a reactivity system could be implemented. For example, it could be done by static analysis of code to determine its dependencies. However, Vue doesn't employ that form of reactivity system.
 
-取而代之的是，Vue 的響應性系統在運行時跟蹤屬性的訪問。它通過結合 Proxy 包裝器和 getter/setter 函數來實現。
+Instead, Vue's reactivity system tracks property access at runtime. It does this using both Proxy wrappers and [getter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description)/[setter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set#description) functions for properties.
 
-詳見：
-- [指南 - 響應式基礎](/guide/essentials/reactivity-fundamentals.html)
-- [指南 - 深入響應式系統](/guide/extras/reactivity-in-depth.html)
+For more details see:
+- [Guide - Reactivity Fundamentals](/guide/essentials/reactivity-fundamentals.html)
+- [Guide - Reactivity in Depth](/guide/extras/reactivity-in-depth.html)
 
 ## 響應性 API (Reactivity API) {#reactivity-api}
 

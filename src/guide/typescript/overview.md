@@ -24,9 +24,9 @@ Vue 本身就是用 TypeScript 編寫的，並對 TypeScript 提供了良好的�
 
 ### IDE 支持 {#ide-support}
 
-- 強烈推薦 [Visual Studio Code](https://code.visualstudio.com/) (VSCode)，因為它對 TypeScript 有著很好的內置支持。
+- 強烈推薦 [Visual Studio Code](https://code.visualstudio.com/) (VS Code)，因為它對 TypeScript 有著很好的內置支持。
 
-  - [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (之前是 Volar) 是官方的 VSCode 擴展，提供了 Vue 單文件組件中的 TypeScript 支持，還伴隨著一些其他非常棒的特性。
+  - [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (之前是 Volar) 是官方的 VS Code 擴展，提供了 Vue 單文件組件中的 TypeScript 支持，還伴隨著一些其他非常棒的特性。
 
     :::tip
     Vue - Official 擴展取代了我們之前為 Vue 2 提供的官方 VSCode 擴展 [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)。如果你之前已經安裝了 Vetur，請確保在 Vue 3 的項目中禁用它。

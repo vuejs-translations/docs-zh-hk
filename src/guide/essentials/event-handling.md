@@ -108,7 +108,7 @@ methods: {
 
 </div>
 
-方法事件處理器會自動接收原生 DOM 事件並觸發執行。在上面的例子中，我們能夠通過被觸發事件的 `event.target.tagName` 訪問到該 DOM 元素。
+方法事件處理器會自動接收原生 DOM 事件並觸發執行。在上面的例子中，我們能夠通過被觸發事件的 `event.target` 訪問到該 DOM 元素。
 
 <div class="composition-api">
 

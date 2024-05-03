@@ -14,7 +14,7 @@ outline: deep
 
 ```vue-html
 <!-- <MyButton> 的模板 -->
-<button>click me</button>
+<button>Click Me</button>
 ```
 
 一個父組件使用了這個組件，並且傳入了 `class`：
@@ -26,7 +26,7 @@ outline: deep
 最後渲染出的 DOM 結果是：
 
 ```html
-<button class="large">click me</button>
+<button class="large">Click Me</button>
 ```
 
 這裡，`<MyButton>` 並沒有將 `class` 聲明為一個它所接受的 prop，所以 `class` 被視作透傳屬性 `<MyButton>` 的根元素上。
@@ -37,13 +37,13 @@ outline: deep
 
 ```vue-html
 <!-- <MyButton> 的模板 -->
-<button class="btn">click me</button>
+<button class="btn">Click Me</button>
 ```
 
 則最後渲染出的 DOM 結果會變成：
 
 ```html
-<button class="btn large">click me</button>
+<button class="btn large">Click Me</button>
 ```
 
 ### `v-on` 監聽器繼承 {#v-on-listener-inheritance}
@@ -112,7 +112,7 @@ defineOptions({
 
 ```vue-html
 <div class="btn-wrapper">
-  <button class="btn">click me</button>
+  <button class="btn">Click Me</button>
 </div>
 ```
 
@@ -120,7 +120,7 @@ defineOptions({
 
 ```vue-html{2}
 <div class="btn-wrapper">
-  <button class="btn" v-bind="$attrs">click me</button>
+  <button class="btn" v-bind="$attrs">Click Me</button>
 </div>
 ```
 

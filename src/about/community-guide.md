@@ -35,7 +35,7 @@ Vue.js 的社區正在急速增長中，如果你正在閱讀本文，這說明�
 - [The Awesome Vue 頁面](https://github.com/vuejs/awesome-vue)：一覽其他大神發佈的優秀資源。
 - [Vue Telescope Explorer](https://vuetelescope.com/explore)：瀏覽用 Vue 創建的網站，並洞悉它們具體使用的框架和庫。
 - [Made with Vue.js](https://madewithvuejs.com/)：展示用 Vue 創建的項目和庫。
-- [“Show and Tell”子論壇](https://forum.vuejs.org/c/show-and-tell)：又一個好地方，可以看看他人藉 Vue 生態完成的作品，以及他人為不斷壯大的 Vue 生態的貢獻。
+- [“Show and Tell”子論壇](https://github.com/vuejs/core/discussions/categories/show-and-tell)：又一個好地方，可以看看他人藉 Vue 生態完成的作品，以及他人為不斷壯大的 Vue 生態的貢獻。
 
 ## 參與方法 {#what-you-can-do}
 
