@@ -53,30 +53,30 @@ shuffleMembers(membersPartnerData as Member[])
     </TeamHero>
 
     <TeamList :members="(membersCoreData as Member[])">
-      <template #title>Core Team Members</template>
+      <template #title>核心團隊成員</template>
       <template #lead>
-        Core team members are those who are actively involved in the
-        maintenance of one or more core projects. They have made
-        significant contributions to the Vue ecosystem, with a long term
-        commitment to the success of the project and its users.
+        核心團隊成員是指那些積極參與
+        一個或多個核心項目的維護的人。他們對 Vue 生態系統做出了
+        重大的貢獻，並對項目及其用戶的成功
+        做出了長期的承諾。
       </template>
     </TeamList>
 
     <TeamList :members="(membersEmeritiData as Member[])">
-      <template #title>Core Team Emeriti</template>
+      <template #title>名譽核心團隊</template>
       <template #lead>
-        Here we honor some no-longer-active core team members who have made
-        valuable contributions in the past.
+        我們在此向一些過去做出過重要貢獻的
+        但不再活躍的核心團隊成員致敬。
       </template>
     </TeamList>
 
     <TeamList :members="(membersPartnerData as Member[])">
-      <template #title>Community Partners</template>
+      <template #title>社區夥伴</template>
       <template #lead>
-        Some members of the Vue community have so enriched it, that they
-        deserve special mention. We've developed a more intimate
-        relationship with these key partners, often coordinating with them
-        on upcoming features and news.
+        一些 Vue 的社區成員讓這裡變得更加豐富，
+        有必要在此特別提及。我們與這些重要夥伴
+        建立了更緊密的關係，經常與他們為
+        即將到來的功能和新聞展開協調。
       </template>
     </TeamList>
   </div>

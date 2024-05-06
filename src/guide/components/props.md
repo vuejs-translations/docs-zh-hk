@@ -291,7 +291,7 @@ props.foo = 'bar'
 export default {
   props: ['foo'],
   created() {
-    // ❌ 警告！prop 是隻讀的！
+    // ❌ 警告！prop 是只讀的！
     this.foo = 'bar'
   }
 }

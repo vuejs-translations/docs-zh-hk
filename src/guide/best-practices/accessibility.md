@@ -509,7 +509,7 @@ W3C 的 WAI-ARIA 為如何構建動態內容和高階用戶界面控件提供了
 - _[運動能力](https://webaim.org/articles/motor/)_ - 可以為這些用戶提供一系列[運動障礙輔助技術](https://webaim.org/articles/motor/assistive)：比如語音識別軟件、眼球跟蹤、單刀式開關、超大軌跡球鼠標、自適應鍵盤等等。
 - _[認知能力](https://webaim.org/articles/cognitive/)_ - 可以為這些用戶提供補充媒體、更清晰和簡單、更結構化的內容。
 
-你可以查看以下來自 WebAim 的鏈接，更深入地瞭解這些用戶的需求：
+你可以查看以下來自 WebAim 的鏈接，更深入地了解這些用戶的需求：
 
 - [Web 無障礙願景：探索改變 & 人人受益](https://www.w3.org/WAI/perspective-videos/)
 - [Web 用戶的故事](https://www.w3.org/WAI/people-use-web/user-stories/)

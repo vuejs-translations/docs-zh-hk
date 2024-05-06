@@ -411,7 +411,7 @@ const openModal = () => {
 </script>
 ```
 
-如果組件的具體類型無法獲得，或者你並不關心組件的具體類型，那麼可以使用 `ComponentPublicInstance`。這隻會包含所有組件都共享的屬性，例如 `$el`。
+如果組件的具體類型無法獲得，或者你並不關心組件的具體類型，那麼可以使用 `ComponentPublicInstance`。這只會包含所有組件都共享的屬性，例如 `$el`。
 
 ```ts
 import { ref } from 'vue'
