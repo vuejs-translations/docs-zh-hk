@@ -47,7 +47,7 @@ const model = defineModel()
 </template>
 ```
 
-[Try it in the playground](https://play.vuejs.org/#eNqFUtFKwzAU/ZWYl06YLbK30Q10DFSYigq+5KW0t11mmoQknZPSf/cm3eqEsT0l555zuefmpKV3WsfbBuiUpjY3XDtiwTV6ziSvtTKOLNZcFKQ0qiZRnATkG6JB0BIDJen2kp5iMlfSOlLbisw8P4oeQAhFPpURxVV0zWSa9PNwEgIHtRaZA0SEpOvbeduG5q5LE0Sh2jvZ3tSqADFjFHlGSYJkmhz10zF1FseXvIo3VklcrfX9jOaq1lyAedGOoz1GpyQwnsvQ3fdTqDnTwPhQz9eQf52ob+zO1xh9NWDBbIHRgXOZqcD19PL9GXZ4H0h03whUnyHfwCrReI+97L6RBdo+0gW3j+H9uaw+7HLnQNrDUt6oV3ZBzyhmsjiz+p/dSTwJfUx2+IpD1ic+xz5enwQGXEDJJaw8Gl2I1upMzlc/hEvdOBR6SNKAjqP1J6P/o6XdL11L5h4=)
+[在演練場中嘗試一下](https://play.vuejs.org/#eNqFUtFKwzAU/ZWYl06YLbK30Q10DFSYigq+5KW0t11mmoQknZPSf/cm3eqEsT0l555zuefmpKV3WsfbBuiUpjY3XDtiwTV6ziSvtTKOLNZcFKQ0qiZRnATkG6JB0BIDJen2kp5iMlfSOlLbisw8P4oeQAhFPpURxVV0zWSa9PNwEgIHtRaZA0SEpOvbeduG5q5LE0Sh2jvZ3tSqADFjFHlGSYJkmhz10zF1FseXvIo3VklcrfX9jOaq1lyAedGOoz1GpyQwnsvQ3fdTqDnTwPhQz9eQf52ob+zO1xh9NWDBbIHRgXOZqcD19PL9GXZ4H0h03whUnyHfwCrReI+97L6RBdo+0gW3j+H9uaw+7HLnQNrDUt6oV3ZBzyhmsjiz+p/dSTwJfUx2+IpD1ic+xz5enwQGXEDJJaw8Gl2I1upMzlc/hEvdOBR6SNKAjqP1J6P/o6XdL11L5h4=)
 
 ### 底層機制 {#under-the-hood}
 
@@ -73,7 +73,7 @@ const emit = defineEmits(['update:modelValue'])
 </template>
 ```
 
-Then, `v-model="modelValue"` in the parent component will be compiled to:
+然後，父組件中的 `v-model="modelValue"` 將被編譯為：
 
 ```vue-html
 <!-- Parent.vue -->
@@ -559,7 +559,6 @@ const [lastName, lastNameModifiers] = defineModel('lastName')
 
 console.log(firstNameModifiers) // { capitalize: true }
 console.log(lastNameModifiers) // { uppercase: true }
-console.log(lastNameModifiers) // { uppercase: true }
 </script>
 ```
 
@@ -577,7 +576,6 @@ lastNameModifiers: { default: () => ({}) }
 defineEmits(['update:firstName', 'update:lastName'])
 
 console.log(props.firstNameModifiers) // { capitalize: true }
-console.log(props.lastNameModifiers) // { uppercase: true }
 console.log(props.lastNameModifiers) // { uppercase: true }
 </script>
 ```
@@ -602,7 +600,6 @@ export default {
   emits: ['update:firstName', 'update:lastName'],
   created() {
     console.log(this.firstNameModifiers) // { capitalize: true }
-    console.log(this.lastNameModifiers) // { uppercase: true }
     console.log(this.lastNameModifiers) // { uppercase: true }
   }
 }

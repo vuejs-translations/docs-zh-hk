@@ -385,17 +385,17 @@ defineProps({
     type: String,
     required: true
   },
-  // Required but nullable string
+  // 必傳，但可以是 null
   propD: {
     type: [String, null],
     required: true
   },
-  // Number with a default value
+  // 有默認值的數字
   propE: {
     type: Number,
     default: 100
   },
-  // Object with a default value
+  // 有默認值的對象
   propF: {
     type: Object,
     // 對象或數組的默認值
@@ -405,15 +405,15 @@ defineProps({
       return { message: 'hello' }
     }
   },
-  // Custom validator function
-  // full props passed as 2nd argument in 3.4+
+  // 自定義類型校驗函數
+  // 在 3.4+ 中完整的 props 作為第二個參數傳入
   propG: {
     validator(value, props) {
       // The value must match one of these strings
       return ['success', 'warning', 'danger'].includes(value)
     }
   },
-  // Function with a default value
+  // 有默認值的函數
   propH: {
     type: Function,
     // 不像對象或數組的默認，這不是一個
@@ -563,9 +563,9 @@ export default {
 
 Vue 會通過 `instanceof Person` 來校驗 `author` prop 的值是否是 `Person` 類的一個實例。
 
-### Nullable Type {#nullable-type}
+### 可空類型 {#nullable-type}
 
-If the type is required but nullable, you can use the array syntax that includes `null`:
+如果類型為必填但可為 null，則可以使用包含 `null` 的數組語法：
 
 <div class="composition-api">
 
@@ -594,7 +594,7 @@ export default {
 
 </div>
 
-Note that if `type` is just `null` without using the array syntax, it will allow any type.
+請注意，如果 `type` 只是 `null` 而不使用數組語法，則它將允許任何類型。
 
 ## Boolean 類型轉換 {#boolean-casting}
 
@@ -668,14 +668,14 @@ export default {
   }
 }
   
-// disabled will be casted to true
+// disabled 將被轉換為 true
 export default {
   props: {
     disabled: [Boolean, String]
   }
 }
   
-// disabled will be casted to true
+// disabled 將被轉換為 true
 export default {
   props: {
     disabled: [Number, Boolean]

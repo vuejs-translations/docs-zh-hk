@@ -109,7 +109,7 @@ watch(question, async (newQuestion, oldQuestion) => {
 
 ### 偵聽數據源類型 {#watch-source-types}
 
-`watch`'s first argument can be different types of reactive "sources": it can be a ref (including computed refs), a reactive object, a [getter function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description), or an array of multiple sources:
+`watch` 的第一個參數可以是不同類型的響應式 “源”：可以是 ref（包括計算 ref）、反應式對象、[getter 函數](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description)或多個源的數組：
 
 ```js
 const x = ref(0)

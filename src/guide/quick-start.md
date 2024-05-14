@@ -20,8 +20,8 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 
 :::tip 前提條件
 
-- Familiarity with the command line
-- Install [Node.js](https://nodejs.org/) version 18.3 or higher
+- 熟悉命令行
+- 已安裝 18.3 或更高版本的 [Node.js](https://nodejs.org/)
   :::
 
 在本節中，我們將介紹如何在本地搭建 Vue [單頁應用](/guide/extras/ways-of-using-vue#single-page-application-spa)。創建的項目將使用基於 [Vite](https://vitejs.dev) 的構建設置，並允許我們使用 Vue 的[單文件組件](/guide/scaling-up/sfc) (SFC)。

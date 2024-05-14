@@ -89,7 +89,7 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 - 推薦使用的 IDE 是 [VS Code](https://code.visualstudio.com/)，配合 [Vue - Official 擴展](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (之前是 Volar)。該插件提供了語法高亮、TypeScript 支持，以及模板內表達式與組件 props 的智能提示。
 
   :::tip
-  Vue - Official replaces [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur), our previous official VS Code extension for Vue 2. If you have Vetur currently installed, make sure to disable it in Vue 3 projects.
+  Vue - Official 取代了我們之前為 Vue 2 提供的官方 VSCode 擴展 [Vetur](https://marketplace.visualstudio.com/items?itemName=octref.vetur)。如果你之前已經安裝了 Vetur，請確保在 Vue 3 的項目中禁用它。
   :::
 
 - [WebStorm](https://www.jetbrains.com/webstorm/) 同樣也為 Vue 的單文件組件提供了很好的內置支持。
