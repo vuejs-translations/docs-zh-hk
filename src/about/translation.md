@@ -8,7 +8,7 @@ aside: deep
 
 ## 翻譯須知
 
-請暫時移步至簡體中文官方倉庫的[維基頁面](https://github.com/vuejs-translations/docs-zh-cn/wiki/%E7%BF%BB%E8%AF%91%E9%A1%BB%E7%9F%A5)查閱。
+請移步至繁體中文官方倉庫的[維基頁面](https://github.com/vuejs-translations/docs-zh-hk/wiki/%E7%BF%BB%E8%AF%91%E9%A1%BB%E7%9F%A5)查閱。
 
 ## 協作指南
 
@@ -193,45 +193,45 @@ Vitepress 和 Vuepress 中對以上兩種寫法的渲染視覺效果為：
 
 ## 術語翻譯參考
 
-| 英文 | 建議翻譯 | 備註 |
-| --- | --- | --- |
-| property | 屬性 | 組件的屬性（數據、計算屬性等） |
-| attribute | _不翻譯_ | 特指 HTML 元素上的屬性 |
-| getter | _一般不翻譯_ | 計算屬性中作計算函數 |
-| setter | _一般不翻譯_ | 計算屬性中作設置函數 |
-| prop | _不翻譯_ | |
-| ref | _不翻譯_ | |
-| feature/functionality | 功能 | |
-| directive | 指令 | |
-| mixin | 混入 | |
-| listen/listener | 監聽/監聽器 | |
-| observe/observer | 偵聽/偵聽器 | |
-| watch/watcher | 偵聽/偵聽器 | |
-| normalize (HTML code, ...) | 規範化 | |
-| standardize | 標準化 | |
-| fire/trigger (事件) | 觸發 | |
-| emit (某個值或事件) | 拋出 | |
-| queue (v.) | 把……加入隊列 | |
-| workaround (n.) | 變通辦法 | |
-| workaround (v.) | 繞過 | |
-| convention | 約定 | |
-| parse | 解析 | |
-| stringify | 字符串化 | |
-| side effect | 副作用 | |
-| declarative | 聲明式 | |
-| imperative | 命令式 | |
-| handler | 處理函數 | |
-| you | 你 (而不用 “您”) | |
-| computed | 計算屬性 | |
-| computed property | 計算屬性 | |
-| guard | 守衛 | |
-| hook | 鉤子 | |
-| selector | 選擇器 | |
-| truthy | 真值 | 需加 MDN 的解釋作為譯註 |
-| falsy | 假值 | 需加 MDN 的解釋作為譯註 |
-| mutate/mutation | 變更 | |
-| immutable | 不可變 | |
-| mutable | 可變 | |
+| 英文                       | 建議翻譯         | 備註                           |
+| -------------------------- | ---------------- | ------------------------------ |
+| property                   | 屬性             | 組件的屬性（數據、計算屬性等） |
+| attribute                  | _不翻譯_         | 特指 HTML 元素上的屬性         |
+| getter                     | _一般不翻譯_     | 計算屬性中作計算函數           |
+| setter                     | _一般不翻譯_     | 計算屬性中作設置函數           |
+| prop                       | _不翻譯_         |                                |
+| ref                        | _不翻譯_         |                                |
+| feature/functionality      | 功能             |                                |
+| directive                  | 指令             |                                |
+| mixin                      | 混入             |                                |
+| listen/listener            | 監聽/監聽器      |                                |
+| observe/observer           | 偵聽/偵聽器      |                                |
+| watch/watcher              | 偵聽/偵聽器      |                                |
+| normalize (HTML code, ...) | 規範化           |                                |
+| standardize                | 標準化           |                                |
+| fire/trigger (事件)        | 觸發             |                                |
+| emit (某個值或事件)        | 拋出             |                                |
+| queue (v.)                 | 把……加入隊列     |                                |
+| workaround (n.)            | 變通辦法         |                                |
+| workaround (v.)            | 繞過             |                                |
+| convention                 | 約定             |                                |
+| parse                      | 解析             |                                |
+| stringify                  | 字符串化         |                                |
+| side effect                | 副作用           |                                |
+| declarative                | 聲明式           |                                |
+| imperative                 | 命令式           |                                |
+| handler                    | 處理函數         |                                |
+| you                        | 你 (而不用 “您”) |                                |
+| computed                   | 計算屬性         |                                |
+| computed property          | 計算屬性         |                                |
+| guard                      | 守衛             |                                |
+| hook                       | 鉤子             |                                |
+| selector                   | 選擇器           |                                |
+| truthy                     | 真值             | 需加 MDN 的解釋作為譯註        |
+| falsy                      | 假值             | 需加 MDN 的解釋作為譯註        |
+| mutate/mutation            | 變更             |                                |
+| immutable                  | 不可變           |                                |
+| mutable                    | 可變             |                                |
 
 - MDN - `truthy` → https://developer.mozilla.org/en-US/docs/Glossary/Truthy
 - MDN - `falsy` → https://developer.mozilla.org/en-US/docs/Glossary/Falsy

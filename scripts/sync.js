@@ -67,7 +67,7 @@ ${body}`)
 
     if (options.open) {
       open(
-        `https://github.com/vuejs-translations/docs-zh-cn/compare/main...sync?quick_pull=1&title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}&labels=${encodeURIComponent('从英文版同步,请使用 merge commit 合并')}`
+        `https://github.com/vuejs-translations/docs-zh-hk/compare/main...sync?quick_pull=1&title=${encodeURIComponent(title)}&body=${encodeURIComponent(body)}&labels=${encodeURIComponent('从英文版同步,请使用 merge commit 合并')}`
       )
     }
   })

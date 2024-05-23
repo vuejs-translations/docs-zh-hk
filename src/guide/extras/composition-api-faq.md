@@ -76,7 +76,7 @@ onMounted(() => {
 
 你可以看到，處理相同邏輯關注點的代碼被強制拆分在了不同的選項中，位於文件的不同部分。在一個幾百行的大組件中，要讀懂代碼中的一個邏輯關注點，需要在文件中反覆上下滾動，這並不理想。另外，如果我們想要將一個邏輯關注點抽取重構到一個可複用的工具函數中，需要從文件的多個不同部分找到所需的正確片段。
 
-而如果[用組合式 API 重構](https://github.com/vuejs-translations/docs-zh-cn/blob/main/assets/FileExplorer.vue)這個組件，將會變成下面右邊這樣：
+而如果[用組合式 API 重構](https://github.com/vuejs-translations/docs-zh-hk/blob/main/assets/FileExplorer.vue)這個組件，將會變成下面右邊這樣：
 
 ![重構後的文件夾組件](https://user-images.githubusercontent.com/499550/62783026-810e6180-ba89-11e9-8774-e7771c8095d6.png)
 
