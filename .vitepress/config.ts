@@ -1,9 +1,9 @@
-import fs from 'fs'
-import path from 'path'
-import { defineConfigWithTheme } from 'vitepress'
 import type { Config as ThemeConfig } from '@vue/theme'
 import baseConfig from '@vue/theme/config'
+import { defineConfigWithTheme } from 'vitepress'
+import fs from 'fs'
 import { headerPlugin } from './headerMdPlugin'
+import path from 'path'
 // import { textAdPlugin } from './textAdMdPlugin'
 
 const nav: ThemeConfig['nav'] = [
@@ -664,6 +664,11 @@ export default defineConfigWithTheme<ThemeConfig>({
         repo: 'https://github.com/vuejs/docs'
       },
       {
+        link: 'https://cn.vuejs.org',
+        text: '简体中文',
+        repo: 'https://github.com/vuejs-translations/docs-zh-cn'
+      },
+      {
         link: 'https://ja.vuejs.org',
         text: '日本語',
         repo: 'https://github.com/vuejs-translations/docs-ja'
@@ -771,7 +776,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     footer: {
       license: {
         text: '版權聲明',
-        link: 'https://github.com/vuejs-translations/docs-zh-cn#%E7%89%88%E6%9D%83%E5%A3%B0%E6%98%8E'
+        link: 'https://github.com/vuejs-translations/docs-zh-hk#%E7%89%88%E6%9D%83%E5%A3%B0%E6%98%8E'
       },
       copyright:
         '本中文文檔採用 知識共享署名-非商業性使用-相同方式共享 4.0 國際許可協議  (CC BY-NC-SA 4.0) 進行許可。'
