@@ -265,7 +265,7 @@ Vue 只能在響應式作用內部跟蹤響應式依賴關係。如果在響應�
 詳見：
 - [指南 - 深入響應式系統](/guide/extras/reactivity-in-depth.html)
 
-## reactivity {#reactivity}
+<!-- TODO: translation -->## reactivity {#reactivity}
 
 In general, *reactivity* refers to the ability to automatically perform actions in response to data changes. For example, updating the DOM or making a network request when a data value changes.
 

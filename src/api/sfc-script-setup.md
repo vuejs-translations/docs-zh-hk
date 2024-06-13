@@ -432,7 +432,7 @@ const post = await fetch(`/api/post/1`).then((r) => r.json())
 
 另外，await 的表达式会自动编译成在 `await` 之后保留当前组件实例上下文的格式。
 
-:::warning Note
+<!-- TODO: translation -->:::warning Note
 `async setup()` must be used in combination with [`Suspense`](/guide/built-ins/suspense.html), which is currently still an experimental feature. We plan to finalize and document it in a future release - but if you are curious now, you can refer to its [tests](https://github.com/vuejs/core/blob/main/packages/runtime-core/__tests__/components/Suspense.spec.ts) to see how it works.
 :::
 

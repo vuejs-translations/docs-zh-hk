@@ -36,7 +36,7 @@ shuffleMembers(membersPartnerData as Member[])
 <template>
   <div class="TeamPage">
     <TeamHero>
-      <template #title>Meet the Team</template>
+      <!-- TODO: translation --><template #title>Meet the Team</template>
       <template #lead>
         The development of Vue and its ecosystem is guided by an
         international team, some of whom have chosen to be

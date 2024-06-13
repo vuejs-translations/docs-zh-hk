@@ -133,7 +133,7 @@ const posts = await res.json()
 
 Vue Router 使用動態導入對[懶加載組件](https://router.vuejs.org/zh/guide/advanced/lazy-loading.html)進行了內置支持。這些與異步組件不同，目前他們不會觸發 `<Suspense>`。但是，它們仍然可以有異步組件作為後代，這些組件可以照常觸發 `<Suspense>`。
 
-## Nested Suspense {#nested-suspense}
+<!-- TODO: translation -->## Nested Suspense {#nested-suspense}
 
 When we have multiple async components (common for nested or layout-based routes) like this:
 

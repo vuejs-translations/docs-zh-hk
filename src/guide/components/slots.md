@@ -294,7 +294,7 @@ function BaseLayout(slots) {
 }
 ```
 
-## Conditional Slots {#conditional-slots}
+<!-- TODO: translation -->## Conditional Slots {#conditional-slots}
 
 Sometimes you want to render something based on whether or not a slot is present. 
 
