@@ -6,8 +6,9 @@ aside: false
 
 ## 多語言版本 {#available-languages}
 
-- [簡體中文](https://cn.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-zh-cn)]
+- [繁體中文](https://hk.vuejs.org) [[源碼](https://github.com/vuejs-translations/docs-zh-hk)]
 - [English / 英語](https://vuejs.org/) [[源碼](https://github.com/vuejs/docs)]
+- [簡體中文](https://cn.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-zh-cn)]
 - [日本語 / 日語](https://ja.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-ja)]
 - [Українська / 烏克蘭語](https://ua.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-uk)]
 - [Français / 法語](https://fr.vuejs.org) [[源碼](https://github.com/vuejs-translations/docs-fr)]
