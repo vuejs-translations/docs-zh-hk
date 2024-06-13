@@ -445,17 +445,17 @@ export default {
       type: String,
       required: true
     },
-    // Required but nullable string
+    // 必傳，但可以是 null
     propD: {
       type: [String, null],
       required: true
     },
-    // Number with a default value
+    // 有默認值的 Number
     propE: {
       type: Number,
       default: 100
     },
-    // Object with a default value
+    // 有默認值的 Object
     propF: {
       type: Object,
       // 對象或者數組應當用工廠函數返回。
@@ -465,15 +465,15 @@ export default {
         return { message: 'hello' }
       }
     },
-    // Custom validator function
-    // full props passed as 2nd argument in 3.4+
+    // 自定義類型校驗函數
+    // 在 3.4+ 中完整的 props 作為第二個參數傳入
     propG: {
       validator(value, props) {
-        // The value must match one of these strings
+        // 值必須匹配以下字符串之一
         return ['success', 'warning', 'danger'].includes(value)
       }
     },
-    // Function with a default value
+    // 有默認值的 Function
     propH: {
       type: Function,
       // 不像對象或數組的默認，這不是一個
