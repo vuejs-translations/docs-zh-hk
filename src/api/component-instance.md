@@ -216,10 +216,10 @@
 
   第二個參數是回調函數。回調函數接收被監視源的新值和舊值。
 
-  - **`immediate`**: 在創建監視器時立即觸發回調。在第一次調用時，舊值將為 `undefined`。
-  - **`deep`**: 如果源是對象，則強制對其進行深度遍歷，以便在深度突變時觸發回調。請參閱[深度觀察者](/guide/essentials/watchers#deep-watchers)。
-  - **`flush`**: 調整回調的刷新時序。請參閱 [Callback Flush Timing](/guide/essentials/watchers#callback-flush-timing) 和 [`watchEffect()`](/api/reactivity-core#watcheffect)。
-  - **`onTrack / onTrigger`**: 調試觀察者的依賴關係。請參閱[監視器調試](/guide/extras/reactivity-in-depth#watcher-debugging)。
+  - **`immediate`**：在創建監視器時立即觸發回調。在第一次調用時，舊值將為 `undefined`。
+  - **`deep`**：如果源是對象，則強制對其進行深度遍歷，以便在深度突變時觸發回調。請參閱[深度觀察者](/guide/essentials/watchers#deep-watchers)。
+  - **`flush`**：調整回調的刷新時序。請參閱 [Callback Flush Timing](/guide/essentials/watchers#callback-flush-timing) 和 [`watchEffect()`](/api/reactivity-core#watcheffect)。
+  - **`onTrack / onTrigger`**：調試觀察者的依賴關係。請參閱[監視器調試](/guide/extras/reactivity-in-depth#watcher-debugging)。
 
 - **示例**
 
