@@ -53,7 +53,7 @@ Vue 3 是性能最強的主流前端框架之一，可以輕鬆處理大多數 w
 
 當你通過構建工具使用時，Vue 的許多 API 都是可以[“tree-shake”](https://developer.mozilla.org/en-US/docs/Glossary/Tree_shaking)的。例如，如果你不使用內置的 `<Transition>` 組件，它就不會被包含在最終的生產環境包裡。
 
-對於一個 Vue 的最少 API 使用的 hello world 應用來說，配合最小化和 brotli 壓縮，其基線大小隻有 **16kb** 左右。但實際的應用大小取決於你使用了多少框架的可選特性。在極端情況下，如果一個應用使用了 Vue 提供的每一個特性，那麼總的運行時大小大約為 **27kb**。
+對於一個 Vue 的最少 API 使用的 hello world 應用來說，配合最小化和 brotli 壓縮，其基線大小只有 **16kb** 左右。但實際的應用大小取決於你使用了多少框架的可選特性。在極端情況下，如果一個應用使用了 Vue 提供的每一個特性，那麼總的運行時大小大約為 **27kb**。
 
 如果不通過構建工具使用 Vue，我們不僅失去了 tree-shaking，而且還必須將模板編譯器加載到瀏覽器。這就使包體積增大到了 **41kb** 左右。因此，如果你為了漸進式增強在沒有構建步驟的情況下使用 Vue，則可以考慮使用 [petite-vue](https://github.com/vuejs/petite-vue) (僅 **6kb**) 來代替。
 

@@ -155,8 +155,6 @@ watch(
 </form>
 ```
 
-請注意這裡我們是如何在表單元素中引入 `autocomplete='on'` 的，它將應用於表單中的所有 input 框。你也可以為每個 input 框都設置不同的 [autocomplete attribute 的值](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/autocomplete)。
-
 ### 標籤 {#labels}
 
 提供標籤來描述所有表單控件的用途；使 `for` 和 `id` 鏈接起來：
@@ -166,9 +164,9 @@ watch(
 <input type="text" name="name" id="name" v-model="name" />
 ```
 
-如果你在 Chrome 開發工具中檢查這個元素，並打開 Elements 選項卡中的 Accessibility 選項卡，你將看到輸入是如何從標籤中獲取其名稱的：
+If you inspect this element in your Chrome DevTools and open the Accessibility tab inside the Elements tab, you will see how the input gets its name from the label:
 
-![Chrome 開發者工具正在通過標籤展示無障礙訪問的 input 框的名字](./images/AccessibleLabelChromeDevTools.png)
+![Chrome Developer Tools showing input accessible name from label](./images/AccessibleLabelChromeDevTools.png)
 
 :::warning 警告：
 你可能還見過這樣的包裝 input 框的標籤：
@@ -198,8 +196,6 @@ watch(
 />
 ```
 
-在 Chrome DevTools 中審查此元素，查看無障礙名稱是如何更改的：
-
 ![Chrome 開發者工具正在通過 aria-label 展示無障礙訪問的 input 框名字](./images/AccessibleARIAlabelDevTools.png)
 
 #### `aria-labelledby` {#aria-labelledby}
@@ -228,7 +224,7 @@ watch(
 </form>
 ```
 
-![Chrome 開發者工具通過 aria-labelledby 展示 input 的無障礙訪問名稱](./images/AccessibleARIAlabelledbyDevTools.png)
+![Chrome Developer Tools showing input accessible name from aria-labelledby](./images/AccessibleARIAlabelledbyDevTools.png)
 
 #### `aria-describedby` {#aria-describedby}
 
@@ -257,8 +253,6 @@ watch(
   <button type="submit">Submit</button>
 </form>
 ```
-
-你可以通過使用 Chrome 開發工具來查看說明：
 
 ![Chrome 開發者工具正在根據 aria-labelledby 和 aria-describedby 展示 input 的無障礙訪問名和無障礙訪問描述信息](./images/AccessibleARIAdescribedby.png)
 
@@ -515,7 +509,7 @@ W3C 的 WAI-ARIA 為如何構建動態內容和高階用戶界面控件提供了
 - _[運動能力](https://webaim.org/articles/motor/)_ - 可以為這些用戶提供一系列[運動障礙輔助技術](https://webaim.org/articles/motor/assistive)：比如語音識別軟件、眼球跟蹤、單刀式開關、超大軌跡球鼠標、自適應鍵盤等等。
 - _[認知能力](https://webaim.org/articles/cognitive/)_ - 可以為這些用戶提供補充媒體、更清晰和簡單、更結構化的內容。
 
-你可以查看以下來自 WebAim 的鏈接，更深入地瞭解這些用戶的需求：
+你可以查看以下來自 WebAim 的鏈接，更深入地了解這些用戶的需求：
 
 - [Web 無障礙願景：探索改變 & 人人受益](https://www.w3.org/WAI/perspective-videos/)
 - [Web 用戶的故事](https://www.w3.org/WAI/people-use-web/user-stories/)

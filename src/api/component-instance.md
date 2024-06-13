@@ -1,16 +1,16 @@
-# 组件实例 {#component-instance}
+# 組件實例 {#component-instance}
 
 :::info
-本页文档描述了组件公共实例 (即 `this`) 上暴露的内置属性和方法，
+本頁文檔描述了組件公共實例 (即 `this`) 上暴露的內置屬性和方法，
 
-本页罗列的所有属性，除了 `$data` 下的嵌套属性之外，都是只读的。
+本頁羅列的所有屬性，除 `$data` 下的嵌套屬性之外，都是只讀的。
 :::
 
 ## $data {#data}
 
-从 [`data`](./options-state#data) 选项函数中返回的对象，会被组件赋为响应式。组件实例将会代理对其数据对象的属性访问。
+從 [`data`](./options-state#data) 選項函數中返回的對象，會被組件賦為響應式。組件實例將會代理對其數據對象的屬性訪問。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentPublicInstance {
@@ -20,9 +20,9 @@
 
 ## $props {#props}
 
-表示组件当前已解析的 props 对象。
+表示組件當前已解析的 props 對象。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentPublicInstance {
@@ -30,15 +30,15 @@
   }
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  这里只包含通过 [`props`](./options-state#props) 选项声明的 props。组件实例将会代理对其 props 对象上属性的访问。
+  這裡只包含通過 [`props`](./options-state#props) 選項聲明的 props。組件實例將會代理對其 props 對象上屬性的訪問。
 
 ## $el {#el}
 
-该组件实例管理的 DOM 根节点。
+該組件實例管理的 DOM 根節點。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentPublicInstance {
@@ -46,23 +46,23 @@
   }
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  `$el` 直到组件[挂载完成 (mounted)](./options-lifecycle#mounted) 之前都会是 `undefined`。
+  `$el` 直到組件[掛載完成 (mounted)](./options-lifecycle#mounted) 之前都會是 `undefined`。
 
-  - 对于单一根元素的组件，`$el` 将会指向该根元素。
-  - 对于以文本节点为根的组件，`$el` 将会指向该文本节点。
-  - 对于以多个元素为根的组件，`$el` 将是一个仅作占位符的 DOM 节点，Vue 使用它来跟踪组件在 DOM 中的位置 (文本节点或 SSR 激活模式下的注释节点)。
+  - 對於單一根元素的組件，`$el` 將會指向該根元素。
+  - 對於以文本節點為根的組件，`$el` 將會指向該文本節點。
+  - 對於以多個元素為根的組件，`$el` 將是一個僅作佔位符的 DOM 節點，Vue 使用它來跟蹤組件在 DOM 中的位置 (文本節點或 SSR 激活模式下的註釋節點)。
 
   :::tip
-  为保持一致性，我们推荐使用[模板引用](/guide/essentials/template-refs)来直接访问元素而不是依赖 `$el`。
+  為保持一致性，我們推薦使用[模板引用](/guide/essentials/template-refs)來直接訪問元素而不是依賴 `$el`。
   :::
 
 ## $options {#options}
 
-已解析的用于实例化当前组件的组件选项。
+已解析的用於實例化當前組件的組件選項。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentPublicInstance {
@@ -70,15 +70,15 @@
   }
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  这个 `$options` 对象暴露了当前组件的已解析选项，并且会是以下几种可能来源的合并结果：
+  這個 `$options` 對象暴露了當前組件的已解析選項，並且會是以下幾種可能來源的合併結果：
 
   - 全局 mixin
-  - 组件 `extends` 的基组件
-  - 组件级 mixin
+  - 組件 `extends` 的基組件
+  - 組件級 mixin
 
-  它通常用于支持自定义组件选项：
+  它通常用於支持自定義組件選項：
 
   ```js
   const app = createApp({
@@ -89,13 +89,13 @@
   })
   ```
 
-- **参考** [`app.config.optionMergeStrategies`](/api/application#app-config-optionmergestrategies)
+- **參考** [`app.config.optionMergeStrategies`](/api/application#app-config-optionmergestrategies)
 
 ## $parent {#parent}
 
-当前组件可能存在的父组件实例，如果当前组件是顶层组件，则为 `null`。
+當前組件可能存在的父組件實例，如果當前組件是頂層組件，則為 `null`。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentPublicInstance {
@@ -105,9 +105,9 @@
 
 ## $root {#root}
 
-当前组件树的根组件实例。如果当前实例没有父组件，那么这个值就是它自己。
+當前組件樹的根組件實例。如果當前實例沒有父組件，那麼這個值就是它自己。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentPublicInstance {
@@ -117,9 +117,9 @@
 
 ## $slots {#slots}
 
-一个表示父组件所传入[插槽](/guide/components/slots)的对象。
+一個表示父組件所傳入[插槽](/guide/components/slots)的對象。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentPublicInstance {
@@ -129,21 +129,21 @@
   type Slot = (...args: any[]) => VNode[]
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  通常用于手写[渲染函数](/guide/extras/render-function)，但也可用于检测是否存在插槽。
+  通常用於手寫[渲染函數](/guide/extras/render-function)，但也可用於檢測是否存在插槽。
 
-  每一个插槽都在 `this.$slots` 上暴露为一个函数，返回一个 vnode 数组，同时 key 名对应着插槽名。默认插槽暴露为 `this.$slots.default`。
+  每一個插槽都在 `this.$slots` 上暴露為一個函數，返回一個 vnode 數組，同時 key 名對應著插槽名。默認插槽暴露為 `this.$slots.default`。
 
-  如果插槽是一个[作用域插槽](/guide/components/slots#scoped-slots)，传递给该插槽函数的参数可以作为插槽的 prop 提供给插槽。
+  如果插槽是一個[作用域插槽](/guide/components/slots#scoped-slots)，傳遞給該插槽函數的參數可以作為插槽的 prop 提供給插槽。
 
-- **参考**[渲染函数 - 渲染插槽](/guide/extras/render-function#rendering-slots)
+- **參考**[渲染函數 - 渲染插槽](/guide/extras/render-function#rendering-slots)
 
 ## $refs {#refs}
 
-一个包含 DOM 元素和组件实例的对象，通过[模板引用](/guide/essentials/template-refs)注册。
+一個包含 DOM 元素和組件實例的對象，通過[模板引用](/guide/essentials/template-refs)註冊。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentPublicInstance {
@@ -151,16 +151,16 @@
   }
   ```
 
-- **参考**
+- **參考**
 
   - [模板引用](/guide/essentials/template-refs)
   - [特殊 Attribute - ref](./built-in-special-attributes.md#ref)
 
 ## $attrs {#attrs}
 
-一个包含了组件所有透传 attributes 的对象。
+一個包含了組件所有透傳屬性的對象。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentPublicInstance {
@@ -168,21 +168,21 @@
   }
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  [透传 Attributes](/guide/components/attrs) 是指由父组件传入，且没有被子组件声明为 props 或是组件自定义事件的 attributes 和事件处理函数。
+  [透傳 Attributes](/guide/components/attrs) 是指由父組件傳入，且沒有被子組件聲明為 props 或是組件自定義事件的 attributes 和事件處理函數。
 
-  默认情况下，若是单一根节点组件，`$attrs` 中的所有属性都是直接自动继承自组件的根元素。而多根节点组件则不会如此，同时你也可以通过配置 [`inheritAttrs`](./options-misc#inheritattrs) 选项来显式地关闭该行为。
+  默認情況下，若是單一根節點組件，`$attrs` 中的所有屬性都是直接自動繼承自組件的根元素。而多根節點組件則不會如此，同時你也可以通過配置 [`inheritAttrs`](./options-misc#inheritattrs) 選項來顯式地關閉該行為。
 
-- **参考**
+- **參考**
 
-  - [透传 Attribute](/guide/components/attrs)
+  - [透傳 Attribute](/guide/components/attrs)
 
 ## $watch() {#watch}
 
-用于命令式地创建侦听器的 API。
+用於命令式地創建偵聽器的 API。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentPublicInstance {
@@ -210,62 +210,62 @@
   type StopHandle = () => void
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  第一个参数是侦听来源。可以是一个组件的属性名的字符串，一个简单的由点分隔的路径字符串，或是一个 getter 函数。
+  第一個參數是監視源。它可以是一個組件屬性名稱字符串、一個簡單的以點分隔的路徑字符串或一個 [getter 函數](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description)。
 
-  第二个参数是回调函数。它接收的参数分别是侦听来源的新值、旧值。
+  第二個參數是回調函數。回調函數接收被監視源的新值和舊值。
 
-  - **`immediate`**：指定在侦听器创建时是否立即触发回调。在第一次调用时旧值为 `undefined`。
-  - **`deep`**：指定在侦听来源是一个对象时，是否强制深度遍历，这样回调函数就会在深层级发生变更时被触发。详见[深层侦听器](/guide/essentials/watchers#deep-watchers)。
-  - **`flush`**：指定回调函数的刷新时机。详见[回调刷新时机](/guide/essentials/watchers#callback-flush-timing)及 [`watchEffect()`](/api/reactivity-core#watcheffect)。
-  - **`onTrack / onTrigger`**：调试侦听器的依赖，详见[侦听器调试](/guide/extras/reactivity-in-depth#watcher-debugging)。
+  - **`immediate`**：在創建監視器時立即觸發回調。在第一次調用時，舊值將為 `undefined`。
+  - **`deep`**：如果源是對象，則強制對其進行深度遍歷，以便在深度突變時觸發回調。請參閱[深度觀察者](/guide/essentials/watchers#deep-watchers)。
+  - **`flush`**：調整回調的刷新時序。請參閱 [Callback Flush Timing](/guide/essentials/watchers#callback-flush-timing) 和 [`watchEffect()`](/api/reactivity-core#watcheffect)。
+  - **`onTrack / onTrigger`**：調試觀察者的依賴關係。請參閱[監視器調試](/guide/extras/reactivity-in-depth#watcher-debugging)。
 
 - **示例**
 
-  侦听一个属性名：
+  偵聽一個屬性名：
 
   ```js
   this.$watch('a', (newVal, oldVal) => {})
   ```
 
-  侦听一个由 `.` 分隔的路径：
+  偵聽一個由 `.` 分隔的路徑：
 
   ```js
   this.$watch('a.b', (newVal, oldVal) => {})
   ```
 
-  对更复杂表达式使用 getter 函数：
+  對更復雜表達式使用 getter 函數：
 
   ```js
   this.$watch(
-    // 每一次这个 `this.a + this.b` 表达式生成一个
-    // 不同的结果，处理函数都会被调用
-    // 这就好像我们在侦听一个计算属性
-    // 而不定义计算属性本身。
+    // 每一次這個 `this.a + this.b` 表達式生成一個
+    // 不同的結果，處理函數都會被調用
+    // 這就好像我們在偵聽一個計算屬性
+    // 而不定義計算屬性本身。
     () => this.a + this.b,
     (newVal, oldVal) => {}
   )
   ```
 
-  停止该侦听器：
+  停止該偵聽器：
 
   ```js
   const unwatch = this.$watch('a', cb)
 
-  // 之后……
+  // 之後……
   unwatch()
   ```
 
-- **参考**
-  - [选项 - `watch`](/api/options-state#watch)
-  - [指南 - 侦听器](/guide/essentials/watchers)
+- **參考**
+  - [選項 - `watch`](/api/options-state#watch)
+  - [指南 - 偵聽器](/guide/essentials/watchers)
 
 ## $emit() {#emit}
 
-在当前组件触发一个自定义事件。任何额外的参数都会传递给事件监听器的回调函数。
+在當前組件觸發一個自定義事件。任何額外的參數都會傳遞給事件監聽器的回調函數。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentPublicInstance {
@@ -278,24 +278,24 @@
   ```js
   export default {
     created() {
-      // 仅触发事件
+      // 僅觸發事件
       this.$emit('foo')
-      // 带有额外的参数
+      // 帶有額外的參數
       this.$emit('bar', 1, 2, 3)
     }
   }
   ```
 
-- **参考**
+- **參考**
 
-  - [组件 - 事件](/guide/components/events)
-  - [`emits` 选项](./options-state#emits)
+  - [組件 - 事件](/guide/components/events)
+  - [`emits` 選項](./options-state#emits)
 
 ## $forceUpdate() {#forceupdate}
 
-强制该组件重新渲染。
+強制該組件重新渲染。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentPublicInstance {
@@ -303,15 +303,15 @@
   }
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  鉴于 Vue 的全自动响应性系统，这个功能应该很少会被用到。唯一可能需要它的情况是，你使用高阶响应式 API 显式创建了一个非响应式的组件状态。
+  鑑於 Vue 的全自動響應性系統，這個功能應該很少會被用到。唯一可能需要它的情況是，你使用高階響應式 API 顯式創建了一個非響應式的組件狀態。
 
 ## $nextTick() {#nexttick}
 
-绑定在实例上的 [`nextTick()`](./general#nexttick) 函数。
+綁定在實例上的 [`nextTick()`](./general#nexttick) 函數。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentPublicInstance {
@@ -319,8 +319,8 @@
   }
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  和全局版本的 `nextTick()` 的唯一区别就是组件传递给 `this.$nextTick()` 的回调函数会带上 `this` 上下文，其绑定了当前组件实例。
+  和全局版本的 `nextTick()` 的唯一區別就是組件傳遞給 `this.$nextTick()` 的回調函數會帶上 `this` 上下文，其綁定了當前組件實例。
 
-- **参考** [`nextTick()`](./general#nexttick)
+- **參考** [`nextTick()`](./general#nexttick)

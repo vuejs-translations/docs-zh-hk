@@ -291,7 +291,7 @@ props.foo = 'bar'
 export default {
   props: ['foo'],
   created() {
-    // ❌ 警告！prop 是隻讀的！
+    // ❌ 警告！prop 是只讀的！
     this.foo = 'bar'
   }
 }
@@ -385,13 +385,18 @@ defineProps({
     type: String,
     required: true
   },
-  // Number 類型的默認值
+  // 必傳，但可以是 null
   propD: {
+    type: [String, null],
+    required: true
+  },
+  // 有默認值的數字
+  propE: {
     type: Number,
     default: 100
   },
-  // 對象類型的默認值
-  propE: {
+  // 有默認值的對象
+  propF: {
     type: Object,
     // 對象或數組的默認值
     // 必須從一個工廠函數返回。
@@ -402,14 +407,14 @@ defineProps({
   },
   // 自定義類型校驗函數
   // 在 3.4+ 中完整的 props 作為第二個參數傳入
-  propF: {
+  propG: {
     validator(value, props) {
       // The value must match one of these strings
       return ['success', 'warning', 'danger'].includes(value)
     }
   },
-  // 函數類型的默認值
-  propG: {
+  // 有默認值的函數
+  propH: {
     type: Function,
     // 不像對象或數組的默認，這不是一個
     // 工廠函數。這會是一個用來作為默認值的函數
@@ -440,13 +445,18 @@ export default {
       type: String,
       required: true
     },
-    // Number 類型的默認值
+    // 必傳，但可以是 null
     propD: {
+      type: [String, null],
+      required: true
+    },
+    // 有默認值的 Number
+    propE: {
       type: Number,
       default: 100
     },
-    // 對象類型的默認值
-    propE: {
+    // 有默認值的 Object
+    propF: {
       type: Object,
       // 對象或者數組應當用工廠函數返回。
       // 工廠函數會收到組件所接收的原始 props
@@ -457,14 +467,14 @@ export default {
     },
     // 自定義類型校驗函數
     // 在 3.4+ 中完整的 props 作為第二個參數傳入
-    propF: {
+    propG: {
       validator(value, props) {
-        // The value must match one of these strings
+        // 值必須匹配以下字符串之一
         return ['success', 'warning', 'danger'].includes(value)
       }
     },
-    // 函數類型的默認值
-    propG: {
+    // 有默認值的 Function
+    propH: {
       type: Function,
       // 不像對象或數組的默認，這不是一個
       // 工廠函數。這會是一個用來作為默認值的函數
@@ -553,6 +563,39 @@ export default {
 
 Vue 會通過 `instanceof Person` 來校驗 `author` prop 的值是否是 `Person` 類的一個實例。
 
+### 可空類型 {#nullable-type}
+
+如果類型為必填但可為 null，則可以使用包含 `null` 的數組語法：
+
+<div class="composition-api">
+
+```js
+defineProps({
+  id: {
+    type: [String, null],
+    required: true
+  }
+})
+```
+
+</div>
+<div class="options-api">
+
+```js
+export default {
+  props: {
+    id: {
+      type: [String, null],
+      required: true
+    }
+  }
+}
+```
+
+</div>
+
+請注意，如果 `type` 只是 `null` 而不使用數組語法，則它將允許任何類型。
+
 ## Boolean 類型轉換 {#boolean-casting}
 
 為了更貼近原生 boolean attributes 的行為，聲明為 `Boolean` 類型的 props 有特別的類型轉換規則。以帶有如下聲明的 `<MyComponent>` 組件為例：
@@ -597,17 +640,17 @@ export default {
 defineProps({
   disabled: [Boolean, Number]
 })
-  
+
 // disabled 將被轉換為 true
 defineProps({
   disabled: [Boolean, String]
 })
-  
+
 // disabled 將被轉換為 true
 defineProps({
   disabled: [Number, Boolean]
 })
-  
+
 // disabled 將被解析為空字符串 (disabled="")
 defineProps({
   disabled: [String, Boolean]
@@ -638,7 +681,7 @@ export default {
     disabled: [Number, Boolean]
   }
 }
-  
+
 // disabled 將被解析為空字符串 (disabled="")
 export default {
   props: {

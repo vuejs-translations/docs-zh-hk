@@ -181,7 +181,7 @@ data() {
 然而，這可能在有多個依賴條件的 class 時會有些冗長。因此你也可以在數組中嵌套對象：
 
 ```vue-html
-<div :class="[{ active: isActive }, errorClass]"></div>
+<div :class="[{ activeClass: isActive }, errorClass]"></div>
 ```
 
 ### 在組件上使用 {#with-components}
@@ -288,7 +288,7 @@ data() {
 ```js
 const styleObject = reactive({
   color: 'red',
-  fontSize: '13px'
+  fontSize: '30px'
 })
 ```
 

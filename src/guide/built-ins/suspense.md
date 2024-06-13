@@ -133,6 +133,34 @@ const posts = await res.json()
 
 Vue Router 使用動態導入對[懶加載組件](https://router.vuejs.org/zh/guide/advanced/lazy-loading.html)進行了內置支持。這些與異步組件不同，目前他們不會觸發 `<Suspense>`。但是，它們仍然可以有異步組件作為後代，這些組件可以照常觸發 `<Suspense>`。
 
+<!-- TODO: translation -->## Nested Suspense {#nested-suspense}
+
+When we have multiple async components (common for nested or layout-based routes) like this:
+
+```vue-html
+<Suspense>
+  <component :is="DynamicAsyncOuter">
+    <component :is="DynamicAsyncInner" />
+  </component>
+</Suspense>
+```
+
+`<Suspense>` creates a boundary that will resolve all the async components down the tree, as expected. However, when we change `DynamicAsyncOuter`, `<Suspense>` awaits it correctly, but when we change `DynamicAsyncInner`, the nested `DynamicAsyncInner` renders an empty node until it has been resolved (instead of the previous one or fallback slot).
+
+In order to solve that, we could have a nested suspense to handle the patch for the nested component, like:
+
+```vue-html
+<Suspense>
+  <component :is="DynamicAsyncOuter">
+    <Suspense suspensible> <!-- this -->
+      <component :is="DynamicAsyncInner" />
+    </Suspense>
+  </component>
+</Suspense>
+```
+
+If you don't set the `suspensible` prop, the inner `<Suspense>` will be treated like a sync component by the parent `<Suspense>`. That means that it has its own fallback slot and if both `Dynamic` components change at the same time, there might be empty nodes and multiple patching cycles while the child `<Suspense>` is loading its own dependency tree, which might not be desirable. When it's set, all the async dependency handling is given to the parent `<Suspense>` (including the events emitted) and the inner `<Suspense>` serves solely as another boundary for the dependency resolution and patching.
+
 ---
 
 **參考**

@@ -1,17 +1,17 @@
-# 响应式 API：核心 {#reactivity-api-core}
+# 響應式 API：核心 {#reactivity-api-core}
 
-:::info 参考
-要更好地了解响应式 API，推荐阅读下面几个指南中的章节：
+:::info 參考
+要更好地了解響應式 API，推薦閱讀下面幾個指南中的章節：
 
-- [响应式基础](/guide/essentials/reactivity-fundamentals) (with the API preference set to Composition API)
-- [深入响应式系统](/guide/extras/reactivity-in-depth)
+- [響應式基礎](/guide/essentials/reactivity-fundamentals) (with the API preference set to Composition API)
+- [深入響應式系統](/guide/extras/reactivity-in-depth)
   :::
 
 ## ref() {#ref}
 
-接受一个内部值，返回一个响应式的、可更改的 ref 对象，此对象只有一个指向其内部值的属性 `.value`。
+接受一個內部值，返回一個響應式的、可更改的 ref 對象，此對象只有一個指向其內部值的屬性 `.value`。
 
-- **类型**
+- **類型**
 
   ```ts
   function ref<T>(value: T): Ref<UnwrapRef<T>>
@@ -21,13 +21,13 @@
   }
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  ref 对象是可更改的，也就是说你可以为 `.value` 赋予新的值。它也是响应式的，即所有对 `.value` 的操作都将被追踪，并且写操作会触发与之相关的副作用。
+  ref 對象是可更改的，也即是你可以為 `.value` 賦予新的值。它也是響應式的，即所有對 `.value` 的操作都將被追蹤，並且寫操作會觸發與之相關的副作用。
 
-  如果将一个对象赋值给 ref，那么这个对象将通过 [reactive()](#reactive) 转为具有深层次响应式的对象。这也意味着如果对象中包含了嵌套的 ref，它们将被深层地解包。
+  如果將一個對象賦值給 ref，那麼這個對象將通過 [reactive()](#reactive) 轉為具有深層次響應式的對象。這也意味著如果對象中包含了嵌套的 ref，它們將被深層地解包。
 
-  若要避免这种深层次的转换，请使用 [`shallowRef()`](./reactivity-advanced#shallowref) 来替代。
+  若要避免這種深層次的轉換，請使用 [`shallowRef()`](./reactivity-advanced#shallowref) 來替代。
 
 - **示例**
 
@@ -39,25 +39,25 @@
   console.log(count.value) // 1
   ```
 
-- **参考**
-  - [指南 - `ref()` 的响应式基础](/guide/essentials/reactivity-fundamentals#reactive-variables-with-ref)
-  - [指南 - 为 `ref()` 标注类型](/guide/typescript/composition-api#typing-ref) <sup class="vt-badge ts" />
+- **參考**
+  - [指南 - `ref()` 的響應式基礎](/guide/essentials/reactivity-fundamentals#reactive-variables-with-ref)
+  - [指南 - 為 `ref()` 標註類型](/guide/typescript/composition-api#typing-ref) <sup class="vt-badge ts" />
 
 ## computed() {#computed}
 
-接受一个 getter 函数，返回一个只读的响应式 [ref](#ref) 对象。该 ref 通过 `.value` 暴露 getter 函数的返回值。它也可以接受一个带有 `get` 和 `set` 函数的对象来创建一个可写的 ref 对象。
+接收一個 [getter 函數](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set#description)，並為 getter 返回的值返回一個只讀的響應式 [ref](#ref) 對象。他還可以使用帶有 `get` 和 `set` 函數的對象來創建一個可寫的 ref 對象。
 
-- **类型**
+- **類型**
 
   ```ts
-  // 只读
+  // 只讀
   function computed<T>(
     getter: (oldValue: T | undefined) => T,
-    // 查看下方的 "计算属性调试" 链接
+    // 查看下方的 "計算屬性調試" 鏈接
     debuggerOptions?: DebuggerOptions
   ): Readonly<Ref<Readonly<T>>>
 
-  // 可写的
+  // 可寫的
   function computed<T>(
     options: {
       get: (oldValue: T | undefined) => T
@@ -69,7 +69,7 @@
 
 - **示例**
 
-  创建一个只读的计算属性 ref：
+  創建一個只讀的計算屬性 ref：
 
   ```js
   const count = ref(1)
@@ -77,10 +77,10 @@
 
   console.log(plusOne.value) // 2
 
-  plusOne.value++ // 错误
+  plusOne.value++ // 錯誤
   ```
 
-  创建一个可写的计算属性 ref：
+  創建一個可寫的計算屬性 ref：
 
   ```js
   const count = ref(1)
@@ -95,7 +95,7 @@
   console.log(count.value) // 0
   ```
 
-  调试：
+  調試：
 
   ```js
   const plusOne = computed(() => count.value + 1, {
@@ -108,35 +108,35 @@
   })
   ```
 
-- **参考**
-  - [指南 - 计算属性](/guide/essentials/computed)
-  - [指南 - 计算属性调试](/guide/extras/reactivity-in-depth#computed-debugging)
-  - [指南 - 为 `computed()` 标注类型](/guide/typescript/composition-api#typing-computed) <sup class="vt-badge ts" />
-  - [指南 - 性能优化 - 计算属性稳定性](/guide/best-practices/performance#computed-stability) <sup class="vt-badge" data-text="3.4+" />
+- **參考**
+  - [指南 - 計算屬性](/guide/essentials/computed)
+  - [指南 - 計算屬性調試](/guide/extras/reactivity-in-depth#computed-debugging)
+  - [指南 - 為 `computed()` 標註類型](/guide/typescript/composition-api#typing-computed) <sup class="vt-badge ts" />
+  - [指南 - 性能優化 - 計算屬性穩定性](/guide/best-practices/performance#computed-stability) <sup class="vt-badge" data-text="3.4+" />
 
 ## reactive() {#reactive}
 
-返回一个对象的响应式代理。
+返回一個對象的響應式代理。
 
-- **类型**
+- **類型**
 
   ```ts
   function reactive<T extends object>(target: T): UnwrapNestedRefs<T>
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  响应式转换是“深层”的：它会影响到所有嵌套的属性。一个响应式对象也将深层地解包任何 [ref](#ref) 属性，同时保持响应性。
+  響應式轉換是“深層”的：它會影響到所有嵌套的屬性。一個響應式對象也將深層地解包任何 [ref](#ref) 屬性，同時保持響應性。
 
-  值得注意的是，当访问到某个响应式数组或 `Map` 这样的原生集合类型中的 ref 元素时，不会执行 ref 的解包。
+  值得注意的是，當訪問到某個響應式數組或 `Map` 這樣的原生集合類型中的 ref 元素時，不會執行 ref 的解包。
 
-  若要避免深层响应式转换，只想保留对这个对象顶层次访问的响应性，请使用 [shallowReactive()](./reactivity-advanced#shallowreactive) 作替代。
+  若要避免深層響應式轉換，只想保留對這個對象頂層次訪問的響應性，請使用 [shallowReactive()](./reactivity-advanced#shallowreactive) 作替代。
 
-  返回的对象以及其中嵌套的对象都会通过 [ES Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) 包裹，因此**不等于**源对象，建议只使用响应式代理，避免使用原始对象。
+  返回的對象以及其中嵌套的對象都會通過 [ES Proxy](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy) 包裹，因此**不等於**源對象，建議只使用響應式代理，避免使用原始對象。
 
 - **示例**
 
-  创建一个响应式对象：
+  創建一個響應式對象：
 
   ```js
   const obj = reactive({ count: 0 })
@@ -149,33 +149,33 @@
   const count = ref(1)
   const obj = reactive({ count })
 
-  // ref 会被解包
+  // ref 會被解包
   console.log(obj.count === count.value) // true
 
-  // 会更新 `obj.count`
+  // 會更新 `obj.count`
   count.value++
   console.log(count.value) // 2
   console.log(obj.count) // 2
 
-  // 也会更新 `count` ref
+  // 也會更新 `count` ref
   obj.count++
   console.log(obj.count) // 3
   console.log(count.value) // 3
   ```
 
-	注意当访问到某个响应式数组或 `Map` 这样的原生集合类型中的 ref 元素时，**不会**执行 ref 的解包：
+	注意當訪問到某個響應式數組或 `Map` 這樣的原生集合類型中的 ref 元素時，**不會**執行 ref 的解包：
 
   ```js
   const books = reactive([ref('Vue 3 Guide')])
-  // 这里需要 .value
+  // 這裡需要 .value
   console.log(books[0].value)
 
   const map = reactive(new Map([['count', ref(0)]]))
-  // 这里需要 .value
+  // 這裡需要 .value
   console.log(map.get('count').value)
   ```
 
-  将一个 [ref](#ref) 赋值给一个 `reactive` 属性时，该 ref 会被自动解包：
+  將一個 [ref](#ref) 賦值給一個 `reactive` 屬性時，該 ref 會被自動解包：
 
   ```ts
   const count = ref(1)
@@ -187,15 +187,15 @@
   console.log(obj.count === count.value) // true
   ```
 
-- **参考**
-  - [指南 - 响应式基础](/guide/essentials/reactivity-fundamentals)
-  - [指南 - 为 `reactive()` 标注类型](/guide/typescript/composition-api#typing-reactive) <sup class="vt-badge ts" />
+- **參考**
+  - [指南 - 響應式基礎](/guide/essentials/reactivity-fundamentals)
+  - [指南 - 為 `reactive()` 標註類型](/guide/typescript/composition-api#typing-reactive) <sup class="vt-badge ts" />
 
 ## readonly() {#readonly}
 
-接受一个对象 (不论是响应式还是普通的) 或是一个 [ref](#ref)，返回一个原值的只读代理。
+接受一個對象 (不論是響應式還是普通的) 或是一個 [ref](#ref)，返回一個原值的只讀代理。
 
-- **类型**
+- **類型**
 
   ```ts
   function readonly<T extends object>(
@@ -203,11 +203,11 @@
   ): DeepReadonly<UnwrapNestedRefs<T>>
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  只读代理是深层的：对任何嵌套属性的访问都将是只读的。它的 ref 解包行为与 `reactive()` 相同，但解包得到的值是只读的。
+  只讀代理是深層的：對任何嵌套屬性的訪問都將是只讀的。它的 ref 解包行為與 `reactive()` 相同，但解包得到的值是只讀的。
 
-  要避免深层级的转换行为，请使用 [shallowReadonly()](./reactivity-advanced#shallowreadonly) 作替代。
+  要避免深層級的轉換行為，請使用 [shallowReadonly()](./reactivity-advanced#shallowreadonly) 作替代。
 
 - **示例**
 
@@ -217,22 +217,22 @@
   const copy = readonly(original)
 
   watchEffect(() => {
-    // 用来做响应性追踪
+    // 用來做響應性追蹤
     console.log(copy.count)
   })
 
-  // 更改源属性会触发其依赖的侦听器
+  // 更改源屬性會觸發其依賴的偵聽器
   original.count++
 
-  // 更改该只读副本将会失败，并会得到一个警告
+  // 更改該只讀副本將會失敗，並會得到一個警告
   copy.count++ // warning!
   ```
 
 ## watchEffect() {#watcheffect}
 
-立即运行一个函数，同时响应式地追踪其依赖，并在依赖更改时重新执行。
+立即運行一個函數，同時響應式地追蹤其依賴，並在依賴更改時重新執行。
 
-- **类型**
+- **類型**
 
   ```ts
   function watchEffect(
@@ -243,7 +243,7 @@
   type OnCleanup = (cleanupFn: () => void) => void
 
   interface WatchEffectOptions {
-    flush?: 'pre' | 'post' | 'sync' // 默认：'pre'
+    flush?: 'pre' | 'post' | 'sync' // 默認：'pre'
     onTrack?: (event: DebuggerEvent) => void
     onTrigger?: (event: DebuggerEvent) => void
   }
@@ -251,15 +251,15 @@
   type StopHandle = () => void
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  第一个参数就是要运行的副作用函数。这个副作用函数的参数也是一个函数，用来注册清理回调。清理回调会在该副作用下一次执行前被调用，可以用来清理无效的副作用，例如等待中的异步请求 (参见下面的示例)。
+  第一個參數就是要運行的副作用函數。這個副作用函數的參數也是一個函數，用來註冊清理回調。清理回調會在該副作用下一次執行前被調用，可以用來清理無效的副作用，例如等待中的異步請求 (參見下面的示例)。
 
-  第二个参数是一个可选的选项，可以用来调整副作用的刷新时机或调试副作用的依赖。
+  第二個參數是一個可選的選項，可以用來調整副作用的刷新時機或調試副作用的依賴。
 
-  默认情况下，侦听器将在组件渲染之前执行。设置 `flush: 'post'` 将会使侦听器延迟到组件渲染之后再执行。详见[回调的触发时机](/guide/essentials/watchers#callback-flush-timing)。在某些特殊情况下 (例如要使缓存失效)，可能有必要在响应式依赖发生改变时立即触发侦听器。这可以通过设置 `flush: 'sync'` 来实现。然而，该设置应谨慎使用，因为如果有多个属性同时更新，这将导致一些性能和数据一致性的问题。
+  默認情況下，偵聽器將在組件渲染之前執行。設置 `flush: 'post'` 將會使偵聽器延遲到組件渲染之後再執行。詳見[回調的觸發時機](/guide/essentials/watchers#callback-flush-timing)。在某些特殊情況下 (例如要使緩存失效)，可能有必要在響應式依賴發生改變時立即觸發偵聽器。這可以通過設置 `flush: 'sync'` 來實現。然而，該設置應謹慎使用，因為如果有多個屬性同時更新，這將導致一些性能和數據一致性的問題。
 
-  返回值是一个用来停止该副作用的函数。
+  返回值是一個用來停止該副作用的函數。
 
 - **示例**
 
@@ -267,10 +267,10 @@
   const count = ref(0)
 
   watchEffect(() => console.log(count.value))
-  // -> 输出 0
+  // -> 輸出 0
 
   count.value++
-  // -> 输出 1
+  // -> 輸出 1
   ```
 
   副作用清除：
@@ -278,24 +278,24 @@
   ```js
   watchEffect(async (onCleanup) => {
     const { response, cancel } = doAsyncWork(id.value)
-    // `cancel` 会在 `id` 更改时调用
+    // `cancel` 會在 `id` 更改時調用
     // 以便取消之前
-    // 未完成的请求
+    // 未完成的請求
     onCleanup(cancel)
     data.value = await response
   })
   ```
 
-  停止侦听器：
+  停止偵聽器：
 
   ```js
   const stop = watchEffect(() => {})
 
-  // 当不再需要此侦听器时:
+  // 當不再需要此偵聽器時:
   stop()
   ```
 
-  选项：
+  選項：
 
   ```js
   watchEffect(() => {}, {
@@ -309,33 +309,33 @@
   })
   ```
 
-- **参考**
-  - [指南 - 侦听器](/guide/essentials/watchers#watcheffect)
-  - [指南 - 侦听器调试](/guide/extras/reactivity-in-depth#watcher-debugging)
+- **參考**
+  - [指南 - 偵聽器](/guide/essentials/watchers#watcheffect)
+  - [指南 - 偵聽器調試](/guide/extras/reactivity-in-depth#watcher-debugging)
 
 ## watchPostEffect() {#watchposteffect}
 
-[`watchEffect()`](#watcheffect) 使用 `flush: 'post'` 选项时的别名。
+[`watchEffect()`](#watcheffect) 使用 `flush: 'post'` 選項時的別名。
 
 ## watchSyncEffect() {#watchsynceffect}
 
-[`watchEffect()`](#watcheffect) 使用 `flush: 'sync'` 选项时的别名。
+[`watchEffect()`](#watcheffect) 使用 `flush: 'sync'` 選項時的別名。
 
 ## watch() {#watch}
 
-侦听一个或多个响应式数据源，并在数据源变化时调用所给的回调函数。
+偵聽一個或多個響應式數據源，並在數據源變化時調用所給的回調函數。
 
-- **类型**
+- **類型**
 
   ```ts
-  // 侦听单个来源
+  // 偵聽單個來源
   function watch<T>(
     source: WatchSource<T>,
     callback: WatchCallback<T>,
     options?: WatchOptions
   ): StopHandle
 
-  // 侦听多个来源
+  // 偵聽多個來源
   function watch<T>(
     sources: WatchSource<T>[],
     callback: WatchCallback<T[]>,
@@ -353,52 +353,52 @@
     | (() => T) // getter
     | T extends object
     ? T
-    : never // 响应式对象
+    : never // 響應式對象
 
   interface WatchOptions extends WatchEffectOptions {
-    immediate?: boolean // 默认：false
-    deep?: boolean // 默认：false
-    flush?: 'pre' | 'post' | 'sync' // 默认：'pre'
+    immediate?: boolean // 默認：false
+    deep?: boolean // 默認：false
+    flush?: 'pre' | 'post' | 'sync' // 默認：'pre'
     onTrack?: (event: DebuggerEvent) => void
     onTrigger?: (event: DebuggerEvent) => void
-    once?: boolean // 默认：false (3.4+)
+    once?: boolean // 默認：false (3.4+)
   }
   ```
 
-  > 为了便于阅读，对类型进行了简化。
+  > 為了便於閱讀，對類型進行了簡化。
 
-- **详细信息**
+- **詳細信息**
 
-  `watch()` 默认是懒侦听的，即仅在侦听源发生变化时才执行回调函数。
+  `watch()` 默認是懶偵聽的，即僅在偵聽源發生變化時才執行回調函數。
 
-  第一个参数是侦听器的**源**。这个来源可以是以下几种：
+  第一個參數是偵聽器的**源**。這個來源可以是以下幾種：
 
-  - 一个函数，返回一个值
-  - 一个 ref
-  - 一个响应式对象
-  - ...或是由以上类型的值组成的数组
+  - 一個函數，返回一個值
+  - 一個 ref
+  - 一個響應式對象
+  - ...或是由以上類型的值組成的數組
 
-  第二个参数是在发生变化时要调用的回调函数。这个回调函数接受三个参数：新值、旧值，以及一个用于注册副作用清理的回调函数。该回调函数会在副作用下一次重新执行前调用，可以用来清除无效的副作用，例如等待中的异步请求。
+  第二個參數是在發生變化時要調用的回調函數。這個回調函數接受三個參數：新值、舊值，以及一個用於註冊副作用清理的回調函數。該回調函數會在副作用下一次重新執行前調用，可以用來清除無效的副作用，例如等待中的異步請求。
 
-	当侦听多个来源时，回调函数接受两个数组，分别对应来源数组中的新值和旧值。
+	當偵聽多個來源時，回調函數接受兩個數組，分別對應來源數組中的新值和舊值。
 
-  第三个可选的参数是一个对象，支持以下这些选项：
+  第三個可選的參數是一個對象，支持以下這些選項：
 
-  - **`immediate`**：在侦听器创建时立即触发回调。第一次调用时旧值是 `undefined`。
-  - **`deep`**：如果源是对象，强制深度遍历，以便在深层级变更时触发回调。参考[深层侦听器](/guide/essentials/watchers#deep-watchers)。
-  - **`flush`**：调整回调函数的刷新时机。参考[回调的刷新时机](/guide/essentials/watchers#callback-flush-timing)及 [`watchEffect()`](/api/reactivity-core#watcheffect)。
-  - **`onTrack / onTrigger`**：调试侦听器的依赖。参考[调试侦听器](/guide/extras/reactivity-in-depth#watcher-debugging)。
-  - **`once`**：回调函数只会运行一次。侦听器将在回调函数首次运行后自动停止。 <sup class="vt-badge" data-text="3.4+" />
+  - **`immediate`**：在偵聽器創建時立即觸發回調。第一次調用時舊值是 `undefined`。
+  - **`deep`**：如果源是對象，強制深度遍歷，以便在深層級變更時觸發回調。參考[深層偵聽器](/guide/essentials/watchers#deep-watchers)。
+  - **`flush`**：調整回調函數的刷新時機。參考[回調的刷新時機](/guide/essentials/watchers#callback-flush-timing)及 [`watchEffect()`](/api/reactivity-core#watcheffect)。
+  - **`onTrack / onTrigger`**：調試偵聽器的依賴。參考[調試偵聽器](/guide/extras/reactivity-in-depth#watcher-debugging)。
+  - **`once`**：回調函數只會運行一次。偵聽器將在回調函數首次運行後自動停止。 <sup class="vt-badge" data-text="3.4+" />
 
-  与 [`watchEffect()`](#watcheffect) 相比，`watch()` 使我们可以：
+  與 [`watchEffect()`](#watcheffect) 相比，`watch()` 使我們可以：
 
-  - 懒执行副作用；
-  - 更加明确是应该由哪个状态触发侦听器重新执行；
-  - 可以访问所侦听状态的前一个值和当前值。
+  - 懶執行副作用；
+  - 更加明確是應該由哪個狀態觸發偵聽器重新執行；
+  - 可以訪問所偵聽狀態的前一個值和當前值。
 
 - **示例**
 
-  侦听一个 getter 函数：
+  偵聽一個 getter 函數：
 
   ```js
   const state = reactive({ count: 0 })
@@ -410,7 +410,7 @@
   )
   ```
 
-  侦听一个 ref：
+  偵聽一個 ref：
 
   ```js
   const count = ref(0)
@@ -419,7 +419,7 @@
   })
   ```
 
-  当侦听多个来源时，回调函数接受两个数组，分别对应来源数组中的新值和旧值：
+  當偵聽多個來源時，回調函數接受兩個數組，分別對應來源數組中的新值和舊值：
 
   ```js
   watch([fooRef, barRef], ([foo, bar], [prevFoo, prevBar]) => {
@@ -427,7 +427,7 @@
   })
   ```
 
-  当使用 getter 函数作为源时，回调只在此函数的返回值变化时才会触发。如果你想让回调在深层级变更时也能触发，你需要使用 `{ deep: true }` 强制侦听器进入深层级模式。在深层级模式时，如果回调函数由于深层级的变更而被触发，那么新值和旧值将是同一个对象。
+  當使用 getter 函數作為源時，回調只在此函數的返回值變化時才會觸發。如果你想讓回調在深層級變更時也能觸發，你需要使用 `{ deep: true }` 強制偵聽器進入深層級模式。在深層級模式時，如果回調函數由於深層級的變更而被觸發，那麼新值和舊值將是同一個對象。
 
   ```js
   const state = reactive({ count: 0 })
@@ -440,16 +440,16 @@
   )
   ```
 
-  当直接侦听一个响应式对象时，侦听器会自动启用深层模式：
+  當直接偵聽一個響應式對象時，偵聽器會自動啟用深層模式：
 
   ```js
   const state = reactive({ count: 0 })
   watch(state, () => {
-    /* 深层级变更状态所触发的回调 */
+    /* 深層級變更狀態所觸發的回調 */
   })
   ```
 
-  `watch()` 和 [`watchEffect()`](#watcheffect) 享有相同的刷新时机和调试选项：
+  `watch()` 和 [`watchEffect()`](#watcheffect) 享有相同的刷新時機和調試選項：
 
   ```js
   watch(source, callback, {
@@ -463,12 +463,12 @@
   })
   ```
 
-  停止侦听器：
+  停止偵聽器：
 
   ```js
   const stop = watch(source, callback)
 
-  // 当已不再需要该侦听器时：
+  // 當已不再需要該偵聽器時：
   stop()
   ```
 
@@ -477,14 +477,14 @@
   ```js
   watch(id, async (newId, oldId, onCleanup) => {
     const { response, cancel } = doAsyncWork(newId)
-    // 当 `id` 变化时，`cancel` 将被调用，
-    // 取消之前的未完成的请求
+    // 當 `id` 變化時，`cancel` 將被調用，
+    // 取消之前的未完成的請求
     onCleanup(cancel)
     data.value = await response
   })
   ```
 
-- **参考**
+- **參考**
 
-  - [指南 - 侦听器](/guide/essentials/watchers)
-  - [指南 - 侦听器调试](/guide/extras/reactivity-in-depth#watcher-debugging)
+  - [指南 - 偵聽器](/guide/essentials/watchers)
+  - [指南 - 偵聽器調試](/guide/extras/reactivity-in-depth#watcher-debugging)
