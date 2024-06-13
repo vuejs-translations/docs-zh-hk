@@ -18,7 +18,7 @@ console.log(props.foo)
 </script>
 ```
 
-在沒有使用 `<script setup>` 的組件中，prop 可以使用 [`props`](/api/options-state#props) 選項來聲明：
+在沒有使用 `<script setup>` 的組件中，props 可以使用 [`props`](/api/options-state#props) 選項來聲明：
 
 ```js
 export default {
@@ -30,7 +30,7 @@ export default {
 }
 ```
 
-注意傳遞給 `defineProps()` 的參數和提供給 `props` 選項的值是相同的，兩種聲明方式背後其實使用的都是 prop 選項。
+注意傳遞給 `defineProps()` 的參數和提供給 `props` 選項的值是相同的，兩種聲明方式背後其實使用的都是 props 選項。
 
 </div>
 
@@ -50,7 +50,7 @@ export default {
 
 </div>
 
-除了使用字符串數組來聲明 prop 外，還可以使用對象的形式：
+除了使用字符串數組來聲明 props 外，還可以使用對象的形式：
 
 <div class="options-api">
 
@@ -152,7 +152,7 @@ export default {
 
 對於組件名我們推薦使用 [PascalCase](/guide/components/registration#component-name-casing)，因為這提高了模板的可讀性，能幫助我們區分 Vue 組件和原生 HTML 元素。然而對於傳遞 props 來說，使用 camelCase 並沒有太多優勢，因此我們推薦更貼近 HTML 的書寫風格。
 
-### 靜態 vs. 動態 Prop {#static-vs-dynamic-props}
+### 靜態 vs. 動態 Props {#static-vs-dynamic-props}
 
 至此，你已經見過了很多像這樣的靜態值形式的 props：
 
