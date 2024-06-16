@@ -36,11 +36,11 @@ shuffleMembers(membersPartnerData as Member[])
 <template>
   <div class="TeamPage">
     <TeamHero>
-      <!-- TODO: translation --><template #title>Meet the Team</template>
+      <template #title>認識團隊</template>
       <template #lead>
-        The development of Vue and its ecosystem is guided by an
-        international team, some of whom have chosen to be
-        <span class="nowrap">featured below.</span>
+        Vue 及其生态系统發展的背後是
+        一个國際化的團隊，以下是部份團隊成員的
+        <span class="nowrap">個人信息。</span>
       </template>
 
       <template #action>
