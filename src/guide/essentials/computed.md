@@ -123,7 +123,7 @@ const publishedBooksMessage = computed(() => {
 [在演練場中嘗試一下](https://play.vuejs.org/#eNp1kE9Lw0AQxb/KI5dtoTainkoaaREUoZ5EEONhm0ybYLO77J9CCfnuzta0vdjbzr6Zeb95XbIwZroPlMySzJW2MR6OfDB5oZrWaOvRwZIsfbOnCUrdmuCpQo+N1S0ET4pCFarUynnI4GttMT9PjLpCAUq2NIN41bXCkyYxiZ9rrX/cDF/xDYiPQLjDDRbVXqqSHZ5DUw2tg3zP8lK6pvxHe2DtvSasDs6TPTAT8F2ofhzh0hTygm5pc+I1Yb1rXE3VMsKsyDm5JcY/9Y5GY8xzHI+wnIpVw4nTI/10R2rra+S4xSPEJzkBvvNNs310ztK/RDlLLjy1Zic9cQVkJn+R7gIwxJGlMXiWnZEq77orhH3Pq2NH9DjvTfpfSBSbmA==)
 
 
-我们在這裡声明了一个计算属性 `publishedBooksMessage`。`computed()` 函数預期传递一个[getter 函数](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description)，返回值是一个**计算的 ref**。与普通 ref 类似，您可以以 `publishedBooksMessage.value` 的形式访问计算结果。在模板中，计算 ref 也会自动解包，因此您可以在模板表达式中引用它们，而无需使用 `.value`。
+我们在這裡声明了一个计算属性 `publishedBooksMessage`。`computed()` 函数預期传递一个 [getter 函数](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description)，返回值是一个**计算的 ref**。与普通 ref 类似，您可以以 `publishedBooksMessage.value` 的形式访问计算结果。在模板中，计算 ref 也会自动解包，因此您可以在模板表达式中引用它们，而无需使用 `.value`。
 
 Vue 的計算屬性會自動追蹤響應式依賴。它會檢測到 `publishedBooksMessage` 依賴於 `author.books`，所以當 `author.books` 改變時，任何依賴於 `publishedBooksMessage` 的綁定都會同時更新。
 
