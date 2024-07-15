@@ -109,7 +109,7 @@ const posts = await res.json()
 
 另外，這些組件都通常與 [Vue Router](https://router.vuejs.org/zh/) 中的 `<RouterView>` 組件結合使用。
 
-下面的示例展示了如何嵌套這些組件，使它們都能按照預期的方式運行。若想組合得更簡單，你也可以刪除一些你不需要的組件：
+下面的示例展示瞭如何嵌套這些組件，使它們都能按照預期的方式運行。若想組合得更簡單，你也可以刪除一些你不需要的組件：
 
 ```vue-html
 <RouterView v-slot="{ Component }">
@@ -133,9 +133,9 @@ const posts = await res.json()
 
 Vue Router 使用動態導入對[懶加載組件](https://router.vuejs.org/zh/guide/advanced/lazy-loading.html)進行了內置支持。這些與異步組件不同，目前他們不會觸發 `<Suspense>`。但是，它們仍然可以有異步組件作為後代，這些組件可以照常觸發 `<Suspense>`。
 
-<!-- TODO: translation -->## Nested Suspense {#nested-suspense}
+## 嵌套 Suspense {#nested-suspense}
 
-When we have multiple async components (common for nested or layout-based routes) like this:
+當我們有多個像這樣的異步組件時（常見於嵌套或基於佈局的路由）：
 
 ```vue-html
 <Suspense>
@@ -145,9 +145,9 @@ When we have multiple async components (common for nested or layout-based routes
 </Suspense>
 ```
 
-`<Suspense>` creates a boundary that will resolve all the async components down the tree, as expected. However, when we change `DynamicAsyncOuter`, `<Suspense>` awaits it correctly, but when we change `DynamicAsyncInner`, the nested `DynamicAsyncInner` renders an empty node until it has been resolved (instead of the previous one or fallback slot).
+`<Suspense>`創建了一個邊界，它將解析樹下的所有異步組件，正如預期的那樣。但是，當我們更改 `DynamicAsyncOuter` 時，`<Suspense>` 會正確地等待它，但當我們修改 `DynamicAsyncInner` 時，嵌套的 `DynamicAsyncInner` 會呈現一個空節點，直到它被解析為止（而不是之前的節點或後備插槽）。
 
-In order to solve that, we could have a nested suspense to handle the patch for the nested component, like:
+為瞭解決這個問題，我們可以有一個嵌套的 Suspense 來處理嵌套組件的補丁，例如：
 
 ```vue-html
 <Suspense>
@@ -159,7 +159,7 @@ In order to solve that, we could have a nested suspense to handle the patch for 
 </Suspense>
 ```
 
-If you don't set the `suspensible` prop, the inner `<Suspense>` will be treated like a sync component by the parent `<Suspense>`. That means that it has its own fallback slot and if both `Dynamic` components change at the same time, there might be empty nodes and multiple patching cycles while the child `<Suspense>` is loading its own dependency tree, which might not be desirable. When it's set, all the async dependency handling is given to the parent `<Suspense>` (including the events emitted) and the inner `<Suspense>` serves solely as another boundary for the dependency resolution and patching.
+如果您不設置 `suspensible` 屬性，則內部 `<Suspense>` 將被父級 `<Suspense>` 視為同步組件。這意味著它有自己的後備插槽，如果兩個 `Dynamic` 組件同時更改，則當子 `<Suspense>` 加載其自己的依賴關係樹時，可能會出現空節點和多個修補週期，這可能不會理想的。設置後，所有異步依賴項處理都會交給父級 `<Suspense>`（包括發出的事件），而內部 `<Suspense>` 僅充當依賴項解析和修補的另一個邊界。
 
 ---
 
