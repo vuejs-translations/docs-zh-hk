@@ -16,7 +16,7 @@ importers:
         version: 4.3.1
       '@vue/theme':
         specifier: ^2.2.5
-        version: 2.2.12(@algolia/client-search@4.23.3)(search-insights@2.14.0)(vitepress@1.3.3(@algolia/client-search@4.23.3)(@types/node@20.12.8)(postcss@8.4.41)(search-insights@2.14.0)(terser@5.31.0))(vue@3.4.38)
+        version: 2.2.12(@algolia/client-search@4.23.3)(search-insights@2.14.0)(vitepress@1.3.4(@algolia/client-search@4.23.3)(@types/node@20.12.8)(postcss@8.4.41)(search-insights@2.14.0)(terser@5.31.0))(vue@3.4.38)
       dynamics.js:
         specifier: ^1.1.5
         version: 1.1.5
@@ -25,7 +25,7 @@ importers:
         version: 3.12.5
       vitepress:
         specifier: ^1.1.0
-        version: 1.3.3(@algolia/client-search@4.23.3)(@types/node@20.12.8)(postcss@8.4.41)(search-insights@2.14.0)(terser@5.31.0)
+        version: 1.3.4(@algolia/client-search@4.23.3)(@types/node@20.12.8)(postcss@8.4.41)(search-insights@2.14.0)(terser@5.31.0)
       vue:
         specifier: ^3.4.0
         version: 3.4.38
@@ -1212,8 +1212,8 @@ packages:
       terser:
         optional: true
 
-  vitepress@1.3.3:
-    resolution: {integrity: sha512-6UzEw/wZ41S/CATby7ea7UlffvRER/uekxgN6hbEvSys9ukmLOKsz87Ehq9yOx1Rwiw+Sj97yjpivP8w1sUmng==}
+  vitepress@1.3.4:
+    resolution: {integrity: sha512-I1/F6OW1xl3kW4PaIMC6snxjWgf3qfziq2aqsDoFc/Gt41WbcRv++z8zjw8qGRIJ+I4bUW7ZcKFDHHN/jkH9DQ==}
     hasBin: true
     peerDependencies:
       markdown-it-mathjax3: ^4
@@ -1226,17 +1226,6 @@ packages:
 
   vue-demi@0.14.10:
     resolution: {integrity: sha512-nMZBOwuzabUO0nLgIcc6rycZEebF6eeUfaiQx9+WSk8e29IbLvPU9feI6tqW4kTo3hvoYAJkMh8n8D0fuISphg==}
-    engines: {node: '>=12'}
-    hasBin: true
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^3.0.0-0 || ^2.6.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-
-  vue-demi@0.14.8:
-    resolution: {integrity: sha512-Uuqnk9YE9SsWeReYqK2alDI5YzciATE0r2SkA6iMAtuXvNTMNACJLJEXNXaEy94ECuBe4Sk6RzRU80kjdbIo1Q==}
     engines: {node: '>=12'}
     hasBin: true
     peerDependencies:
@@ -1726,7 +1715,7 @@ snapshots:
 
   '@vue/shared@3.4.38': {}
 
-  '@vue/theme@2.2.12(@algolia/client-search@4.23.3)(search-insights@2.14.0)(vitepress@1.3.3(@algolia/client-search@4.23.3)(@types/node@20.12.8)(postcss@8.4.41)(search-insights@2.14.0)(terser@5.31.0))(vue@3.4.38)':
+  '@vue/theme@2.2.12(@algolia/client-search@4.23.3)(search-insights@2.14.0)(vitepress@1.3.4(@algolia/client-search@4.23.3)(@types/node@20.12.8)(postcss@8.4.41)(search-insights@2.14.0)(terser@5.31.0))(vue@3.4.38)':
     dependencies:
       '@docsearch/css': 3.6.0
       '@docsearch/js': 3.6.0(@algolia/client-search@4.23.3)(search-insights@2.14.0)
@@ -1734,7 +1723,7 @@ snapshots:
       body-scroll-lock: 4.0.0-beta.0
       normalize.css: 8.0.1
       tiny-decode: 0.1.3
-      vitepress: 1.3.3(@algolia/client-search@4.23.3)(@types/node@20.12.8)(postcss@8.4.41)(search-insights@2.14.0)(terser@5.31.0)
+      vitepress: 1.3.4(@algolia/client-search@4.23.3)(@types/node@20.12.8)(postcss@8.4.41)(search-insights@2.14.0)(terser@5.31.0)
     transitivePeerDependencies:
       - '@algolia/client-search'
       - '@types/react'
@@ -1749,7 +1738,7 @@ snapshots:
       '@types/web-bluetooth': 0.0.20
       '@vueuse/metadata': 10.9.0
       '@vueuse/shared': 10.9.0(vue@3.4.38)
-      vue-demi: 0.14.8(vue@3.4.38)
+      vue-demi: 0.14.10(vue@3.4.38)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -1781,7 +1770,7 @@ snapshots:
 
   '@vueuse/shared@10.9.0(vue@3.4.38)':
     dependencies:
-      vue-demi: 0.14.8(vue@3.4.38)
+      vue-demi: 0.14.10(vue@3.4.38)
     transitivePeerDependencies:
       - '@vue/composition-api'
       - vue
@@ -2574,7 +2563,7 @@ snapshots:
       fsevents: 2.3.3
       terser: 5.31.0
 
-  vitepress@1.3.3(@algolia/client-search@4.23.3)(@types/node@20.12.8)(postcss@8.4.41)(search-insights@2.14.0)(terser@5.31.0):
+  vitepress@1.3.4(@algolia/client-search@4.23.3)(@types/node@20.12.8)(postcss@8.4.41)(search-insights@2.14.0)(terser@5.31.0):
     dependencies:
       '@docsearch/css': 3.6.1
       '@docsearch/js': 3.6.1(@algolia/client-search@4.23.3)(search-insights@2.14.0)
@@ -2623,10 +2612,6 @@ snapshots:
       - universal-cookie
 
   vue-demi@0.14.10(vue@3.4.38):
-    dependencies:
-      vue: 3.4.38
-
-  vue-demi@0.14.8(vue@3.4.38):
     dependencies:
       vue: 3.4.38
 
