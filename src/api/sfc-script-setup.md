@@ -197,7 +197,7 @@ const emit = defineEmits<{
 }>()
 ```
 
-- `defineProps` 或 `defineEmits` 要么使用运行时声明，要么使用类型声明。同时使用两种声明方式会导致编译报错。
+- `defineProps` or `defineEmits` can only use either runtime declaration OR type declaration. Using both at the same time will result in a compile error.
 
 - 使用类型声明的时候，静态分析会自动生成等效的运行时声明，从而在避免双重声明的前提下确保正确的运行时行为。
 
@@ -209,12 +209,12 @@ const emit = defineEmits<{
 
   这个限制已经在 3.3 版本中解决。最新版本的 Vue 支持在类型参数的位置引用导入的和有限的复杂类型。然而，由于类型到运行时的转换仍然基于 AST，因此并不支持使用需要实际类型分析的复杂类型，例如条件类型等。你可以在单个 prop 的类型上使用条件类型，但不能对整个 props 对象使用。
 
-### 使用类型声明时的默认 props 值 {#default-props-values-when-using-type-declaration}
+### Default props values when using type declaration <sup class="vt-badge ts" /> {#default-props-values-when-using-type-declaration}
 
-针对类型的 `defineProps` 声明的不足之处在于，它没有可以给 props 提供默认值的方式。为了解决这个问题，我们还提供了 `withDefaults` 编译器宏：
+In 3.5 and above, default values can be naturally declared when using Reactive Props Destructure. But in 3.4 and below, Reactive Props Destructure is not enabled by default. In order to declare props default values with type-based declaration, the `withDefaults` compiler macro is needed:
 
 ```ts
-export interface Props {
+interface Props {
   msg?: string
   labels?: string[]
 }
@@ -337,7 +337,9 @@ defineExpose({
 
 当父组件通过模板引用的方式获取到当前组件的实例，获取到的实例会像这样 `{ a: number, b: number }` (ref 会和在普通实例中一样被自动解包)
 
-## defineOptions() <sup class="vt-badge" data-text="3.3+" /> {#defineoptions}
+## defineOptions() {#defineoptions}
+
+- Only supported in 3.3+
 
 这个宏可以用来直接在 `<script setup>` 中声明组件选项，而不必使用单独的 `<script>` 块：
 
@@ -352,10 +354,11 @@ defineOptions({
 </script>
 ```
 
-- 仅支持 Vue 3.3+。
-- 这是一个宏定义，选项将会被提升到模块作用域中，无法访问 `<script setup>` 中不是字面常数的局部变量。
+- This is a macro. The options will be hoisted to module scope and cannot access local variables in `<script setup>` that are not literal constants.
 
 ## defineSlots()<sup class="vt-badge ts"/> {#defineslots}
+
+- Only supported in 3.3+
 
 这个宏可以用于为 IDE 提供插槽名称和 props 类型检查的类型提示。
 
@@ -371,9 +374,9 @@ const slots = defineSlots<{
 </script>
 ```
 
-- 仅支持 Vue 3.3+。
-
 ## `useSlots()` 和 `useAttrs()` {#useslots-useattrs}
+
+## `useSlots()` & `useAttrs()` {#useslots-useattrs}
 
 在 `<script setup>` 使用 `slots` 和 `attrs` 的情况应该是相对来说较为罕见的，因为可以在模板中直接通过 `$slots` 和 `$attrs` 来访问它们。在你的确需要使用它们的罕见场景中，可以分别用 `useSlots` 和 `useAttrs` 两个辅助函数：
 
@@ -436,9 +439,37 @@ const post = await fetch(`/api/post/1`).then((r) => r.json())
 `async setup()` 必须与 [`Suspense`](/guide/built-ins/suspense.html) 结合使用，该功能目前仍是一个实验性功能。我们计划在未来的版本中完成并记录它 - 但如果你现在好奇，你可以参考它的[测试](https://github.com/vuejs/core/blob/main/packages/runtime-core/__tests__/components/Suspense.spec.ts)來看看它是如何工作的。
 :::
 
+## Import Statements {#imports-statements}
+
+Import statements in vue follow [ECMAScript module specification](https://nodejs.org/api/esm.html).
+In addition, you can use aliases defined in your build tool configuration:
+
+```vue
+<script setup>
+import { ref } from 'vue'
+import { componentA } from './Components'
+import { componentB } from '@/Components'
+import { componentC } from '~/Components'
+</script>
+```
+
+## Import Statements {#imports-statements}
+
+Import statements in vue follow [ECMAScript module specification](https://nodejs.org/api/esm.html).
+In addition, you can use aliases defined in your build tool configuration:
+
+```vue
+<script setup>
+import { ref } from 'vue'
+import { componentA } from './Components'
+import { componentB } from '@/Components'
+import { componentC } from '~/Components'
+</script>
+```
+
 ## 泛型 <sup class="vt-badge ts" /> {#generics}
 
-可以使用 `<script>` 标签上的 `generic` 属性声明泛型类型参数：
+Generic type parameters can be declared using the `generic` attribute on the `<script>` tag:
 
 ```vue
 <script setup lang="ts" generic="T">
@@ -465,7 +496,25 @@ defineProps<{
 </script>
 ```
 
-## 限制 {#restrictions}
+In order to use a reference to a generic component in a `ref` you need to use the [`vue-component-type-helpers`](https://www.npmjs.com/package/vue-component-type-helpers) library as `InstanceType` won't work.
+
+```vue
+<script
+  setup
+  lang="ts"
+>
+import componentWithoutGenerics from '../component-without-generics.vue';
+import genericComponent from '../generic-component.vue';
+
+import type { ComponentExposed } from 'vue-component-type-helpers';
+
+// Works for a component without generics
+ref<InstanceType<typeof componentWithoutGenerics>>();
+
+ref<ComponentExposed<typeof genericComponent>>();
+```
+
+## Restrictions {#restrictions}
 
 - 由于模块执行语义的差异，`<script setup>` 中的代码依赖单文件组件的上下文。当将其移动到外部的 `.js` 或者 `.ts` 文件中的时候，对于开发者和工具来说都会感到混乱。因此，**`<script setup>`** 不能和 `src` attribute 一起使用。
 - `<script setup>` 不支持 DOM 内根组件模板。([相关讨论](https://github.com/vuejs/core/issues/8391))

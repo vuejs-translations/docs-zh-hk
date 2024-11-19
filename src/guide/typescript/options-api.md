@@ -230,7 +230,7 @@ declare module 'vue' {
 
 參考：
 
-- [對組件類型擴展的 TypeScript 單元測試](https://github.com/vuejs/core/blob/main/packages/dts-test/componentTypeExtensions.test-d.tsx)
+- [對組件類型擴展的 TypeScript 單元測試](https://github.com/vuejs/core/blob/main/packages-private/dts-test/componentTypeExtensions.test-d.tsx)
 
 ### 類型擴展的位置 {#type-augmentation-placement}
 
@@ -288,8 +288,8 @@ declare module 'vue' {
 
 這種類型擴展和全局屬性擴展受到[相同的限制](#type-augmentation-placement)。
 
-參考：
+The placement of this augmentation is subject to the [same restrictions](#type-augmentation-placement) as global property augmentations.
 
 - [對組件類型擴展的 TypeScript 單元測試](https://github.com/vuejs/core/blob/main/packages/dts-test/componentTypeExtensions.test-d.tsx)
 
-<!-- zhlint disabled -->
+- [TypeScript unit tests for component type extensions](https://github.com/vuejs/core/blob/main/packages-private/dts-test/componentTypeExtensions.test-d.tsx)

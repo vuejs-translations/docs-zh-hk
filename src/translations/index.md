@@ -6,7 +6,7 @@ aside: false
 
 ## 多語言版本 {#available-languages}
 
-- [繁體中文](https://hk.vuejs.org) [[源碼](https://github.com/vuejs-translations/docs-zh-hk)]
+- [繁體中文](https://zh-hk.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-zh-hk)]
 - [English / 英語](https://vuejs.org/) [[源碼](https://github.com/vuejs/docs)]
 - [簡體中文](https://cn.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-zh-cn)]
 - [日本語 / 日語](https://ja.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-ja)]
@@ -16,13 +16,15 @@ aside: false
 - [Português / 葡萄牙語](https://pt.vuejs.org) [[源碼](https://github.com/vuejs-translations/docs-pt)]
 - [বাংলা / 孟加拉語](https://bn.vuejs.org) [[源碼](https://github.com/vuejs-translations/docs-bn)]
 - [Italiano / 意大利語](https://it.vuejs.org) [[源碼](https://github.com/vuejs-translations/docs-it)]
-- [فارسی / 波斯語](https://fa.vuejs.org) [[source](https://github.com/vuejs-translations/docs-fa)]
-- [Русский / 俄語](https://ru.vuejs.org/) [[source](https://github.com/vuejs-translations/docs-ru)]
-- [Čeština / 捷克語](https://cs.vuejs.org/) [[source](https://github.com/vuejs-translations/docs-cs)]
+- [فارسی / 波斯語](https://fa.vuejs.org) [[源碼](https://github.com/vuejs-translations/docs-fa)]
+- [Русский / 俄語](https://ru.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-ru)]
+- [Čeština / 捷克語](https://cs.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-cs)]
 
 ## 翻譯中的語言 {#work-in-progress-languages}
 
-- [العربية / 阿拉伯語](https://ar.vuejs.org/) [[source](https://github.com/vuejs-translations/docs-ar)]
+- [العربية / 阿拉伯語](https://ar.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-ar)]
+
+- [Español / Spanish](https://vue3-spanish-docs.netlify.app/) [[源碼](https://github.com/icarusgk/vuejs-spanish-docs)]
 
 ## 啟動新的翻譯 {#starting-a-new-translation}
 

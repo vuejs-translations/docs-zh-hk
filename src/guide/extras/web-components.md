@@ -47,15 +47,15 @@ export default {
 ```js
 // vue.config.js
 module.exports = {
-  chainWebpack: config => {
+  chainWebpack: (config) => {
     config.module
       .rule('vue')
       .use('vue-loader')
-      .tap(options => ({
+      .tap((options) => ({
         ...options,
         compilerOptions: {
           // 將所有以 ion- 開頭的標籤都視為自定義元素
-          isCustomElement: tag => tag.startsWith('ion-')
+          isCustomElement: (tag) => tag.startsWith('ion-')
         }
       }))
   }
@@ -81,7 +81,7 @@ module.exports = {
 
 ### defineCustomElement {#definecustomelement}
 
-Vue 提供了一個和定義一般 Vue 組件幾乎完全一致的 [`defineCustomElement`](/api/general#definecustomelement) 方法來支持創建自定義元素。這個方法接收的參數和 [`defineComponent`](/api/general#definecomponent) 完全相同。但它會返回一個繼承自 `HTMLElement` 的自定義元素構造器：
+Vue 提供了一個和定義一般 Vue 組件幾乎完全一致的 [`defineCustomElement`](/api/custom-elements#definecustomelement) 方法來支持創建自定義元素。這個方法接收的參數和 [`defineComponent`](/api/general#definecomponent) 完全相同。但它會返回一個繼承自 `HTMLElement` 的自定義元素構造器：
 
 ```vue-html
 <my-vue-element></my-vue-element>
@@ -171,6 +171,20 @@ document.body.appendChild(
 
 [Provide / Inject API](/guide/components/provide-inject#provide-inject) 和[相應的組合式 API](/api/composition-api-dependency-injection#provide) 在 Vue 定義的自定義元素中都可以正常工作。但是請注意，依賴關係**只在自定義元素之間**起作用。例如一個 Vue 定義的自定義元素就無法注入一個由常規 Vue 組件所提供的屬性。
 
+#### App Level Config <sup class="vt-badge" data-text="3.5+" /> {#app-level-config}
+
+You can configure the app instance of a Vue custom element using the `configureApp` option:
+
+```js
+defineCustomElement(MyComponent, {
+  configureApp(app) {
+    app.config.errorHandler = (err) => {
+      /* ... */
+    }
+  }
+})
+```
+
 ### 將 SFC 編譯為自定義元素 {#sfc-as-custom-element}
 
 `defineCustomElement` 也可以搭配 Vue 單文件組件 (SFC) 使用。但是，根據默認的工具鏈配置，SFC 中的 `<style>` 在生產環境構建時仍然會被抽取和合併到一個單獨的 CSS 文件中。當正在使用 SFC 編寫自定義元素時，通常需要改為注入 `<style>` 標籤到自定義元素的 shadow root 上。
@@ -242,7 +256,7 @@ export const Counter = defineCustomElement(CounterSFC)
 // 註冊全局類型
 declare module 'vue' {
   export interface GlobalComponents {
-    'Counter': typeof Counter,
+    Counter: typeof Counter
   }
 }
 ```

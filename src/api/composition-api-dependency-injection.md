@@ -107,7 +107,9 @@
   - [指南 - 依賴注入](/guide/components/provide-inject)
   - [指南 - 為 provide/inject 標註類型](/guide/typescript/composition-api#typing-provide-inject) <sup class="vt-badge ts" />
 
-## hasInjectionContext() <sup class="vt-badge" data-text="3.3+" /> {#has-injection-context}
+## hasInjectionContext() {#has-injection-context}
+
+- Only supported in 3.3+
 
 如果 [inject()](#inject) 可以在錯誤的地方 (例如 `setup()` 之外) 被調用而不觸發警告，則返回 `true`。此方法適用於希望在內部使用 `inject()` 而不向用戶發出警告的庫。
 

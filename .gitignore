@@ -15,7 +15,6 @@
 .Trashes
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
-.idea
 
 # Directories potentially created on remote AFP share
 .AppleDB
@@ -112,5 +111,5 @@ src/examples/data.json
 src/tutorial/data.json
 draft.md
 
-# IDEs
+# folders created by IDE
 .idea

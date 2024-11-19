@@ -442,33 +442,37 @@ function MyComponent(slots) {
 如果你同時使用了具名插槽與默認插槽，則需要為默認插槽使用顯式的 `<template>` 標籤。嘗試直接為組件添加 `v-slot` 指令將導致編譯錯誤。這是為了避免因默認插槽的 props 的作用域而困惑。舉例：
 
 ```vue-html
+<!-- <MyComponent> template -->
+<div>
+  <slot :message="hello"></slot>
+  <slot name="footer" />
+</div>
+```
+
+```vue-html
 <!-- 該模板無法編譯 -->
-<template>
-  <MyComponent v-slot="{ message }">
+<MyComponent v-slot="{ message }">
+  <p>{{ message }}</p>
+  <template #footer>
+    <!-- message 屬於默認插槽，此處不可用 -->
     <p>{{ message }}</p>
-    <template #footer>
-      <!-- message 屬於默認插槽，此處不可用 -->
-      <p>{{ message }}</p>
-    </template>
-  </MyComponent>
-</template>
+  </template>
+</MyComponent>
 ```
 
 為默認插槽使用顯式的 `<template>` 標籤有助於更清晰地指出 `message` 屬性在其他插槽中不可用：
 
 ```vue-html
-<template>
-  <MyComponent>
-    <!-- 使用顯式的默認插槽 -->
-    <template #default="{ message }">
-      <p>{{ message }}</p>
-    </template>
+<MyComponent>
+  <!-- 使用顯式的默認插槽 -->
+  <template #default="{ message }">
+    <p>{{ message }}</p>
+  </template>
 
-    <template #footer>
-      <p>Here's some contact info</p>
-    </template>
-  </MyComponent>
-</template>
+  <template #footer>
+    <p>Here's some contact info</p>
+  </template>
+</MyComponent>
 ```
 
 ### 高級列表組件示例 {#fancy-list-example}

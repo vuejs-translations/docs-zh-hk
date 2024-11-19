@@ -66,7 +66,7 @@ export default {
 
 - [Gridsome：`<page-query>`](https://gridsome.org/docs/querying-data/)
 - [vite-plugin-vue-gql：`<gql>`](https://github.com/wheatjs/vite-plugin-vue-gql)
-- [vue-i18n：`<i18n>`](https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n#i18n-custom-block)
+- [vue-i18n：`<i18n>`](https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n#i18n-custom-block)
 
 自定义块的处理需要依赖工具链。如果你想要在构建中集成你的自定义语块，请参见 [SFC 自定义块集成工具链指南](/guide/scaling-up/tooling#sfc-custom-block-integrations)获取更多细节。
 
@@ -136,6 +136,13 @@ p {{ msg }}
 </unit-test>
 ```
 
-## 注释 {#comments}
+:::warning Note
+While using aliases in `src`, don't start with `~`, anything after it is interpreted as a module request. This means you can reference assets inside node modules:
+```vue
+<img src="~some-npm-package/foo.png">
+```
+:::
+
+## Comments {#comments}
 
 在每一个语块中你都可以按照相应语言 (HTML、CSS、JavaScript 和 Pug 等等) 的语法书写注释。对于顶层注释，请使用 HTML 的注释语法 `<!-- comment contents here -->`

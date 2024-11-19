@@ -133,7 +133,9 @@ const posts = await res.json()
 
 Vue Router 使用動態導入對[懶加載組件](https://router.vuejs.org/zh/guide/advanced/lazy-loading.html)進行了內置支持。這些與異步組件不同，目前他們不會觸發 `<Suspense>`。但是，它們仍然可以有異步組件作為後代，這些組件可以照常觸發 `<Suspense>`。
 
-## 嵌套 Suspense {#nested-suspense}
+## Nested Suspense {#nested-suspense}
+
+- Only supported in 3.3+
 
 當我們有多個像這樣的異步組件時（常見於嵌套或基於佈局的路由）：
 

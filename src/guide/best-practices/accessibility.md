@@ -116,23 +116,16 @@ watch(
 
 [Landmark](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles/landmark_role) 會為應用中的章節提供訪問規劃。依賴輔助技術的用戶可以跳過內容直接導航到應用的每個部分。你可以使用 [ARIA role](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Roles) 幫助你實現這個目標。
 
-| HTML    | ARIA Role            | 地標的目的 |
-|---------| -------------------- | --------- |
-| header  | role="banner"        | 主標題：頁面的標題 |
-| nav     | role="navigation"    | 適合用作文檔或相關文檔導航的鏈接集合 |
-| main    | role="main"          | 文檔的主體或中心內容 |
-| footer  | role="contentinfo"   | 關於父級文檔的信息：腳註/版權/隱私聲明鏈接 |
-| aside   | role="complementary" | 用來支持主內容，同時其自身的內容是相對獨立且有意義的 |
-| search  | role="search"        | 該章節包含整個應用的搜索功能 |
-| form    | role="form"          | 表單相關元素的集合 |
+| HTML    | ARIA Role            | Landmark 的目的                                          |
+| ------- | -------------------- | -------------------------------------------------------- |
+| header  | role="banner"        | 主標題：頁面的標題                                       |
+| nav     | role="navigation"    | 適合用作文檔或相關文檔導航的鏈接集合                     |
+| main    | role="main"          | 文檔的主體或中心內容                                     |
+| footer  | role="contentinfo"   | 關於父級文檔的信息：腳註/版權/隱私聲明鏈接               |
+| aside   | role="complementary" | 用來支持主內容，同時其自身的內容是相對獨立且有意義的     |
+| search  | role="search"        | 該章節包含整個應用的搜索功能                             |
+| form    | role="form"          | 表單相關元素的集合                                       |
 | section | role="region"        | 相關的且用戶可能會導航至此的內容。必須為該元素提供 label |
-
-
-:::tip 提示：
-建議同時使用 landmark HTML 元素和 role 屬性，以最大程度地兼容[不支持 HTML5 語義元素的傳統瀏覽器](https://caniuse.com/#feat=html5semantic)。
-:::
-
-[閱讀更多有關標題的細節](https://www.w3.org/TR/wai-aria-1.2/#landmark_roles)
 
 ## 語義化表單 {#semantic-forms}
 

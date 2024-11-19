@@ -34,15 +34,15 @@
 
 ## MaybeRef\<T> {#mayberef}
 
-`T | Ref<T>` 的別名。對於標註[組合式函數](/guide/reusability/composables.html)的參數很有用。
+- Only supported in 3.3+
 
-- 僅在 3.3+ 版本中支持。
+Alias for `T | Ref<T>`. Useful for annotating arguments of [Composables](/guide/reusability/composables.html).
 
 ## MaybeRefOrGetter\<T> {#maybereforgetter}
 
-`T | Ref<T> | (() => T)` 的別名。對於標註[組合式函數](/guide/reusability/composables.html)的參數很有用。
+- Only supported in 3.3+
 
-- 僅在 3.3+ 版本中支持。
+Alias for `T | Ref<T> | (() => T)`. Useful for annotating arguments of [Composables](/guide/reusability/composables.html).
 
 ## ExtractPropTypes\<T> {#extractproptypes}
 
@@ -77,9 +77,9 @@
 
 ## ExtractPublicPropTypes\<T> {#extractpublicproptypes}
 
-從運行時的 props 選項對象中提取 prop。提取的類型是面向外部的，即父組件允許傳遞的 props。
+- Only supported in 3.3+
 
-- 僅在 3.3+ 版本中支持。
+Extract prop types from a runtime props options object. The extracted types are public facing - i.e. the props that the parent is allowed to pass.
 
 - **示例**
 

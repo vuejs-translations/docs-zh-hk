@@ -155,26 +155,26 @@ export default {
 ```vue-html
 <div>Checked names: {{ checkedNames }}</div>
 
-<input type="checkbox" id="jack" value="Jack" v-model="checkedNames">
+<input type="checkbox" id="jack" value="Jack" v-model="checkedNames" />
 <label for="jack">Jack</label>
 
-<input type="checkbox" id="john" value="John" v-model="checkedNames">
+<input type="checkbox" id="john" value="John" v-model="checkedNames" />
 <label for="john">John</label>
 
-<input type="checkbox" id="mike" value="Mike" v-model="checkedNames">
+<input type="checkbox" id="mike" value="Mike" v-model="checkedNames" />
 <label for="mike">Mike</label>
 ```
 
 <div class="demo">
   <div>Checked names: {{ checkedNames }}</div>
 
-  <input type="checkbox" id="demo-jack" value="Jack" v-model="checkedNames">
+  <input type="checkbox" id="demo-jack" value="Jack" v-model="checkedNames" />
   <label for="demo-jack">Jack</label>
 
-  <input type="checkbox" id="demo-john" value="John" v-model="checkedNames">
+  <input type="checkbox" id="demo-john" value="John" v-model="checkedNames" />
   <label for="demo-john">John</label>
 
-  <input type="checkbox" id="demo-mike" value="Mike" v-model="checkedNames">
+  <input type="checkbox" id="demo-mike" value="Mike" v-model="checkedNames" />
   <label for="demo-mike">Mike</label>
 </div>
 
@@ -434,7 +434,7 @@ export default {
 <input v-model.number="age" />
 ```
 
-如果該值無法被 `parseFloat()` 處理，那麼將返回原始值。
+If the value cannot be parsed with `parseFloat()`, then the original (string) value is used instead. In particular, if the input is empty (for instance after the user clearing the input field), an empty string is returned. This behavior differs from the [DOM property `valueAsNumber`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement#valueasnumber). 
 
 `number` 修飾符會在輸入框有 `type="number"` 時自動啟用。
 

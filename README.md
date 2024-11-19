@@ -25,22 +25,24 @@
 
 ## 如何在本地編輯和預覽該網站
 
-本項目要求：
+This project requires Node.js to be `v18` or higher. And it is recommended to enable corepack:
 
-- Node.js 為 `v14.0.0` 或更高版本
-- pnpm 為 `v7.4.0` 或更高版本
-
-本站基於 [VitePress](https://github.com/vuejs/vitepress) 和 [@vue/theme](https://github.com/vuejs/vue-theme) 建立。網站內容以 Markdown 格式書寫，位於 `src` 文件夾中。
-
-```sh
-pnpm i
-pnpm run dev
+```bash
+corepack enable
 ```
 
-## 貢獻者列表
+This project requires Node.js to be `v18` or higher. And it is recommended to enable corepack:
 
-最新的文檔/翻譯貢獻情況可以參閱 GitHub 提供的 [contributors](https://github.com/dy-xiaodong2022/docs-zh-hant/graphs/contributors) 頁面。
+```bash
+corepack enable
+```
 
-## 版權聲明
+## Working on the content
 
-<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="知識共享許可協議" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />本作品採用<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">知識共享署名-非商業性使用-相同方式共享 4.0 國際許可協議 (CC BY-NC-SA 4.0) </a>進行許可。
+- See VitePress docs on supported [Markdown Extensions](https://vitepress.dev/guide/markdown) and the ability to [use Vue syntax inside markdown](https://vitepress.dev/guide/using-vue).
+
+- See the [Writing Guide](https://github.com/vuejs/docs/blob/main/.github/contributing/writing-guide.md) for our rules and recommendations on writing and maintaining documentation content.
+
+## Working on the theme
+
+If changes need to made for the theme, check out the [instructions for developing the theme alongside the docs](https://github.com/vuejs/vue-theme#developing-with-real-content).

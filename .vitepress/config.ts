@@ -45,6 +45,7 @@ const nav: ThemeConfig['nav'] = [
         text: '資源',
         items: [
           { text: '合作伙伴', link: '/partners/' },
+          { text: 'Developers', link: '/developers/' },
           { text: '主題', link: '/ecosystem/themes' },
           { text: 'UI 組件', link: 'https://ui-libs.vercel.app/' },
           {
@@ -125,9 +126,13 @@ const nav: ThemeConfig['nav'] = [
     link: '/sponsor/'
   },
   {
-    text: '合作伙伴',
-    link: '/partners/',
-    activeMatch: `^/partners/`
+    text: 'Experts',
+    badge: { text: 'NEW' },
+    activeMatch: `^/(partners|developers)/`,
+    items: [
+      { text: 'Partners', link: '/partners/' },
+      { text: 'Developers', link: '/developers/', badge: { text: 'NEW' } }
+    ]
   }
 ]
 
@@ -368,6 +373,10 @@ export const sidebar: ThemeConfig['sidebar'] = {
         {
           text: '依賴注入',
           link: '/api/composition-api-dependency-injection'
+        },
+        {
+          text: 'Helpers',
+          link: '/api/composition-api-helpers'
         }
       ]
     },
@@ -417,6 +426,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
     {
       text: '進階 API',
       items: [
+        { text: 'Custom Elements', link: '/api/custom-elements' },
         { text: '渲染函數', link: '/api/render-function' },
         { text: '服務端渲染', link: '/api/ssr' },
         { text: 'TypeScript 工具類型', link: '/api/utility-types' },
@@ -593,7 +603,15 @@ const i18n: ThemeConfig['i18n'] = {
 export default defineConfigWithTheme<ThemeConfig>({
   extends: baseConfig,
 
-  lang: 'zh-CN',
+  sitemap: {
+    hostname: 'https://vuejs.org'
+  },
+
+  sitemap: {
+    hostname: 'https://vuejs.org'
+  },
+
+  lang: 'zh-HK',
   title: 'Vue.js',
   description: 'Vue.js - 漸進式的 JavaScript 框架',
   srcDir: 'src',
@@ -632,6 +650,14 @@ export default defineConfigWithTheme<ThemeConfig>({
       {},
       fs.readFileSync(
         path.resolve(__dirname, './inlined-scripts/restorePreference.js'),
+        'utf-8'
+      )
+    ],
+    [
+      'script',
+      {},
+      fs.readFileSync(
+        path.resolve(__dirname, './inlined-scripts/uwu.js'),
         'utf-8'
       )
     ],
@@ -718,6 +744,11 @@ export default defineConfigWithTheme<ThemeConfig>({
         link: 'https://cs.vuejs.org',
         text: 'Čeština',
         repo: 'https://github.com/vuejs-translations/docs-cs'
+      },
+      {
+        link: 'https://zh-hk.vuejs.org',
+        text: '繁體中文',
+        repo: 'https://github.com/vuejs-translations/docs-zh-hk'
       },
       {
         link: '/translations/',
@@ -827,7 +858,6 @@ export default defineConfigWithTheme<ThemeConfig>({
       }
     },
     build: {
-      minify: 'terser',
       chunkSizeWarningLimit: Infinity
     },
     json: {

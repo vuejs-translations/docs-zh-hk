@@ -43,7 +43,11 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
   <VTCodeGroupTab label="yarn">
   
   ```sh
+  # For Yarn Modern (v2+)
   $ yarn create vue@latest
+  
+  # For Yarn ^v4.11
+  $ yarn dlx create-vue@latest
   ```
 
   </VTCodeGroupTab>
@@ -102,19 +106,16 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 
   - emacs 通過 [lsp-mode](https://emacs-lsp.github.io/lsp-mode/page/lsp-volar/) 支持。
 
-## 瀏覽器開發者插件 {#browser-devtools}
-
-<VueSchoolLink href="https://vueschool.io/lessons/using-vue-dev-tools-with-vuejs-3" title="免費的 Vue.js Devtools 課程"/>
+## Browser Devtools {#browser-devtools}
 
 Vue 的瀏覽器開發者插件使我們可以瀏覽一個 Vue 應用的組件樹，查看各個組件的狀態，追蹤狀態管理的事件，還可以進行組件性能分析。
 
-![devtools 截圖](https://raw.githubusercontent.com/vuejs/devtools/main/media/screenshot-shadow.png)
+![devtools 截圖](./images/devtools.png)
 
-- [文檔](https://devtools.vuejs.org/)
-- [Chrome 擴展商店頁](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-- [Firefox 所屬插件頁](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-- [Edge 擴展](https://microsoftedge.microsoft.com/addons/detail/vuejs-devtools/olofadcdnkkjdfgjcmjaadnlehnnihnl)
-- [獨立的 Electron 應用所屬插件](https://devtools.vuejs.org/guide/installation.html#standalone)
+- [Documentation](https://devtools.vuejs.org/)
+- [Chrome Extension](https://chromewebstore.google.com/detail/vuejs-devtools-beta/ljjemllljcmogpfapbkkighbhhppjdbg)
+- [Vite Plugin](https://devtools.vuejs.org/guide/vite-plugin)
+- [Standalone Electron app](https://devtools.vuejs.org/guide/standalone)
 
 ## TypeScript {#typescript}
 
@@ -192,9 +193,8 @@ Vue 團隊維護著 [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-v
 
 - [VueUse Playground](https://play.vueuse.org)
 - [Vue + Vite on Repl.it](https://replit.com/@templates/VueJS-with-Vite)
-- [Vue on CodeSandbox](https://codesandbox.io/s/vue-3)
+- [Vue on CodeSandbox](https://codesandbox.io/p/devbox/github/codesandbox/sandbox-templates/tree/main/vue-vite)
 - [Vue on Codepen](https://codepen.io/pen/editor/vue)
-- [Vue on Components.studio](https://components.studio/create/vue3)
 - [Vue on WebComponents.dev](https://webcomponents.dev/create/cevue)
 
 <!-- TODO ## Backend Framework Integrations -->

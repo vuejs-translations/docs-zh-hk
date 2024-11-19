@@ -46,7 +46,14 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
   <VTCodeGroupTab label="yarn">
 
   ```sh
+  # For Yarn (v1+)
+  $ yarn create vue
+
+  # For Yarn Modern (v2+)
   $ yarn create vue@latest
+  
+  # For Yarn ^v4.11
+  $ yarn dlx create-vue@latest
   ```
 
   </VTCodeGroupTab>
@@ -196,7 +203,7 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 </script>
 ```
 
-[Codepen 示例](https://codepen.io/vuejs-examples/pen/QWJwJLp)
+[CodePen 示例 >](https://codepen.io/vuejs-examples/pen/QWJwJLp)
 
 </div>
 
@@ -221,7 +228,7 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 </script>
 ```
 
-[Codepen 示例](https://codepen.io/vuejs-examples/pen/eYQpQEG)
+[CodePen 示例 >](https://codepen.io/vuejs-examples/pen/eYQpQEG)
 
 :::tip
 本指南中許多關於組合式 API 的例子將使用 `<script setup>` 語法，這需要構建工具。如果你打算在沒有構建步驟的情況下使用組合式 API，請參考 [`setup()` 選項](/api/composition-api-setup)的用法。
@@ -278,12 +285,12 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 
 <div class="options-api">
 
-[Codepen 示例](https://codepen.io/vuejs-examples/pen/VwVYVZO)
+[CodePen 示例 >](https://codepen.io/vuejs-examples/pen/VwVYVZO)
 
 </div>
 <div class="composition-api">
 
-[Codepen 示例](https://codepen.io/vuejs-examples/pen/MWzazEv)
+[CodePen 示例 >](https://codepen.io/vuejs-examples/pen/MWzazEv)
 
 </div>
 
@@ -323,7 +330,7 @@ import { createApp } from 'vue'
 </script>
 ```
 
-[Codepen 示例](https://codepen.io/vuejs-examples/pen/wvQKQyM)
+[CodePen 示例 >](https://codepen.io/vuejs-examples/pen/wvQKQyM)
 
 </div>
 
@@ -354,7 +361,7 @@ import { createApp } from 'vue'
 </script>
 ```
 
-[Codepen demo](https://codepen.io/vuejs-examples/pen/YzRyRYM)
+[CodePen Demo >](https://codepen.io/vuejs-examples/pen/YzRyRYM)
 
 </div>
 

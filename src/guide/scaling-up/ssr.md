@@ -38,11 +38,11 @@ Vue.js 是一個用於構建客戶端應用的框架。默認情況下，Vue 組
 
 ### SSR vs. SSG {#ssr-vs-ssg}
 
-**靜態站點生成** (Static-Site Generation，縮寫為 SSG)，也被稱為預渲染，是另一種流行的構建快速網站的技術。如果用服務端渲染一個頁面所需的數據對每個用戶來說都是相同的，那麼我們可以只渲染一次，提前在構建過程中完成，而不是每次請求進來都重新渲染頁面。預渲染的頁面生成後作為靜態 HTML 文件被服務器託管。
+**Static Site Generation (SSG)**, also referred to as pre-rendering, is another popular technique for building fast websites. If the data needed to server-render a page is the same for every user, then instead of rendering the page every time a request comes in, we can render it only once, ahead of time, during the build process. Pre-rendered pages are generated and served as static HTML files.
 
-SSG 保留了和 SSR 應用相同的性能表現：它帶來了優秀的首屏加載性能。同時，它比 SSR 應用的花銷更小，也更容易部署，因為它輸出的是靜態 HTML 和資源文件。這裡的關鍵詞是**靜態**：SSG 僅可以用於消費靜態數據的頁面，即數據在構建期間就是已知的，並且在多次部署期間不會改變。每當數據變化時，都需要重新部署。
+SSG retains the same performance characteristics of SSR apps: it provides great time-to-content performance. At the same time, it is cheaper and easier to deploy than SSR apps because the output is static HTML and assets. The keyword here is **static**: SSG can only be applied to pages providing static data, i.e. data that is known at build time and can not change between requests. Every time the data changes, a new deployment is needed.
 
-如果你調研 SSR 只是為了優化為數不多的營銷頁面的 SEO (例如 `/`、`/about` 和 `/contact` 等)，那麼你可能需要 SSG 而不是 SSR。SSG 也非常適合構建基於內容的網站，例如文檔站點或者博客。事實上，你現在正在閱讀的這個網站就是使用 [VitePress](https://vitepress.dev/) 靜態生成的，它是一個由 Vue 驅動的靜態站點生成器。
+If you're only investigating SSR to improve the SEO of a handful of marketing pages (e.g. `/`, `/about`, `/contact`, etc.), then you probably want SSG instead of SSR. SSG is also great for content-based websites such as documentation sites or blogs. In fact, this website you are reading right now is statically generated using [VitePress](https://vitepress.dev/), a Vue-powered static site generator.
 
 ## 基礎教程 {#basic-tutorial}
 
@@ -313,6 +313,10 @@ export function createApp() {
 3. 服務端和客戶端的時區不一致。有時候我們可能會想要把一個時間轉換為用戶的當地時間，但在服務端的時區跟用戶的時區可能並不一致，我們也並不能可靠的在服務端預先知道用戶的時區。這種情況下，當地時間的轉換也應該作為純客戶端邏輯去執行。
 
 當 Vue 遇到激活不匹配時，它將嘗試自動恢復並調整預渲染的 DOM 以匹配客戶端的狀態。這將導致一些渲染性能的損失，因為需要丟棄不匹配的節點並渲染新的節點，但大多數情況下，應用應該會如預期一樣繼續工作。儘管如此，最好還是在開發過程中發現並避免激活不匹配。
+
+#### Suppressing Hydration Mismatches <sup class="vt-badge" data-text="3.5+" /> {#suppressing-hydration-mismatches}
+
+In Vue 3.5+, it is possible to selectively suppress inevitable hydration mismatches by using the [`data-allow-mismatch`](/api/ssr#data-allow-mismatch) attribute.
 
 ### 自定義指令 {#custom-directives}
 
