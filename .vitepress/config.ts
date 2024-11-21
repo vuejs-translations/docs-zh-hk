@@ -604,11 +604,7 @@ export default defineConfigWithTheme<ThemeConfig>({
   extends: baseConfig,
 
   sitemap: {
-    hostname: 'https://vuejs.org'
-  },
-
-  sitemap: {
-    hostname: 'https://vuejs.org'
+    hostname: 'https://zh-hk.vuejs.org'
   },
 
   lang: 'zh-HK',

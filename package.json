@@ -9,6 +9,9 @@
     "build": "vitepress build",
     "preview": "vitepress preview",
     "preinstall": "npx only-allow pnpm",
+    "lint": "zhlint 'src/{api,about,guide,sponsor,translations,tutorial}/**/*.md'",
+    "clean": "rm -rf .vitepress/dist",
+    "sync": "node scripts/sync.js",
     "type": "vue-tsc --noEmit"
   },
   "dependencies": {
@@ -24,7 +27,8 @@
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^22.7.5",
     "typescript": "^5.6.3",
-    "vue-tsc": "^2.1.6"
+    "vue-tsc": "^2.1.6",
+    "zhlint": "^0.8.2"
   },
   "packageManager": "pnpm@9.12.1"
 }
