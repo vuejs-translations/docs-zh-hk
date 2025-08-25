@@ -706,7 +706,25 @@ const vnode = withDirectives(h('div'), [
 
 <div class="composition-api">
 
-在組合式 API 中，模板引用通過將 `ref()` 本身作為一個屬性傳遞給 vnode 來創建：
+在組合式 API 中，當使用 [`useTemplateRef()`](/api/composition-api-helpers#usetemplateref) <sup class="vt-badge" data-text="3.5+" /> 時，模板引用通過將字符串值作為 prop 傳遞給 vnode 來創建：
+
+```js
+import { h, useTemplateRef } from 'vue'
+
+export default {
+  setup() {
+    const divEl = useTemplateRef('my-div')
+
+    // <div ref="my-div">
+    return () => h('div', { ref: 'my-div' })
+  }
+}
+```
+
+<details>
+<summary>3.5 之前的使用方式</summary>
+
+在 3.5 之前，當 `useTemplateRef()` 尚未引入時，模板引用通過將 `ref()` 本身作為 prop 傳遞給 vnode 來創建：
 
 ```js
 import { h, ref } from 'vue'
@@ -720,7 +738,7 @@ export default {
   }
 }
 ```
-
+</details>
 </div>
 <div class="options-api">
 

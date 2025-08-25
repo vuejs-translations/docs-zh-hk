@@ -1,10 +1,10 @@
-# 状态选项 {#options-state}
+# 狀態選項 {#options-state}
 
 ## data {#data}
 
-用于声明组件初始响应式状态的函数。
+用於聲明組件初始響應式狀態的函數。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentOptions {
@@ -15,15 +15,15 @@
   }
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  该函数应当返回一个普通 JavaScript 对象，Vue 会将它转换为响应式对象。实例创建后，可以通过 `this.$data` 访问该响应式对象。组件实例也代理了该数据对象上所有的属性，因此 `this.a` 等价于 `this.$data.a`。
+  該函數應當返回一個普通 JavaScript 對象，Vue 會將它轉換為響應式對象。實例創建後，可以通過 `this.$data` 訪問該響應式對象。組件實例也代理了該數據對象上所有的屬性，因此 `this.a` 等價於 `this.$data.a`。
 
-  所有会用到的顶层数据属性都应该提前在这个对象中声明。虽然理论上可以向 `this.$data` 添加新属性，但并不推荐这么做。如果一个属性的值在一开始还获取不到，应当先用 `undefined` 或是 `null` 值来占位，让 Vue 知道这个属性是存在的。
+  所有會用到的頂層數據屬性都應該提前在這個對象中聲明。雖然理論上可以向 `this.$data` 添加新屬性，但並不推薦這麼做。如果一個屬性的值在一開始還獲取不到，應當先用 `undefined` 或是 `null` 值來佔位，讓 Vue 知道這個屬性是存在的。
 
-  以 `_` 或 `$` 开头的属性将**不会**被组件实例代理，因为它们可能和 Vue 的内置属性、API 方法冲突。你必须以 `this.$data._property` 的方式访问它们。
+  以 `_` 或 `$` 開頭的屬性將**不會**被組件實例代理，因為它們可能和 Vue 的內置屬性、API 方法衝突。你必須以 `this.$data._property` 的方式訪問它們。
 
-  **不**推荐返回一个可能改变自身状态的对象，如浏览器 API 原生对象或是带原型的类实例等。理想情况下，返回的对象应是一个纯粹代表组件状态的普通对象。
+  **不**推薦返回一個可能改變自身狀態的對象，如瀏覽器 API 原生對象或是帶原型的類實例等。理想情況下，返回的對象應是一個純粹代表組件狀態的普通對象。
 
 - **示例**
 
@@ -39,19 +39,19 @@
   }
   ```
 
-  注意，如果你为 `data` 属性使用了一个箭头函数，则 `this` 将不会指向该组件实例，不过你仍然可以通过该函数的第一个参数来访问实例：
+  注意，如果你為 `data` 屬性使用了一個箭頭函數，則 `this` 將不會指向該組件實例，不過你仍然可以通過該函數的第一個參數來訪問實例：
 
   ```js
   data: (vm) => ({ a: vm.myProp })
   ```
 
-- **参考**[深入响应式系统](/guide/extras/reactivity-in-depth)
+- **參考**[深入響應式系統](/guide/extras/reactivity-in-depth)
 
 ## props {#props}
 
-用于声明一个组件的 props。
+用於聲明一個組件的 props。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentOptions {
@@ -74,30 +74,30 @@
   type PropType<T> = { new (): T } | { new (): T }[]
   ```
 
-  > 为了便于阅读，对类型进行了简化。
+  > 為了便於閱讀，對類型進行了簡化。
 
-- **详细信息**
+- **詳細信息**
 
-  在 Vue 中，所有的组件 props 都需要被显式声明。组件 props 可以通过两种方式声明：
+  在 Vue 中，所有的組件 props 都需要被顯式聲明。組件 props 可以通過兩種方式聲明：
 
-  - 使用字符串数组的简易形式。
-  - 使用对象的完整形式。该对象的每个属性键是对应 prop 的名称，值则是该 prop 应具有的类型的构造函数，或是更高级的选项。
+  - 使用字符串數組的簡易形式。
+  - 使用對象的完整形式。該對象的每個屬性鍵是對應 prop 的名稱，值則是該 prop 應具有的類型的構造函數，或是更高級的選項。
 
-  在基于对象的语法中，每个 prop 可以进一步定义如下选项：
+  在基於對象的語法中，每個 prop 可以進一步定義如下選項：
 
-  - **`type`**：可以是下列原生构造函数之一：`String`、`Number`、`Boolean`、`Array`、`Object`、`Date`、`Function`、`Symbol`、任何自定义构造函数，或由上述内容组成的数组。在开发模式中，Vue 会检查一个 prop 的值是否匹配其声明的类型，如果不匹配则会抛出警告。详见 [Prop 校验](/guide/components/props#prop-validation)。
+  - **`type`**：可以是下列原生構造函數之一：`String`、`Number`、`Boolean`、`Array`、`Object`、`Date`、`Function`、`Symbol`、任何自定義構造函數，或由上述內容組成的數組。在開發模式中，Vue 會檢查一個 prop 的值是否匹配其聲明的類型，如果不匹配則會拋出警告。詳見 [Prop 校驗](/guide/components/props#prop-validation)。
 
-    还要注意，一个 `Boolean` 类型的 prop 会影响它在开发或生产模式下的值转换行为。详见 [Boolean 类型转换](/guide/components/props#boolean-casting)。
+    還要注意，一個 `Boolean` 類型的 prop 會影響它在開發或生產模式下的值轉換行為。詳見 [Boolean 類型轉換](/guide/components/props#boolean-casting)。
 
-  - **`default`**：为该 prop 指定一个当其没有被传入或值为 `undefined` 时的默认值。对象或数组的默认值必须从一个工厂函数返回。工厂函数也接收原始 prop 对象作为参数。
+  - **`default`**：為該 prop 指定一個當其沒有被傳入或值為 `undefined` 時的默認值。對象或數組的默認值必須從一個工廠函數返回。工廠函數也接收原始 prop 對象作為參數。
 
-  - **`required`**：定义该 prop 是否必需传入。在非生产环境中，如果 required 值为[真值](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)且 prop 未被传入，一个控制台警告将会被抛出。
+  - **`required`**：定義該 prop 是否必需傳入。在非生產環境中，如果 required 值為[真值](https://developer.mozilla.org/en-US/docs/Glossary/Truthy)且 prop 未被傳入，一個控制檯警告將會被拋出。
 
-  - **`validator`**：将 prop 值作为唯一参数传入的自定义验证函数。在开发模式下，如果该函数返回一个[假值](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) (即验证失败)，一个控制台警告将会被抛出。
+  - **`validator`**：將 prop 值和 prop 對象作為參數傳入的自定義驗證函數。在開發模式下，如果該函數返回一個[假值](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) (即驗證失敗)，一個控制檯警告將會被拋出。
 
 - **示例**
 
-  简易声明：
+  簡易聲明：
 
   ```js
   export default {
@@ -105,14 +105,14 @@
   }
   ```
 
-  对象声明，带有验证：
+  對象聲明，帶有驗證：
 
   ```js
   export default {
     props: {
-      // 类型检查
+      // 類型檢查
       height: Number,
-      // 类型检查 + 其他验证
+      // 類型檢查 + 其他驗證
       age: {
         type: Number,
         default: 0,
@@ -125,15 +125,15 @@
   }
   ```
 
-- **参考**
+- **參考**
   - [指南 - Props](/guide/components/props)
-  - [指南 - 为组件的 props 标注类型](/guide/typescript/options-api#typing-component-props) <sup class="vt-badge ts" />
+  - [指南 - 為組件的 props 標註類型](/guide/typescript/options-api#typing-component-props) <sup class="vt-badge ts" />
 
 ## computed {#computed}
 
-用于声明要在组件实例上暴露的计算属性。
+用於聲明要在組件實例上暴露的計算屬性。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentOptions {
@@ -158,13 +158,13 @@
   }
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  该选项接收一个对象，其中键是计算属性的名称，值是一个计算属性 getter，或一个具有 `get` 和 `set` 方法的对象 (用于声明可写的计算属性)。
+  該選項接收一個對象，其中鍵是計算屬性的名稱，值是一個計算屬性 getter，或一個具有 `get` 和 `set` 方法的對象 (用於聲明可寫的計算屬性)。
 
-  所有的 getters 和 setters 会将它们的 `this` 上下文自动绑定为组件实例。
+  所有的 getters 和 setters 會將它們的 `this` 上下文自動綁定為組件實例。
 
-  注意，如果你为一个计算属性使用了箭头函数，则 `this` 不会指向该组件实例，不过你仍然可以通过该函数的第一个参数来访问实例：
+  注意，如果你為一個計算屬性使用了箭頭函數，則 `this` 不會指向該組件實例，不過你仍然可以通過該函數的第一個參數來訪問實例：
 
   ```js
   export default {
@@ -182,11 +182,11 @@
       return { a: 1 }
     },
     computed: {
-      // 只读
+      // 只讀
       aDouble() {
         return this.a * 2
       },
-      // 可写
+      // 可寫
       aPlus: {
         get() {
           return this.a + 1
@@ -207,15 +207,15 @@
   }
   ```
 
-- **参考**
-  - [指南 - 计算属性](/guide/essentials/computed)
-  - [指南 - 为计算属性标记类型](/guide/typescript/options-api#typing-computed-properties) <sup class="vt-badge ts" />
+- **參考**
+  - [指南 - 計算屬性](/guide/essentials/computed)
+  - [指南 - 為計算屬性標記類型](/guide/typescript/options-api#typing-computed-properties) <sup class="vt-badge ts" />
 
 ## methods {#methods}
 
-用于声明要混入到组件实例中的方法。
+用於聲明要混入到組件實例中的方法。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentOptions {
@@ -225,11 +225,11 @@
   }
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  声明的方法可以直接通过组件实例访问，或者在模板语法表达式中使用。所有的方法都会将它们的 `this` 上下文自动绑定为组件实例，即使在传递时也如此。
+  聲明的方法可以直接通過組件實例訪問，或者在模板語法表達式中使用。所有的方法都會將它們的 `this` 上下文自動綁定為組件實例，即使在傳遞時也如此。
 
-  在声明方法时避免使用箭头函数，因为它们不能通过 `this` 访问组件实例。
+  在聲明方法時避免使用箭頭函數，因為它們不能通過 `this` 訪問組件實例。
 
 - **示例**
 
@@ -250,13 +250,13 @@
   }
   ```
 
-- **参考**[事件处理](/guide/essentials/event-handling)
+- **參考**[事件處理](/guide/essentials/event-handling)
 
 ## watch {#watch}
 
-用于声明在数据更改时调用的侦听回调。
+用於聲明在數據更改時調用的偵聽回調。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentOptions {
@@ -283,22 +283,22 @@
   }
   ```
 
-  > 为了便于阅读，对类型进行了简化。
+  > 為了便於閱讀，對類型進行了簡化。
 
-- **详细信息**
+- **詳細信息**
 
-  `watch` 选项期望接受一个对象，其中键是需要侦听的响应式组件实例属性 (例如，通过 `data` 或 `computed` 声明的属性)——值是相应的回调函数。该回调函数接受被侦听源的新值和旧值。
+  `watch` 選項期望接受一個對象，其中鍵是需要偵聽的響應式組件實例屬性 (例如，通過 `data` 或 `computed` 聲明的屬性)——值是相應的回調函數。該回調函數接受被偵聽源的新值和舊值。
 
-  除了一个根级属性，键名也可以是一个简单的由点分隔的路径，例如 `a.b.c`。注意，这种用法**不支持**复杂表达式——仅支持由点分隔的路径。如果你需要侦听复杂的数据源，可以使用命令式的 [`$watch()`](/api/component-instance#watch) API。
+  除了一個根級屬性，鍵名也可以是一個簡單的由點分隔的路徑，例如 `a.b.c`。注意，這種用法**不支持**複雜表達式——僅支持由點分隔的路徑。如果你需要偵聽複雜的數據源，可以使用命令式的 [`$watch()`](/api/component-instance#watch) API。
 
-  值也可以是一个方法名称的字符串 (通过 `methods` 声明)，或包含额外选项的对象。当使用对象语法时，回调函数应被声明在 `handler` 中。额外的选项包含：
+  值也可以是一個方法名稱的字符串 (通過 `methods` 聲明)，或包含額外選項的對象。當使用對象語法時，回調函數應被聲明在 `handler` 中。額外的選項包含：
 
-  - **`immediate`**：在侦听器创建时立即触发回调。第一次调用时，旧值将为 `undefined`。
-  - **`deep`**：如果源是对象或数组，则强制深度遍历源，以便在深度变更时触发回调。详见[深层侦听器](/guide/essentials/watchers#deep-watchers)。
-  - **`flush`**：调整回调的刷新时机。详见[回调的触发时机](/guide/essentials/watchers#callback-flush-timing)及 [`watchEffect()`](/api/reactivity-core#watcheffect)。
-  - **`onTrack / onTrigger`**：调试侦听器的依赖关系。详见[侦听器调试](/guide/extras/reactivity-in-depth#watcher-debugging)。
+  - **`immediate`**：在偵聽器創建時立即觸發回調。第一次調用時，舊值將為 `undefined`。
+  - **`deep`**：如果源是對象或數組，則強制深度遍歷源，以便在深度變更時觸發回調。詳見[深層偵聽器](/guide/essentials/watchers#deep-watchers)。
+  - **`flush`**：調整回調的刷新時機。詳見[回調的觸發時機](/guide/essentials/watchers#callback-flush-timing)及 [`watchEffect()`](/api/reactivity-core#watcheffect)。
+  - **`onTrack / onTrigger`**：調試偵聽器的依賴關係。詳見[偵聽器調試](/guide/extras/reactivity-in-depth#watcher-debugging)。
 
-  声明侦听器回调时避免使用箭头函数，因为它们将无法通过 `this` 访问组件实例。
+  聲明偵聽器回調時避免使用箭頭函數，因為它們將無法通過 `this` 訪問組件實例。
 
 - **示例**
 
@@ -316,31 +316,31 @@
       }
     },
     watch: {
-      // 侦听根级属性
+      // 偵聽根級屬性
       a(val, oldVal) {
         console.log(`new: ${val}, old: ${oldVal}`)
       },
-      // 字符串方法名称
+      // 字符串方法名稱
       b: 'someMethod',
-      // 该回调将会在被侦听的对象的属性改变时调动，无论其被嵌套多深
+      // 該回調將會在被偵聽的對象的屬性改變時調動，無論其被嵌套多深
       c: {
         handler(val, oldVal) {
           console.log('c changed')
         },
         deep: true
       },
-      // 侦听单个嵌套属性：
+      // 偵聽單個嵌套屬性：
       'c.d': function (val, oldVal) {
         // do something
       },
-      // 该回调将会在侦听开始之后立即调用
+      // 該回調將會在偵聽開始之後立即調用
       e: {
         handler(val, oldVal) {
           console.log('e changed')
         },
         immediate: true
       },
-      // 你可以传入回调数组，它们将会被逐一调用
+      // 你可以傳入回調數組，它們將會被逐一調用
       f: [
         'handle1',
         function handle2(val, oldVal) {
@@ -368,13 +368,13 @@
   }
   ```
 
-- **参考**[侦听器](/guide/essentials/watchers)
+- **參考**[偵聽器](/guide/essentials/watchers)
 
 ## emits {#emits}
 
-用于声明由组件触发的自定义事件。
+用於聲明由組件觸發的自定義事件。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentOptions {
@@ -388,20 +388,20 @@
   type EmitValidator = (...args: unknown[]) => boolean
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  可以以两种形式声明触发的事件：
+  可以以兩種形式聲明觸發的事件：
 
-  - 使用字符串数组的简易形式。
-  - 使用对象的完整形式。该对象的每个属性键是事件的名称，值是 `null` 或一个验证函数。
+  - 使用字符串數組的簡易形式。
+  - 使用對象的完整形式。該對象的每個屬性鍵是事件的名稱，值是 `null` 或一個驗證函數。
 
-  验证函数会接收到传递给组件的 `$emit` 调用的额外参数。例如，如果 `this.$emit('foo', 1)` 被调用，`foo` 相应的验证函数将接受参数 `1`。验证函数应返回布尔值，以表明事件参数是否通过了验证。
+  驗證函數會接收到傳遞給組件的 `$emit` 調用的額外參數。例如，如果 `this.$emit('foo', 1)` 被調用，`foo` 相應的驗證函數將接受參數 `1`。驗證函數應返回布爾值，以表明事件參數是否通過了驗證。
 
-  注意，`emits` 选项会影响一个监听器被解析为组件事件监听器，还是原生 DOM 事件监听器。被声明为组件事件的监听器不会被透传到组件的根元素上，且将从组件的 `$attrs` 对象中移除。详见[透传 Attributes](/guide/components/attrs)。
+  注意，`emits` 選項會影響一個監聽器被解析為組件事件監聽器，還是原生 DOM 事件監聽器。被聲明為組件事件的監聽器不會被透傳到組件的根元素上，且將從組件的 `$attrs` 對象中移除。詳見[透傳 Attributes](/guide/components/attrs)。
 
 - **示例**
 
-  数组语法：
+  數組語法：
 
   ```js
   export default {
@@ -412,15 +412,15 @@
   }
   ```
 
-  对象语法：
+  對象語法：
 
   ```js
   export default {
     emits: {
-      // 没有验证函数
+      // 沒有驗證函數
       click: null,
 
-      // 具有验证函数
+      // 具有驗證函數
       submit: (payload) => {
         if (payload.email && payload.password) {
           return true
@@ -433,15 +433,15 @@
   }
   ```
 
-- **参考**
-  - [指南 - 透传 Attributes](/guide/components/attrs)
-  - [指南 - 为组件的 emits 标注类型](/guide/typescript/options-api#typing-component-emits) <sup class="vt-badge ts" />
+- **參考**
+  - [指南 - 透傳 Attributes](/guide/components/attrs)
+  - [指南 - 為組件的 emits 標註類型](/guide/typescript/options-api#typing-component-emits) <sup class="vt-badge ts" />
 
 ## expose {#expose}
 
-用于声明当组件实例被父组件通过模板引用访问时暴露的公共属性。
+用於聲明當組件實例被父組件通過模板引用訪問時暴露的公共屬性。
 
-- **类型**
+- **類型**
 
   ```ts
   interface ComponentOptions {
@@ -449,19 +449,19 @@
   }
   ```
 
-- **详细信息**
+- **詳細信息**
 
-  默认情况下，当通过 `$parent`、`$root` 或模板引用访问时，组件实例将向父组件暴露所有的实例属性。这可能不是我们希望看到的，因为组件很可能拥有一些应保持私有的内部状态或方法，以避免紧耦合。
+  默認情況下，當通過 `$parent`、`$root` 或模板引用訪問時，組件實例將向父組件暴露所有的實例屬性。這可能不是我們希望看到的，因為組件很可能擁有一些應保持私有的內部狀態或方法，以避免緊耦合。
 
-  `expose` 选项值应当是一个包含要暴露的属性名称字符串的数组。当使用 `expose` 时，只有显式列出的属性将在组件实例上暴露。
+  `expose` 選項值應當是一個包含要暴露的屬性名稱字符串的數組。當使用 `expose` 時，只有顯式列出的屬性將在組件實例上暴露。
 
-  `expose` 仅影响用户定义的属性——它不会过滤掉内置的组件实例属性。
+  `expose` 僅影響用戶定義的屬性——它不會過濾掉內置的組件實例屬性。
 
 - **示例**
 
   ```js
   export default {
-    // 只有 `publicMethod` 在公共实例上可用
+    // 只有 `publicMethod` 在公共實例上可用
     expose: ['publicMethod'],
     methods: {
       publicMethod() {

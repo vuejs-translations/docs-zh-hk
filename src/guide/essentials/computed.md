@@ -364,8 +364,15 @@ const alwaysSmall = computed({
 
 - Only supported in 3.4+
 
+<p class="options-api">
+In case you need it, you can get the previous value returned by the computed property accessing
+the second argument of the getter:
+</p>
+
+<p class="composition-api">
 In case you need it, you can get the previous value returned by the computed property accessing
 the first argument of the getter:
+</p>
 
 <div class="options-api">
 
@@ -380,12 +387,12 @@ export default {
     // This computed will return the value of count when it's less or equal to 3.
     // When count is >=4, the last value that fulfilled our condition will be returned
     // instead until count is less or equal to 3
-    alwaysSmall(previous) {
+    alwaysSmall(_, previous) {
       if (this.count <= 3) {
-        return this.count;
+        return this.count
       }
 
-      return previous;
+      return previous
     }
   }
 }
@@ -405,10 +412,10 @@ const count = ref(2)
 // instead until count is less or equal to 3
 const alwaysSmall = computed((previous) => {
   if (count.value <= 3) {
-    return count.value;
+    return count.value
   }
 
-  return previous;
+  return previous
 })
 </script>
 ```
@@ -427,15 +434,15 @@ export default {
   },
   computed: {
     alwaysSmall: {
-      get(previous) {
+      get(_, previous) {
         if (this.count <= 3) {
-          return this.count;
+          return this.count
         }
 
         return previous;
       },
       set(newValue) {
-        this.count = newValue * 2;
+        this.count = newValue * 2
       }
     }
   }
@@ -454,13 +461,13 @@ const count = ref(2)
 const alwaysSmall = computed({
   get(previous) {
     if (count.value <= 3) {
-      return count.value;
+      return count.value
     }
 
-    return previous;
+    return previous
   },
   set(newValue) {
-    count.value = newValue * 2;
+    count.value = newValue * 2
   }
 })
 </script>

@@ -1,10 +1,15 @@
+import fs from 'fs'
+import path from 'path'
+import { defineConfigWithTheme, type HeadConfig, type Plugin } from 'vitepress'
 import type { Config as ThemeConfig } from '@vue/theme'
+import llmstxt from 'vitepress-plugin-llms'
 import baseConfig from '@vue/theme/config'
 import { defineConfigWithTheme } from 'vitepress'
 import fs from 'fs'
 import { headerPlugin } from './headerMdPlugin'
 import path from 'path'
 // import { textAdPlugin } from './textAdMdPlugin'
+import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
 
 const nav: ThemeConfig['nav'] = [
   {
@@ -181,15 +186,15 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/guide/essentials/event-handling'
         },
         { text: '表單輸入綁定', link: '/guide/essentials/forms' },
-        {
-          text: '生命週期',
-          link: '/guide/essentials/lifecycle'
-        },
         { text: '偵聽器', link: '/guide/essentials/watchers' },
         { text: '模板引用', link: '/guide/essentials/template-refs' },
         {
           text: '組件基礎',
           link: '/guide/essentials/component-basics'
+        },
+        {
+          text: 'Lifecycle Hooks',
+          link: '/guide/essentials/lifecycle'
         }
       ]
     },
@@ -496,10 +501,6 @@ export const sidebar: ThemeConfig['sidebar'] = {
           text: '帶過渡動畫的列表',
           link: '/examples/#list-transition'
         },
-        {
-          text: 'TodoMVC',
-          link: '/examples/#todomvc'
-        }
       ]
     },
     {
@@ -566,38 +567,19 @@ export const sidebar: ThemeConfig['sidebar'] = {
   ]
 }
 
-const i18n: ThemeConfig['i18n'] = {
-  search: '搜索',
-  menu: '菜單',
-  toc: '本頁目錄',
-  returnToTop: '返回頂部',
-  appearance: '外觀',
-  previous: '前一篇',
-  next: '下一篇',
-  pageNotFound: '頁面未找到',
-  deadLink: {
-    before: '你打開了一個不存在的鏈接：',
-    after: '。'
-  },
-  deadLinkReport: {
-    before: '不介意的話請提交到',
-    link: '這裡',
-    after: '，我們會跟進修復。'
-  },
-  footerLicense: {
-    before: '',
-    after: ''
-  },
-  ariaAnnouncer: {
-    before: '',
-    after: '已經加載完畢'
-  },
-  ariaDarkMode: '切換深色模式',
-  ariaSkipToContent: '直接跳到內容',
-  ariaToC: '當前頁面的目錄',
-  ariaMainNav: '主導航',
-  ariaMobileNav: '移動版導航',
-  ariaSidebarNav: '側邊欄導航'
+// Placeholder of the i18n config for @vuejs-translations.
+// const i18n: ThemeConfig['i18n'] = {
+// }
+
+function inlineScript(file: string): HeadConfig {
+  return [
+    'script',
+    {},
+    fs.readFileSync(
+      path.resolve(__dirname, `./inlined-scripts/${file}`),
+      'utf-8'
+    )
+  ]
 }
 
 export default defineConfigWithTheme<ThemeConfig>({
@@ -638,25 +620,11 @@ export default defineConfigWithTheme<ThemeConfig>({
       'link',
       {
         rel: 'preconnect',
-        href: 'https://sponsors.vuejs.org'
+        href: 'https://automation.vuejs.org'
       }
     ],
-    [
-      'script',
-      {},
-      fs.readFileSync(
-        path.resolve(__dirname, './inlined-scripts/restorePreference.js'),
-        'utf-8'
-      )
-    ],
-    [
-      'script',
-      {},
-      fs.readFileSync(
-        path.resolve(__dirname, './inlined-scripts/uwu.js'),
-        'utf-8'
-      )
-    ],
+    inlineScript('restorePreference.js'),
+    inlineScript('uwu.js'),
     [
       'script',
       {
@@ -672,7 +640,8 @@ export default defineConfigWithTheme<ThemeConfig>({
         src: 'https://vueschool.io/banner.js?affiliate=vuejs&type=top',
         async: 'true'
       }
-    ]
+    ],
+    inlineScript('perfops.js')
   ],
 
   themeConfig: {
@@ -688,7 +657,7 @@ export default defineConfigWithTheme<ThemeConfig>({
       },
       {
         link: 'https://cn.vuejs.org',
-        text: '简体中文',
+        text: '簡體中文',
         repo: 'https://github.com/vuejs-translations/docs-zh-cn'
       },
       {
@@ -734,7 +703,7 @@ export default defineConfigWithTheme<ThemeConfig>({
       {
         link: 'https://ru.vuejs.org',
         text: 'Русский',
-        repo: 'https://github.com/translation-gang/docs-ru'
+        repo: 'https://github.com/vuejs-translations/docs-ru'
       },
       {
         link: 'https://cs.vuejs.org',
@@ -745,6 +714,11 @@ export default defineConfigWithTheme<ThemeConfig>({
         link: 'https://zh-hk.vuejs.org',
         text: '繁體中文',
         repo: 'https://github.com/vuejs-translations/docs-zh-hk'
+      },
+      {
+        link: 'https://pl.vuejs.org',
+        text: 'Polski',
+        repo: 'https://github.com/vuejs-translations/docs-pl',
       },
       {
         link: '/translations/',
@@ -830,6 +804,7 @@ export default defineConfigWithTheme<ThemeConfig>({
     theme: 'github-dark',
     config(md) {
       md.use(headerPlugin)
+        .use(groupIconMdPlugin)
       // .use(textAdPlugin)
     }
   },
@@ -858,6 +833,36 @@ export default defineConfigWithTheme<ThemeConfig>({
     },
     json: {
       stringify: true
-    }
+    },
+    plugins: [
+      llmstxt({
+        ignoreFiles: [
+          'about/team/**/*',
+          'about/team.md',
+          'about/privacy.md',
+          'about/coc.md',
+          'developers/**/*',
+          'ecosystem/themes.md',
+          'examples/**/*',
+          'partners/**/*',
+          'sponsor/**/*',
+          'index.md'
+        ],
+        customLLMsTxtTemplate: `\
+# Vue.js
+
+Vue.js - The Progressive JavaScript Framework
+
+## Table of Contents
+
+{toc}`
+      }) as Plugin,
+      groupIconVitePlugin({
+        customIcon: {
+          cypress: 'vscode-icons:file-type-cypress',
+          'testing library': 'logos:testing-library'
+        }
+      }) as Plugin
+    ]
   }
 })

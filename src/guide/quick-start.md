@@ -16,6 +16,8 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 
 - 如果你已經比較熟悉 Node.js 和構建工具等概念，還可以直接在瀏覽器中打開 [StackBlitz](https://vite.new/vue) 來嘗試完整的構建設置。
 
+- 如需了解推薦的設置，請觀看這個互動式 [Scrimba](http://scrimba.com/links/vue-quickstart) 教程，它會帶你了解如何運行、編輯和部署你的第一個 Vue 應用。
+
 ## 創建一個 Vue 應用 {#creating-a-vue-application}
 
 :::tip 前提條件
@@ -28,45 +30,33 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 
 確保你安裝了最新版本的 [Node.js](https://nodejs.org/)，並且你的當前工作目錄正是打算創建項目的目錄。在命令行中運行以下命令 (不要輸入 `$` 符號)：
 
-<VTCodeGroup>
-  <VTCodeGroupTab label="npm">
+::: code-group
 
-  ```sh
-  $ npm create vue@latest
-  ```
+```sh [npm]
+$ npm create vue@latest
+```
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="pnpm">
+```sh [pnpm]
+$ pnpm create vue@latest
+```
 
-  ```sh
-  $ pnpm create vue@latest
-  ```
+```sh [yarn]
+# For Yarn (v1+)
+$ yarn create vue
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="yarn">
-
-  ```sh
-  # For Yarn (v1+)
-  $ yarn create vue
-
-  # For Yarn Modern (v2+)
-  $ yarn create vue@latest
+# For Yarn Modern (v2+)
+$ yarn create vue@latest
   
-  # For Yarn ^v4.11
-  $ yarn dlx create-vue@latest
-  ```
+# For Yarn ^v4.11
+$ yarn dlx create-vue@latest
+```
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="bun">
+```sh [bun]
+$ bun create vue@latest
+```
+:::
 
-  ```sh
-  $ bun create vue@latest
-  ```
-
-  </VTCodeGroupTab>
-</VTCodeGroup>
-
-這一指令將會安裝並執行 [create-vue](https://github.com/vuejs/create-vue)，它是 Vue 官方的項目腳手架工具。你將會看到一些諸如 TypeScript 和測試支持之類的可選功能提示：
+This command will install and execute [create-vue](https://github.com/vuejs/create-vue), the official Vue project scaffolding tool. You will be presented with prompts for several optional features such as TypeScript and testing support:
 
 <div class="language-sh"><pre><code><span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Project name: <span style="color:#888;">… <span style="color:#89DDFF;">&lt;</span><span style="color:#888;">your-project-name</span><span style="color:#89DDFF;">&gt;</span></span></span>
 <span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add TypeScript? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
@@ -84,44 +74,34 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 
 如果不確定是否要開啟某個功能，你可以直接按下回車鍵選擇 `No`。在項目被創建後，通過以下步驟安裝依賴並啟動開發伺服器：
 
-<VTCodeGroup>
-  <VTCodeGroupTab label="npm">
+::: code-group
 
-  ```sh-vue
-  $ cd {{'<your-project-name>'}}
-  $ npm install
-  $ npm run dev
-  ```
+```sh-vue [npm]
+$ cd {{'<your-project-name>'}}
+$ npm install
+$ npm run dev
+```
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="pnpm">
+```sh-vue [pnpm]
+$ cd {{'<your-project-name>'}}
+$ pnpm install
+$ pnpm run dev
+```
 
-  ```sh-vue
-  $ cd {{'<your-project-name>'}}
-  $ pnpm install
-  $ pnpm run dev
-  ```
+```sh-vue [yarn]
+$ cd {{'<your-project-name>'}}
+$ yarn
+$ yarn dev
+```
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="yarn">
+```sh-vue [bun]
+$ cd {{'<your-project-name>'}}
+$ bun install
+$ bun run dev
+```
 
-  ```sh-vue
-  $ cd {{'<your-project-name>'}}
-  $ yarn
-  $ yarn dev
-  ```
+:::
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="bun">
-
-  ```sh-vue
-  $ cd {{'<your-project-name>'}}
-  $ bun install
-  $ bun run dev
-  ```
-
-  </VTCodeGroupTab>
-</VTCodeGroup>
 
 你現在應該已經運行起來了你的第一個 Vue 項目！請注意，生成的項目中的示例組件使用的是[組合式 API](/guide/introduction#composition-api) 和 `<script setup>`，而非[選項式 API](/guide/introduction#options-api)。下面是一些補充提示：
 
@@ -132,36 +112,26 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 
 當你準備將應用發佈到生產環境時，請運行：
 
-<VTCodeGroup>
-  <VTCodeGroupTab label="npm">
+::: code-group
 
-  ```sh
-  $ npm run build
-  ```
+```sh [npm]
+$ npm run build
+```
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="pnpm">
+```sh [pnpm]
+$ pnpm run build
+```
 
-  ```sh
-  $ pnpm run build
-  ```
+```sh [yarn]
+$ yarn build
+```
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="yarn">
+```sh [bun]
+$ bun run build
+```
 
-  ```sh
-  $ yarn build
-  ```
+:::
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="bun">
-
-  ```sh
-  $ bun run build
-  ```
-
-  </VTCodeGroupTab>
-</VTCodeGroup>
 
 此命令會在 `./dist` 文件夾中為你的應用創建一個生產環境的構建版本。關於將應用上線生產環境的更多內容，請閱讀[生產環境部署指南](/guide/best-practices/production-deployment)。
 
@@ -381,8 +351,7 @@ import { createApp } from 'vue'
 
 隨著對這份指南的逐步深入，我們可能需要將代碼分割成單獨的 JavaScript 文件，以便更容易管理。例如：
 
-```html
-<!-- index.html -->
+```html [index.html]
 <div id="app"></div>
 
 <script type="module">
@@ -395,8 +364,7 @@ import { createApp } from 'vue'
 
 <div class="options-api">
 
-```js
-// my-component.js
+```js [my-component.js]
 export default {
   data() {
     return { count: 0 }
@@ -408,8 +376,7 @@ export default {
 </div>
 <div class="composition-api">
 
-```js
-// my-component.js
+```js [my-component.js]
 import { ref } from 'vue'
 export default {
   setup() {

@@ -21,7 +21,7 @@ const { x, y } = useMouse()
 
 如果我們要直接在組件中使用組合式 API 實現鼠標跟蹤功能，它會是這樣的：
 
-```vue
+```vue [MouseComponent.vue]
 <script setup>
 import { ref, onMounted, onUnmounted } from 'vue'
 
@@ -42,8 +42,7 @@ onUnmounted(() => window.removeEventListener('mousemove', update))
 
 但是，如果我們想在多個組件中複用這個相同的邏輯呢？我們可以把這個邏輯以一個組合式函數的形式提取到外部文件中：
 
-```js
-// mouse.js
+```js [mouse.js]
 import { ref, onMounted, onUnmounted } from 'vue'
 
 // 按照慣例，組合式函數名以“use”開頭
@@ -70,7 +69,7 @@ export function useMouse() {
 
 下面是它在組件中使用的方式：
 
-```vue
+```vue [MouseComponent.vue]
 <script setup>
 import { useMouse } from './mouse.js'
 
@@ -92,8 +91,7 @@ const { x, y } = useMouse()
 
 舉例來說，我們可以將添加和清除 DOM 事件監聽器的邏輯也封裝進一個組合式函數中：
 
-```js
-// event.js
+```js [event.js]
 import { onMounted, onUnmounted } from 'vue'
 
 export function useEventListener(target, event, callback) {
@@ -106,8 +104,7 @@ export function useEventListener(target, event, callback) {
 
 有了它，之前的 `useMouse()` 組合式函數可以被簡化為：
 
-```js{3,9-12}
-// mouse.js
+```js{2,8-11} [mouse.js]
 import { ref } from 'vue'
 import { useEventListener } from './event'
 
@@ -157,8 +154,7 @@ fetch('...')
 
 如果在每個需要獲取數據的組件中都要重複這種模式，那就太繁瑣了。我們可以把它抽離成一個組合式函數：
 
-```js
-// fetch.js
+```js [fetch.js]
 import { ref } from 'vue'
 
 export function useFetch(url) {
@@ -208,8 +204,7 @@ const { data, error } = useFetch(() => `/posts/${props.id}`)
 
 我們可以用 [`watchEffect()`](/api/reactivity-core.html#watcheffect) 和 [`toValue()`](/api/reactivity-utilities.html#tovalue) API 來重構我們現有的實現：
 
-```js{8,13}
-// fetch.js
+```js{7,12} [fetch.js]
 import { ref, watchEffect, toValue } from 'vue'
 
 export function useFetch(url) {

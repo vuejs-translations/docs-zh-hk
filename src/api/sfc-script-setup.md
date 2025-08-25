@@ -256,16 +256,20 @@ function inc() {
 :::warning
 如果为 `defineModel` prop 设置了一个 `default` 值且父组件没有为该 prop 提供任何值，会导致父组件与子组件之间不同步。在下面的示例中，父组件的 `myRef` 是 undefined，而子组件的 `model` 是 1：
 
-```js
-// 子组件：
+```vue [Child.vue]
+<script setup>
 const model = defineModel({ default: 1 })
-
-// 父组件
-const myRef = ref()
+</script>
 ```
 
-```html
-<Child v-model="myRef"></Child>
+```vue [Parent.vue]
+<script setup>
+const myRef = ref()
+</script>
+
+<template>
+  <Child v-model="myRef"></Child>
+</template>
 ```
 
 :::
@@ -494,6 +498,18 @@ defineProps<{
   list: U[]
 }>()
 </script>
+```
+
+You can use `@vue-generic` the directive to pass in explicit types, for when the type cannot be inferred:
+
+```vue
+<template>
+  <!-- @vue-generic {import('@/api').Actor} -->
+  <ApiSelect v-model="peopleIds" endpoint="/api/actors" id-prop="actorId" />
+
+  <!-- @vue-generic {import('@/api').Genre} -->
+  <ApiSelect v-model="genreIds" endpoint="/api/genres" id-prop="genreId" />
+</template>
 ```
 
 In order to use a reference to a generic component in a `ref` you need to use the [`vue-component-type-helpers`](https://www.npmjs.com/package/vue-component-type-helpers) library as `InstanceType` won't work.

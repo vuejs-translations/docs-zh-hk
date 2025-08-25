@@ -1,5 +1,9 @@
 # Priority C Rules: Recommended {#priority-c-rules-recommended}
 
+::: warning Note
+This Vue.js Style Guide is outdated and needs to be reviewed. If you have any questions or suggestions, please [open an issue](https://github.com/vuejs/docs/issues/new).
+:::
+
 Where multiple, equally good options exist, an arbitrary choice can be made to ensure consistency. In these rules, we describe each acceptable option and suggest a default choice. That means you can feel free to make a different choice in your own codebase, as long as you're consistent and have a good reason. Please do have a good reason though! By adapting to the community standard, you will:
 
 1. Train your brain to more easily parse most of the community code you encounter
@@ -260,19 +264,19 @@ const inputClasses = computed(() => {
 <div class="style-example style-example-bad">
 <h3>Bad</h3>
 
-```vue-html
+```vue-html [ComponentX.vue]
 <style>/* ... */</style>
 <script>/* ... */</script>
 <template>...</template>
 ```
 
-```vue-html
-<!-- ComponentA.vue -->
+```vue-html [ComponentA.vue]
 <script>/* ... */</script>
 <template>...</template>
 <style>/* ... */</style>
+```
 
-<!-- ComponentB.vue -->
+```vue-html [ComponentB.vue]
 <template>...</template>
 <script>/* ... */</script>
 <style>/* ... */</style>
@@ -283,25 +287,27 @@ const inputClasses = computed(() => {
 <div class="style-example style-example-good">
 <h3>Good</h3>
 
-```vue-html
-<!-- ComponentA.vue -->
-<script>/* ... */</script>
-<template>...</template>
-<style>/* ... */</style>
-
-<!-- ComponentB.vue -->
+```vue-html [ComponentA.vue]
 <script>/* ... */</script>
 <template>...</template>
 <style>/* ... */</style>
 ```
 
-```vue-html
-<!-- ComponentA.vue -->
+```vue-html [ComponentB.vue]
+<script>/* ... */</script>
+<template>...</template>
+<style>/* ... */</style>
+```
+
+or
+
+```vue-html  [ComponentA.vue]
 <template>...</template>
 <script>/* ... */</script>
 <style>/* ... */</style>
+```
 
-<!-- ComponentB.vue -->
+```vue-html [ComponentB.vue]
 <template>...</template>
 <script>/* ... */</script>
 <style>/* ... */</style>

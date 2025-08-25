@@ -403,7 +403,7 @@ export function useMachine(options) {
 很多其他框架已經引入了與 Vue 組合式 API 中的 ref 類似的響應性基礎類型，並稱之為“信號”：
 
 - [Solid 信號](https://www.solidjs.com/docs/latest/api#createsignal)
-- [Angular 信號](https://angular.io/guide/signals)
+- [Angular 信號](https://angular.dev/guide/signals)
 - [Preact 信號](https://preactjs.com/guide/v10/signals/)
 - [Qwik 信號](https://qwik.builder.io/docs/components/state/#usesignal)
 

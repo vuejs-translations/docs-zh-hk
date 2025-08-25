@@ -153,6 +153,8 @@ const number = ref(0)
 const tweened = reactive({
   number: 0
 })
+
+// 注意：對於大於 Number.MAX_SAFE_INTEGER (9007199254740991) 的輸入，由於 JavaScript 數字精度的限制，結果可能不準確。
 watch(number, (n) => {
   gsap.to(tweened, { duration: 0.5, number: Number(n) || 0 })
 })
@@ -175,6 +177,8 @@ export default {
       tweened: 0
     }
   },
+  // Note: For inputs greater than Number.MAX_SAFE_INTEGER (9007199254740991),
+  // the result may be inaccurate due to limitations in JavaScript number precision.
   watch: {
     number(n) {
       gsap.to(this, { duration: 0.5, tweened: Number(n) || 0 })

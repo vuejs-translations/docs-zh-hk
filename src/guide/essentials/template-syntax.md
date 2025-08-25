@@ -1,5 +1,9 @@
 # 模板語法 {#template-syntax}
 
+<ScrimbaLink href="https://scrimba.com/links/vue-template-syntax" title="Free Vue.js Template Syntax Lesson" type="scrimba">
+  在 Scrimba 上觀看交互式視頻教程
+</ScrimbaLink>
+
 Vue 使用一種基於 HTML 的模板語法，使我們能夠聲明式地將其組件實例的數據綁定到呈現的 DOM 上。所有的 Vue 模板都是語法層面合法的 HTML，可以被符合規範的瀏覽器和 HTML 解析器解析。
 
 在底層機制中，Vue 會將模板編譯成高度優化的 JavaScript 代碼。結合響應式系統，當應用狀態變更時，Vue 能夠智能地推導出需要重新渲染的組件的最少數量，並應用最少的 DOM 操作。

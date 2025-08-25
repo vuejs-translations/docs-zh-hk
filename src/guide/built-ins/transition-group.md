@@ -80,9 +80,9 @@ import ListStagger from './transition-demos/ListStagger.vue'
 
 [完整示例](/examples/#list-transition)
 
-### Custom TransitionGroup classes
+### Custom TransitionGroup classes {#custom-transitiongroup-classes}
 
-You can also specify custom transition classes for the moving element by passing the `moveClass` prop to `<TransitionGroup>`, just like [custom transition classes on `<Transition>`](https://vuejs.org/guide/built-ins/transition.html#custom-transition-classes).
+You can also specify custom transition classes for the moving element by passing the `moveClass` prop to `<TransitionGroup>`, just like [custom transition classes on `<Transition>`](/guide/built-ins/transition.html#custom-transition-classes).
 
 ## 漸進延遲列表動畫 {#staggering-list-transitions}
 

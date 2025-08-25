@@ -330,7 +330,7 @@ In comparison, properties like `height` or `margin` will trigger CSS layout, so 
 
 你可以通過監聽 `<Transition>` 組件事件的方式在過渡過程中掛上鉤子函數：
 
-```html
+```vue-html
 <Transition
   @before-enter="onBeforeEnter"
   @enter="onEnter"
@@ -469,8 +469,7 @@ export default {
 
 得益於 Vue 的組件系統，過渡效果是可以被封裝複用的。要創建一個可被複用的過渡，我們需要為 `<Transition>` 組件創建一個包裝組件，並向內傳入插槽內容：
 
-```vue{5}
-<!-- MyTransition.vue -->
+```vue{6} [MyTransition.vue]
 <script>
 // JavaScript 鉤子邏輯...
 </script>

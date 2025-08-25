@@ -1,6 +1,6 @@
 # Class 與 Style 綁定 {#class-and-style-bindings}
 
-數據綁定的一個常見需求場景是操縱元素的 CSS class 列表和內聯樣式。因為 `class` 和 `style` 都是元素属性，我們可以和其他属性一樣使用 `v-bind` 將它們和動態的字符串綁定。但是，在處理比較複雜的綁定時，通過拼接生成字符串是麻煩且易出錯的。因此，Vue 專門為 `class` 和 `style` 的 `v-bind` 用法提供了特殊的功能增強。除了字符串外，表達式的值也可以是對象或數組。
+數據綁定的一個常見需求場景是操縱元素的 CSS class 列表和內聯樣式。因為 `class` 和 `style` 都是元素屬性，我們可以和其他屬性一樣使用 `v-bind` 將它們和動態的字符串綁定。但是，在處理比較複雜的綁定時，通過拼接生成字符串是麻煩且易出錯的。因此，Vue 專門為 `class` 和 `style` 的 `v-bind` 用法提供了特殊的功能增強。除了字符串外，表達式的值也可以是對象或數組。
 
 ## 綁定 HTML class {#binding-html-classes}
 
@@ -190,7 +190,7 @@ data() {
 
 對於只有一個根元素的組件，當你使用了 `class` 屬性時，這些 class 會被添加到根元素上並與該元素上已有的 class 合併。
 
-舉例來說，如果你聲明了一個組件名叫 `MyComponent`，模板如下：
+舉例來說，如果你聲明瞭一個組件名叫 `MyComponent`，模板如下：
 
 ```vue-html
 <!-- 子組件模板 -->
@@ -241,7 +241,7 @@ Class 的綁定也是同樣的：
 <span>This is a child component</span>
 ```
 
-你可以在[透傳 Attribute](/guide/components/attrs) 一章中了解更多組件的 attribute 繼承的細節。
+你可以在[透傳 Attribute](/guide/components/attrs) 一章中瞭解更多組件的 attribute 繼承的細節。
 
 ## 綁定內聯樣式 {#binding-inline-styles}
 
@@ -314,6 +314,20 @@ data() {
 ```
 
 同樣的，如果樣式對象需要更復雜的邏輯，也可以使用返回樣式對象的計算屬性。
+
+`:style` 指令也可以與普通的樣式屬性共存，就像 `:class` 一樣。
+
+模版:
+
+```vue-html
+<h1 style="color: red" :style="'font-size: 1em'">hello</h1>
+```
+
+渲染結果:
+
+```vue-html
+<h1 style="color: red; font-size: 1em;">hello</h1>
+```
 
 ### 綁定數組 {#binding-to-arrays-1}
 

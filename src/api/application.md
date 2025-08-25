@@ -111,12 +111,12 @@ Registers a global component if passing both a name string and a component defin
   const app = createApp({})
 
   // 注册一个选项对象
-  app.component('my-component', {
+  app.component('MyComponent', {
     /* ... */
   })
 
   // 得到一个已注册的组件
-  const MyComponent = app.component('my-component')
+  const MyComponent = app.component('MyComponent')
   ```
 
 - **参考**[组件注册](/guide/components/registration)
@@ -144,17 +144,17 @@ Registers a global component if passing both a name string and a component defin
   })
 
   // 注册（对象形式的指令）
-  app.directive('my-directive', {
+  app.directive('myDirective', {
     /* 自定义指令钩子 */
   })
 
   // 注册（函数形式的指令）
-  app.directive('my-directive', () => {
+  app.directive('myDirective', () => {
     /* ... */
   })
 
   // 得到一个已注册的指令
-  const myDirective = app.directive('my-directive')
+  const myDirective = app.directive('myDirective')
   ```
 
 - **参考**[自定义指令](/guide/reusability/custom-directives)
@@ -624,13 +624,13 @@ Configure a prefix for all IDs generated via [useId()](/api/composition-api-help
 - **Example**
 
   ```js
-  app.config.idPrefix = 'my-app'
+  app.config.idPrefix = 'myApp'
   ```
 
   ```js
   // in a component:
-  const id1 = useId() // 'my-app:0'
-  const id2 = useId() // 'my-app:1'
+  const id1 = useId() // 'myApp:0'
+  const id2 = useId() // 'myApp:1'
   ```
 
 ## app.config.throwUnhandledErrorInProduction <sup class="vt-badge" data-text="3.5+" /> {#app-config-throwunhandlederrorinproduction}

@@ -1,5 +1,9 @@
 # TypeScript 與組合式 API {#typescript-with-composition-api}
 
+<ScrimbaLink href="https://scrimba.com/links/vue-ts-composition-api" title="Free Vue.js TypeScript with Composition API Lesson" type="scrimba">
+ 觀看 Scrimba 上的互動視頻課程
+</ScrimbaLink>
+
 > 這一章假設你已經閱讀了[搭配 TypeScript 使用 Vue](./overview) 的概覽。
 
 ## 為組件的 props 標註類型 {#typing-component-props}
@@ -376,7 +380,7 @@ With Vue 3.5 and `@vue/language-tools` 2.1 (powering both the IDE language servi
 In cases where auto-inference is not possible, you can still cast the template ref to an explicit type via the generic argument:
 
 ```ts
-const el = useTemplateRef<HTMLInputElement>(null)
+const el = useTemplateRef<HTMLInputElement>('el')
 ```
 
 <details>
@@ -416,8 +420,7 @@ In cases where auto-inference is not possible (e.g. non-SFC usage or dynamic com
 
 In order to get the instance type of an imported component, we need to first get its type via `typeof`, then use TypeScript's built-in `InstanceType` utility to extract its instance type:
 
-```vue{5}
-<!-- App.vue -->
+```vue{6,7} [App.vue]
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
 import Foo from './Foo.vue'
@@ -440,13 +443,12 @@ In cases where the exact type of the component isn't available or isn't importan
 import { useTemplateRef } from 'vue'
 import type { ComponentPublicInstance } from 'vue'
 
-const child = useTemplateRef<ComponentPublicInstance | null>(null)
+const child = useTemplateRef<ComponentPublicInstance>('child')
 ```
 
 In cases where the component referenced is a [generic component](/guide/typescript/overview.html#generic-components), for instance `MyGenericModal`:
 
-```vue
-<!-- MyGenericModal.vue -->
+```vue [MyGenericModal.vue]
 <script setup lang="ts" generic="ContentType extends string | number">
 import { ref } from 'vue'
 
@@ -462,14 +464,13 @@ defineExpose({
 
 It needs to be referenced using `ComponentExposed` from the [`vue-component-type-helpers`](https://www.npmjs.com/package/vue-component-type-helpers) library as `InstanceType` won't work.
 
-```vue
-<!-- App.vue -->
+```vue [App.vue]
 <script setup lang="ts">
 import { useTemplateRef } from 'vue'
 import MyGenericModal from './MyGenericModal.vue'
 import type { ComponentExposed } from 'vue-component-type-helpers'
 
-const modal = useTemplateRef<ComponentExposed<typeof MyGenericModal>>(null)
+const modal = useTemplateRef<ComponentExposed<typeof MyGenericModal>>('modal')
 
 const openModal = () => {
   modal.value?.open('newValue')

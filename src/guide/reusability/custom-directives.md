@@ -25,7 +25,7 @@ const vHighlight = {
 
 我們已經介紹了兩種在 Vue 中重用代碼的方式：[組件](/guide/essentials/component-basics)和[組合式函數](./composables)。組件是主要的構建模塊，而組合式函數則側重於有狀態的邏輯。另一方面，自定義指令主要是為了重用涉及普通元素的底層 DOM 訪問的邏輯。
 
-一個自定義指令由一個包含類似組件生命週期鉤子的對象來定義。鉤子函數會接收到指令所綁定元素作為其參數。下面是一個自定義指令的例子，當一個 input 元素被 Vue 插入到 DOM 中後，它會被自動聚焦：
+一個自定義指令由一個包含類似組件生命週期鉤子的對象來定義。鉤子函數會接收到指令所綁定元素作為其參數。下面是一個自定義指令的例子，當一個 input 元素被 Vue 插入到 DOM 中後，該指令會將 class 添加到元素中：
 
 <div class="composition-api">
 
@@ -230,7 +230,7 @@ const myDirective = {
 這裡指令的參數會基於組件的 `arg` 數據屬性響應式地更新。
 
 :::tip Note
-除了 `el` 外，其他參數都是只讀的，不要修改它們。如你需要在不同的鉤子間共享信息，建議通過元素的 [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) 屬性實現。
+除了 `el` 外，其他參數都是隻讀的，不要修改它們。如你需要在不同的鉤子間共享信息，建議通過元素的 [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) 屬性實現。
 :::
 
 ## 簡化形式 {#function-shorthand}

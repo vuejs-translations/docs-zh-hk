@@ -51,57 +51,35 @@ onMounted(load)
     </p>
   </section>
 
-  <section v-if="data && data.special" id="special-sponsor">
-    <template v-if="data && data.platinum_china">
-      <h3>中國區鉑金贊助</h3>
-      <div id="special-sponsor-container">
-        <template
-          v-for="{
-            url,
-            img,
-            name,
-            height,
-            description
-          } of data.platinum_china"
-        >
-          <a
-            class="logo"
-            :href="url"
-            target="_blank"
-            rel="sponsored noopener"
-          >
-            <picture v-if="img.endsWith('png')">
-              <source
-                type="image/avif"
-                :srcset="`${base}/images/${img.replace(
-                  /\.png$/,
-                  '.avif'
-                )}`"
-              />
-              <img
-                :src="`${base}/images/${img}`"
-                :alt="name"
-                :style="{ height: height || '50px' }"
-              />
-            </picture>
-            <img
-              width="150"
-              v-else
-              :src="`${base}/images/${img}`"
-              :alt="name"
+  <section v-if="data && data.platinum_china" id="special-sponsor">
+    <h3>中國區鉑金贊助</h3>
+    <div id="special-sponsor-container">
+      <template v-for="{ url, url_cn, img, name, height, description } of data.platinum_china"
+      >
+        <a class="logo" :href="url_cn || url" target="_blank" rel="sponsored noopener">
+          <picture v-if="img.endsWith('png')">
+            <source
+              type="image/avif"
+              :srcset="`${base}/images/${img.replace(/\.png$/,'.avif')}`"
             />
-          </a>
-        </template>
-      </div>
-    </template>
-    <a v-else-if="data" class="lead" href="/sponsor/"
-      >中國區鉑金贊助位 點擊了解更多</a
-    >
+            <img :src="`${base}/images/${img}`" :alt="name" :style="{ height: height || '50px' }" />
+          </picture>
+          <img
+            width="168"
+            height="42"
+            v-else
+            :src="`${base}/images/${img}`"
+            :alt="name"
+          />
+        </a>
+        <span>{{ description }}</span>
+      </template>
+    </div>
   </section>
-  <section v-else id="special-sponsor">
+  <section v-else id="special-spsr">
     <span>
       <a href="/sponsor/#tier-benefits">
-        Special Sponsor slot is now vacant - Inquire now
+        中國區鉑金贊助位現已空缺-立即諮詢
       </a>
     </span>
   </section>
@@ -125,7 +103,7 @@ onMounted(load)
     </div>
   </section>
 
-  <section id="sponsors">
+  <section id="spsrs">
     <h2>Platinum Sponsors</h2>
     <SponsorsGroup tier="platinum" placement="landing" />
     <h2>Gold Sponsors</h2>
@@ -245,36 +223,6 @@ html:not(.dark) .accent,
   background-color: var(--vt-c-gray-dark-3);
 }
 
-/* NOTE: via #vuemastery-action in VueMasteryModal.vue */
-
-.actions .get-started {
-  font-size: 16px;
-  display: inline-block;
-  border-radius: 8px;
-  transition: background-color 0.5s, color 0.5s;
-  position: relative;
-  font-weight: 600;
-  background-color: var(--vt-c-green);
-  color: #fff;
-  margin-right: 18px;
-  padding: 8px 1em;
-}
-
-.dark .actions .get-started {
-  color: var(--vt-c-indigo);
-}
-
-.actions .get-started:hover {
-  background-color: var(--vt-c-green-dark);
-  transition-duration: 0.2s;
-}
-
-.dark .actions .get-started:hover {
-  background-color: var(--vt-c-green-light);
-}
-
-/* end NOTE */
-
 #special-sponsor {
   border-top: 1px solid var(--vt-c-divider-light);
   border-bottom: 1px solid var(--vt-c-divider-light);
@@ -294,13 +242,30 @@ html:not(.dark) .accent,
   align-items: center;
 }
 
-#special-sponsor .logo {
-  display: flex;
-  justify-content: center;
-  padding: 0 20px;
+#special-spsr span {
+  color: var(--vt-c-text-2);
+  font-weight: 500;
+  font-size: 13px;
+  vertical-align: middle;
+  flex: 1;
 }
 
-.dark #special-sponsor img {
+#special-spsr span:first-child {
+  text-align: right;
+}
+
+#special-spsr a {
+  display: flex;
+  justify-content: center;
+  padding: 0 24px;
+}
+
+#special-spsr img {
+  height: 42px;
+  margin: -6px 0;
+}
+
+.dark #special-spsr img {
   filter: grayscale(1) invert(1);
 }
 
@@ -328,18 +293,18 @@ html:not(.dark) .accent,
   background-color: transparent;
 }
 
-#sponsors {
+#spsrs {
   max-width: 900px;
   margin: 0px auto;
 }
 
-#sponsors h2 {
+#spsrs h2 {
   font-size: 20px;
   font-weight: 600;
   margin-bottom: 1em;
 }
 
-#sponsors .sponsor-container {
+#spsrs .spsr-container {
   margin-bottom: 3em;
 }
 
@@ -372,15 +337,15 @@ html:not(.dark) .accent,
     font-size: 16px;
     margin: 18px 0 30px;
   }
-  #special-sponsor {
+  #special-spsr {
     flex-direction: column;
     height: auto;
   }
-  #special-sponsor img {
+  #special-spsr img {
     height: 36px;
     margin: 8px 0;
   }
-  #special-sponsor span {
+  #special-spsr span {
     text-align: center !important;
   }
   #highlights h3 {

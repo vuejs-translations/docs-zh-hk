@@ -113,6 +113,135 @@ watchEffect(() => {
 
 </div>
 
+<!-- TODO: Translation -->
+
+## Ref on Component {#ref-on-component}
+
+> This section assumes knowledge of [Components](/guide/essentials/component-basics). Feel free to skip it and come back later.
+
+`ref` can also be used on a child component. In this case the reference will be that of a component instance:
+
+<div class="composition-api">
+
+```vue
+<script setup>
+import { useTemplateRef, onMounted } from 'vue'
+import Child from './Child.vue'
+
+const childRef = useTemplateRef('child')
+
+onMounted(() => {
+  // childRef.value will hold an instance of <Child />
+})
+</script>
+
+<template>
+  <Child ref="child" />
+</template>
+```
+
+<details>
+<summary>Usage before 3.5</summary>
+
+```vue
+<script setup>
+import { ref, onMounted } from 'vue'
+import Child from './Child.vue'
+
+const child = ref(null)
+
+onMounted(() => {
+  // child.value will hold an instance of <Child />
+})
+</script>
+
+<template>
+  <Child ref="child" />
+</template>
+```
+
+</details>
+
+</div>
+<div class="options-api">
+
+```vue
+<script>
+import Child from './Child.vue'
+
+export default {
+  components: {
+    Child
+  },
+  mounted() {
+    // this.$refs.child will hold an instance of <Child />
+  }
+}
+</script>
+
+<template>
+  <Child ref="child" />
+</template>
+```
+
+</div>
+
+<span class="composition-api">If the child component is using Options API or not using `<script setup>`, the</span><span class="options-api">The</span> referenced instance will be identical to the child component's `this`, which means the parent component will have full access to every property and method of the child component. This makes it easy to create tightly coupled implementation details between the parent and the child, so component refs should be only used when absolutely needed - in most cases, you should try to implement parent / child interactions using the standard props and emit interfaces first.
+
+<div class="composition-api">
+
+An exception here is that components using `<script setup>` are **private by default**: a parent component referencing a child component using `<script setup>` won't be able to access anything unless the child component chooses to expose a public interface using the `defineExpose` macro:
+
+```vue
+<script setup>
+import { ref } from 'vue'
+
+const a = 1
+const b = ref(2)
+
+// Compiler macros, such as defineExpose, don't need to be imported
+defineExpose({
+  a,
+  b
+})
+</script>
+```
+
+When a parent gets an instance of this component via template refs, the retrieved instance will be of the shape `{ a: number, b: number }` (refs are automatically unwrapped just like on normal instances).
+
+Note that defineExpose must be called before any await operation. Otherwise, properties and methods exposed after the await operation will not be accessible. 
+
+See also: [Typing Component Template Refs](/guide/typescript/composition-api#typing-component-template-refs) <sup class="vt-badge ts" />
+
+</div>
+<div class="options-api">
+
+The `expose` option can be used to limit the access to a child instance:
+
+```js
+export default {
+  expose: ['publicData', 'publicMethod'],
+  data() {
+    return {
+      publicData: 'foo',
+      privateData: 'bar'
+    }
+  },
+  methods: {
+    publicMethod() {
+      /* ... */
+    },
+    privateMethod() {
+      /* ... */
+    }
+  }
+}
+```
+
+In the above example, a parent referencing this component via template ref will only be able to access `publicData` and `publicMethod`.
+
+</div>
+
 ## `v-for` 中的模板引用 {#refs-inside-v-for}
 
 > 需要 v3.5 及以上版本
@@ -218,129 +347,4 @@ export default {
 <input :ref="(el) => { /* 將 el 賦值給一個數據屬性或 ref 變量 */ }">
 ```
 
-注意我們這裡需要使用動態的 `:ref` 綁定才能夠傳入一個函數。當綁定的元素被卸載時，函數也會被調用一次，此時的 `el` 參數會是 `null`。你當然也可以綁定一個組件方法而不是內聯函數。
-
-## 組件上的 ref {#ref-on-component}
-
-> 這一小節假設你已了解[組件](/guide/essentials/component-basics)的相關知識，或者你也可以先跳過這裡，之後再回來看。
-
-模板引用也可以被用在一個子組件上。這種情況下引用中獲得的值是組件實例：
-
-<div class="composition-api">
-
-```vue
-<script setup>
-import { useTemplateRef, onMounted } from 'vue'
-import Child from './Child.vue'
-
-const childRef = useTemplateRef('child')
-
-onMounted(() => {
-  // childRef.value will hold an instance of <Child />
-})
-</script>
-
-<template>
-  <Child ref="child" />
-</template>
-```
-
-<details>
-<summary>Usage before 3.5</summary>
-
-```vue
-<script setup>
-import { ref, onMounted } from 'vue'
-import Child from './Child.vue'
-
-const child = ref(null)
-
-onMounted(() => {
-  // child.value 是 <Child /> 組件的實例
-})
-</script>
-
-<template>
-  <Child ref="child" />
-</template>
-```
-
-</details>
-
-</div>
-<div class="options-api">
-
-```vue
-<script>
-import Child from './Child.vue'
-
-export default {
-  components: {
-    Child
-  },
-  mounted() {
-    // this.$refs.child 是 <Child /> 組件的實例
-  }
-}
-</script>
-
-<template>
-  <Child ref="child" />
-</template>
-```
-
-</div>
-
-如果一個子組件使用的是選項式 API <span class="composition-api">或沒有使用 `<script setup>`</span>，被引用的組件實例和該子組件的 `this` 完全一致，這意味著父組件對子組件的每一個屬性和方法都有完全的訪問權。這使得在父組件和子組件之間創建緊密耦合的實現細節變得很容易，當然也因此，應該只在絕對需要時才使用組件引用。大多數情況下，你應該首先使用標準的 props 和 emit 接口來實現父子組件交互。
-
-<div class="composition-api">
-
-有一個例外的情況，使用了 `<script setup>` 的組件是**默認私有**的：一個父組件無法訪問到一個使用了 `<script setup>` 的子組件中的任何東西，除非子組件在其中通過 `defineExpose` 宏顯式暴露：
-
-```vue
-<script setup>
-import { ref } from 'vue'
-
-const a = 1
-const b = ref(2)
-
-// 像 defineExpose 這樣的編譯器宏不需要導入
-defineExpose({
-  a,
-  b
-})
-</script>
-```
-
-當父組件通過模板引用獲取到了該組件的實例時，得到的實例類型為 `{ a: number, b: number }` (ref 都會自動解包，和一般的實例一樣)。
-
-TypeScript 用戶請參考：[為組件的模板引用標註類型](/guide/typescript/composition-api#typing-component-template-refs) <sup class="vt-badge ts" />
-
-</div>
-<div class="options-api">
-
-`expose` 選項可以用於限制對子組件實例的訪問：
-
-```js
-export default {
-  expose: ['publicData', 'publicMethod'],
-  data() {
-    return {
-      publicData: 'foo',
-      privateData: 'bar'
-    }
-  },
-  methods: {
-    publicMethod() {
-      /* ... */
-    },
-    privateMethod() {
-      /* ... */
-    }
-  }
-}
-```
-
-在上面這個例子中，父組件通過模板引用訪問到子組件實例後，只能訪問 `publicData` 和 `publicMethod`。
-
-</div>
+Note we are using a dynamic `:ref` binding so we can pass it a function instead of a ref name string. When the element is unmounted, the argument will be `null`. You can, of course, use a method instead of an inline function.

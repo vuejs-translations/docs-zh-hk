@@ -19,12 +19,13 @@ aside: false
 - [فارسی / 波斯語](https://fa.vuejs.org) [[源碼](https://github.com/vuejs-translations/docs-fa)]
 - [Русский / 俄語](https://ru.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-ru)]
 - [Čeština / 捷克語](https://cs.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-cs)]
+- [Polski / Polish](https://pl.vuejs.org/) [[source](https://github.com/vuejs-translations/docs-pl)]
 
 ## 翻譯中的語言 {#work-in-progress-languages}
 
 - [العربية / 阿拉伯語](https://ar.vuejs.org/) [[源碼](https://github.com/vuejs-translations/docs-ar)]
-
 - [Español / Spanish](https://vue3-spanish-docs.netlify.app/) [[源碼](https://github.com/icarusgk/vuejs-spanish-docs)]
+- [Deutsch / German](https://de.vuejs.org/) [[source](https://github.com/vuejs-translations/docs-de)]
 
 ## 啟動新的翻譯 {#starting-a-new-translation}
 
