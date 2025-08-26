@@ -1,5 +1,5 @@
-<!-- TODO: translation -->
-# Vue.js 隐私政策 {#vue.js-privacy-policy}
+<!-- TODO: translation --># Vue.js Privacy Policy {#vue.js-privacy-policy}
+
 > Effective Date: May 3, 2024
 
 這份隱私政策說明了 Vue.js 組織（以下稱「Vue」、「我們」、「本公司」或「我們的」）在處理您於本網站（https://vuejs.org）及我們與開源相關的網站（以下統稱「網站」）的資訊時的做法，以及在本網站上向您提供的任何內容、相關文件、資訊與服務（例如：教程、支援開發者工作流程的工具、資源存取等，以下統稱「服務」）。本隱私政策說明了我們為支援服務所處理的個人資訊。
