@@ -1,42 +1,34 @@
-<!-- TODO: translation --># Vue.js Privacy Policy {#vue.js-privacy-policy}
-
 > Effective Date: May 3, 2024
 
-This Privacy Policy describes the Vue.js organization ("Vue", "we", "us" or "our") practices for handling your information in connection with this website (https://vuejs.org) and our open source-related websites ("Websites") and any content, related documentation, information and services (e.g. tutorials, tools to support the developer workflow, access to resources, etc.) made available to you on this website (collectively, the "Services"). This Privacy Policy describes the personal information we process to support our Services.
+這份隱私政策說明了 Vue.js 組織（以下稱「Vue」、「我們」、「本公司」或「我們的」）在處理您於本網站（https://vuejs.org）及我們與開源相關的網站（以下統稱「網站」）的資訊時的做法，以及在本網站上向您提供的任何內容、相關文件、資訊與服務（例如：教程、支援開發者工作流程的工具、資源存取等，以下統稱「服務」）。本隱私政策說明了我們為支援服務所處理的個人資訊。
 
-For clarity, this Privacy Policy does not apply to any:
+為了清楚起見，本隱私政策不適用於以下任何情況：
 
-1. Use of open source code, documentation or specifications made available on GitHub (https://github.com/), which are governed by the terms of the applicable open source license;
+1. 使用在 GitHub（https://github.com/）上提供的開源程式碼、文件或規範，這些均受適用的開源許可條款約束；
+2. 在 GitHub 上針對開源專案的 Pull Request、問題（issues）以及其他互動或功能，這些均受 GitHub 條款與條件約束；
+3. 我們在 NPM（https://npmjs.com/）上發佈套件的使用統計資料，這些均受 NPM 條款與條件約束；
+4. 我們發佈的瀏覽器或 IDE 擴充套件的使用統計資料，這些資料由瀏覽器或 IDE 供應商收集，並受各供應商各自的條款與條件約束。
 
-2. Pull requests, issues and any other interactions or features related to participation in open source projects on GitHub, which are governed by GitHub's terms and conditions; or
+## 我們收集哪些種類的資訊？
 
-3. Usage statistics of our published packages on NPM (https://npmjs.com/), which are governed by NPM's terms and conditions; or
+我們**不**會收集或儲存任何類型的個人資料，無論是透過我們的網站，還是透過我們發佈的 NPM 套件或瀏覽器 / IDE 擴充套件。
 
-4. Usage statistics of our published browser / IDE extensions collected by the browser / IDE vendors. Such statistics are governed by the vendors' respective terms and conditions.
+我們可能透過整合於我們網站的第三方服務收集匿名化資料：
 
-## What Kinds of Information Do We Collect? {#what-kinds-of-information-do-we-collect}
+- **網站訪客資料。** 我們的網站分析由 [Fathom Analytics](https://usefathom.com/) 提供支援，該服務不使用 Cookie，並遵循 GDPR、ePrivacy（包括 PECR）、COPPA 及 CCPA。使用這款注重隱私的網站分析軟體時，您的 IP 位址僅會被短暫處理，我們（網站營運方）無法識別您的身份。依照 CCPA，您的個人資訊已被去識別化。您可以在 Fathom Analytics 的網站上閱讀更多相關資訊。
+  - Fathom Analytics 隱私政策: https://usefathom.com/legal/privacy
+- **搜尋功能的使用資料。** 我們的搜尋功能由 [Algolia DocSearch](https://docsearch.algolia.com/) 提供支援，該服務不進行任何形式的使用者追蹤或指紋識別，且不使用 Cookie。Algolia 的服務符合 GDPR、CCPA，並通過 TRUSTe 認證。
+  - Algolia 隱私政策：https://www.algolia.com/policies/privacy/
+  - Algolia 的安全性與隱私合規性：https://www.algolia.com/distributed-secure/security-compliance/
 
-We do **not** collect or store any type of personal data, whether through our websites or through our published npm packages or browser / IDE extensions.
+## 我們如何使用資訊？
 
-We may collect anonymized data via 3rd party services integrated in our websites:
+收集上述資料的唯一目的是以最注重隱私的方式了解我們的網站流量和使用情況，以便我們能持續改進網站和文件的品質。依據 GDPR，其合法依據為「第 6(1)(f) 條；我們的合法利益在於持續改進我們的網站與業務。」根據說明，沒有任何個人資料會被長期儲存。
 
-- **Visitor data to our websites.** Our website analytics is powered by [Fathom Analytics](https://usefathom.com/), which doesn't use cookies and complies with the GDPR, ePrivacy (including PECR), COPPA and CCPA. Using this privacy-friendly website analytics software, your IP address is only briefly processed, and we (running this website) have no way of identifying you. As per the CCPA, your personal information is de-identified. You can read more about this on Fathom Analytics' website.
+## 資料保留期限
 
-  - Fathom Analytics' Privacy Policy: https://usefathom.com/legal/privacy
+所有收集的資料皆儲存在上述第三方服務中，並遵循各服務各自的資料保留政策。
 
-- **Usage data of the search functionality.** Our search functionality is powered by [Algolia DocSearch](https://docsearch.algolia.com/), which does not perform any type of user tracking or fingerprinting, and does not use cookies. Algolia services are GDPR compliant, CCPA compliant, and TRUSTe Certified.
+## Questions
 
-  - Algolia's privacy policy: https://www.algolia.com/policies/privacy/
-  - Algolia's security and privacy compliance: https://www.algolia.com/distributed-secure/security-compliance/
-
-## How Do We Use Information? {#how-do-we-use-information}
-
-The sole purpose of collecting the aforementioned data is to understand our website traffic and usage in the most privacy-friendly way possible so that we can continually improve our website and documentation quality. The lawful basis as per the GDPR is "Article 6(1)(f); where our legitimate interests are to improve our website and business continually." As per the explanation, no personal data is stored over time.
-
-## Data Retention {#data-retention}
-
-All data collected are stored on aforementioned 3rd party services and are subject to the services' respective data retention policies.
-
-## Questions {#questions}
-
-If you have any questions about this Privacy Policy or our practices, please contact us via email at hello@vuejs.org.
+如果您對本隱私政策或我們的作法有任何疑問，請透過電子郵件與我們聯絡： hello@vuejs.org。
