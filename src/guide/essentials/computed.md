@@ -122,7 +122,7 @@ const publishedBooksMessage = computed(() => {
 
 [在演練場中嘗試一下](https://play.vuejs.org/#eNp1kE9Lw0AQxb/KI5dtoTainkoaaREUoZ5EEONhm0ybYLO77J9CCfnuzta0vdjbzr6Zeb95XbIwZroPlMySzJW2MR6OfDB5oZrWaOvRwZIsfbOnCUrdmuCpQo+N1S0ET4pCFarUynnI4GttMT9PjLpCAUq2NIN41bXCkyYxiZ9rrX/cDF/xDYiPQLjDDRbVXqqSHZ5DUw2tg3zP8lK6pvxHe2DtvSasDs6TPTAT8F2ofhzh0hTygm5pc+I1Yb1rXE3VMsKsyDm5JcY/9Y5GY8xzHI+wnIpVw4nTI/10R2rra+S4xSPEJzkBvvNNs310ztK/RDlLLjy1Zic9cQVkJn+R7gIwxJGlMXiWnZEq77orhH3Pq2NH9DjvTfpfSBSbmA==)
 
-我們在這裡定義了一個計算屬性 `publishedBooksMessage`。`computed()` 方法期望接收一個 [getter 函數](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description)，它的返回值是一個**計算屬性 ref**。和一般的 ref 相似，你可以通過 `publishedBooksMessage.value` 来訪問計算的結果。計算屬性 ref 也會在模板中自動解包，所以你可以在模板表達式中引用時而無需添加 `.value`。
+我們在這裡定義了一個計算屬性 `publishedBooksMessage`。`computed()` 方法期望接收一個 [getter 函數](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description)，它的返回值是一個**計算屬性 ref**。和一般的 ref 相似，你可以通過 `publishedBooksMessage.value` 來訪問計算的結果。計算屬性 ref 也會在模板中自動解包，所以你可以在模板表達式中引用時而無需添加 `.value`。
 
 Vue 的計算屬性會自動追蹤響應式依賴。它會檢測到 `publishedBooksMessage` 依賴於 `author.books`，所以當 `author.books` 改變時，任何依賴於 `publishedBooksMessage` 的綁定都會同時更新。
 
@@ -250,6 +250,231 @@ const fullName = computed({
 現在當你再運行 `fullName.value = 'John Doe'` 時，setter 會被調用而 `firstName` 和 `lastName` 會隨之更新。
 
 </div>
+
+## Getting the Previous Value {#previous}
+
+- Only supported in 3.4+
+
+In case you need it, you can get the previous value returned by the computed property accessing
+the first argument of the getter:
+
+<div class="options-api">
+
+```js
+export default {
+  data() {
+    return {
+      count: 2
+    }
+  },
+  computed: {
+    // This computed will return the value of count when it's less or equal to 3.
+    // When count is >=4, the last value that fulfilled our condition will be returned
+    // instead until count is less or equal to 3
+    alwaysSmall(previous) {
+      if (this.count <= 3) {
+        return this.count;
+      }
+
+      return previous;
+    }
+  }
+}
+```
+</div>
+
+<div class="composition-api">
+
+```vue
+<script setup>
+import { ref, computed } from 'vue'
+
+const count = ref(2)
+
+// This computed will return the value of count when it's less or equal to 3.
+// When count is >=4, the last value that fulfilled our condition will be returned
+// instead until count is less or equal to 3
+const alwaysSmall = computed((previous) => {
+  if (count.value <= 3) {
+    return count.value;
+  }
+
+  return previous;
+})
+</script>
+```
+</div>
+
+In case you're using a writable computed:
+
+<div class="options-api">
+
+```js
+export default {
+  data() {
+    return {
+      count: 2
+    }
+  },
+  computed: {
+    alwaysSmall: {
+      get(previous) {
+        if (this.count <= 3) {
+          return this.count;
+        }
+
+        return previous;
+      },
+      set(newValue) {
+        this.count = newValue * 2;
+      }
+    }
+  }
+}
+```
+
+</div>
+<div class="composition-api">
+
+```vue
+<script setup>
+import { ref, computed } from 'vue'
+
+const count = ref(2)
+
+const alwaysSmall = computed({
+  get(previous) {
+    if (count.value <= 3) {
+      return count.value;
+    }
+
+    return previous;
+  },
+  set(newValue) {
+    count.value = newValue * 2;
+  }
+})
+</script>
+```
+
+</div>
+
+## Getting the Previous Value {#previous}
+
+- Only supported in 3.4+
+
+<p class="options-api">
+In case you need it, you can get the previous value returned by the computed property accessing
+the second argument of the getter:
+</p>
+
+<p class="composition-api">
+In case you need it, you can get the previous value returned by the computed property accessing
+the first argument of the getter:
+</p>
+
+<div class="options-api">
+
+```js
+export default {
+  data() {
+    return {
+      count: 2
+    }
+  },
+  computed: {
+    // This computed will return the value of count when it's less or equal to 3.
+    // When count is >=4, the last value that fulfilled our condition will be returned
+    // instead until count is less or equal to 3
+    alwaysSmall(_, previous) {
+      if (this.count <= 3) {
+        return this.count
+      }
+
+      return previous
+    }
+  }
+}
+```
+</div>
+
+<div class="composition-api">
+
+```vue
+<script setup>
+import { ref, computed } from 'vue'
+
+const count = ref(2)
+
+// This computed will return the value of count when it's less or equal to 3.
+// When count is >=4, the last value that fulfilled our condition will be returned
+// instead until count is less or equal to 3
+const alwaysSmall = computed((previous) => {
+  if (count.value <= 3) {
+    return count.value
+  }
+
+  return previous
+})
+</script>
+```
+</div>
+
+In case you're using a writable computed:
+
+<div class="options-api">
+
+```js
+export default {
+  data() {
+    return {
+      count: 2
+    }
+  },
+  computed: {
+    alwaysSmall: {
+      get(_, previous) {
+        if (this.count <= 3) {
+          return this.count
+        }
+
+        return previous;
+      },
+      set(newValue) {
+        this.count = newValue * 2
+      }
+    }
+  }
+}
+```
+
+</div>
+<div class="composition-api">
+
+```vue
+<script setup>
+import { ref, computed } from 'vue'
+
+const count = ref(2)
+
+const alwaysSmall = computed({
+  get(previous) {
+    if (count.value <= 3) {
+      return count.value
+    }
+
+    return previous
+  },
+  set(newValue) {
+    count.value = newValue * 2
+  }
+})
+</script>
+```
+
+</div>
+
+
 
 ## 最佳實踐 {#best-practices}
 

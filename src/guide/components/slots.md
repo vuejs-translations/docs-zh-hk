@@ -296,9 +296,9 @@ function BaseLayout(slots) {
 
 ## 条件插槽 {#conditional-slots}
 
-有時候，您可能希望根據插槽的存在與否來渲染內容。
+有時候，你可能希望根據插槽的存在與否來渲染內容。
 
-您可以結合 [$slots](/api/component-instance.html#slots) 屬性和 [v-if](/guide/essentials/conditional.html#v-if) 來實現這一點。
+你可以結合 [$slots](/api/component-instance.html#slots) 屬性和 [v-if](/guide/essentials/conditional.html#v-if) 來實現這一點。
 
 在下面的示例中，我們定義了一個 Card 組件，包含三個條件性插槽：`header`、`footer` 和 `default`。
 當 header / footer / default 插槽存在時，我們希望對它們進行包裝，以提供額外的樣式：
@@ -442,33 +442,37 @@ function MyComponent(slots) {
 如果你同時使用了具名插槽與默認插槽，則需要為默認插槽使用顯式的 `<template>` 標籤。嘗試直接為組件添加 `v-slot` 指令將導致編譯錯誤。這是為了避免因默認插槽的 props 的作用域而困惑。舉例：
 
 ```vue-html
+<!-- <MyComponent> template -->
+<div>
+  <slot :message="hello"></slot>
+  <slot name="footer" />
+</div>
+```
+
+```vue-html
 <!-- 該模板無法編譯 -->
-<template>
-  <MyComponent v-slot="{ message }">
+<MyComponent v-slot="{ message }">
+  <p>{{ message }}</p>
+  <template #footer>
+    <!-- message 屬於默認插槽，此處不可用 -->
     <p>{{ message }}</p>
-    <template #footer>
-      <!-- message 屬於默認插槽，此處不可用 -->
-      <p>{{ message }}</p>
-    </template>
-  </MyComponent>
-</template>
+  </template>
+</MyComponent>
 ```
 
 為默認插槽使用顯式的 `<template>` 標籤有助於更清晰地指出 `message` 屬性在其他插槽中不可用：
 
 ```vue-html
-<template>
-  <MyComponent>
-    <!-- 使用顯式的默認插槽 -->
-    <template #default="{ message }">
-      <p>{{ message }}</p>
-    </template>
+<MyComponent>
+  <!-- 使用顯式的默認插槽 -->
+  <template #default="{ message }">
+    <p>{{ message }}</p>
+  </template>
 
-    <template #footer>
-      <p>Here's some contact info</p>
-    </template>
-  </MyComponent>
-</template>
+  <template #footer>
+    <p>Here's some contact info</p>
+  </template>
+</MyComponent>
 ```
 
 ### 高級列表組件示例 {#fancy-list-example}

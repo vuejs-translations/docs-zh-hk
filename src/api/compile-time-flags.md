@@ -26,20 +26,21 @@ outline: deep
 
   在生产环境中启用/禁用开发者工具支持。启用会在打包结果中包含更多代码，因此建议仅在调试时启用此功能。
 
-## `__VUE_PROD_HYDRATION_MISMATCH_DETAILS__` <sup class="vt-badge" data-text="3.4+" /> {#VUE_PROD_HYDRATION_MISMATCH_DETAILS}
+## `__VUE_PROD_HYDRATION_MISMATCH_DETAILS__` {#VUE_PROD_HYDRATION_MISMATCH_DETAILS}
 
 - **默认值：**`false`
 
   启用/禁用生产环境构建下激活 (hydration) 不匹配的详细警告。启用会在打包结果中包含更多代码，因此建议仅在调试时启用此功能。
 
+- Only available in 3.4+
+
 ## 配置指南 {#configuration-guides}
 
 ### Vite {#vite}
 
-`@vitejs/plugin-vue` 会自动为这些标志提供默认值。要更改默认值，请使用 Vite 的 [`define` 配置项](https://vitejs.dev/config/shared-options.html#define)：
+`@vitejs/plugin-vue` 会自动为这些标志提供默认值。要更改默认值，请使用 Vite 的 [`define` 配置项](https://vite.dev/config/shared-options.html#define)：
 
-```js
-// vite.config.js
+```js [vite.config.js]
 import { defineConfig } from 'vite'
 
 export default defineConfig({
@@ -54,8 +55,7 @@ export default defineConfig({
 
 `@vue/cli-service` 自动为其中一些标志提供默认值。要配置/修改这些值：
 
-```js
-// vue.config.js
+```js [vue.config.js]
 module.exports = {
   chainWebpack: (config) => {
     config.plugin('define').tap((definitions) => {
@@ -74,8 +74,7 @@ module.exports = {
 
 应该使用 webpack 的 [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) 定义这些标志：
 
-```js
-// webpack.config.js
+```js [webpack.config.js]
 module.exports = {
   // ...
   plugins: [
@@ -92,8 +91,7 @@ module.exports = {
 
 应该使用 [@rollup/plugin-replace](https://github.com/rollup/plugins/tree/master/packages/replace) 定义这些标志：
 
-```js
-// rollup.config.js
+```js [rollup.config.js]
 import replace from '@rollup/plugin-replace'
 
 export default {

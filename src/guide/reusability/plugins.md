@@ -40,8 +40,7 @@ const myPlugin = {
 
 讓我們從設置插件對象開始。建議在一個單獨的文件中創建並導出它，以保證更好地管理邏輯，如下所示：
 
-```js
-// plugins/i18n.js
+```js [plugins/i18n.js]
 export default {
   install: (app, options) => {
     // 在這裡編寫插件代碼
@@ -57,8 +56,7 @@ export default {
 
 這個函數應當能夠在任意模板中被全局調用。這一點可以通過在插件中將它添加到 `app.config.globalProperties` 上來實現：
 
-```js{4-11}
-// plugins/i18n.js
+```js{3-10} [plugins/i18n.js]
 export default {
   install: (app, options) => {
     // 注入一個全局可用的 $translate() 方法
@@ -97,10 +95,9 @@ TypeScript 用戶請參考：[擴展全局屬性](/guide/typescript/options-api#
 
 ### 插件中的 Provide / Inject {#provide-inject-with-plugins}
 
-在插件中，我們可以通過 `provide` 來為插件用戶供給一些內容。舉例來說，我們可以將插件接收到的 `options` 參數提供給整個應用，讓任何組件都能使用這個翻譯字典對象。
+在插件中，我們可以通過 `provide` 來讓插件用戶可以訪問函數或者屬性。舉例來說，我們可以將插件接收到的 `options` 參數提供給整個應用，讓任何組件都能使用這個翻譯字典對象。
 
-```js{10}
-// plugins/i18n.js
+```js{3} [plugins/i18n.js]
 export default {
   install: (app, options) => {
     app.provide('i18n', options)
@@ -112,7 +109,7 @@ export default {
 
 <div class="composition-api">
 
-```vue
+```vue{4}
 <script setup>
 import { inject } from 'vue'
 
@@ -125,7 +122,7 @@ console.log(i18n.greetings.hello)
 </div>
 <div class="options-api">
 
-```js
+```js{2}
 export default {
   inject: ['i18n'],
   created() {
@@ -135,3 +132,7 @@ export default {
 ```
 
 </div>
+
+### Bundle for NPM {#bundle-for-npm}
+
+If you further want to build and publish your plugin for others to use, see [Vite's section on Library Mode](https://vite.dev/guide/build.html#library-mode).

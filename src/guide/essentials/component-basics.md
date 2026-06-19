@@ -1,5 +1,9 @@
 # 組件基礎 {#components-basics}
 
+<ScrimbaLink href="https://scrimba.com/links/vue-component-basics" title="Free Vue.js Components Basics Lesson" type="scrimba">
+  在 Scrimba 上觀看交互式視頻教程
+</ScrimbaLink>
+
 組件允許我們將 UI 劃分為獨立的、可重用的部分，並且可以對每個部分進行單獨的思考。在實際應用中，組件常常被組織成層層嵌套的樹狀結構：
 
 ![組件樹](./images/components.png)
@@ -174,7 +178,7 @@ import ButtonCounter from './ButtonCounter.vue'
 <button-counter></button-counter>
 ```
 
-請看 [DOM 內模板解析注意事項](#in-dom-template-parsing-caveats)了解更多細節。
+請看 [DOM 內模板解析注意事項](#in-dom-template-parsing-caveats)瞭解更多細節。
 
 ## 傳遞 props {#passing-props}
 
@@ -184,8 +188,7 @@ Props 是一種特別的 attributes，你可以在組件上聲明註冊。要傳
 
 <div class="options-api">
 
-```vue
-<!-- BlogPost.vue -->
+```vue [BlogPost.vue]
 <script>
 export default {
   props: ['title']
@@ -202,8 +205,7 @@ export default {
 </div>
 <div class="composition-api">
 
-```vue
-<!-- BlogPost.vue -->
+```vue [BlogPost.vue]
 <script setup>
 defineProps(['title'])
 </script>
@@ -349,8 +351,8 @@ const postFontSize = ref(1)
 
 然後，給 `<BlogPost>` 組件添加一個按鈕：
 
-```vue{5}
-<!-- BlogPost.vue, 省略了 <script> -->
+```vue{5} [BlogPost.vue]
+<!-- 省略了 <script> -->
 <template>
   <div class="blog-post">
     <h4>{{ title }}</h4>
@@ -370,8 +372,8 @@ const postFontSize = ref(1)
 
 子組件可以通過調用內置的 [**`$emit`** 方法](/api/component-instance#emit)，通過傳入事件名稱來拋出一個事件：
 
-```vue{5}
-<!-- BlogPost.vue, 省略了 <script> -->
+```vue{5} [BlogPost.vue]
+<!-- 省略了 <script> -->
 <template>
   <div class="blog-post">
     <h4>{{ title }}</h4>
@@ -397,8 +399,7 @@ const postFontSize = ref(1)
 
 <div class="options-api">
 
-```vue{5}
-<!-- BlogPost.vue -->
+```vue{4} [BlogPost.vue]
 <script>
 export default {
   props: ['title'],
@@ -410,8 +411,7 @@ export default {
 </div>
 <div class="composition-api">
 
-```vue{4}
-<!-- BlogPost.vue -->
+```vue{3} [BlogPost.vue]
 <script setup>
 defineProps(['title'])
 defineEmits(['enlarge-text'])
@@ -420,7 +420,7 @@ defineEmits(['enlarge-text'])
 
 </div>
 
-這聲明了一個組件可能觸發的所有事件，還可以對事件的參數進行[驗證](/guide/components/events#validate-emitted-events)。同時，這還可以讓 Vue 避免將它們作為原生事件監聽器隱式地應用於子組件的根元素。
+這聲明瞭一個組件可能觸發的所有事件，還可以對事件的參數進行[驗證](/guide/components/events#validate-emitted-events)。同時，這還可以讓 Vue 避免將它們作為原生事件監聽器隱式地應用於子組件的根元素。
 
 <div class="composition-api">
 
@@ -469,8 +469,7 @@ Something bad happened.
 
 這可以通過 Vue 的自定義 `<slot>` 元素來實現：
 
-```vue{4}
-<!-- AlertBox.vue -->
+```vue{4} [AlertBox.vue]
 <template>
   <div class="alert-box">
     <strong>This is an Error for Demo Purposes</strong>

@@ -1,5 +1,9 @@
 # 組件 v-model {#component-v-model}
 
+<ScrimbaLink href="https://scrimba.com/links/vue-component-v-model" title="Free Vue.js Component v-model Lesson" type="scrimba">
+  在 Scrimba 上觀看交互式視頻教程
+</ScrimbaLink>
+
 ## 基本用法 {#basic-usage}
 
 `v-model` 可以在組件上使用以實現雙向綁定。
@@ -8,8 +12,7 @@
 
 從 Vue 3.4 開始，推薦的實現方式是使用 [`defineModel()`](/api/sfc-script-setup#definemodel) 宏：
 
-```vue
-<!-- Child.vue -->
+```vue [Child.vue]
 <script setup>
 const model = defineModel()
 
@@ -20,13 +23,13 @@ function update() {
 
 <template>
   <div>Parent bound v-model is: {{ model }}</div>
+  <button @click="update">Increment</button>
 </template>
 ```
 
 父組件可以用 `v-model` 綁定一個值：
 
-```vue-html
-<!-- Parent.vue -->
+```vue-html [Parent.vue]
 <Child v-model="countModel" />
 ```
 
@@ -58,8 +61,7 @@ const model = defineModel()
 
 在 3.4 版本之前，你一般會按照如下的方式來實現上述相同的子組件：
 
-```vue
-<!-- Child.vue -->
+```vue [Child.vue]
 <script setup>
 const props = defineProps(['modelValue'])
 const emit = defineEmits(['update:modelValue'])
@@ -73,10 +75,9 @@ const emit = defineEmits(['update:modelValue'])
 </template>
 ```
 
-然後，父組件中的 `v-model="modelValue"` 將被編譯為：
+然後，父組件中的 `v-model="foo"` 將被編譯為：
 
-```vue-html
-<!-- Parent.vue -->
+```vue-html [Parent.vue]
 <Child
   :modelValue="foo"
   @update:modelValue="$event => (foo = $event)"
@@ -85,7 +86,7 @@ const emit = defineEmits(['update:modelValue'])
 
 如你所見，這顯得冗長得多。然而，這樣寫有助於理解其底層機制。
 
-因為 `defineModel` 聲明了一個 prop，你可以通過給 `defineModel` 傳遞選項，來聲明底層 prop 的選項：
+因為 `defineModel` 聲明瞭一個 prop，你可以通過給 `defineModel` 傳遞選項，來聲明底層 prop 的選項：
 
 ```js
 // 使 v-model 必填
@@ -98,16 +99,20 @@ const model = defineModel({ default: 0 })
 :::warning
 如果為 `defineModel` prop 設置了一個 `default` 值且父組件沒有為該 prop 提供任何值，會導致父組件與子組件之間不同步。在下面的示例中，父組件的 `myRef` 是 undefined，而子組件的 `model` 是 1：
 
-```js
-// 子組件：
+```vue [Child.vue]
+<script setup>
 const model = defineModel({ default: 1 })
-
-// 父組件
-const myRef = ref()
+</script>
 ```
 
-```html
-<Child v-model="myRef"></Child>
+```vue [Parent.vue]
+<script setup>
+const myRef = ref()
+</script>
+
+<template>
+  <Child v-model="myRef"></Child>
+</template>
 ```
 
 :::
@@ -147,8 +152,7 @@ const myRef = ref()
 
 這裡是相應的代碼：
 
-```vue
-<!-- CustomInput.vue -->
+```vue [CustomInput.vue]
 <script>
 export default {
   props: ['modelValue'],
@@ -174,8 +178,7 @@ export default {
 
 另一種在組件內實現 `v-model` 的方式是使用一個可寫的，同時具有 getter 和 setter 的 `computed` 屬性。`get` 方法需返回 `modelValue` prop，而 `set` 方法需觸發相應的事件：
 
-```vue
-<!-- CustomInput.vue -->
+```vue [CustomInput.vue]
 <script>
 export default {
   props: ['modelValue'],
@@ -212,8 +215,7 @@ export default {
 
 在子組件中，我們可以通過將字符串作為第一個參數傳遞給 `defineModel()` 來支持相應的參數：
 
-```vue
-<!-- MyComponent.vue -->
+```vue [MyComponent.vue]
 <script setup>
 const title = defineModel('title')
 </script>
@@ -223,7 +225,7 @@ const title = defineModel('title')
 </template>
 ```
 
-[在演練場中嘗試一下](https://play.vuejs.org/#eNqFU9tu2zAM/RVBKOAWyGIM25PhFbugDxuwC7a+VX3wEiZ1K0uCRHkuDP/7SKlxk16BILbIQ/KcQ3mUn5xb9hFkJeuw8q3DU2XazlmP4vvtF0tvBgyKjbedKJblXozLCmWUgSHB17BpokYxKiPEaocKlRgPOk0Lzq8bbI5PMlYIDxi92Z2E+GvtzXmLGipR9G86uwYtGr+NHTeAoemc5tEMnfhBf/Sry1kBHRAI1SDQSYj66u3pON73FdNUlxRLuX12d9MqZNQHJecKJUVJ8Lqc+8qFfODGgYlPueK8dWTIRZHaF5fJCuhadumiiI5cgTy6uHxVUmtcxGwC3jomizCgkjlU9Y2OKZjZ5+jHVETRI556fDhyIY6gZylIXgMp4g4nufSxdgwrazbtdnkdrCHlSaCSvPhWg//psLUmKEn7z7OVbLS2/76lGPoISX2quYLVzRPx6zBwTMlfHgL4nmTMucwxp8/+/EjK5yTtMLLoF5K/IVgdmWOGfY5mTbT3cInt1/QptGZ7Hs4GBBN2ophounoJryStn+/Cc9Lv6b5bvt9dWTn9B6F1Lrs=)
+[在演練場中嘗試一下](https://play.vuejs.org/#eNqFklFPwjAUhf9K05dhgiyGNzJI1PCgCWqUx77McQeFrW3aOxxZ9t+9LTAXA/q2nnN6+t12Db83ZrSvgE944jIrDTIHWJmZULI02iJrmIWctSy3umQRRaPOWhweNX0pUHiyR3FP870UZkyoTCuH7FPr3VJiAWzqSwfR/rbUKyhYatdV6VugTktTQHQjVBIfeYiEFgikpwi0YizZ3M2aplfXtklMWvD6UKf+CfrUVPBuh+AspngSd718yH+hX7iS4xihjUZYQS4VLPwJgyiI/3FLZSrafzAeBqFG4jgxeuEqGTo6OZfr0dZpRVxNuFWeEa4swL4alEQm+IQFx3tpUeiv56ChrWB41rMNZLsL+tbVXhP8zYIDuyeQzkN6HyBWb88/XgJ3ZxJ95bH/MN/B6aLyjMfYQ6VWhN3LBdqn8FdJtV66eY2g3HkoD+qTbcgLTo/jX+ra6D+449E47BOq5e039mr+gA==)
 
 如果需要額外的 prop 選項，應該在 model 名稱之後傳遞：
 
@@ -234,8 +236,7 @@ const title = defineModel('title', { required: true })
 <details>
 <summary>3.4 之前的用法</summary>
 
-```vue
-<!-- MyComponent.vue -->
+```vue [MyComponent.vue]
 <script setup>
 defineProps({
   title: {
@@ -262,8 +263,7 @@ defineEmits(['update:title'])
 
 在這種情況下，子組件應該使用 `title` prop 和 `update:title` 事件來更新父組件的值，而非默認的 `modelValue` prop 和 `update:modelValue` 事件：
 
-```vue
-<!-- MyComponent.vue -->
+```vue [MyComponent.vue]
 <script>
 export default {
   props: ['title'],
@@ -401,9 +401,9 @@ console.log(modifiers) // { capitalize: true }
 </template>
 ```
 
-為了能夠基於修飾符選擇性地調節值的讀取和寫入方式，我們可以給 `defineModel()` 傳入 `get` 和 `set` 這兩個選項。這兩個選項在從模型引用中讀取或設置值時會接收到當前的值，並且它們都應該返回一個經過處理的新值。下面是一個例子，展示了如何利用 `set` 選項來應用 `capitalize` (首字母大寫) 修飾符：
+為了能夠基於修飾符選擇性地調節值的讀取和寫入方式，我們可以給 `defineModel()` 傳入 `get` 和 `set` 這兩個選項。這兩個選項在從模型引用中讀取或設置值時會接收到當前的值，並且它們都應該返回一個經過處理的新值。下面是一個例子，展示瞭如何利用 `set` 選項來應用 `capitalize` (首字母大寫) 修飾符：
 
-```vue{6-8}
+```vue{4-6}
 <script setup>
 const [model, modifiers] = defineModel({
   set(value) {
@@ -420,7 +420,7 @@ const [model, modifiers] = defineModel({
 </template>
 ```
 
-[在演練場中嘗試一下](https://play.vuejs.org/#eNp9UsFu2zAM/RVClzhY5mzoLUgHdEUPG9Bt2LLTtIPh0Ik6WxIkyosb5N9LybFrFG1OkvgeyccnHsWNtXkbUKzE2pdOWQKPFOwnqVVjjSM4gsMKTlA508CMqbMRuu9uDd80ajrD+XISi3WZDCB1abQnaLoNHgiuY8VsNptLvV72TbkdPwgbWxeE/ALY7JUHpW0gKAurqKjVI3rAFl1He6V30JkA3AbdKvLXUzXt+8Zssc6fM6+l6NtLAUtusF6O3cRCvFB9yY2SiYFw+8KSYcY/qfEC+FCVQuf/8rxbrJTG+4hkxyiWq2ZtUQecQ3oDqAqyMWeieyQAu0bBaUh5ebkv3A1lH+Y5md/WorstPGZzeHfGfa1KzD6yxzH11B/TCjHC4dPlX1j3P0CdjQ5S79/Z3WhpPF91lDz7Uald/uCNZj/TFFJE91SN7rslxX5JsRrmk6Koa/P/a4qRC7gY4uUey3+vxB/8Icak+OHQo2tRihGjwu2QtUb47te3pHsEWXWomX0B/Ine1CFq7Gmfg96y7Akvqf2StoKXcePvDoTaD0NFocnhxJeClyRu2FujP8u9yq+GnxGnJxSEO+M=)
+[在演練場中嘗試一下](https://play.vuejs.org/#eNp9UsFu2zAM/RVClzhY5mzoLUgHdEUPG9Bt2LLTtIPh0Ik6WRIkKksa5N9LybFrFG1OkvgeyccnHsWNc+UuoliIZai9cgQBKbpP0qjWWU9wBI8NnKDxtoUJUycDdH+4tXwzaOgMl/NRLNVlMoA0tTWBoD2scE9wnSoWk8lUmuW8a8rt+EHYOl0R8gtgtVUBlHGRoK6cokqrRwxAW4RGea6mkQg9HGwEboZ+kbKWY027961doy6f86+l6ERIAXNus5wPPcVMvNB+yZOaiZFw/cKYftI/ufEM+FCNQh/+8tRrbJTB+4QUxySWqxa7SkecQn4DqAaKIWekeyAAe0fRG8h5Zb2t/A0VH6Yl2d/Oob+tAhZTeHfGg1Y1Fh/Z6ZR66o5xhRTh8OnyXyy7f6CDSw5S59/Z3WRpOl91lAL70ahN+RCsYT/zFFIk95RG/92RYr+kWPTzSVFpbf9/zTHyEWd9vN5i/e+V+EPYp5gUPzwG9DuUYsCo8htkrQm++/Ut6x5AVh01sy+APzFYHZPGjvY5mjXLHvGy2i95K5TZrMLdntCEfqgkNDuc+VLwkqQNe2v0Z7lX5VX/M+L0BFEuPdc=)
 
 <details>
 <summary>3.4 之前的用法</summary>
@@ -444,7 +444,7 @@ function emitValue(e) {
 </script>
 
 <template>
-  <input type="text" :value="modelValue" @input="emitValue" />
+  <input type="text" :value="props.modelValue" @input="emitValue" />
 </template>
 ```
 
@@ -541,7 +541,7 @@ export default {
 
 </div>
 
-這裡是另一個例子，展示了如何在使用多個不同參數的 `v-model` 時使用修飾符：
+這裡是另一個例子，展示瞭如何在使用多個不同參數的 `v-model` 時使用修飾符：
 
 ```vue-html
 <UserName
@@ -568,10 +568,10 @@ console.log(lastNameModifiers) // { uppercase: true }
 ```vue{5,6,10,11}
 <script setup>
 const props = defineProps({
-firstName: String,
-lastName: String,
-firstNameModifiers: { default: () => ({}) },
-lastNameModifiers: { default: () => ({}) }
+  firstName: String,
+  lastName: String,
+  firstNameModifiers: { default: () => ({}) },
+  lastNameModifiers: { default: () => ({}) }
 })
 defineEmits(['update:firstName', 'update:lastName'])
 

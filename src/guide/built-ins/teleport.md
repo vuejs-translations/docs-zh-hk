@@ -6,7 +6,7 @@
 
 有時我們可能會遇到這樣的場景：一個組件模板的一部分在邏輯上從屬於該組件，但從整個應用視圖的角度來看，它在 DOM 中應該被渲染在整個 Vue 應用外部的其他地方。
 
-這類場景最常見的例子就是全屏的模態框。理想情況下，我們希望觸發模態框的按鈕和模態框本身是在同一個組件中，因為它們都與組件的開關狀態有關。但這意味著該模態框將與按鈕一起渲染在應用 DOM 結構裡很深的地方。這會導致該模態框的 CSS 佈局代碼很難寫。
+這類場景最常見的例子就是全屏的模態框。理想情況下，我們希望觸發模態框的按鈕代碼和模態框代碼本身是寫在同一個單文件組件（SFC）中，因為它們都與組件的開關狀態有關。但這意味著該模態框將與按鈕一起渲染在應用 DOM 結構裡很深的地方。這會導致該模態框的 CSS 佈局代碼很難寫。
 
 試想下面這樣的 HTML 結構：
 
@@ -148,7 +148,7 @@ const open = ref(false)
 我們也可以將 `<Teleport>` 和 [`<Transition>`](./transition) 結合使用來創建一個帶動畫的模態框。你可以看看[這個示例](/examples/#modal)。
 
 :::tip
-`<Teleport>` 掛載時，傳送的 `to` 目標必須已經存在於 DOM 中。理想情況下，這應該是整個 Vue 應用 DOM 樹外部的一個元素。如果目標元素也是由 Vue 渲染的，你需要確保在掛載 `<Teleport>` 之前先掛載該元素。
+`<Teleport>` 掛載時，傳送的 `to` 目標必須已經存在於 DOM 中。理想情況下，這應該是整個 Vue 應用 DOM 樹外部的一個元素。如果目標元素也是由 Vue 渲染的，你需要確保在掛載 `<Teleport>` 之前先掛載該元素。如果你正在使用 SSR，請參閱[在 SSR 中處理 Teleports](/guide/scaling-up/ssr#teleports)。
 :::
 
 ## 搭配組件使用 {#using-with-components}
@@ -167,7 +167,7 @@ const open = ref(false)
 </Teleport>
 ```
 
-這裡的 `isMobile` 狀態可以根據 CSS media query 的不同結果動態地更新。
+我們可以動態地更新 `isMobile`。
 
 ## 多個 Teleport 共享目標 {#multiple-teleports-on-the-same-target}
 
@@ -192,6 +192,19 @@ const open = ref(false)
   <div>B</div>
 </div>
 ```
+
+## 延遲 Teleport <sup class="vt-badge" data-text="3.5+" /> {#deferred-teleport}
+
+在 Vue 3.5 及以上版本中，我們可以使用 `defer` prop 來延遲 Teleport 對目標的解析，直到應用的其他部分掛載完成。這樣 Teleport 就可以指向一個由 Vue 渲染、但位於組件樹中靠後位置的容器元素：
+
+```vue-html
+<Teleport defer to="#late-div">...</Teleport>
+
+<!-- 模板中靠後的某處 -->
+<div id="late-div"></div>
+```
+
+請注意，目標元素必須與 Teleport 在同一個掛載 / 更新 tick 中被渲染——也就是說，如果 `<div>` 要等一秒鐘後才被掛載，Teleport 仍然會報錯。這個 defer 的行為與 `mounted` 生命週期鉤子類似。
 
 ---
 

@@ -45,7 +45,7 @@
 
 ## computed() {#computed}
 
-接收一個 [getter 函數](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/set#description)，並為 getter 返回的值返回一個只讀的響應式 [ref](#ref) 對象。他還可以使用帶有 `get` 和 `set` 函數的對象來創建一個可寫的 ref 對象。
+接收一個 [getter 函數](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get#description)，並為 getter 返回的值返回一個只讀的響應式 [ref](#ref) 對象。他還可以使用帶有 `get` 和 `set` 函數的對象來創建一個可寫的 ref 對象。
 
 - **類型**
 
@@ -112,7 +112,7 @@
   - [指南 - 計算屬性](/guide/essentials/computed)
   - [指南 - 計算屬性調試](/guide/extras/reactivity-in-depth#computed-debugging)
   - [指南 - 為 `computed()` 標註類型](/guide/typescript/composition-api#typing-computed) <sup class="vt-badge ts" />
-  - [指南 - 性能優化 - 計算屬性穩定性](/guide/best-practices/performance#computed-stability) <sup class="vt-badge" data-text="3.4+" />
+  - [指南 - 性能優化 - 計算屬性穩定性](/guide/best-practices/performance#computed-stability)
 
 ## reactive() {#reactive}
 
@@ -238,7 +238,7 @@
   function watchEffect(
     effect: (onCleanup: OnCleanup) => void,
     options?: WatchEffectOptions
-  ): StopHandle
+  ): WatchHandle
 
   type OnCleanup = (cleanupFn: () => void) => void
 
@@ -273,19 +273,6 @@
   // -> 輸出 1
   ```
 
-  副作用清除：
-
-  ```js
-  watchEffect(async (onCleanup) => {
-    const { response, cancel } = doAsyncWork(id.value)
-    // `cancel` 會在 `id` 更改時調用
-    // 以便取消之前
-    // 未完成的請求
-    onCleanup(cancel)
-    data.value = await response
-  })
-  ```
-
   停止偵聽器：
 
   ```js
@@ -293,6 +280,88 @@
 
   // 當不再需要此偵聽器時:
   stop()
+  ```
+
+  Pausing / resuming the watcher: <sup class="vt-badge" data-text="3.5+" />
+
+  ```js
+  const { stop, pause, resume } = watchEffect(() => {})
+
+  // temporarily pause the watcher
+  pause()
+
+  // resume later
+  resume()
+
+  // stop
+  stop()
+  ```
+
+  Pausing / resuming the watcher: <sup class="vt-badge" data-text="3.5+" />
+
+  ```js
+  const { stop, pause, resume } = watchEffect(() => {})
+
+  // temporarily pause the watcher
+  pause()
+
+  // resume later
+  resume()
+
+  // stop
+  stop()
+  ```
+
+  Side effect cleanup:
+
+  ```js
+  watchEffect(async (onCleanup) => {
+    const { response, cancel } = doAsyncWork(newId)
+    // `cancel` will be called if `id` changes, cancelling
+    // the previous request if it hasn't completed yet
+    onCleanup(cancel)
+    data.value = await response
+  })
+  ```
+
+  Side effect cleanup in 3.5+:
+
+  ```js
+  import { onWatcherCleanup } from 'vue'
+
+  watchEffect(async () => {
+    const { response, cancel } = doAsyncWork(newId)
+    // `cancel` will be called if `id` changes, cancelling
+    // the previous request if it hasn't completed yet
+    onWatcherCleanup(cancel)
+    data.value = await response
+  })
+  ```
+
+  Side effect cleanup:
+
+  ```js
+  watchEffect(async (onCleanup) => {
+    const { response, cancel } = doAsyncWork(newId)
+    // `cancel` will be called if `id` changes, cancelling
+    // the previous request if it hasn't completed yet
+    onCleanup(cancel)
+    data.value = await response
+  })
+  ```
+
+  Side effect cleanup in 3.5+:
+
+  ```js
+  import { onWatcherCleanup } from 'vue'
+
+  watchEffect(async () => {
+    const { response, cancel } = doAsyncWork(newId)
+    // `cancel` will be called if `id` changes, cancelling
+    // the previous request if it hasn't completed yet
+    onWatcherCleanup(cancel)
+    data.value = await response
+  })
   ```
 
   選項：
@@ -333,14 +402,14 @@
     source: WatchSource<T>,
     callback: WatchCallback<T>,
     options?: WatchOptions
-  ): StopHandle
+  ): WatchHandle
 
   // 偵聽多個來源
   function watch<T>(
     sources: WatchSource<T>[],
     callback: WatchCallback<T[]>,
     options?: WatchOptions
-  ): StopHandle
+  ): WatchHandle
 
   type WatchCallback<T> = (
     value: T,
@@ -351,13 +420,11 @@
   type WatchSource<T> =
     | Ref<T> // ref
     | (() => T) // getter
-    | T extends object
-    ? T
-    : never // 響應式對象
+    | (T extends object ? T : never) // 響應式對象
 
   interface WatchOptions extends WatchEffectOptions {
     immediate?: boolean // 默認：false
-    deep?: boolean // 默認：false
+    deep?: boolean | number // 默認：false
     flush?: 'pre' | 'post' | 'sync' // 默認：'pre'
     onTrack?: (event: DebuggerEvent) => void
     onTrigger?: (event: DebuggerEvent) => void
@@ -373,22 +440,24 @@
 
   第一個參數是偵聽器的**源**。這個來源可以是以下幾種：
 
-  - 一個函數，返回一個值
-  - 一個 ref
-  - 一個響應式對象
-  - ...或是由以上類型的值組成的數組
+<!-- TODO: translation -->
 
-  第二個參數是在發生變化時要調用的回調函數。這個回調函數接受三個參數：新值、舊值，以及一個用於註冊副作用清理的回調函數。該回調函數會在副作用下一次重新執行前調用，可以用來清除無效的副作用，例如等待中的異步請求。
+  - A getter function that returns a value
+  - A ref
+  - A reactive object
+  - ...or an array of the above.
 
-	當偵聽多個來源時，回調函數接受兩個數組，分別對應來源數組中的新值和舊值。
+  The second argument is the callback that will be called when the source changes. The callback receives three arguments: the new value, the old value, and a function for registering a side effect cleanup callback. The cleanup callback will be called right before the next time the effect is re-run, and can be used to clean up invalidated side effects, e.g. a pending async request.
 
-  第三個可選的參數是一個對象，支持以下這些選項：
+  When watching multiple sources, the callback receives two arrays containing new / old values corresponding to the source array.
 
-  - **`immediate`**：在偵聽器創建時立即觸發回調。第一次調用時舊值是 `undefined`。
-  - **`deep`**：如果源是對象，強制深度遍歷，以便在深層級變更時觸發回調。參考[深層偵聽器](/guide/essentials/watchers#deep-watchers)。
-  - **`flush`**：調整回調函數的刷新時機。參考[回調的刷新時機](/guide/essentials/watchers#callback-flush-timing)及 [`watchEffect()`](/api/reactivity-core#watcheffect)。
-  - **`onTrack / onTrigger`**：調試偵聽器的依賴。參考[調試偵聽器](/guide/extras/reactivity-in-depth#watcher-debugging)。
-  - **`once`**：回調函數只會運行一次。偵聽器將在回調函數首次運行後自動停止。 <sup class="vt-badge" data-text="3.4+" />
+  The third optional argument is an options object that supports the following options:
+
+  - **`immediate`**: trigger the callback immediately on watcher creation. Old value will be `undefined` on the first call.
+  - **`deep`**: force deep traversal of the source if it is an object, so that the callback fires on deep mutations. In 3.5+, this can also be a number indicating the max traversal depth. See [Deep Watchers](/guide/essentials/watchers#deep-watchers).
+  - **`flush`**: adjust the callback's flush timing. See [Callback Flush Timing](/guide/essentials/watchers#callback-flush-timing) and [`watchEffect()`](/api/reactivity-core#watcheffect).
+  - **`onTrack / onTrigger`**: debug the watcher's dependencies. See [Watcher Debugging](/guide/extras/reactivity-in-depth#watcher-debugging).
+  - **`once`**: (3.4+) run the callback only once. The watcher is automatically stopped after the first callback run.
 
   與 [`watchEffect()`](#watcheffect) 相比，`watch()` 使我們可以：
 
@@ -472,6 +541,21 @@
   stop()
   ```
 
+  Pausing / resuming the watcher: <sup class="vt-badge" data-text="3.5+" />
+
+  ```js
+  const { stop, pause, resume } = watch(() => {})
+
+  // temporarily pause the watcher
+  pause()
+
+  // resume later
+  resume()
+
+  // stop
+  stop()
+  ```
+
   副作用清理：
 
   ```js
@@ -484,7 +568,7 @@
   })
   ```
 
-- **參考**
+- **See also**
 
-  - [指南 - 偵聽器](/guide/essentials/watchers)
-  - [指南 - 偵聽器調試](/guide/extras/reactivity-in-depth#watcher-debugging)
+  - [Guide - Watchers](/guide/essentials/watchers)
+  - [Guide - Watcher Debugging](/guide/extras/reactivity-in-depth#watcher-debugging)

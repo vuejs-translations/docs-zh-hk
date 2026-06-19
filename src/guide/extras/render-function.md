@@ -26,7 +26,7 @@ const vnode = h(
 )
 ```
 
-`h()` 是 **hyperscript** 的簡稱——意思是“能生成 HTML (超文本標記語言) 的 JavaScript”。這個名字來源於許多虛擬 DOM 實現默認形成的約定。一個更準確的名稱應該是 `createVnode()`，但當你需要多次使用渲染函數時，一個簡短的名字會更省力。
+`h()` 是 **hyperscript** 的簡稱——意思是“能生成 HTML (超文本標記語言) 的 JavaScript”。這個名字來源於許多虛擬 DOM 實現默認形成的約定。一個更準確的名稱應該是 `createVNode()`，但當你需要多次使用渲染函數時，一個簡短的名字會更省力。
 
 `h()` 函數的使用方式非常的靈活：
 
@@ -215,6 +215,33 @@ function render() {
   )
 }
 ```
+
+### Using Vnodes in `<template>` {#using-vnodes-in-template}
+
+```vue
+<script setup>
+import { h } from 'vue'
+
+const vnode = h('button', ['Hello'])
+</script>
+
+<template>
+  <!-- Via <component /> -->
+  <component :is="vnode">Hi</component>
+
+  <!-- Or directly as element -->
+  <vnode />
+  <vnode>Hi</vnode>
+</template>
+```
+
+A vnode object has been declared in `setup()`, you can use it like a normal component for rendering.
+
+:::warning
+A vnode represents an already created render output, not a component definition. Using a vnode in `<template>` does not create a new component instance, and the vnode will be rendered as-is.
+
+This pattern should be used with care and is not a replacement for normal components.
+:::
 
 ## JSX / TSX {#jsx-tsx}
 
@@ -706,7 +733,25 @@ const vnode = withDirectives(h('div'), [
 
 <div class="composition-api">
 
-在組合式 API 中，模板引用通過將 `ref()` 本身作為一個屬性傳遞給 vnode 來創建：
+在組合式 API 中，當使用 [`useTemplateRef()`](/api/composition-api-helpers#usetemplateref) <sup class="vt-badge" data-text="3.5+" /> 時，模板引用通過將字符串值作為 prop 傳遞給 vnode 來創建：
+
+```js
+import { h, useTemplateRef } from 'vue'
+
+export default {
+  setup() {
+    const divEl = useTemplateRef('my-div')
+
+    // <div ref="my-div">
+    return () => h('div', { ref: 'my-div' })
+  }
+}
+```
+
+<details>
+<summary>3.5 之前的使用方式</summary>
+
+在 3.5 之前，當 `useTemplateRef()` 尚未引入時，模板引用通過將 `ref()` 本身作為 prop 傳遞給 vnode 來創建：
 
 ```js
 import { h, ref } from 'vue'
@@ -720,7 +765,7 @@ export default {
   }
 }
 ```
-
+</details>
 </div>
 <div class="options-api">
 

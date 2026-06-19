@@ -324,13 +324,13 @@ Vue 需要附加事件監聽器，以便知道過渡何時結束。可以是 `tr
 
 2. 大多數的現代瀏覽器都可以在執行 `transform` 動畫時利用 GPU 進行硬件加速。
 
-相比之下，像 `height` 或者 `margin` 這樣的屬性會觸發 CSS 佈局變動，因此執行它們的動畫效果更昂貴，需要謹慎使用。我們可以在 [CSS-Triggers](https://csstriggers.com/) 這類的網站查詢哪些屬性會在執行動畫時觸發 CSS 佈局變動。
+In comparison, properties like `height` or `margin` will trigger CSS layout, so they are much more expensive to animate, and should be used with caution.
 
 ## JavaScript 鉤子 {#javascript-hooks}
 
 你可以通過監聽 `<Transition>` 組件事件的方式在過渡過程中掛上鉤子函數：
 
-```html
+```vue-html
 <Transition
   @before-enter="onBeforeEnter"
   @enter="onEnter"
@@ -469,8 +469,7 @@ export default {
 
 得益於 Vue 的組件系統，過渡效果是可以被封裝複用的。要創建一個可被複用的過渡，我們需要為 `<Transition>` 組件創建一個包裝組件，並向內傳入插槽內容：
 
-```vue{5}
-<!-- MyTransition.vue -->
+```vue{6} [MyTransition.vue]
 <script>
 // JavaScript 鉤子邏輯...
 </script>

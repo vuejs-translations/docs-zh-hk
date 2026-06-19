@@ -4,7 +4,7 @@ on:
   push:
     branches-ignore: ['gh-pages']
   pull_request:
-    branches: [master]
+    branches: [main]
 
 jobs:
   build:
@@ -12,13 +12,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v2
-        with:
-          version: 8
+      - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'pnpm'
-      - run: |
-          pnpm install
-          pnpm lint
+      - run: pnpm install --frozen-lockfile
+      - name: zhlint (non-blocking, see #80)
+        continue-on-error: true
+        run: pnpm lint

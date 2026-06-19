@@ -214,7 +214,7 @@
     "projects": [
       {
         "label": "VueJsNews",
-        "url": "https://twitter.com/VueJsNews"
+        "url": "https://x.com/VueJsNews"
       }
     ],
     "website": {
@@ -349,9 +349,10 @@
   },
   {
     "name": "Erick Petrucelli",
-    "title": "Software Engineer & Architect, UX Specialist, Consultant, Educator, Writer",
-    "company": "Freelance",
-    "location": "João Pessoa, Brazil",
+    "title": "Lead Software Engineer, UI/UX Specialist, Manager, Teacher, Speaker, Writer",
+    "company": "LawnStarter",
+    "companyLink": "https://www.lawnstarter.com/",
+    "location": "Campinas, Brazil",
     "languages": ["Portuguese", "English"],
     "projects": [
       {

@@ -197,11 +197,11 @@ const emit = defineEmits<{
 }>()
 ```
 
-- `defineProps` 或 `defineEmits` 要么使用运行时声明，要么使用类型声明。同时使用两种声明方式会导致编译报错。
+- `defineProps` 或 `defineEmits` 只能使用運行時聲明或類型聲明中的一種，同時使用兩種會導致編譯錯誤。
 
 - 使用类型声明的时候，静态分析会自动生成等效的运行时声明，从而在避免双重声明的前提下确保正确的运行时行为。
 
-  - 在开发模式下，编译器会试着从类型来推导对应的运行时验证。例如这里从 `foo: string` 类型中推断出 `foo: String`。如果类型是对导入类型的引用，这里的推导结果会是 `foo: null` (与 `any` 类型相等)，因为编译器没有外部文件的信息。
+  - 在开发模式下，编译器会试着从类型来推导对应的运行时验证。例如这里从 `foo: string` 类型中推断出 `foo: String`。导入的类型也会被解析，前提是将 TypeScript 作为 peer dependency 安装。
 
   - 在生产模式下，编译器会生成数组格式的声明来减少打包体积 (这里的 props 会被编译成 `['foo', 'bar']`)。
 
@@ -209,12 +209,48 @@ const emit = defineEmits<{
 
   这个限制已经在 3.3 版本中解决。最新版本的 Vue 支持在类型参数的位置引用导入的和有限的复杂类型。然而，由于类型到运行时的转换仍然基于 AST，因此并不支持使用需要实际类型分析的复杂类型，例如条件类型等。你可以在单个 prop 的类型上使用条件类型，但不能对整个 props 对象使用。
 
-### 使用类型声明时的默认 props 值 {#default-props-values-when-using-type-declaration}
+### 响应式 Props 解构 <sup class="vt-badge" data-text="3.5+" /> {#reactive-props-destructure}
 
-针对类型的 `defineProps` 声明的不足之处在于，它没有可以给 props 提供默认值的方式。为了解决这个问题，我们还提供了 `withDefaults` 编译器宏：
+在 Vue 3.5 及以上版本中，从 `defineProps` 返回值中解构的变量是响应式的。当同一个 `<script setup>` 块中的代码访问从 `defineProps` 解构出的变量时，Vue 的编译器会自动在前面加上 `props.`：
 
 ```ts
-export interface Props {
+const { foo } = defineProps(['foo'])
+
+watchEffect(() => {
+  // 在 3.5 之前只运行一次
+  // 在 3.5+ 中，当 "foo" prop 改变时会重新运行
+  console.log(foo)
+})
+```
+
+以上代码会被编译为以下等价形式：
+
+```js {5}
+const props = defineProps(['foo'])
+
+watchEffect(() => {
+  // `foo` 被编译器转换为 `props.foo`
+  console.log(props.foo)
+})
+```
+
+此外，你可以使用 JavaScript 原生的默认值语法来声明 props 的默认值。这在使用基于类型的 props 声明时特别有用：
+
+```ts
+interface Props {
+  msg?: string
+  labels?: string[]
+}
+
+const { msg = 'hello', labels = ['one', 'two'] } = defineProps<Props>()
+```
+
+### 使用類型聲明時的 props 預設值 <sup class="vt-badge ts" /> {#default-props-values-when-using-type-declaration}
+
+在 3.5 及以上版本中，使用 Props 響應式解構時可以自然地聲明預設值。但在 3.4 及以下版本中，Props 響應式解構並非預設啟用。要在基於類型的聲明下聲明 props 的預設值，需要使用 `withDefaults` 編譯器宏：
+
+```ts
+interface Props {
   msg?: string
   labels?: string[]
 }
@@ -256,16 +292,20 @@ function inc() {
 :::warning
 如果为 `defineModel` prop 设置了一个 `default` 值且父组件没有为该 prop 提供任何值，会导致父组件与子组件之间不同步。在下面的示例中，父组件的 `myRef` 是 undefined，而子组件的 `model` 是 1：
 
-```js
-// 子组件：
+```vue [Child.vue]
+<script setup>
 const model = defineModel({ default: 1 })
-
-// 父组件
-const myRef = ref()
+</script>
 ```
 
-```html
-<Child v-model="myRef"></Child>
+```vue [Parent.vue]
+<script setup>
+const myRef = ref()
+</script>
+
+<template>
+  <Child v-model="myRef"></Child>
+</template>
 ```
 
 :::
@@ -337,7 +377,9 @@ defineExpose({
 
 当父组件通过模板引用的方式获取到当前组件的实例，获取到的实例会像这样 `{ a: number, b: number }` (ref 会和在普通实例中一样被自动解包)
 
-## defineOptions() <sup class="vt-badge" data-text="3.3+" /> {#defineoptions}
+## defineOptions() {#defineoptions}
+
+- 僅在 3.3+ 版本中支持
 
 这个宏可以用来直接在 `<script setup>` 中声明组件选项，而不必使用单独的 `<script>` 块：
 
@@ -352,10 +394,11 @@ defineOptions({
 </script>
 ```
 
-- 仅支持 Vue 3.3+。
-- 这是一个宏定义，选项将会被提升到模块作用域中，无法访问 `<script setup>` 中不是字面常数的局部变量。
+- 這是一個宏。選項會被提升到模塊作用域，因此無法訪問 `<script setup>` 中不是字面常量的局部變量。
 
 ## defineSlots()<sup class="vt-badge ts"/> {#defineslots}
+
+- 僅在 3.3+ 版本中支持
 
 这个宏可以用于为 IDE 提供插槽名称和 props 类型检查的类型提示。
 
@@ -370,8 +413,6 @@ const slots = defineSlots<{
 }>()
 </script>
 ```
-
-- 仅支持 Vue 3.3+。
 
 ## `useSlots()` 和 `useAttrs()` {#useslots-useattrs}
 
@@ -432,13 +473,26 @@ const post = await fetch(`/api/post/1`).then((r) => r.json())
 
 另外，await 的表达式会自动编译成在 `await` 之后保留当前组件实例上下文的格式。
 
-<!-- TODO: translation -->:::warning Note
-`async setup()` must be used in combination with [`Suspense`](/guide/built-ins/suspense.html), which is currently still an experimental feature. We plan to finalize and document it in a future release - but if you are curious now, you can refer to its [tests](https://github.com/vuejs/core/blob/main/packages/runtime-core/__tests__/components/Suspense.spec.ts) to see how it works.
+:::warning 提示
+`async setup()` 必须与 [`Suspense`](/guide/built-ins/suspense.html) 结合使用，该功能目前仍是一个实验性功能。我们计划在未来的版本中完成并记录它 - 但如果你现在好奇，你可以参考它的[测试](https://github.com/vuejs/core/blob/main/packages/runtime-core/__tests__/components/Suspense.spec.ts)來看看它是如何工作的。
 :::
+
+## 導入語句 {#imports-statements}
+
+Vue 中的導入語句遵循 [ECMAScript 模塊規範](https://nodejs.org/api/esm.html)。此外，你還可以使用在構建工具配置中定義的別名：
+
+```vue
+<script setup>
+import { ref } from 'vue'
+import { componentA } from './Components'
+import { componentB } from '@/Components'
+import { componentC } from '~/Components'
+</script>
+```
 
 ## 泛型 <sup class="vt-badge ts" /> {#generics}
 
-可以使用 `<script>` 标签上的 `generic` 属性声明泛型类型参数：
+可以通過 `<script>` 標籤上的 `generic` attribute 來聲明泛型類型參數：
 
 ```vue
 <script setup lang="ts" generic="T">
@@ -465,7 +519,37 @@ defineProps<{
 </script>
 ```
 
-## 限制 {#restrictions}
+當類型無法被推導時，可以使用 `@vue-generic` 指令來傳入明確的類型：
+
+```vue
+<template>
+  <!-- @vue-generic {import('@/api').Actor} -->
+  <ApiSelect v-model="peopleIds" endpoint="/api/actors" id-prop="actorId" />
+
+  <!-- @vue-generic {import('@/api').Genre} -->
+  <ApiSelect v-model="genreIds" endpoint="/api/genres" id-prop="genreId" />
+</template>
+```
+
+要在 `ref` 中引用一個泛型組件，你需要使用 [`vue-component-type-helpers`](https://www.npmjs.com/package/vue-component-type-helpers) 庫，因為 `InstanceType` 對此無效。
+
+```vue
+<script
+  setup
+  lang="ts"
+>
+import componentWithoutGenerics from '../component-without-generics.vue';
+import genericComponent from '../generic-component.vue';
+
+import type { ComponentExposed } from 'vue-component-type-helpers';
+
+// 對於不含泛型的組件，可直接使用 InstanceType
+ref<InstanceType<typeof componentWithoutGenerics>>();
+
+ref<ComponentExposed<typeof genericComponent>>();
+```
+
+## 使用限制 {#restrictions}
 
 - 由于模块执行语义的差异，`<script setup>` 中的代码依赖单文件组件的上下文。当将其移动到外部的 `.js` 或者 `.ts` 文件中的时候，对于开发者和工具来说都会感到混乱。因此，**`<script setup>`** 不能和 `src` attribute 一起使用。
 - `<script setup>` 不支持 DOM 内根组件模板。([相关讨论](https://github.com/vuejs/core/issues/8391))

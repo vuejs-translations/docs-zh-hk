@@ -126,7 +126,7 @@ items.forEach((item, index) => {
 
 ## `v-for` 與對象 {#v-for-with-an-object}
 
-你也可以使用 `v-for` 來遍歷一個對象的所有屬性。遍歷的順序會基於對該對象調用 `Object.keys()` 的返回值來決定。
+你也可以使用 `v-for` 來遍歷一個對象的所有屬性。遍歷的順序會基於對該對象調用 `Object.values()` 的返回值來決定。
 
 <div class="composition-api">
 
@@ -213,11 +213,7 @@ data() {
 </ul>
 ```
 
-## `v-for` 與 `v-if` {#v-for-with-v-if}
-
-:::warning 注意
-同時使用 `v-if` 和 `v-for` 是**不推薦的**，因為這樣二者的優先級不明顯。請轉閱[風格指南](/style-guide/rules-essential#avoid-v-if-with-v-for)查看更多細節。
-:::
+## `v-for` with `v-if` {#v-for-with-v-if}
 
 當它們同時存在於一個節點上時，`v-if` 比 `v-for` 的優先級更高。這意味著 `v-if` 的條件將無法訪問到 `v-for` 作用域內定義的變量別名：
 

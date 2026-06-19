@@ -21,44 +21,37 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 
 ### Vite {#vite}
 
-[Vite](https://cn.vitejs.dev/) 是一個輕量級的、速度極快的構建工具，對 Vue SFC 提供第一優先級支持。作者是尤雨溪，同時也是 Vue 的作者！
+[Vite](https://vite.dev/) 是一個輕量級的、速度極快的構建工具，對 Vue SFC 提供第一優先級支持。作者是尤雨溪，同時也是 Vue 的作者！
 
 要使用 Vite 來創建一個 Vue 項目，非常簡單：
 
-<VTCodeGroup>
-  <VTCodeGroupTab label="npm">
+::: code-group
 
-  ```sh
-  $ npm create vue@latest
-  ```
+```sh [npm]
+$ npm create vue@latest
+```
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="pnpm">
+```sh [pnpm]
+$ pnpm create vue@latest
+```
   
-  ```sh
-  $ pnpm create vue@latest
-  ```
-
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="yarn">
+```sh [yarn]
+# For Yarn Modern (v2+)
+$ yarn create vue@latest
   
-  ```sh
-  $ yarn create vue@latest
-  ```
-
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="bun">
+# For Yarn ^v4.11
+$ yarn dlx create-vue@latest
+```
   
-  ```sh
-  $ bun create vue@latest
-  ```
+```sh [bun]
+$ bun create vue@latest
+```
 
-  </VTCodeGroupTab>
-</VTCodeGroup>
+:::
 
 這個命令會安裝和執行 [create-vue](https://github.com/vuejs/create-vue)，它是 Vue 提供的官方腳手架工具。跟隨命令行的提示繼續操作即可。
 
-- 要學習更多關於 Vite 的知識，請查看 [Vite 官方文檔](https://cn.vitejs.dev)。
+- 要學習更多關於 Vite 的知識，請查看 [Vite 官方文檔](https://vite.dev/)。
 - 若要了解如何為一個 Vite 項目配置 Vue 相關的特殊行為，例如向 Vue 編譯器傳遞相關選項，請查看 [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue#readme) 的文檔。
 
 上面提到的兩種在線演練場也支持將文件作為一個 Vite 項目下載。
@@ -102,19 +95,16 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 
   - emacs 通過 [lsp-mode](https://emacs-lsp.github.io/lsp-mode/page/lsp-volar/) 支持。
 
-## 瀏覽器開發者插件 {#browser-devtools}
-
-<VueSchoolLink href="https://vueschool.io/lessons/using-vue-dev-tools-with-vuejs-3" title="免費的 Vue.js Devtools 課程"/>
+## Browser Devtools {#browser-devtools}
 
 Vue 的瀏覽器開發者插件使我們可以瀏覽一個 Vue 應用的組件樹，查看各個組件的狀態，追蹤狀態管理的事件，還可以進行組件性能分析。
 
-![devtools 截圖](https://raw.githubusercontent.com/vuejs/devtools/main/media/screenshot-shadow.png)
+![devtools 截圖](./images/devtools.png)
 
-- [文檔](https://devtools.vuejs.org/)
-- [Chrome 擴展商店頁](https://chrome.google.com/webstore/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-- [Firefox 所屬插件頁](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-- [Edge 擴展](https://microsoftedge.microsoft.com/addons/detail/vuejs-devtools/olofadcdnkkjdfgjcmjaadnlehnnihnl)
-- [獨立的 Electron 應用所屬插件](https://devtools.vuejs.org/guide/installation.html#standalone)
+- [Documentation](https://devtools.vuejs.org/)
+- [Chrome Extension](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
+- [Vite Plugin](https://devtools.vuejs.org/guide/vite-plugin)
+- [Standalone Electron app](https://devtools.vuejs.org/guide/standalone)
 
 ## TypeScript {#typescript}
 
@@ -192,9 +182,8 @@ Vue 團隊維護著 [eslint-plugin-vue](https://github.com/vuejs/eslint-plugin-v
 
 - [VueUse Playground](https://play.vueuse.org)
 - [Vue + Vite on Repl.it](https://replit.com/@templates/VueJS-with-Vite)
-- [Vue on CodeSandbox](https://codesandbox.io/s/vue-3)
+- [Vue on CodeSandbox](https://codesandbox.io/p/devbox/github/codesandbox/sandbox-templates/tree/main/vue-vite)
 - [Vue on Codepen](https://codepen.io/pen/editor/vue)
-- [Vue on Components.studio](https://components.studio/create/vue3)
 - [Vue on WebComponents.dev](https://webcomponents.dev/create/cevue)
 
 <!-- TODO ## Backend Framework Integrations -->

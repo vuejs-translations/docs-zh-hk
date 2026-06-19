@@ -123,6 +123,8 @@ const message = inject('message')
 </script>
 ```
 
+如果多個上層組件提供了相同 key 的數據，`inject` 會從組件鏈上最接近的父組件中查找注入的值。
+
 如果提供的值是一個 ref，注入進來的會是該 ref 對象，而**不會**自動解包為其內部的值。這使得注入方組件能夠通過 ref 對象保持了和供給方的響應性鏈接。
 
 [帶有響應性的 provide + inject 完整示例](https://play.vuejs.org/#eNqFUUFugzAQ/MrKF1IpxfeIVKp66Kk/8MWFDXYFtmUbpArx967BhURRU9/WOzO7MzuxV+fKcUB2YlWovXYRAsbBvQije2d9hAk8Xo7gvB11gzDDxdseCuIUG+ZN6a7JjZIvVRIlgDCcw+d3pmvTglz1okJ499I0C3qB1dJQT9YRooVaSdNiACWdQ5OICj2WwtTWhAg9hiBbhHNSOxQKu84WT8LkNQ9FBhTHXyg1K75aJHNUROxdJyNSBVBp44YI43NvG+zOgmWWYGt7dcipqPhGZEe2ef07wN3lltD+lWN6tNkV/37+rdKjK2rzhRTt7f3u41xhe37/xJZGAL2PLECXa9NKdD/a6QTTtGnP88LgiXJtYv4BaLHhvg==)
@@ -168,6 +170,8 @@ export default {
   }
 }
 ```
+
+如果多個上層組件提供了相同 key 的數據，`inject` 會從組件鏈上最接近的父組件中查找注入的值。
 
 [完整的 provide + inject 示例](https://play.vuejs.org/#eNqNkcFqwzAQRH9l0EUthOhuRKH00FO/oO7B2JtERZaEvA4F43+vZCdOTAIJCImRdpi32kG8h7A99iQKobs6msBvpTNt8JHxcTC2wS76FnKrJpVLZelKR39TSUO7qreMoXRA7ZPPkeOuwHByj5v8EqI/moZeXudCIBL30Z0V0FLXVXsqIA9krU8R+XbMR9rS0mqhS4KpDbZiSgrQc5JKQqvlRWzEQnyvuc9YuWbd4eXq+TZn0IvzOeKr8FvsNcaK/R6Ocb9Uc4FvefpE+fMwP0wH8DU7wB77nIo6x6a2hvNEME5D0CpbrjnHf+8excI=)
 
@@ -293,7 +297,7 @@ provide('read-only-count', readonly(count))
 
 為保證注入方和提供方之間的響應性鏈接，我們需要使用 [computed()](/api/reactivity-core#computed) 函數提供一個計算屬性：
 
-```js{10}
+```js{12}
 import { computed } from 'vue'
 
 export default {
@@ -319,12 +323,11 @@ export default {
 
 ## 使用 Symbol 作注入名 {#working-with-symbol-keys}
 
-至此，我們已經了解瞭如何使用字符串作為注入名。但如果你正在構建大型的應用，包含非常多的依賴提供，或者你正在編寫提供給其他開發者使用的組件庫，建議最好使用 Symbol 來作為注入名以避免潛在的衝突。
+至此，我們已經了解瞭如何使用字符串作為注入名。但如果你正在構建大型的應用，包含非常多的依賴提供，或者你正在編寫提供給其他開發者使用的組件庫，建議最好使用 [Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) 來作為注入名以避免潛在的衝突。
 
 我們通常推薦在一個單獨的文件中導出這些注入名 Symbol：
 
-```js
-// keys.js
+```js [keys.js]
 export const myInjectionKey = Symbol()
 ```
 

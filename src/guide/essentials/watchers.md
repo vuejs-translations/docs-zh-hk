@@ -224,6 +224,8 @@ watch(
 
 </div>
 
+In Vue 3.5+, the `deep` option can also be a number indicating the max traversal depth - i.e. how many levels should Vue traverse an object's nested properties.
+
 :::warning 謹慎使用
 深度偵聽需要遍歷被偵聽對象中的所有嵌套的屬性，當用於大型數據結構時，開銷很大。因此請只在必要時才使用它，並且要留意性能。
 :::
@@ -272,7 +274,9 @@ watch(
 
 </div>
 
-## 一次性偵聽器 <sup class="vt-badge" data-text="3.4+" /> {#once-watchers}
+## 一次性偵聽器 {#once-watchers}
+
+- Only supported in 3.4+
 
 每當被偵聽源發生變化時，偵聽器的回調就會執行。如果希望回調只在源變化時觸發一次，請使用 `once: true` 選項。
 
@@ -354,13 +358,137 @@ watchEffect(async () => {
 
 ### `watch` vs. `watchEffect` {#watch-vs-watcheffect}
 
-`watch` 和 `watchEffect` 都能響應式地執行有副作用的回調。它們之間的主要區別是追蹤響應式依賴的方式：
+`watch` and `watchEffect` both allow us to reactively perform side effects. Their main difference is the way they track their reactive dependencies:
 
 - `watch` 只追蹤明確偵聽的數據源。它不會追蹤任何在回調中訪問到的東西。另外，僅在數據源確實改變時才會觸發回調。`watch` 會避免在發生副作用時追蹤依賴，因此，我們能更加精確地控制回調函數的觸發時機。
 
 - `watchEffect`，則會在副作用發生期間追蹤依賴。它會在同步執行過程中，自動追蹤所有能訪問到的響應式屬性。這更方便，而且代碼往往更簡潔，但有時其響應性依賴關係會不那麼明確。
 
 </div>
+
+## Side Effect Cleanup {#side-effect-cleanup}
+
+Sometimes we may perform side effects, e.g. asynchronous requests, in a watcher:
+
+<div class="composition-api">
+
+```js
+watch(id, (newId) => {
+  fetch(`/api/${newId}`).then(() => {
+    // callback logic
+  })
+})
+```
+
+</div>
+<div class="options-api">
+
+```js
+export default {
+  watch: {
+    id(newId) {
+      fetch(`/api/${newId}`).then(() => {
+        // callback logic
+      })
+    }
+  }
+}
+```
+
+</div>
+
+But what if `id` changes before the request completes? When the previous request completes, it will still fire the callback with an ID value that is already stale. Ideally, we want to be able to cancel the stale request when `id` changes to a new value.
+
+We can use the [`onWatcherCleanup()`](/api/reactivity-core#onwatchercleanup) <sup class="vt-badge" data-text="3.5+" /> API to register a cleanup function that will be called when the watcher is invalidated and is about to re-run:
+
+<div class="composition-api">
+
+```js {10-13}
+import { watch, onWatcherCleanup } from 'vue'
+
+watch(id, (newId) => {
+  const controller = new AbortController()
+
+  fetch(`/api/${newId}`, { signal: controller.signal }).then(() => {
+    // callback logic
+  })
+
+  onWatcherCleanup(() => {
+    // abort stale request
+    controller.abort()
+  })
+})
+```
+
+</div>
+<div class="options-api">
+
+```js {12-15}
+import { onWatcherCleanup } from 'vue'
+
+export default {
+  watch: {
+    id(newId) {
+      const controller = new AbortController()
+
+      fetch(`/api/${newId}`, { signal: controller.signal }).then(() => {
+        // callback logic
+      })
+
+      onWatcherCleanup(() => {
+        // abort stale request
+        controller.abort()
+      })
+    }
+  }
+}
+```
+
+</div>
+
+Note that `onWatcherCleanup` is only supported in Vue 3.5+ and must be called during the synchronous execution of a `watchEffect` effect function or `watch` callback function: you cannot call it after an `await` statement in an async function.
+
+Alternatively, an `onCleanup` function is also passed to watcher callbacks as the 3rd argument<span class="composition-api">, and to the `watchEffect` effect function as the first argument</span>:
+
+<div class="composition-api">
+
+```js
+watch(id, (newId, oldId, onCleanup) => {
+  // ...
+  onCleanup(() => {
+    // cleanup logic
+  })
+})
+
+watchEffect((onCleanup) => {
+  // ...
+  onCleanup(() => {
+    // cleanup logic
+  })
+})
+```
+
+</div>
+<div class="options-api">
+
+```js
+export default {
+  watch: {
+    id(newId, oldId, onCleanup) {
+      // ...
+      onCleanup(() => {
+        // cleanup logic
+      })
+    }
+  }
+}
+```
+
+</div>
+
+`onCleanup` passed via function argument is bound to the watcher instance so it is not subject to the synchronous constraint of `onWatcherCleanup`.
+
+This works in versions before 3.5. In addition, `onCleanup` passed via function argument is bound to the watcher instance so it is not subject to the synchronously constraint of `onWatcherCleanup`.
 
 ## 回調的觸發時機 {#callback-flush-timing}
 

@@ -64,7 +64,7 @@
 
 - **詳細信息**
 
-  第一個參數是注入的 key。Vue 會遍歷父組件鏈，通過匹配 key 來確定所提供的值。如果父組件鏈上多個組件對同一個 key 提供了值，那麼離得更近的組件將會“覆蓋”鏈上更遠的組件所提供的值。如果沒有能通過 key 匹配到值，`inject()` 將返回 `undefined`，除非提供了一個默認值。
+  第一個參數是注入的 key。Vue 會遍歷父組件鏈，通過匹配 key 來確定所提供的值。如果父組件鏈上多個組件對同一個 key 提供了相同的值，那麼離得更近的組件將會“覆蓋”鏈上更遠的組件所提供的值並被使用。如果沒有能通過 key 匹配到值，`inject()` 將返回 `undefined`，除非提供了一個默認值。
 
   第二個參數是可選的，即在沒有匹配到 key 時使用的默認值。
 
@@ -107,7 +107,9 @@
   - [指南 - 依賴注入](/guide/components/provide-inject)
   - [指南 - 為 provide/inject 標註類型](/guide/typescript/composition-api#typing-provide-inject) <sup class="vt-badge ts" />
 
-## hasInjectionContext() <sup class="vt-badge" data-text="3.3+" /> {#has-injection-context}
+## hasInjectionContext() {#has-injection-context}
+
+- Only supported in 3.3+
 
 如果 [inject()](#inject) 可以在錯誤的地方 (例如 `setup()` 之外) 被調用而不觸發警告，則返回 `true`。此方法適用於希望在內部使用 `inject()` 而不向用戶發出警告的庫。
 

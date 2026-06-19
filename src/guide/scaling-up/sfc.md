@@ -94,7 +94,7 @@ SFC 中的 `<style>` 標籤一般會在開發時注入成原生的 `<style>` 標
 
 你可以在 [Vue SFC 演練場](https://play.vuejs.org/)中實際使用一下單文件組件，同時可以看到它們最終被編譯後的樣子。
 
-在實際項目中，我們一般會使用集成了 SFC 編譯器的構建工具，例如 [Vite](https://cn.vitejs.dev/) 或者 [Vue CLI](https://cli.vuejs.org/zh/) (基於 [webpack](https://webpack.js.org/))，Vue 官方也提供了腳手架工具來幫助你盡可能快速地上手開發 SFC。更多細節請查看 [SFC 工具鏈](/guide/scaling-up/tooling)章節。
+在實際項目中，我們一般會使用集成了 SFC 編譯器的構建工具，例如 [Vite](https://vite.dev/) 或者 [Vue CLI](https://cli.vuejs.org/) (基於 [webpack](https://webpack.js.org/))，Vue 官方也提供了腳手架工具來幫助你盡可能快速地上手開發 SFC。更多細節請查看 [SFC 工具鏈](/guide/scaling-up/tooling)章節。
 
 ## 如何看待關注點分離？ {#what-about-separation-of-concerns}
 

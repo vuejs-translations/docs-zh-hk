@@ -79,7 +79,7 @@ import SwitchComponent from './keep-alive-demos/SwitchComponent.vue'
 
 ## 最大緩存實例數 {#max-cached-instances}
 
-我們可以通過傳入 `max` prop 來限制可被緩存的最大組件實例數。`<KeepAlive>` 的行為在指定了 `max` 後類似一個 [LRU 緩存](<https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_recently_used_(LRU)>)：如果緩存的實例數量即將超過指定的那個最大數量，則最久沒有被訪問的緩存實例將被銷燬，以便為新的實例騰出空間。
+我們可以通過傳入 `max` prop 來限制可被緩存的最大組件實例數。`<KeepAlive>` 的行為在指定了 `max` 後類似一個 [LRU 緩存](<https://en.wikipedia.org/wiki/Cache_replacement_policies#Least_Recently_Used_(LRU)>)：如果緩存的實例數量即將超過指定的那個最大數量，則最久沒有被訪問的緩存實例將被銷燬，以便為新的實例騰出空間。
 
 ```vue-html
 <KeepAlive :max="10">

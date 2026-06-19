@@ -16,50 +16,47 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 
 - 如果你已經比較熟悉 Node.js 和構建工具等概念，還可以直接在瀏覽器中打開 [StackBlitz](https://vite.new/vue) 來嘗試完整的構建設置。
 
+- 如需了解推薦的設置，請觀看這個互動式 [Scrimba](http://scrimba.com/links/vue-quickstart) 教程，它會帶你了解如何運行、編輯和部署你的第一個 Vue 應用。
+
 ## 創建一個 Vue 應用 {#creating-a-vue-application}
 
 :::tip 前提條件
 
 - 熟悉命令行
-- 已安裝 18.3 或更高版本的 [Node.js](https://nodejs.org/)
+- 已安裝 [Node.js](https://nodejs.org/)，版本需符合 `^20.19.0 || >=22.12.0`
   :::
 
-在本節中，我們將介紹如何在本地搭建 Vue [單頁應用](/guide/extras/ways-of-using-vue#single-page-application-spa)。創建的項目將使用基於 [Vite](https://vitejs.dev) 的構建設置，並允許我們使用 Vue 的[單文件組件](/guide/scaling-up/sfc) (SFC)。
+在本節中，我們將介紹如何在本地搭建 Vue [單頁應用](/guide/extras/ways-of-using-vue#single-page-application-spa)。創建的項目將使用基於 [Vite](https://vite.dev/) 的構建設置，並允許我們使用 Vue 的[單文件組件](/guide/scaling-up/sfc) (SFC)。
 
 確保你安裝了最新版本的 [Node.js](https://nodejs.org/)，並且你的當前工作目錄正是打算創建項目的目錄。在命令行中運行以下命令 (不要輸入 `$` 符號)：
 
-<VTCodeGroup>
-  <VTCodeGroupTab label="npm">
+::: code-group
 
-  ```sh
-  $ npm create vue@latest
-  ```
+```sh [npm]
+$ npm create vue@latest
+```
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="pnpm">
+```sh [pnpm]
+$ pnpm create vue@latest
+```
 
-  ```sh
-  $ pnpm create vue@latest
-  ```
+```sh [yarn]
+# For Yarn (v1+)
+$ yarn create vue
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="yarn">
+# For Yarn Modern (v2+)
+$ yarn create vue@latest
+  
+# For Yarn ^v4.11
+$ yarn dlx create-vue@latest
+```
 
-  ```sh
-  $ yarn create vue@latest
-  ```
+```sh [bun]
+$ bun create vue@latest
+```
+:::
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="bun">
-
-  ```sh
-  $ bun create vue@latest
-  ```
-
-  </VTCodeGroupTab>
-</VTCodeGroup>
-
-這一指令將會安裝並執行 [create-vue](https://github.com/vuejs/create-vue)，它是 Vue 官方的項目腳手架工具。你將會看到一些諸如 TypeScript 和測試支持之類的可選功能提示：
+這個命令會安裝並執行 [create-vue](https://github.com/vuejs/create-vue)，這是 Vue 官方的項目腳手架工具。你會看到一些可選功能的提示，例如 TypeScript 和測試支持：
 
 <div class="language-sh"><pre><code><span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Project name: <span style="color:#888;">… <span style="color:#89DDFF;">&lt;</span><span style="color:#888;">your-project-name</span><span style="color:#89DDFF;">&gt;</span></span></span>
 <span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add TypeScript? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
@@ -77,84 +74,64 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 
 如果不確定是否要開啟某個功能，你可以直接按下回車鍵選擇 `No`。在項目被創建後，通過以下步驟安裝依賴並啟動開發伺服器：
 
-<VTCodeGroup>
-  <VTCodeGroupTab label="npm">
+::: code-group
 
-  ```sh-vue
-  $ cd {{'<your-project-name>'}}
-  $ npm install
-  $ npm run dev
-  ```
+```sh-vue [npm]
+$ cd {{'<your-project-name>'}}
+$ npm install
+$ npm run dev
+```
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="pnpm">
+```sh-vue [pnpm]
+$ cd {{'<your-project-name>'}}
+$ pnpm install
+$ pnpm run dev
+```
 
-  ```sh-vue
-  $ cd {{'<your-project-name>'}}
-  $ pnpm install
-  $ pnpm run dev
-  ```
+```sh-vue [yarn]
+$ cd {{'<your-project-name>'}}
+$ yarn
+$ yarn dev
+```
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="yarn">
+```sh-vue [bun]
+$ cd {{'<your-project-name>'}}
+$ bun install
+$ bun run dev
+```
 
-  ```sh-vue
-  $ cd {{'<your-project-name>'}}
-  $ yarn
-  $ yarn dev
-  ```
+:::
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="bun">
-
-  ```sh-vue
-  $ cd {{'<your-project-name>'}}
-  $ bun install
-  $ bun run dev
-  ```
-
-  </VTCodeGroupTab>
-</VTCodeGroup>
 
 你現在應該已經運行起來了你的第一個 Vue 項目！請注意，生成的項目中的示例組件使用的是[組合式 API](/guide/introduction#composition-api) 和 `<script setup>`，而非[選項式 API](/guide/introduction#options-api)。下面是一些補充提示：
 
 - 推薦的 IDE 配置是 [Visual Studio Code](https://code.visualstudio.com/) + [Vue - Official 擴展](https://marketplace.visualstudio.com/items?itemName=Vue.volar)。如果使用其他編輯器，參考 [IDE 支持章節](/guide/scaling-up/tooling#ide-support)。
 - 更多工具細節，包括與後端框架的整合，我們會在[工具鏈指南](/guide/scaling-up/tooling)進行討論。
-- 要了解構建工具 Vite 更多背後的細節，請查看 [Vite 文檔](https://cn.vitejs.dev)。
+- 要了解構建工具 Vite 更多背後的細節，請查看 [Vite 文檔](https://vite.dev/)。
 - 如果你選擇使用 TypeScript，請閱讀 [TypeScript 使用指南](typescript/overview)。
 
 當你準備將應用發佈到生產環境時，請運行：
 
-<VTCodeGroup>
-  <VTCodeGroupTab label="npm">
+::: code-group
 
-  ```sh
-  $ npm run build
-  ```
+```sh [npm]
+$ npm run build
+```
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="pnpm">
+```sh [pnpm]
+$ pnpm run build
+```
 
-  ```sh
-  $ pnpm run build
-  ```
+```sh [yarn]
+$ yarn build
+```
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="yarn">
+```sh [bun]
+$ bun run build
+```
 
-  ```sh
-  $ yarn build
-  ```
+:::
 
-  </VTCodeGroupTab>
-  <VTCodeGroupTab label="bun">
-
-  ```sh
-  $ bun run build
-  ```
-
-  </VTCodeGroupTab>
-</VTCodeGroup>
 
 此命令會在 `./dist` 文件夾中為你的應用創建一個生產環境的構建版本。關於將應用上線生產環境的更多內容，請閱讀[生產環境部署指南](/guide/best-practices/production-deployment)。
 
@@ -196,7 +173,7 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 </script>
 ```
 
-[Codepen 示例](https://codepen.io/vuejs-examples/pen/QWJwJLp)
+[CodePen 示例 >](https://codepen.io/vuejs-examples/pen/QWJwJLp)
 
 </div>
 
@@ -221,7 +198,7 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 </script>
 ```
 
-[Codepen 示例](https://codepen.io/vuejs-examples/pen/eYQpQEG)
+[CodePen 示例 >](https://codepen.io/vuejs-examples/pen/eYQpQEG)
 
 :::tip
 本指南中許多關於組合式 API 的例子將使用 `<script setup>` 語法，這需要構建工具。如果你打算在沒有構建步驟的情況下使用組合式 API，請參考 [`setup()` 選項](/api/composition-api-setup)的用法。
@@ -278,12 +255,12 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 
 <div class="options-api">
 
-[Codepen 示例](https://codepen.io/vuejs-examples/pen/VwVYVZO)
+[CodePen 示例 >](https://codepen.io/vuejs-examples/pen/VwVYVZO)
 
 </div>
 <div class="composition-api">
 
-[Codepen 示例](https://codepen.io/vuejs-examples/pen/MWzazEv)
+[CodePen 示例 >](https://codepen.io/vuejs-examples/pen/MWzazEv)
 
 </div>
 
@@ -323,7 +300,7 @@ import { createApp } from 'vue'
 </script>
 ```
 
-[Codepen 示例](https://codepen.io/vuejs-examples/pen/wvQKQyM)
+[CodePen 示例 >](https://codepen.io/vuejs-examples/pen/wvQKQyM)
 
 </div>
 
@@ -354,7 +331,7 @@ import { createApp } from 'vue'
 </script>
 ```
 
-[Codepen demo](https://codepen.io/vuejs-examples/pen/YzRyRYM)
+[CodePen Demo >](https://codepen.io/vuejs-examples/pen/YzRyRYM)
 
 </div>
 
@@ -374,8 +351,7 @@ import { createApp } from 'vue'
 
 隨著對這份指南的逐步深入，我們可能需要將代碼分割成單獨的 JavaScript 文件，以便更容易管理。例如：
 
-```html
-<!-- index.html -->
+```html [index.html]
 <div id="app"></div>
 
 <script type="module">
@@ -388,8 +364,7 @@ import { createApp } from 'vue'
 
 <div class="options-api">
 
-```js
-// my-component.js
+```js [my-component.js]
 export default {
   data() {
     return { count: 0 }
@@ -401,8 +376,7 @@ export default {
 </div>
 <div class="composition-api">
 
-```js
-// my-component.js
+```js [my-component.js]
 import { ref } from 'vue'
 export default {
   setup() {

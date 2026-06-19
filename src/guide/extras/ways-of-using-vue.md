@@ -6,7 +6,7 @@
 
 Vue 可以以一個單獨 JS 文件的形式使用，無需構建步驟！如果你的後端框架已經渲染了大部分的 HTML，或者你的前端邏輯並不複雜，不需要構建步驟，這是最簡單的使用 Vue 的方式。在這些場景中你可以將 Vue 看作一個更加聲明式的 jQuery 替代品。
 
-Vue 也提供了另一個更適用於此類無構建步驟場景的版本 [petite-vue](https://github.com/vuejs/petite-vue)。它為漸進式增強已有的 HTML 作了特別的優化，功能更加精簡，十分輕量。
+我們之前也提供了另一個更適用於此類無構建步驟場景的版本 [petite-vue](https://github.com/vuejs/petite-vue)。它為漸進式增強已有的 HTML 作了特別的優化，功能更加精簡，十分輕量。但是，petite-vue 已經不再被積極維護，最後一個版本發佈於 Vue 3.2.27。
 
 ## 作為 Web Component 嵌入 {#embedded-web-components}
 
@@ -53,7 +53,7 @@ Vue 團隊也維護了一個名為 [VitePress](https://vitepress.dev/) 的靜態
 
 儘管 Vue 主要是為構建 Web 應用而設計的，但它絕不僅僅侷限於瀏覽器。你還可以：
 
-- 配合 [Electron](https://www.electronjs.org/) 構建桌面應用
+- 配合 [Electron](https://www.electronjs.org/) 或 [Wails](https://wails.io) 構建桌面應用
 - 配合 [Ionic Vue](https://ionicframework.com/docs/vue/overview) 構建移動端應用
 - 使用 [Quasar](https://quasar.dev/) 或 [Tauri](https://tauri.app) 用同一套代碼同時開發桌面端和移動端應用
 - 使用 [TresJS](https://tresjs.org/) 構建 3D WebGL 體驗

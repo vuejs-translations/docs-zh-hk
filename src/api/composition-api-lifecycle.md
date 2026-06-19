@@ -11,7 +11,7 @@
 - **类型**
 
   ```ts
-  function onMounted(callback: () => void): void
+  function onMounted(callback: () => void, target?: ComponentInternalInstance | null): void
   ```
 
 - **详细信息**
@@ -53,7 +53,7 @@
 - **类型**
 
   ```ts
-  function onUpdated(callback: () => void): void
+  function onUpdated(callback: () => void, target?: ComponentInternalInstance | null): void
   ```
 
 - **详细信息**
@@ -96,7 +96,7 @@
 - **类型**
 
   ```ts
-  function onUnmounted(callback: () => void): void
+  function onUnmounted(callback: () => void, target?: ComponentInternalInstance | null): void
   ```
 
 - **详细信息**
@@ -135,7 +135,7 @@
 - **类型**
 
   ```ts
-  function onBeforeMount(callback: () => void): void
+  function onBeforeMount(callback: () => void, target?: ComponentInternalInstance | null): void
   ```
 
 - **详细信息**
@@ -151,7 +151,7 @@
 - **类型**
 
   ```ts
-  function onBeforeUpdate(callback: () => void): void
+  function onBeforeUpdate(callback: () => void, target?: ComponentInternalInstance | null): void
   ```
 
 - **详细信息**
@@ -167,7 +167,7 @@
 - **类型**
 
   ```ts
-  function onBeforeUnmount(callback: () => void): void
+  function onBeforeUnmount(callback: () => void, target?: ComponentInternalInstance | null): void
   ```
 
 - **详细信息**
@@ -210,7 +210,7 @@
   在生产环境中，第三个参数 (`info`) 是一个缩短的代码，而不是含有完整信息的字符串。错误代码和字符串的映射可以参阅[生产环境错误代码参考](/error-reference/#runtime-errors)。
   :::
 
-  你可以在 `errorCaptured()` 中更改组件状态来为用户显示一个错误状态。注意不要让错误状态再次渲染导致本次错误的内容，否则组件会陷入无限循环。
+  你可以在 `onErrorCaptured()` 中更改组件状态来为用户显示一个错误状态。注意不要让错误状态再次渲染导致本次错误的内容，否则组件会陷入无限循环。
 
   这个钩子可以通过返回 `false` 来阻止错误继续向上传递。请看下方的传递细节介绍。
 
@@ -282,7 +282,7 @@
 - **类型**
 
   ```ts
-  function onActivated(callback: () => void): void
+  function onActivated(callback: () => void, target?: ComponentInternalInstance | null): void
   ```
 
 - **参考**[指南 - 缓存实例的生命周期](/guide/built-ins/keep-alive#lifecycle-of-cached-instance)
@@ -296,7 +296,7 @@
 - **类型**
 
   ```ts
-  function onDeactivated(callback: () => void): void
+  function onDeactivated(callback: () => void, target?: ComponentInternalInstance | null): void
   ```
 
 - **参考**[指南 - 缓存实例的生命周期](/guide/built-ins/keep-alive#lifecycle-of-cached-instance)

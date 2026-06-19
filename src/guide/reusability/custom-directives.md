@@ -1,20 +1,124 @@
 # 自定義指令 {#custom-directives}
 
 <script setup>
-const vFocus = {
+const vHighlight = {
   mounted: el => {
-    el.focus()
+    el.classList.add('is-highlight')
   }
 }
 </script>
 
-## 介紹 {#introduction}
+<style>
+.vt-doc p.is-highlight {
+  margin-bottom: 0;
+}
+
+.is-highlight {
+  background-color: yellow;
+  color: black;
+}
+</style>
+
+## Introduction {#introduction}
 
 除了 Vue 內置的一系列指令 (例如 `v-model` 或 `v-show`) 之外，Vue 還允許你註冊自定義的指令 (Custom Directives)。
 
 我們已經介紹了兩種在 Vue 中重用代碼的方式：[組件](/guide/essentials/component-basics)和[組合式函數](./composables)。組件是主要的構建模塊，而組合式函數則側重於有狀態的邏輯。另一方面，自定義指令主要是為了重用涉及普通元素的底層 DOM 訪問的邏輯。
 
-一個自定義指令由一個包含類似組件生命週期鉤子的對象來定義。鉤子函數會接收到指令所綁定元素作為其參數。下面是一個自定義指令的例子，當一個 input 元素被 Vue 插入到 DOM 中後，它會被自動聚焦：
+一個自定義指令由一個包含類似組件生命週期鉤子的對象來定義。鉤子函數會接收到指令所綁定元素作為其參數。下面是一個自定義指令的例子，當一個 input 元素被 Vue 插入到 DOM 中後，該指令會將 class 添加到元素中：
+
+<div class="composition-api">
+
+```vue
+<script setup>
+// enables v-highlight in templates
+const vHighlight = {
+  mounted: (el) => {
+    el.classList.add('is-highlight')
+  }
+}
+</script>
+
+<template>
+  <p v-highlight>This sentence is important!</p>
+</template>
+```
+
+</div>
+
+<div class="options-api">
+
+```js
+const highlight = {
+  mounted: (el) => el.classList.add('is-highlight')
+}
+
+export default {
+  directives: {
+    // enables v-highlight in template
+    highlight
+  }
+}
+```
+
+```vue-html
+<p v-highlight>This sentence is important!</p>
+```
+
+</div>
+
+<div class="demo">
+  <p v-highlight>This sentence is important!</p>
+</div>
+
+<div class="composition-api">
+
+In `<script setup>`, any camelCase variable that starts with the `v` prefix can be used as a custom directive. In the example above, `vHighlight` can be used in the template as `v-highlight`.
+
+If you are not using `<script setup>`, custom directives can be registered using the `directives` option:
+
+```js
+export default {
+  setup() {
+    /*...*/
+  },
+  directives: {
+    // enables v-highlight in template
+    highlight: {
+      /* ... */
+    }
+  }
+}
+```
+
+</div>
+
+<div class="options-api">
+
+Similar to components, custom directives must be registered so that they can be used in templates. In the example above, we are using local registration via the `directives` option.
+
+</div>
+
+It is also common to globally register custom directives at the app level:
+
+```js
+const app = createApp({})
+
+// make v-highlight usable in all components
+app.directive('highlight', {
+  /* ... */
+})
+```
+
+It is possible to type global custom directives by extending the `GlobalDirectives` interface from `vue`
+
+More Details: [Typing Custom Global Directives](/guide/typescript/composition-api#typing-global-custom-directives) <sup class="vt-badge ts" />
+
+## When to use custom directives {#when-to-use}
+
+Custom directives should only be used when the desired functionality can only be achieved via direct DOM manipulation.
+
+A common example of this is a `v-focus` custom directive that brings an element into focus.
 
 <div class="composition-api">
 
@@ -54,54 +158,9 @@ export default {
 
 </div>
 
-<div class="demo">
-  <input v-focus placeholder="This should be focused" />
-</div>
+This directive is more useful than the `autofocus` attribute because it works not just on page load - it also works when the element is dynamically inserted by Vue!
 
-假設你還未點擊頁面中的其他地方，那麼上面這個 input 元素應該會被自動聚焦。該指令比 `autofocus` 屬性更有用，因為它不僅可以在頁面加載完成後生效，還可以在 Vue 動態插入元素後生效。
-
-<div class="composition-api">
-
-在 `<script setup>` 中，任何以 `v` 開頭的駝峰式命名的變量都可以被用作一個自定義指令。在上面的例子中，`vFocus` 即可以在模板中以 `v-focus` 的形式使用。
-
-在沒有使用 `<script setup>` 的情況下，自定義指令需要通過 `directives` 選項註冊：
-
-```js
-export default {
-  setup() {
-    /*...*/
-  },
-  directives: {
-    // 在模板中啟用 v-focus
-    focus: {
-      /* ... */
-    }
-  }
-}
-```
-
-</div>
-
-<div class="options-api">
-
-和組件類似，自定義指令在模板中使用前必須先註冊。在上面的例子中，我們使用 `directives` 選項完成了指令的局部註冊。
-
-</div>
-
-將一個自定義指令全局註冊到應用層級也是一種常見的做法：
-
-```js
-const app = createApp({})
-
-// 使 v-focus 在所有組件中都可用
-app.directive('focus', {
-  /* ... */
-})
-```
-
-:::tip
-只有當所需功能只能通過直接的 DOM 操作來實現時，才應該使用自定義指令。其他情況下應該儘可能地使用 `v-bind` 這樣的內置指令來聲明式地使用模板，這樣更高效，也對服務端渲染更友好。
-:::
+Declarative templating with built-in directives such as `v-bind` is recommended when possible because they are more efficient and server-rendering friendly.
 
 ## 指令鉤子 {#directive-hooks}
 
@@ -111,23 +170,23 @@ app.directive('focus', {
 const myDirective = {
   // 在綁定元素的 attribute 前
   // 或事件監聽器應用前調用
-  created(el, binding, vnode, prevVnode) {
+  created(el, binding, vnode) {
     // 下面會介紹各個參數的細節
   },
   // 在元素被插入到 DOM 前調用
-  beforeMount(el, binding, vnode, prevVnode) {},
+  beforeMount(el, binding, vnode) {},
   // 在綁定元素的父組件
   // 及他自己的所有子節點都掛載完成後調用
-  mounted(el, binding, vnode, prevVnode) {},
+  mounted(el, binding, vnode) {},
   // 綁定元素的父組件更新前調用
   beforeUpdate(el, binding, vnode, prevVnode) {},
   // 在綁定元素的父組件
   // 及他自己的所有子節點都更新後調用
   updated(el, binding, vnode, prevVnode) {},
   // 綁定元素的父組件卸載前調用
-  beforeUnmount(el, binding, vnode, prevVnode) {},
+  beforeUnmount(el, binding, vnode) {},
   // 綁定元素的父組件卸載後調用
-  unmounted(el, binding, vnode, prevVnode) {}
+  unmounted(el, binding, vnode) {}
 }
 ```
 
@@ -175,7 +234,7 @@ const myDirective = {
 這裡指令的參數會基於組件的 `arg` 數據屬性響應式地更新。
 
 :::tip Note
-除了 `el` 外，其他參數都是只讀的，不要修改它們。如你需要在不同的鉤子間共享信息，建議通過元素的 [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) 屬性實現。
+除了 `el` 外，其他參數都是隻讀的，不要修改它們。如你需要在不同的鉤子間共享信息，建議通過元素的 [dataset](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset) 屬性實現。
 :::
 
 ## 簡化形式 {#function-shorthand}
@@ -210,6 +269,10 @@ app.directive('demo', (el, binding) => {
 
 ## 在組件上使用 {#usage-on-components}
 
+:::warning Not recommended
+Using custom directives on components is not recommended. Unexpected behaviour may occur when a component has multiple root nodes.
+:::
+
 當在組件上使用自定義指令時，它會始終應用於組件的根節點，和[透傳屬性](/guide/components/attrs)類似。
 
 ```vue-html
@@ -224,4 +287,4 @@ app.directive('demo', (el, binding) => {
 </div>
 ```
 
-需要注意的是組件可能含有多個根節點。當應用到一個多根組件時，指令將會被忽略且拋出一個警告。和原生屬性不同，指令不能通過 `v-bind="$attrs"` 來傳遞給一個不同的元素。總的來說，**不**建議在組件上使用自定義指令。
+Note that components can potentially have more than one root node. When applied to a multi-root component, a directive will be ignored and a warning will be thrown. Unlike attributes, directives can't be passed to a different element with `v-bind="$attrs"`.

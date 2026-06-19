@@ -1,5 +1,9 @@
 # TypeScript 與組合式 API {#typescript-with-composition-api}
 
+<ScrimbaLink href="https://scrimba.com/links/vue-ts-composition-api" title="Free Vue.js TypeScript with Composition API Lesson" type="scrimba">
+ 觀看 Scrimba 上的互動視頻課程
+</ScrimbaLink>
+
 > 這一章假設你已經閱讀了[搭配 TypeScript 使用 Vue](./overview) 的概覽。
 
 ## 為組件的 props 標註類型 {#typing-component-props}
@@ -50,7 +54,7 @@ const props = defineProps<Props>()
 </script>
 ```
 
-這同樣適用於 `Props` 從另一個源文件中導入的情況。該功能要求 TypeScript 作為 Vue 的一個 peer dependency。
+這同樣適用於 `Props` 從另一個源文件中導入的情況，例如相對路徑導入、路徑別名（如 `@/types`）或外部依賴（如 `node_modules`）。該功能要求 TypeScript 作為 Vue 的一個 peer dependency。
 
 ```vue
 <script setup lang="ts">
@@ -64,14 +68,25 @@ const props = defineProps<Props>()
 
 在 3.2 及以下版本中，`defineProps()` 的泛型類型參數僅限於類型文字或對本地接口的引用。
 
-這個限制在 3.3 中得到了解決。最新版本的 Vue 支持在類型參數位置引用導入和有限的複雜類型。但是，由於類型到運行時轉換仍然基於 AST，一些需要實際類型分析的複雜類型，例如條件類型，還未支持。您可以使用條件類型來指定單個 prop 的類型，但不能用於整個 props 對象的類型。
+這個限制在 3.3 中得到了解決。最新版本的 Vue 支持在類型參數位置引用導入和有限的複雜類型。但是，由於類型到運行時轉換仍然基於 AST，一些需要實際類型分析的複雜類型，例如條件類型，還未支持。你可以使用條件類型來指定單個 prop 的類型，但不能用於整個 props 對象的類型。
 
-### Props 解構默認值 {#props-default-values}
+### Props 解構預設值 {#props-default-values}
 
-當使用基於類型的聲明時，我們失去了為 props 聲明默認值的能力。這可以通過 `withDefaults` 編譯器宏解決：
+當使用基於類型的聲明時，我們失去了為 props 聲明預設值的能力。這可以通過 [Props 響應式解構](/guide/components/props#reactive-props-destructure) <sup class="vt-badge" data-text="3.5+" /> 來解決：
 
 ```ts
-export interface Props {
+interface Props {
+  msg?: string
+  labels?: string[]
+}
+
+const { msg = 'hello', labels = ['one', 'two'] } = defineProps<Props>()
+```
+
+在 3.4 及以下版本中，Props 響應式解構並非預設啟用，另一種方式是使用 `withDefaults` 編譯器宏：
+
+```ts
+interface Props {
   msg?: string
   labels?: string[]
 }
@@ -82,7 +97,11 @@ const props = withDefaults(defineProps<Props>(), {
 })
 ```
 
-這將被編譯為等效的運行時 props `default` 選項。此外，`withDefaults` 幫助程序為默認值提供類型檢查，並確保返回的 props 類型刪除了已聲明默認值的屬性的可選標誌。
+這將被編譯為等效的運行時 props `default` 選項。此外，`withDefaults` 幫助程序為預設值提供類型檢查，並確保返回的 props 類型刪除了已聲明預設值的屬性的可選標誌。
+
+:::info
+請注意，在使用 `withDefaults` 時，可變引用類型（如數組或對象）的預設值應該包裹在函數中，以避免意外修改和外部副作用。這確保了每個組件實例都能獲得自己的預設值副本。在使用解構搭配預設值時則**不**需要這樣做。
+:::
 
 ### 非 `<script setup>` 場景下 {#without-script-setup}
 
@@ -356,6 +375,17 @@ const foo = inject('foo') as string
 
 ## 為模板引用標註類型 {#typing-template-refs}
 
+在 Vue 3.5 與 `@vue/language-tools` 2.1（同時為 IDE 語言服務和 `vue-tsc` 提供支持）下，SFC 中由 `useTemplateRef()` 創建的靜態 ref 的類型可以根據對應 `ref` attribute 所使用的元素**自動推導**。
+
+當無法自動推導時，你仍然可以通過泛型參數將模板引用強制轉換為一個明確的類型：
+
+```ts
+const el = useTemplateRef<HTMLInputElement>('el')
+```
+
+<details>
+<summary>3.5 之前的用法</summary>
+
 模板引用需要通過一個顯式指定的泛型參數和一個初始值 `null` 來創建：
 
 ```vue
@@ -374,21 +404,55 @@ onMounted(() => {
 </template>
 ```
 
+</details>
+
 可以通過類似於 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/input#technical_summary) 的頁面來獲取正確的 DOM 接口。
 
 注意為了嚴格的類型安全，有必要在訪問 `el.value` 時使用可選鏈或類型守衛。這是因為直到組件被掛載前，這個 ref 的值都是初始的 `null`，並且在由於 `v-if` 的行為將引用的元素卸載時也可以被設置為 `null`。
 
 ## 為組件模板引用標註類型 {#typing-component-template-refs}
 
-有時，你可能需要為一個子組件添加一個模板引用，以便調用它公開的方法。舉例來說，我們有一個 `MyModal` 子組件，它有一個打開模態框的方法：
+在 Vue 3.5 與 `@vue/language-tools` 2.1（同時為 IDE 語言服務和 `vue-tsc` 提供支持）下，SFC 中由 `useTemplateRef()` 創建的靜態 ref 的類型可以根據對應 `ref` attribute 所使用的元素或組件**自動推導**。
 
-```vue
-<!-- MyModal.vue -->
+當無法自動推導時（例如在非 SFC 用法或動態組件中），你仍然可以通過泛型參數將模板引用強制轉換為一個明確的類型。
+
+為了獲得導入組件的實例類型，我們需要先通過 `typeof` 獲取其類型，再使用 TypeScript 內置的 `InstanceType` 工具類型來提取其實例類型：
+
+```vue{6,7} [App.vue]
 <script setup lang="ts">
+import { useTemplateRef } from 'vue'
+import Foo from './Foo.vue'
+import Bar from './Bar.vue'
+
+type FooType = InstanceType<typeof Foo>
+type BarType = InstanceType<typeof Bar>
+
+const compRef = useTemplateRef<FooType | BarType>('comp')
+</script>
+
+<template>
+  <component :is="Math.random() > 0.5 ? Foo : Bar" ref="comp" />
+</template>
+```
+
+當組件的確切類型無法獲得或並不重要時，可以改用 `ComponentPublicInstance`。它只包含所有組件共有的屬性，例如 `$el`：
+
+```ts
+import { useTemplateRef } from 'vue'
+import type { ComponentPublicInstance } from 'vue'
+
+const child = useTemplateRef<ComponentPublicInstance>('child')
+```
+
+當被引用的組件是一個[泛型組件](/guide/typescript/overview.html#generic-components)時，例如 `MyGenericModal`：
+
+```vue [MyGenericModal.vue]
+<script setup lang="ts" generic="ContentType extends string | number">
 import { ref } from 'vue'
 
-const isContentShown = ref(false)
-const open = () => (isContentShown.value = true)
+const content = ref<ContentType | null>(null)
+
+const open = (newContent: ContentType) => (content.value = newContent)
 
 defineExpose({
   open
@@ -396,26 +460,59 @@ defineExpose({
 </script>
 ```
 
-為了獲取 `MyModal` 的類型，我們首先需要通過 `typeof` 得到其類型，再使用 TypeScript 內置的 `InstanceType` 工具類型來獲取其實例類型：
+它需要使用 [`vue-component-type-helpers`](https://www.npmjs.com/package/vue-component-type-helpers) 庫中的 `ComponentExposed` 來引用，因為 `InstanceType` 對其無效。
 
-```vue{5}
-<!-- App.vue -->
+```vue [App.vue]
 <script setup lang="ts">
-import MyModal from './MyModal.vue'
+import { useTemplateRef } from 'vue'
+import MyGenericModal from './MyGenericModal.vue'
+import type { ComponentExposed } from 'vue-component-type-helpers'
 
-const modal = ref<InstanceType<typeof MyModal> | null>(null)
+const modal =
+  useTemplateRef<ComponentExposed<typeof MyGenericModal>>('modal')
 
 const openModal = () => {
-  modal.value?.open()
+  modal.value?.open('newValue')
 }
 </script>
 ```
 
-如果組件的具體類型無法獲得，或者你並不關心組件的具體類型，那麼可以使用 `ComponentPublicInstance`。這只會包含所有組件都共享的屬性，例如 `$el`。
+請注意，在 `@vue/language-tools` 2.1+ 下，靜態模板引用的類型可以被自動推導，僅在邊緣情況下才需要使用上述方式。
 
-```ts
-import { ref } from 'vue'
-import type { ComponentPublicInstance } from 'vue'
+## 為全局自定義指令標註類型 {#typing-global-custom-directives}
 
-const child = ref<ComponentPublicInstance | null>(null)
+為了讓通過 `app.directive()` 聲明的全局自定義指令獲得類型提示和類型檢查，你可以擴展 `GlobalDirectives`：
+
+```ts [src/directives/highlight.ts]
+import type { Directive } from 'vue'
+
+export type HighlightDirective = Directive<HTMLElement, string>
+
+declare module 'vue' {
+  export interface GlobalDirectives {
+    // 以 v 為前綴（v-highlight）
+    vHighlight: HighlightDirective
+  }
+}
+
+export default {
+  mounted: (el, binding) => {
+    el.style.backgroundColor = binding.value
+  }
+} satisfies HighlightDirective
+```
+
+```ts [main.ts]
+import highlight from './directives/highlight'
+// ...其他代碼
+const app = createApp(App)
+app.directive('highlight', highlight)
+```
+
+在組件中使用：
+
+```vue [App.vue]
+<template>
+  <p v-highlight="'blue'">這句話很重要！</p>
+</template>
 ```

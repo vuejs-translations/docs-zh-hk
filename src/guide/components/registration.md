@@ -138,4 +138,4 @@ export default {
 
 在單文件組件和內聯字符串模板中，我們都推薦這樣做。但是，PascalCase 的標籤名在 DOM 內模板中是不可用的，詳情參見 [DOM 內模板解析注意事項](/guide/essentials/component-basics#in-dom-template-parsing-caveats)。
 
-為了方便，Vue 支持將模板中使用 kebab-case 的標籤解析為使用 PascalCase 註冊的組件。這意味著一個以 `MyComponent` 為名註冊的組件，在模板中可以通過 `<MyComponent>` 或 `<my-component>` 引用。這讓我們能夠使用同樣的 JavaScript 組件註冊代碼來配合不同來源的模板。
+為了方便，Vue 支持將模板中使用 kebab-case 的標籤解析為使用 PascalCase 註冊的組件。這意味著一個以 `MyComponent` 為名註冊的組件，在 Vue（或被 Vue 渲染的 HTML 元素）模板中可以通過 `<MyComponent>` 或 `<my-component>` 引用。這讓我們能夠使用同樣的 JavaScript 組件註冊代碼來配合不同來源的模板。
