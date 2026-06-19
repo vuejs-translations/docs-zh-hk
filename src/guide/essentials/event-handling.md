@@ -246,7 +246,7 @@ To address this problem, Vue provides **event modifiers** for `v-on`. Recall tha
 <form @submit.prevent></form>
 
 <!-- only trigger handler if event.target is the element itself -->
-<!-- i.e. not from a child element -->
+<!-- 即事件不是從內部元素觸發的 -->
 <div @click.self="doThat">...</div>
 ```
 
@@ -258,8 +258,8 @@ The `.capture`, `.once`, and `.passive` modifiers mirror the [options of the nat
 
 ```vue-html
 <!-- use capture mode when adding the event listener     -->
-<!-- i.e. an event targeting an inner element is handled -->
-<!-- here before being handled by that element           -->
+<!-- 即指向內部元素的事件會在這裡先被處理，                    -->
+<!-- 然後才會交給該元素自己處理                              -->
 <div @click.capture="doThis">...</div>
 
 <!-- the click event will be triggered at most once -->

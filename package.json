@@ -5,6 +5,9 @@
     "dev": "vitepress",
     "build": "vitepress build",
     "preview": "vitepress preview",
+    "lint": "zhlint 'src/{api,about,guide,sponsor,translations,tutorial}/**/*.md'",
+    "clean": "rm -rf .vitepress/dist",
+    "sync": "node scripts/sync.js",
     "preinstall": "npx only-allow pnpm",
     "type": "vue-tsc --noEmit"
   },
@@ -20,11 +23,15 @@
     "@types/body-scroll-lock": "^3.1.2",
     "@types/markdown-it": "^14.1.2",
     "@types/node": "^25.5.2",
+    "commander": "^9.5.0",
+    "open": "^10.1.0",
     "oxc-minify": "^0.124.0",
+    "simple-git": "^3.27.0",
     "typescript": "^5.9.3",
     "vitepress-plugin-group-icons": "^1.7.3",
     "vitepress-plugin-llms": "^1.12.0",
-    "vue-tsc": "^3.2.6"
+    "vue-tsc": "^3.2.6",
+    "zhlint": "0.8.1"
   },
   "engines": {
     "node": ">=20"
@@ -37,6 +44,9 @@
     "onlyBuiltDependencies": [
       "esbuild",
       "vue-demi"
-    ]
+    ],
+    "patchedDependencies": {
+      "zhlint@0.8.1": "patches/zhlint@0.8.1.patch"
+    }
   }
 }

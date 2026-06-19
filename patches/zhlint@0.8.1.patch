@@ -1,0 +1,17 @@
+diff --git a/lib/rules/case-abbrs.js b/lib/rules/case-abbrs.js
+index 3a7b720f7c809d7571a6ae39bf5b8354177a7fb9..3342164087b9c64b6f404d3aad2429599672c800 100644
+--- a/lib/rules/case-abbrs.js
++++ b/lib/rules/case-abbrs.js
+@@ -27,10 +27,10 @@ const reverseAbbrsIntoChars = (abbrs) => {
+ const matchAbbr = (token, group, reversedAbbrChars) => {
+     // find previous token
+     const tokenBefore = findTokenBefore(group, token);
+-    if (tokenBefore && !tokenBefore.spaceAfter) {
++    if (tokenBefore && !tokenBefore.spaceAfter && tokenBefore.value !== undefined) {
+         // get the next matching abbr chars by removing the last char and filtering
+         const matchedAbbrChars = reversedAbbrChars
+-            .filter((abbr) => abbr[0].toLowerCase() === tokenBefore.value.toLowerCase())
++            .filter((abbr) => abbr.length > 0 && typeof abbr[0] === 'string' && abbr[0].toLowerCase() === String(tokenBefore.value).toLowerCase())
+             .map((abbr) => abbr.slice(1));
+         // keep matching until any abbr chars fully matched
+         // then return true
