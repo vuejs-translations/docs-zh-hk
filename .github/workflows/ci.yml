@@ -20,6 +20,6 @@ jobs:
           node-version: 20
           cache: 'pnpm'
       - run: pnpm install --frozen-lockfile
-      - name: zhlint (non-blocking, see #66)
+      - name: zhlint (non-blocking, see #80)
         continue-on-error: true
         run: pnpm lint
