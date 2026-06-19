@@ -23,10 +23,10 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 :::tip 前提條件
 
 - 熟悉命令行
-- 已安裝 18.3 或更高版本的 [Node.js](https://nodejs.org/)
+- 已安裝 [Node.js](https://nodejs.org/)，版本需符合 `^20.19.0 || >=22.12.0`
   :::
 
-在本節中，我們將介紹如何在本地搭建 Vue [單頁應用](/guide/extras/ways-of-using-vue#single-page-application-spa)。創建的項目將使用基於 [Vite](https://vitejs.dev) 的構建設置，並允許我們使用 Vue 的[單文件組件](/guide/scaling-up/sfc) (SFC)。
+在本節中，我們將介紹如何在本地搭建 Vue [單頁應用](/guide/extras/ways-of-using-vue#single-page-application-spa)。創建的項目將使用基於 [Vite](https://vite.dev/) 的構建設置，並允許我們使用 Vue 的[單文件組件](/guide/scaling-up/sfc) (SFC)。
 
 確保你安裝了最新版本的 [Node.js](https://nodejs.org/)，並且你的當前工作目錄正是打算創建項目的目錄。在命令行中運行以下命令 (不要輸入 `$` 符號)：
 
@@ -56,7 +56,7 @@ $ bun create vue@latest
 ```
 :::
 
-This command will install and execute [create-vue](https://github.com/vuejs/create-vue), the official Vue project scaffolding tool. You will be presented with prompts for several optional features such as TypeScript and testing support:
+這個命令會安裝並執行 [create-vue](https://github.com/vuejs/create-vue)，這是 Vue 官方的項目腳手架工具。你會看到一些可選功能的提示，例如 TypeScript 和測試支持：
 
 <div class="language-sh"><pre><code><span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Project name: <span style="color:#888;">… <span style="color:#89DDFF;">&lt;</span><span style="color:#888;">your-project-name</span><span style="color:#89DDFF;">&gt;</span></span></span>
 <span style="color:var(--vt-c-green);">✔</span> <span style="color:#A6ACCD;">Add TypeScript? <span style="color:#888;">… <span style="color:#89DDFF;text-decoration:underline">No</span> / Yes</span></span>
@@ -107,7 +107,7 @@ $ bun run dev
 
 - 推薦的 IDE 配置是 [Visual Studio Code](https://code.visualstudio.com/) + [Vue - Official 擴展](https://marketplace.visualstudio.com/items?itemName=Vue.volar)。如果使用其他編輯器，參考 [IDE 支持章節](/guide/scaling-up/tooling#ide-support)。
 - 更多工具細節，包括與後端框架的整合，我們會在[工具鏈指南](/guide/scaling-up/tooling)進行討論。
-- 要了解構建工具 Vite 更多背後的細節，請查看 [Vite 文檔](https://cn.vitejs.dev)。
+- 要了解構建工具 Vite 更多背後的細節，請查看 [Vite 文檔](https://vite.dev/)。
 - 如果你選擇使用 TypeScript，請閱讀 [TypeScript 使用指南](typescript/overview)。
 
 當你準備將應用發佈到生產環境時，請運行：

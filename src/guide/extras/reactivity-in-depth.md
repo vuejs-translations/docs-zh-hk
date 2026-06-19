@@ -402,14 +402,14 @@ export function useMachine(options) {
 
 很多其他框架已經引入了與 Vue 組合式 API 中的 ref 類似的響應性基礎類型，並稱之為“信號”：
 
-- [Solid 信號](https://www.solidjs.com/docs/latest/api#createsignal)
+- [Solid 信號](https://docs.solidjs.com/concepts/signals)
 - [Angular 信號](https://angular.dev/guide/signals)
 - [Preact 信號](https://preactjs.com/guide/v10/signals/)
 - [Qwik 信號](https://qwik.builder.io/docs/components/state/#usesignal)
 
-<!-- TODO: translation -->Fundamentally, signals are the same kind of reactivity primitive as Vue refs. It's a value container that provides dependency tracking on access, and side-effect triggering on mutation. This reactivity-primitive-based paradigm isn't a particularly new concept in the frontend world: it dates back to implementations like [Knockout observables](https://knockoutjs.com/documentation/observables.html) and [Meteor Tracker](https://docs.meteor.com/api/tracker.html) from more than a decade ago. Vue Options API and the React state management library [MobX](https://mobx.js.org/) are also based on the same principles, but hide the primitives behind object properties.
+從本質上來說，信號和 Vue 的 ref 屬於同類響應性基礎類型。它是一個值的容器，在訪問時進行依賴追蹤，在修改時觸發副作用。這種基於響應性基礎類型的範式在前端世界中並不是一個特別新的概念：早在十多年前，[Knockout observables](https://knockoutjs.com/documentation/observables.html) 和 [Meteor Tracker](https://docs.meteor.com/api/tracker.html) 等實現就已經採用了這種模式。Vue 的選項式 API 和 React 的狀態管理庫 [MobX](https://mobx.js.org/) 也基於同樣的原理，只是將這些基礎類型隱藏在對象屬性背後。
 
-Although not a necessary trait for something to qualify as signals, today the concept is often discussed alongside the rendering model where updates are performed through fine-grained subscriptions. Due to the use of Virtual DOM, Vue currently [relies on compilers to achieve similar optimizations](/guide/extras/rendering-mechanism#compiler-informed-virtual-dom). However, we are also exploring a new Solid-inspired compilation strategy, called [Vapor Mode](https://github.com/vuejs/core-vapor), that does not rely on Virtual DOM and takes more advantage of Vue's built-in reactivity system.
+雖然不是構成信號的必要條件，但今天這個概念常常和那種通過細粒度訂閱來執行更新的渲染模型一起被討論。因為使用了虛擬 DOM，Vue 目前是[依靠編譯器來實現類似的優化](/guide/extras/rendering-mechanism#compiler-informed-virtual-dom)。不過，我們也在探索一種受 Solid 啟發的新編譯策略，稱為 [Vapor Mode](https://github.com/vuejs/core-vapor)，它不依賴虛擬 DOM，並能更充分地利用 Vue 內置的響應性系統。
 
 ### API 設計權衡 {#api-design-trade-offs}
 

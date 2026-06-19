@@ -223,6 +223,34 @@ If you inspect this element in your Chrome DevTools and open the Accessibility t
 
 ![Chrome Developer Tools showing input accessible name from aria-labelledby](./images/AccessibleARIAlabelledbyDevTools.png)
 
+When this pattern is used inside a reusable component, generate the IDs with
+[`useId()`](/api/composition-api-helpers.html#useid) instead of hard-coding
+them. This keeps each component instance's `id` values unique while still
+linking the visible text to the form control:
+
+```vue
+<script setup>
+import { useId } from 'vue'
+
+const sectionId = useId()
+const nameId = useId()
+</script>
+
+<template>
+  <section class="form-section">
+    <h2 :id="sectionId">Billing</h2>
+
+    <label :id="nameId" :for="`${nameId}-input`">Name: </label>
+    <input
+      :id="`${nameId}-input`"
+      type="text"
+      name="name"
+      :aria-labelledby="`${sectionId} ${nameId}`"
+    />
+  </section>
+</template>
+```
+
 #### `aria-describedby` {#aria-describedby}
 
 [aria-describedby](https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Attributes/aria-describedby) 的用法與 `aria-labelledby` 相同，它提供了一條用戶可能需要的附加描述信息。這可用於描述任何輸入的標準：

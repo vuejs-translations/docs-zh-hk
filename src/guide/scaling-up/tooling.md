@@ -21,7 +21,7 @@ import { VTCodeGroup, VTCodeGroupTab } from '@vue/theme'
 
 ### Vite {#vite}
 
-[Vite](https://cn.vitejs.dev/) 是一個輕量級的、速度極快的構建工具，對 Vue SFC 提供第一優先級支持。作者是尤雨溪，同時也是 Vue 的作者！
+[Vite](https://vite.dev/) 是一個輕量級的、速度極快的構建工具，對 Vue SFC 提供第一優先級支持。作者是尤雨溪，同時也是 Vue 的作者！
 
 要使用 Vite 來創建一個 Vue 項目，非常簡單：
 
@@ -51,7 +51,7 @@ $ bun create vue@latest
 
 這個命令會安裝和執行 [create-vue](https://github.com/vuejs/create-vue)，它是 Vue 提供的官方腳手架工具。跟隨命令行的提示繼續操作即可。
 
-- 要學習更多關於 Vite 的知識，請查看 [Vite 官方文檔](https://cn.vitejs.dev)。
+- 要學習更多關於 Vite 的知識，請查看 [Vite 官方文檔](https://vite.dev/)。
 - 若要了解如何為一個 Vite 項目配置 Vue 相關的特殊行為，例如向 Vue 編譯器傳遞相關選項，請查看 [@vitejs/plugin-vue](https://github.com/vitejs/vite-plugin-vue/tree/main/packages/plugin-vue#readme) 的文檔。
 
 上面提到的兩種在線演練場也支持將文件作為一個 Vite 項目下載。

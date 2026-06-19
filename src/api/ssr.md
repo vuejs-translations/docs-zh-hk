@@ -213,7 +213,7 @@
   import { useSSRContext } from 'vue'
 
   // 确保只在服务端渲染时调用
-  // https://cn.vitejs.dev/guide/ssr.html#conditional-logic
+  // https://vite.dev/guide/ssr.html#conditional-logic
   if (import.meta.env.SSR) {
     const ctx = useSSRContext()
     // ...给上下文对象添加属性
@@ -223,20 +223,20 @@
 
 ## data-allow-mismatch <sup class="vt-badge" data-text="3.5+" /> {#data-allow-mismatch}
 
-A special attribute that can be used to suppress [hydration mismatch](/guide/scaling-up/ssr#hydration-mismatch) warnings.
+一個特殊的 attribute，可用於抑制 [激活不匹配](/guide/scaling-up/ssr#hydration-mismatch) 警告。
 
-- **Example**
+- **示例**
 
   ```html
   <div data-allow-mismatch="text">{{ data.toLocaleString() }}</div>
   ```
 
-  The value can limit the allowed mismatch to a specific type. Allowed values are:
+  該值可以將允許的不匹配限制在特定的類型。允許的值有：
 
   - `text`
-  - `children` (only allows mismatch for direct children)
+  - `children`（僅允許直接子節點存在不匹配）
   - `class`
   - `style`
   - `attribute`
 
-  If no value is provided, all types of mismatches will be allowed.
+  如果沒有提供值，所有類型的不匹配都會被允許。

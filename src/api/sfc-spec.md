@@ -28,7 +28,7 @@ export default {
 </style>
 
 <custom1>
-  This could be e.g. documentation for the component.
+  例如，可以放置該組件的文檔。
 </custom1>
 ```
 
@@ -105,9 +105,9 @@ p {{ msg }}
 
 注意对不同预处理器的集成会根据你所使用的工具链而有所不同，具体细节请查看相应的工具链文档来确认：
 
-- [Vite](https://cn.vitejs.dev/guide/features.html#css-pre-processors)
-- [Vue CLI](https://cli.vuejs.org/zh/guide/css.html#%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8)
-- [webpack + vue-loader](https://vue-loader.vuejs.org/zh/guide/pre-processors.html#%E4%BD%BF%E7%94%A8%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8)
+- [Vite](https://vite.dev/guide/features.html#css-pre-processors)
+- [Vue CLI](https://cli.vuejs.org/guide/css.html#pre-processors)
+- [webpack + vue-loader](https://vue-loader.vuejs.org/guide/pre-processors.html#using-pre-processors)
 
 ## `src` 导入 {#src-imports}
 
@@ -136,8 +136,8 @@ p {{ msg }}
 </unit-test>
 ```
 
-:::warning Note
-While using aliases in `src`, don't start with `~`, anything after it is interpreted as a module request. This means you can reference assets inside node modules:
+:::warning 注意
+在 `src` 中使用別名時，不要以 `~` 開頭，否則 `~` 後面的內容會被當作模塊請求來解析。這意味著你可以引用 node modules 中的資源：
 ```vue
 <img src="~some-npm-package/foo.png">
 ```

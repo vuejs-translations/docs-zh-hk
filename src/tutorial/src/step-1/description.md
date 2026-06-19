@@ -30,7 +30,7 @@
 import { ... } from 'vue/dist/vue.esm-bundler.js'
 ```
 
-要麼通過配置構建工具來正確解析 `vue`。以下是 [Vite](https://vitejs.dev/) 配置的示例：
+要麼配置構建工具來相應地解析 `vue`。以下是 [Vite](https://vite.dev/) 配置的示例：
 
 ```js [vite.config.js]
 export default {

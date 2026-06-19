@@ -54,7 +54,7 @@ const props = defineProps<Props>()
 </script>
 ```
 
-這同樣適用於 `Props` 從另一個源文件中導入的情況。該功能要求 TypeScript 作為 Vue 的一個 peer dependency。
+這同樣適用於 `Props` 從另一個源文件中導入的情況，例如相對路徑導入、路徑別名（如 `@/types`）或外部依賴（如 `node_modules`）。該功能要求 TypeScript 作為 Vue 的一個 peer dependency。
 
 ```vue
 <script setup lang="ts">
@@ -68,11 +68,11 @@ const props = defineProps<Props>()
 
 在 3.2 及以下版本中，`defineProps()` 的泛型類型參數僅限於類型文字或對本地接口的引用。
 
-這個限制在 3.3 中得到了解決。最新版本的 Vue 支持在類型參數位置引用導入和有限的複雜類型。但是，由於類型到運行時轉換仍然基於 AST，一些需要實際類型分析的複雜類型，例如條件類型，還未支持。您可以使用條件類型來指定單個 prop 的類型，但不能用於整個 props 對象的類型。
+這個限制在 3.3 中得到了解決。最新版本的 Vue 支持在類型參數位置引用導入和有限的複雜類型。但是，由於類型到運行時轉換仍然基於 AST，一些需要實際類型分析的複雜類型，例如條件類型，還未支持。你可以使用條件類型來指定單個 prop 的類型，但不能用於整個 props 對象的類型。
 
-### Props 解構默認值 {#props-default-values}
+### Props 解構預設值 {#props-default-values}
 
-When using type-based declaration, we lose the ability to declare default values for the props. This can be resolved by using [Reactive Props Destructure](/guide/components/props#reactive-props-destructure) <sup class="vt-badge" data-text="3.5+" />:
+當使用基於類型的聲明時，我們失去了為 props 聲明預設值的能力。這可以通過 [Props 響應式解構](/guide/components/props#reactive-props-destructure) <sup class="vt-badge" data-text="3.5+" /> 來解決：
 
 ```ts
 interface Props {
@@ -83,7 +83,7 @@ interface Props {
 const { msg = 'hello', labels = ['one', 'two'] } = defineProps<Props>()
 ```
 
-In 3.4 and below, Reactive Props Destructure is not enabled by default. An alternative is to use the `withDefaults` compiler macro:
+在 3.4 及以下版本中，Props 響應式解構並非預設啟用，另一種方式是使用 `withDefaults` 編譯器宏：
 
 ```ts
 interface Props {
@@ -97,10 +97,10 @@ const props = withDefaults(defineProps<Props>(), {
 })
 ```
 
-這將被編譯為等效的運行時 props `default` 選項。此外，`withDefaults` 幫助程序為默認值提供類型檢查，並確保返回的 props 類型刪除了已聲明默認值的屬性的可選標誌。
+這將被編譯為等效的運行時 props `default` 選項。此外，`withDefaults` 幫助程序為預設值提供類型檢查，並確保返回的 props 類型刪除了已聲明預設值的屬性的可選標誌。
 
 :::info
-Note that default values for mutable reference types (like arrays or objects) should be wrapped in functions when using `withDefaults` to avoid accidental modification and external side effects. This ensures each component instance gets its own copy of the default value. This is **not** necessary when using default values with destructure.
+請注意，在使用 `withDefaults` 時，可變引用類型（如數組或對象）的預設值應該包裹在函數中，以避免意外修改和外部副作用。這確保了每個組件實例都能獲得自己的預設值副本。在使用解構搭配預設值時則**不**需要這樣做。
 :::
 
 ### 非 `<script setup>` 場景下 {#without-script-setup}
@@ -375,16 +375,16 @@ const foo = inject('foo') as string
 
 ## 為模板引用標註類型 {#typing-template-refs}
 
-With Vue 3.5 and `@vue/language-tools` 2.1 (powering both the IDE language service and `vue-tsc`), the type of refs created by `useTemplateRef()` in SFCs can be **automatically inferred** for static refs based on what element the matching `ref` attribute is used on.
+在 Vue 3.5 與 `@vue/language-tools` 2.1（同時為 IDE 語言服務和 `vue-tsc` 提供支持）下，SFC 中由 `useTemplateRef()` 創建的靜態 ref 的類型可以根據對應 `ref` attribute 所使用的元素**自動推導**。
 
-In cases where auto-inference is not possible, you can still cast the template ref to an explicit type via the generic argument:
+當無法自動推導時，你仍然可以通過泛型參數將模板引用強制轉換為一個明確的類型：
 
 ```ts
 const el = useTemplateRef<HTMLInputElement>('el')
 ```
 
 <details>
-<summary>Usage before 3.5</summary>
+<summary>3.5 之前的用法</summary>
 
 模板引用需要通過一個顯式指定的泛型參數和一個初始值 `null` 來創建：
 
@@ -414,11 +414,11 @@ onMounted(() => {
 
 ## 為組件模板引用標註類型 {#typing-component-template-refs}
 
-With Vue 3.5 and `@vue/language-tools` 2.1 (powering both the IDE language service and `vue-tsc`), the type of refs created by `useTemplateRef()` in SFCs can be **automatically inferred** for static refs based on what element or component the matching `ref` attribute is used on.
+在 Vue 3.5 與 `@vue/language-tools` 2.1（同時為 IDE 語言服務和 `vue-tsc` 提供支持）下，SFC 中由 `useTemplateRef()` 創建的靜態 ref 的類型可以根據對應 `ref` attribute 所使用的元素或組件**自動推導**。
 
-In cases where auto-inference is not possible (e.g. non-SFC usage or dynamic components), you can still cast the template ref to an explicit type via the generic argument.
+當無法自動推導時（例如在非 SFC 用法或動態組件中），你仍然可以通過泛型參數將模板引用強制轉換為一個明確的類型。
 
-In order to get the instance type of an imported component, we need to first get its type via `typeof`, then use TypeScript's built-in `InstanceType` utility to extract its instance type:
+為了獲得導入組件的實例類型，我們需要先通過 `typeof` 獲取其類型，再使用 TypeScript 內置的 `InstanceType` 工具類型來提取其實例類型：
 
 ```vue{6,7} [App.vue]
 <script setup lang="ts">
@@ -437,7 +437,7 @@ const compRef = useTemplateRef<FooType | BarType>('comp')
 </template>
 ```
 
-In cases where the exact type of the component isn't available or isn't important, `ComponentPublicInstance` can be used instead. This will only include properties that are shared by all components, such as `$el`:
+當組件的確切類型無法獲得或並不重要時，可以改用 `ComponentPublicInstance`。它只包含所有組件共有的屬性，例如 `$el`：
 
 ```ts
 import { useTemplateRef } from 'vue'
@@ -446,7 +446,7 @@ import type { ComponentPublicInstance } from 'vue'
 const child = useTemplateRef<ComponentPublicInstance>('child')
 ```
 
-In cases where the component referenced is a [generic component](/guide/typescript/overview.html#generic-components), for instance `MyGenericModal`:
+當被引用的組件是一個[泛型組件](/guide/typescript/overview.html#generic-components)時，例如 `MyGenericModal`：
 
 ```vue [MyGenericModal.vue]
 <script setup lang="ts" generic="ContentType extends string | number">
@@ -462,7 +462,7 @@ defineExpose({
 </script>
 ```
 
-It needs to be referenced using `ComponentExposed` from the [`vue-component-type-helpers`](https://www.npmjs.com/package/vue-component-type-helpers) library as `InstanceType` won't work.
+它需要使用 [`vue-component-type-helpers`](https://www.npmjs.com/package/vue-component-type-helpers) 庫中的 `ComponentExposed` 來引用，因為 `InstanceType` 對其無效。
 
 ```vue [App.vue]
 <script setup lang="ts">
@@ -470,7 +470,8 @@ import { useTemplateRef } from 'vue'
 import MyGenericModal from './MyGenericModal.vue'
 import type { ComponentExposed } from 'vue-component-type-helpers'
 
-const modal = useTemplateRef<ComponentExposed<typeof MyGenericModal>>('modal')
+const modal =
+  useTemplateRef<ComponentExposed<typeof MyGenericModal>>('modal')
 
 const openModal = () => {
   modal.value?.open('newValue')
@@ -478,4 +479,42 @@ const openModal = () => {
 </script>
 ```
 
-Note that with `@vue/language-tools` 2.1+, static template refs' types can be automatically inferred and the above is only needed in edge cases.
+請注意，在 `@vue/language-tools` 2.1+ 下，靜態模板引用的類型可以被自動推導，僅在邊緣情況下才需要使用上述方式。
+
+## 為全局自定義指令標註類型 {#typing-global-custom-directives}
+
+為了讓通過 `app.directive()` 聲明的全局自定義指令獲得類型提示和類型檢查，你可以擴展 `GlobalDirectives`：
+
+```ts [src/directives/highlight.ts]
+import type { Directive } from 'vue'
+
+export type HighlightDirective = Directive<HTMLElement, string>
+
+declare module 'vue' {
+  export interface GlobalDirectives {
+    // 以 v 為前綴（v-highlight）
+    vHighlight: HighlightDirective
+  }
+}
+
+export default {
+  mounted: (el, binding) => {
+    el.style.backgroundColor = binding.value
+  }
+} satisfies HighlightDirective
+```
+
+```ts [main.ts]
+import highlight from './directives/highlight'
+// ...其他代碼
+const app = createApp(App)
+app.directive('highlight', highlight)
+```
+
+在組件中使用：
+
+```vue [App.vue]
+<template>
+  <p v-highlight="'blue'">這句話很重要！</p>
+</template>
+```

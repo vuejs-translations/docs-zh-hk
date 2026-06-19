@@ -31,7 +31,7 @@ This project requires Node.js to be `v18` or higher. And it is recommended to en
 corepack enable
 ```
 
-This project requires Node.js to be `v18` or higher. And it is recommended to enable corepack:
+This project requires Node.js to be `v20` or higher. And it is recommended to enable corepack:
 
 ```bash
 corepack enable
@@ -45,4 +45,4 @@ corepack enable
 
 ## Working on the theme
 
-If changes need to made for the theme, check out the [instructions for developing the theme alongside the docs](https://github.com/vuejs/vue-theme#developing-with-real-content).
+If changes need to be made for the theme, check out the [instructions for developing the theme alongside the docs](https://github.com/vuejs/vue-theme#developing-with-real-content).

@@ -115,44 +115,44 @@ defineProps<{
 
 <div class="composition-api">
 
-## Reactive Props Destructure <sup class="vt-badge" data-text="3.5+" /> \*\* {#reactive-props-destructure}
+## Props 響應式解構 <sup class="vt-badge" data-text="3.5+" /> \*\* {#reactive-props-destructure}
 
-Vue's reactivity system tracks state usage based on property access. E.g. when you access `props.foo` in a computed getter or a watcher, the `foo` prop gets tracked as a dependency.
+Vue 的響應式系統基於屬性訪問來追蹤狀態的使用情況。例如，當你在計算屬性的 getter 或偵聽器中訪問 `props.foo` 時，`foo` 這個 prop 就會被追蹤為依賴。
 
-So, given the following code:
+那麼，給定下面的代碼：
 
 ```js
 const { foo } = defineProps(['foo'])
 
 watchEffect(() => {
-  // runs only once before 3.5
-  // re-runs when the "foo" prop changes in 3.5+
+  // 在 3.5 之前只會運行一次
+  // 在 3.5+ 中當 "foo" prop 變化時會重新運行
   console.log(foo)
 })
 ```
 
-In version 3.4 and below, `foo` is an actual constant and will never change. In version 3.5 and above, Vue's compiler automatically prepends `props.` when code in the same `<script setup>` block accesses variables destructured from `defineProps`. Therefore the code above becomes equivalent to the following:
+在 3.4 及以下版本中，`foo` 是一個實際的常量，永遠不會改變。而在 3.5 及以上版本中，當同一個 `<script setup>` 塊中的代碼訪問從 `defineProps` 解構出來的變量時，Vue 編譯器會自動為其前置 `props.`。因此上面的代碼等價於下面這樣：
 
 ```js {5}
 const props = defineProps(['foo'])
 
 watchEffect(() => {
-  // `foo` transformed to `props.foo` by the compiler
+  // 編譯器會把 `foo` 轉換為 `props.foo`
   console.log(props.foo)
 })
 ```
 
-In addition, you can use JavaScript's native default value syntax to declare default values for the props. This is particularly useful when using the type-based props declaration:
+此外，你還可以使用 JavaScript 原生的預設值語法來為 props 聲明預設值。在使用基於類型的 props 聲明時特別有用：
 
 ```ts
 const { foo = 'hello' } = defineProps<{ foo?: string }>()
 ```
 
-If you prefer to have more visual distinction between destructured props and normal variables in your IDE, Vue's VSCode extension provides a setting to enable inlay-hints for destructured props.
+如果你希望在 IDE 中讓解構的 props 和普通變量在視覺上有更明顯的區別，Vue 的 VSCode 擴展提供了一項設置，可以為解構的 props 啟用 inlay-hints。
 
-### Passing Destructured Props into Functions {#passing-destructured-props-into-functions}
+### 將解構的 Props 傳入函數 {#passing-destructured-props-into-functions}
 
-When we pass a destructured prop into a function, e.g.:
+當我們把一個解構出來的 prop 傳入函數時，例如：
 
 ```js
 const { foo } = defineProps(['foo'])
@@ -160,21 +160,21 @@ const { foo } = defineProps(['foo'])
 watch(foo, /* ... */)
 ```
 
-This will not work as expected because it is equivalent to `watch(props.foo, ...)` - we are passing a value instead of a reactive data source to `watch`. In fact, Vue's compiler will catch such cases and throw a warning.
+它不會如預期那樣工作，因為它等價於 `watch(props.foo, ...)`——我們向 `watch` 傳入的是一個值，而不是一個響應式數據源。實際上，Vue 編譯器會捕捉到這類情況並拋出警告。
 
-Similar to how we can watch a normal prop with `watch(() => props.foo, ...)`, we can watch a destructured prop also by wrapping it in a getter:
+正如我們可以用 `watch(() => props.foo, ...)` 來偵聽一個普通的 prop 一樣，我們也可以通過把解構的 prop 包裹在 getter 中來偵聽它：
 
 ```js
 watch(() => foo, /* ... */)
 ```
 
-In addition, this is the recommended approach when we need to pass a destructured prop into an external function while retaining reactivity:
+此外，當我們需要將一個解構的 prop 傳入外部函數，同時保留其響應性時，這也是推薦的做法：
 
 ```js
 useComposable(() => foo)
 ```
 
-The external function can call the getter (or normalize it with [toValue](/api/reactivity-utilities.html#tovalue)) when it needs to track changes of the provided prop, e.g. in a computed or watcher getter.
+當外部函數需要追蹤所提供 prop 的變化時（例如在計算屬性或偵聽器的 getter 中），它可以調用該 getter（或使用 [toValue](/api/reactivity-utilities.html#tovalue) 進行標準化）。
 
 </div>
 
@@ -333,6 +333,30 @@ const post = {
 ```vue-html
 <BlogPost :id="post.id" :title="post.title" />
 ```
+
+### 與顯式綁定結合時的合併行為 {#merge-behavior-when-combining-bindings}
+
+當 `v-bind` 與同一組件上的顯式綁定一同使用時，Vue 內部會調用 `mergeProps()` 來合併它們。合併策略取決於鍵的類型：
+
+- **普通 props** —— 後者覆蓋前者：
+
+```vue-html
+<!-- title === 'bar' -->
+<BlogPost title="foo" v-bind="{ title: 'bar' }" />
+```
+
+- **事件監聽器** —— 在 `v-bind` 對象中傳遞監聽器時，[請使用 `onEventName` 鍵名約定](/guide/extras/render-function#v-on)。同一事件的所有處理函數都會被調用（參見 [`v-on` 監聽器繼承](/guide/components/attrs#v-on-listener-inheritance)）：
+
+```vue-html
+<!-- logs 1 and 2 -->
+<BlogPost @click="console.log(1)" v-bind="{ onClick: () => console.log(2) }" />
+```
+
+- **`class` 與 `style`** 遵循類似的合併策略（參見 [`class` 與 `style` 的合併](/guide/components/attrs#class-and-style-merging)）。
+
+:::tip
+完整的合併規則記錄在 [`mergeProps()`](/api/render-function#mergeprops) API 參考中。
+:::
 
 ## 單向數據流 {#one-way-data-flow}
 

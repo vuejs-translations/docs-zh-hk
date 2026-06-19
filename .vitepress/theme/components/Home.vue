@@ -13,16 +13,18 @@ onMounted(load)
   <section id="hero">
     <img id="uwu" alt="Vue.js Kawaii Logo by @icarusgkx" />
     <h1 class="tagline">
-      <span class="accent">漸進式</span>
-      <br />JavaScript 框架
+      The
+      <span class="accent">Progressive</span>
+      <br />JavaScript Framework
     </h1>
     <p class="description">
-      易學易用，性能出色，適用場景豐富的 Web 前端框架。
+      An approachable, performant and versatile framework for building web
+      user interfaces.
     </p>
     <p class="actions">
       <VueMasteryModal />
       <a class="get-started" href="/guide/introduction.html">
-        快速開始
+        Get Started
         <svg
           class="icon"
           xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +37,7 @@ onMounted(load)
           />
         </svg>
       </a>
-      <a class="setup" href="/guide/quick-start.html">安裝</a>
+      <a class="setup" href="/guide/quick-start.html">Install</a>
       <a class="security" href="https://v2.vuejs.org/eol/" target="_blank">
         Get Security Updates for Vue 2
         <svg
@@ -51,54 +53,56 @@ onMounted(load)
     </p>
   </section>
 
-  <section v-if="data && data.platinum_china" id="special-sponsor">
-    <h3>中國區鉑金贊助</h3>
-    <div id="special-sponsor-container">
-      <template v-for="{ url, url_cn, img, name, height, description } of data.platinum_china"
-      >
-        <a class="logo" :href="url_cn || url" target="_blank" rel="sponsored noopener">
-          <picture v-if="img.endsWith('png')">
-            <source
-              type="image/avif"
-              :srcset="`${base}/images/${img.replace(/\.png$/,'.avif')}`"
-            />
-            <img :src="`${base}/images/${img}`" :alt="name" :style="{ height: height || '50px' }" />
-          </picture>
-          <img
-            width="168"
-            height="42"
-            v-else
-            :src="`${base}/images/${img}`"
-            :alt="name"
+  <section v-if="data && data.special" id="special-spsr">
+    <span class="lead">Special Sponsor</span>
+    <template v-for="{ url, img, name, description } of data.special">
+      <a :href="url" target="_blank" rel="sponsored noopener">
+        <picture v-if="img.endsWith('png')">
+          <source
+            type="image/avif"
+            :srcset="`${base}/images/${img.replace(/\.png$/, '.avif')}`"
           />
-        </a>
-        <span>{{ description }}</span>
-      </template>
-    </div>
+          <img :src="`${base}/images/${img}`" :alt="name" />
+        </picture>
+        <img
+          width="168"
+          height="42"
+          v-else
+          :src="`${base}/images/${img}`"
+          :alt="name"
+        />
+      </a>
+      <span>{{ description }}</span>
+    </template>
   </section>
   <section v-else id="special-spsr">
     <span>
       <a href="/sponsor/#tier-benefits">
-        中國區鉑金贊助位現已空缺-立即諮詢
+        Special Sponsor slot is now vacant - Inquire now
       </a>
     </span>
   </section>
 
   <section id="highlights" class="vt-box-container">
     <div class="vt-box">
-      <h2>易學易用</h2>
+      <h2>Versatile</h2>
       <p>
-        基於標準 HTML、CSS 和 JavaScript 構建，提供易於使用的 API 和出色的文檔。
+        A rich, incrementally adoptable ecosystem that scales between a
+        library and a full-featured framework.
       </p>
     </div>
     <div class="vt-box">
-      <h2>性能出色</h2>
-      <p>經過編譯器優化、完全響應式的渲染系統，幾乎不需要手動優化。</p>
+      <h2>User-friendly</h2>
+      <p>
+        Builds on top of standard HTML, CSS and JavaScript with intuitive
+        API and world-class documentation.
+      </p>
     </div>
     <div class="vt-box">
-      <h2>靈活多變</h2>
+      <h2>Efficient</h2>
       <p>
-        豐富的、可漸進式集成的生態系統，可以根據應用規模在庫和框架間切換自如。
+        Truly reactive, compiler-optimized rendering system that rarely
+        requires manual optimization.
       </p>
     </div>
   </section>
@@ -223,22 +227,11 @@ html:not(.dark) .accent,
   background-color: var(--vt-c-gray-dark-3);
 }
 
-#special-sponsor {
+#special-spsr {
   border-top: 1px solid var(--vt-c-divider-light);
   border-bottom: 1px solid var(--vt-c-divider-light);
   padding: 12px 24px;
-}
-
-#special-sponsor h3 {
-  text-align: center;
-  font-size: 13px;
-  font-weight: 500;
-  padding-bottom: 10px;
-}
-
-#special-sponsor-container {
   display: flex;
-  justify-content: center;
   align-items: center;
 }
 
@@ -293,6 +286,10 @@ html:not(.dark) .accent,
   background-color: transparent;
 }
 
+#highlights .vt-box h2::first-letter{
+  color: var(--vt-c-green);
+}
+
 #spsrs {
   max-width: 900px;
   margin: 0px auto;
@@ -339,7 +336,6 @@ html:not(.dark) .accent,
   }
   #special-spsr {
     flex-direction: column;
-    height: auto;
   }
   #special-spsr img {
     height: 36px;

@@ -13,7 +13,7 @@ const { page } = useData()
 type Source = 'url-query' | 'url-header' | 'default'
 let source: Source | false =
   inBrowser && localStorage.getItem(preferCompositionKey) === null
-    ? 'default'
+    ? 'default' as Source
     : false
 
 if (inBrowser) {
@@ -104,7 +104,7 @@ function dismiss() {
           一些頁面根據所選的 API 風格將包含不同的內容。可以通過此開關在它們之間切換。
         </p>
       </template>
-      <template v-if="source && source.startsWith('url')">
+      <template v-else-if="source && source.startsWith('url')">
         <p>
           正在顯示
           {{ preferComposition ? '組合式' : '選項式' }} API 的內容，這是因為

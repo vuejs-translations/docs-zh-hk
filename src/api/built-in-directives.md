@@ -8,7 +8,7 @@
 
 - **详细信息**
 
-  `v-text` 通过设置元素的 [textContent](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent) 属性来工作，因此它将覆盖元素中所有现有的内容。如果你需要更新 `textContent` 的部分，应该使用 [mustache interpolations](/guide/essentials/template-syntax#text-interpolation) 代替。
+  `v-text` 通过设置元素的 [textContent](https://developer.mozilla.org/en-US/docs/Web/API/Node/textContent) 属性来工作，因此它将覆盖元素中所有现有的内容。如果你只需要更新 `textContent` 的一部分，应该使用 [mustache 插值](/guide/essentials/template-syntax#text-interpolation) 代替 (例如 <span v-pre>`<span>Keep this but update a {{dynamicPortion}}</span>`</span>)。
 
 - **示例**
 
@@ -267,9 +267,9 @@
 
 - **修饰符**
 
-  - `.camel` - transform the kebab-case attribute name into camelCase.
-  - `.prop` - force a binding to be set as a DOM property (3.2+).
-  - `.attr` - force a binding to be set as a DOM attribute (3.2+).
+  - `.camel` - 將 kebab-case attribute 名稱轉換為 camelCase。
+  - `.prop` - 強制將綁定設置為 DOM property (3.2+)。
+  - `.attr` - 強制將綁定設置為 DOM attribute (3.2+)。
 
 - **用途**
 

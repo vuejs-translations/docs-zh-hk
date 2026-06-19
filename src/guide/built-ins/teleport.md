@@ -148,7 +148,7 @@ const open = ref(false)
 我們也可以將 `<Teleport>` 和 [`<Transition>`](./transition) 結合使用來創建一個帶動畫的模態框。你可以看看[這個示例](/examples/#modal)。
 
 :::tip
-`<Teleport>` 掛載時，傳送的 `to` 目標必須已經存在於 DOM 中。理想情況下，這應該是整個 Vue 應用 DOM 樹外部的一個元素。如果目標元素也是由 Vue 渲染的，你需要確保在掛載 `<Teleport>` 之前先掛載該元素。
+`<Teleport>` 掛載時，傳送的 `to` 目標必須已經存在於 DOM 中。理想情況下，這應該是整個 Vue 應用 DOM 樹外部的一個元素。如果目標元素也是由 Vue 渲染的，你需要確保在掛載 `<Teleport>` 之前先掛載該元素。如果你正在使用 SSR，請參閱[在 SSR 中處理 Teleports](/guide/scaling-up/ssr#teleports)。
 :::
 
 ## 搭配組件使用 {#using-with-components}
@@ -193,18 +193,18 @@ const open = ref(false)
 </div>
 ```
 
-## Deferred Teleport <sup class="vt-badge" data-text="3.5+" /> {#deferred-teleport}
+## 延遲 Teleport <sup class="vt-badge" data-text="3.5+" /> {#deferred-teleport}
 
-In Vue 3.5 and above, we can use the `defer` prop to defer the target resolving of a Teleport until other parts of the application have mounted. This allows the Teleport to target a container element that is rendered by Vue, but in a later part of the component tree:
+在 Vue 3.5 及以上版本中，我們可以使用 `defer` prop 來延遲 Teleport 對目標的解析，直到應用的其他部分掛載完成。這樣 Teleport 就可以指向一個由 Vue 渲染、但位於組件樹中靠後位置的容器元素：
 
 ```vue-html
 <Teleport defer to="#late-div">...</Teleport>
 
-<!-- somewhere later in the template -->
+<!-- 模板中靠後的某處 -->
 <div id="late-div"></div>
 ```
 
-Note that the target element must be rendered in the same mount / update tick with the Teleport - i.e. if the `<div>` is only mounted a second later, the Teleport will still report an error. The defer works similarly to the `mounted` lifecycle hook.
+請注意，目標元素必須與 Teleport 在同一個掛載 / 更新 tick 中被渲染——也就是說，如果 `<div>` 要等一秒鐘後才被掛載，Teleport 仍然會報錯。這個 defer 的行為與 `mounted` 生命週期鉤子類似。
 
 ---
 

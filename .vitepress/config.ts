@@ -1,42 +1,42 @@
 import fs from 'fs'
 import path from 'path'
-import { defineConfigWithTheme, type HeadConfig, type Plugin } from 'vitepress'
+import {
+  defineConfigWithTheme,
+  type HeadConfig,
+  type Plugin
+} from 'vitepress'
 import type { Config as ThemeConfig } from '@vue/theme'
 import llmstxt from 'vitepress-plugin-llms'
 import baseConfig from '@vue/theme/config'
-import { defineConfigWithTheme } from 'vitepress'
-import fs from 'fs'
 import { headerPlugin } from './headerMdPlugin'
-import path from 'path'
 // import { textAdPlugin } from './textAdMdPlugin'
-import { groupIconMdPlugin, groupIconVitePlugin } from 'vitepress-plugin-group-icons'
+import {
+  groupIconMdPlugin,
+  groupIconVitePlugin
+} from 'vitepress-plugin-group-icons'
 
 const nav: ThemeConfig['nav'] = [
   {
     text: '文檔',
-    activeMatch: `^/(guide|style-guide|cookbook|examples)/`,
+    activeMatch: `^/(guide|tutorial|examples|api|glossary|error-reference)/`,
     items: [
+      { text: '快速上手', link: '/guide/quick-start' },
       { text: '簡介', link: '/guide/introduction' },
       { text: '互動教程', link: '/tutorial/' },
       { text: '示例', link: '/examples/' },
-      { text: '快速上手', link: '/guide/quick-start' },
+      { text: 'API', link: '/api/' },
       // { text: '風格指南', link: '/style-guide/' },
       { text: '術語表', link: '/glossary/' },
       { text: '錯誤碼參照表', link: '/error-reference/' },
       {
-        text: 'Vue 2 文檔',
+        text: 'Vue 2 Docs',
         link: 'https://v2.cn.vuejs.org'
       },
       {
-        text: '從 Vue 2 遷移',
+        text: 'Migration from Vue 2',
         link: 'https://v3-migration.vuejs.org/'
       }
     ]
-  },
-  {
-    text: 'API',
-    activeMatch: `^/api/`,
-    link: '/api/'
   },
   {
     text: '演練場',
@@ -49,12 +49,14 @@ const nav: ThemeConfig['nav'] = [
       {
         text: '資源',
         items: [
-          { text: '合作伙伴', link: '/partners/' },
-          { text: 'Developers', link: '/developers/' },
           { text: '主題', link: '/ecosystem/themes' },
           { text: 'UI 組件', link: 'https://ui-libs.vercel.app/' },
           {
-            text: '證書',
+            text: 'Plugins Collection',
+            link: 'https://www.vue-plugins.org/'
+          },
+          {
+            text: 'Certification',
             link: 'https://certificates.dev/vuejs/?ref=vuejs-nav'
           },
           { text: '找工作', link: 'https://vuejobs.com/?ref=vuejs' },
@@ -86,22 +88,22 @@ const nav: ThemeConfig['nav'] = [
         text: '幫助',
         items: [
           {
-            text: 'Discord 聊天室',
+            text: 'Discord Chat',
             link: 'https://discord.com/invite/HBherRA'
           },
           {
-            text: 'GitHub 論壇',
+            text: 'GitHub Discussions',
             link: 'https://github.com/vuejs/core/discussions'
           },
           { text: 'DEV Community', link: 'https://dev.to/t/vue' }
         ]
       },
       {
-        text: '動態',
+        text: '新聞',
         items: [
           { text: '博客', link: 'https://blog.vuejs.org/' },
-          { text: 'Twitter', link: 'https://twitter.com/vuejs' },
-          { text: '活動', link: 'https://events.vuejs.org/' },
+          { text: 'Twitter', link: 'https://x.com/vuejs' },
+          { text: '事件', link: 'https://events.vuejs.org/' },
           { text: '新聞簡報', link: '/ecosystem/newsletters' }
         ]
       }
@@ -115,28 +117,23 @@ const nav: ThemeConfig['nav'] = [
       { text: '團隊', link: '/about/team' },
       { text: '版本發佈', link: '/about/releases' },
       {
-        text: '社區指南',
+        text: 'Community Guide',
         link: '/about/community-guide'
       },
       { text: '行為規範', link: '/about/coc' },
       { text: 'Privacy Policy', link: '/about/privacy' },
       {
-        text: '紀錄片',
+        text: 'The Documentary',
         link: 'https://www.youtube.com/watch?v=OrxmtDw4pVI'
       }
     ]
   },
   {
-    text: '贊助',
-    link: '/sponsor/'
-  },
-  {
-    text: 'Experts',
-    badge: { text: 'NEW' },
-    activeMatch: `^/(partners|developers)/`,
+    text: '支持',
+    activeMatch: `^/(sponsor|partners)/`,
     items: [
-      { text: 'Partners', link: '/partners/' },
-      { text: 'Developers', link: '/developers/', badge: { text: 'NEW' } }
+      { text: 'Sponsor', link: '/sponsor/' },
+      { text: '合作伙伴', link: '/partners/' }
     ]
   }
 ]
@@ -157,39 +154,39 @@ export const sidebar: ThemeConfig['sidebar'] = {
       text: '基礎',
       items: [
         {
-          text: '創建一個應用',
+          text: 'Creating an Application',
           link: '/guide/essentials/application'
         },
         {
-          text: '模板語法',
+          text: 'Template Syntax',
           link: '/guide/essentials/template-syntax'
         },
         {
-          text: '響應式基礎',
+          text: 'Reactivity Fundamentals',
           link: '/guide/essentials/reactivity-fundamentals'
         },
         {
-          text: '計算屬性',
+          text: 'Computed Properties',
           link: '/guide/essentials/computed'
         },
         {
-          text: '類與樣式綁定',
+          text: 'Class and Style Bindings',
           link: '/guide/essentials/class-and-style'
         },
         {
-          text: '條件渲染',
+          text: 'Conditional Rendering',
           link: '/guide/essentials/conditional'
         },
         { text: '列表渲染', link: '/guide/essentials/list' },
         {
-          text: '事件處理',
+          text: 'Event Handling',
           link: '/guide/essentials/event-handling'
         },
         { text: '表單輸入綁定', link: '/guide/essentials/forms' },
         { text: '偵聽器', link: '/guide/essentials/watchers' },
         { text: '模板引用', link: '/guide/essentials/template-refs' },
         {
-          text: '組件基礎',
+          text: 'Components Basics',
           link: '/guide/essentials/component-basics'
         },
         {
@@ -202,36 +199,36 @@ export const sidebar: ThemeConfig['sidebar'] = {
       text: '深入組件',
       items: [
         {
-          text: '註冊',
+          text: 'Registration',
           link: '/guide/components/registration'
         },
         { text: 'Props', link: '/guide/components/props' },
         { text: '事件', link: '/guide/components/events' },
         { text: '組件 v-model', link: '/guide/components/v-model' },
         {
-          text: '透傳屬性',
+          text: 'Fallthrough Attributes',
           link: '/guide/components/attrs'
         },
         { text: '插槽', link: '/guide/components/slots' },
         {
-          text: '依賴注入',
+          text: 'Provide / inject',
           link: '/guide/components/provide-inject'
         },
         {
-          text: '異步組件',
+          text: 'Async Components',
           link: '/guide/components/async'
         }
       ]
     },
     {
-      text: '邏輯複用',
+      text: '可重用性',
       items: [
         {
-          text: '組合式函數',
+          text: 'Composables',
           link: '/guide/reusability/composables'
         },
         {
-          text: '自定義指令',
+          text: 'Custom Directives',
           link: '/guide/reusability/custom-directives'
         },
         { text: '插件', link: '/guide/reusability/plugins' }
@@ -257,12 +254,12 @@ export const sidebar: ThemeConfig['sidebar'] = {
         { text: '工具鏈', link: '/guide/scaling-up/tooling' },
         { text: '路由', link: '/guide/scaling-up/routing' },
         {
-          text: '狀態管理',
+          text: 'State Management',
           link: '/guide/scaling-up/state-management'
         },
         { text: '測試', link: '/guide/scaling-up/testing' },
         {
-          text: '服務端渲染 (SSR)',
+          text: 'Server-Side Rendering (SSR)',
           link: '/guide/scaling-up/ssr'
         }
       ]
@@ -271,19 +268,19 @@ export const sidebar: ThemeConfig['sidebar'] = {
       text: '最佳實踐',
       items: [
         {
-          text: '生產部署',
+          text: 'Production Deployment',
           link: '/guide/best-practices/production-deployment'
         },
         {
-          text: '性能優化',
+          text: 'Performance',
           link: '/guide/best-practices/performance'
         },
         {
-          text: '無障礙訪問',
+          text: 'Accessibility',
           link: '/guide/best-practices/accessibility'
         },
         {
-          text: '安全',
+          text: 'Security',
           link: '/guide/best-practices/security'
         }
       ]
@@ -293,11 +290,11 @@ export const sidebar: ThemeConfig['sidebar'] = {
       items: [
         { text: '總覽', link: '/guide/typescript/overview' },
         {
-          text: 'TS 與組合式 API',
+          text: 'TS with Composition API',
           link: '/guide/typescript/composition-api'
         },
         {
-          text: 'TS 與選項式 API',
+          text: 'TS with Options API',
           link: '/guide/typescript/options-api'
         }
       ]
@@ -306,39 +303,39 @@ export const sidebar: ThemeConfig['sidebar'] = {
       text: '進階主題',
       items: [
         {
-          text: '使用 Vue 的多種方式',
+          text: 'Ways of Using Vue',
           link: '/guide/extras/ways-of-using-vue'
         },
         {
-          text: '組合式 API 常見問答',
+          text: 'Composition API FAQ',
           link: '/guide/extras/composition-api-faq'
         },
         {
-          text: '深入響應式系統',
+          text: 'Reactivity in Depth',
           link: '/guide/extras/reactivity-in-depth'
         },
         {
-          text: '渲染機制',
+          text: 'Rendering Mechanism',
           link: '/guide/extras/rendering-mechanism'
         },
         {
-          text: '渲染函數 & JSX',
+          text: 'Render Functions & JSX',
           link: '/guide/extras/render-function'
         },
         {
-          text: 'Vue 與 Web Components',
+          text: 'Vue and Web Components',
           link: '/guide/extras/web-components'
         },
         {
-          text: '動畫技巧',
+          text: 'Animation Techniques',
           link: '/guide/extras/animation'
         }
         // {
-        //   text: '為 Vue 構建一個庫',
+        //   text: 'Building a Library for Vue',
         //   link: '/guide/extras/building-a-library'
         // },
         // {
-        //   text: 'Vue for React 開發者',
+        //   text: 'Vue for React Devs',
         //   link: '/guide/extras/vue-for-react-devs'
         // }
       ]
@@ -350,7 +347,7 @@ export const sidebar: ThemeConfig['sidebar'] = {
       items: [
         { text: '應用實例', link: '/api/application' },
         {
-          text: '通用',
+          text: 'General',
           link: '/api/general'
         }
       ]
@@ -360,23 +357,23 @@ export const sidebar: ThemeConfig['sidebar'] = {
       items: [
         { text: 'setup()', link: '/api/composition-api-setup' },
         {
-          text: '響應式: 核心',
+          text: 'Reactivity: Core',
           link: '/api/reactivity-core'
         },
         {
-          text: '響應式: 工具',
+          text: 'Reactivity: Utilities',
           link: '/api/reactivity-utilities'
         },
         {
-          text: '響應式: 進階',
+          text: 'Reactivity: Advanced',
           link: '/api/reactivity-advanced'
         },
         {
-          text: '生命週期鉤子',
+          text: 'Lifecycle Hooks',
           link: '/api/composition-api-lifecycle'
         },
         {
-          text: '依賴注入',
+          text: 'Dependency Injection',
           link: '/api/composition-api-dependency-injection'
         },
         {
@@ -391,16 +388,16 @@ export const sidebar: ThemeConfig['sidebar'] = {
         { text: '狀態選項', link: '/api/options-state' },
         { text: '渲染選項', link: '/api/options-rendering' },
         {
-          text: '生命週期選項',
+          text: 'Options: Lifecycle',
           link: '/api/options-lifecycle'
         },
         {
-          text: '組合選項',
+          text: 'Options: Composition',
           link: '/api/options-composition'
         },
         { text: '其他雜項', link: '/api/options-misc' },
         {
-          text: '組件實例',
+          text: 'Component Instance',
           link: '/api/component-instance'
         }
       ]
@@ -411,11 +408,11 @@ export const sidebar: ThemeConfig['sidebar'] = {
         { text: '指令', link: '/api/built-in-directives' },
         { text: '組件', link: '/api/built-in-components' },
         {
-          text: '特殊元素',
+          text: 'Special Elements',
           link: '/api/built-in-special-elements'
         },
         {
-          text: '特殊屬性',
+          text: 'Special Attributes',
           link: '/api/built-in-special-attributes'
         }
       ]
@@ -442,65 +439,65 @@ export const sidebar: ThemeConfig['sidebar'] = {
   ],
   '/examples/': [
     {
-      text: '基礎',
+      text: 'Basic',
       items: [
         {
-          text: '你好，世界',
+          text: 'Hello World',
           link: '/examples/#hello-world'
         },
         {
-          text: '處理用戶輸入',
+          text: 'Handling User Input',
           link: '/examples/#handling-input'
         },
         {
-          text: '屬性綁定',
+          text: 'Attribute Bindings',
           link: '/examples/#attribute-bindings'
         },
         {
-          text: '條件與循環',
+          text: 'Conditionals and Loops',
           link: '/examples/#conditionals-and-loops'
         },
         {
-          text: '表單綁定',
+          text: 'Form Bindings',
           link: '/examples/#form-bindings'
         },
         {
-          text: '簡單組件',
+          text: 'Simple Component',
           link: '/examples/#simple-component'
         }
       ]
     },
     {
-      text: '實戰',
+      text: 'Practical',
       items: [
         {
-          text: 'Markdown 編輯器',
+          text: 'Markdown Editor',
           link: '/examples/#markdown'
         },
         {
-          text: '獲取數據',
+          text: 'Fetching Data',
           link: '/examples/#fetching-data'
         },
         {
-          text: '帶有排序和過濾器的網格',
+          text: 'Grid with Sort and Filter',
           link: '/examples/#grid'
         },
         {
-          text: '樹狀視圖',
+          text: 'Tree View',
           link: '/examples/#tree'
         },
         {
-          text: 'SVG 圖像',
+          text: 'SVG Graph',
           link: '/examples/#svg'
         },
         {
-          text: '帶過渡動效的模態框',
+          text: 'Modal with Transitions',
           link: '/examples/#modal'
         },
         {
-          text: '帶過渡動畫的列表',
+          text: 'List with Transitions',
           link: '/examples/#list-transition'
-        },
+        }
       ]
     },
     {
@@ -508,19 +505,19 @@ export const sidebar: ThemeConfig['sidebar'] = {
       text: '7 GUIs',
       items: [
         {
-          text: '計數器',
+          text: 'Counter',
           link: '/examples/#counter'
         },
         {
-          text: '溫度轉換器',
+          text: 'Temperature Converter',
           link: '/examples/#temperature-converter'
         },
         {
-          text: '機票預訂',
+          text: 'Flight Booker',
           link: '/examples/#flight-booker'
         },
         {
-          text: '計時器',
+          text: 'Timer',
           link: '/examples/#timer'
         },
         {
@@ -528,11 +525,11 @@ export const sidebar: ThemeConfig['sidebar'] = {
           link: '/examples/#crud'
         },
         {
-          text: '畫圓',
+          text: 'Circle Drawer',
           link: '/examples/#circle-drawer'
         },
         {
-          text: '單元格',
+          text: 'Cells',
           link: '/examples/#cells'
         }
       ]
@@ -540,10 +537,10 @@ export const sidebar: ThemeConfig['sidebar'] = {
   ],
   '/style-guide/': [
     {
-      text: 'Style Guide',
+      text: '風格指南',
       items: [
         {
-          text: 'Overview',
+          text: '總覽',
           link: '/style-guide/'
         },
         {
@@ -586,12 +583,12 @@ export default defineConfigWithTheme<ThemeConfig>({
   extends: baseConfig,
 
   sitemap: {
-    hostname: 'https://zh-hk.vuejs.org'
+    hostname: 'https://vuejs.org'
   },
 
-  lang: 'zh-HK',
+  lang: 'en-US',
   title: 'Vue.js',
-  description: 'Vue.js - 漸進式的 JavaScript 框架',
+  description: 'Vue.js - The Progressive JavaScript Framework',
   srcDir: 'src',
   srcExclude: ['tutorial/**/description.md'],
 
@@ -604,7 +601,7 @@ export default defineConfigWithTheme<ThemeConfig>({
       'meta',
       {
         property: 'og:description',
-        content: 'Vue.js - 漸進式的 JavaScript 框架'
+        content: 'Vue.js - The Progressive JavaScript Framework'
       }
     ],
     [
@@ -629,7 +626,7 @@ export default defineConfigWithTheme<ThemeConfig>({
       'script',
       {
         src: 'https://cdn.usefathom.com/script.js',
-        'data-site': 'ZPMMDSYA',
+        'data-site': 'XNOLWPLB',
         'data-spa': 'auto',
         defer: ''
       }
@@ -637,27 +634,22 @@ export default defineConfigWithTheme<ThemeConfig>({
     [
       'script',
       {
-        src: 'https://vueschool.io/banner.js?affiliate=vuejs&type=top',
+        src: 'https://media.bitterbrains.com/main.js?from=vuejs&type=top',
         async: 'true'
       }
-    ],
-    inlineScript('perfops.js')
+    ]
   ],
 
   themeConfig: {
     nav,
     sidebar,
-    i18n,
+    // Placeholder of the i18n config for @vuejs-translations.
+    // i18n,
 
     localeLinks: [
       {
-        link: 'https://vuejs.org',
-        text: 'English',
-        repo: 'https://github.com/vuejs/docs'
-      },
-      {
         link: 'https://cn.vuejs.org',
-        text: '簡體中文',
+        text: '简体中文',
         repo: 'https://github.com/vuejs-translations/docs-zh-cn'
       },
       {
@@ -674,6 +666,11 @@ export default defineConfigWithTheme<ThemeConfig>({
         link: 'https://fr.vuejs.org',
         text: 'Français',
         repo: 'https://github.com/vuejs-translations/docs-fr'
+      },
+      {
+        link: 'https://de.vuejs.org',
+        text: 'Deutsch',
+        repo: 'https://github.com/vuejs-translations/docs-de'
       },
       {
         link: 'https://ko.vuejs.org',
@@ -718,11 +715,11 @@ export default defineConfigWithTheme<ThemeConfig>({
       {
         link: 'https://pl.vuejs.org',
         text: 'Polski',
-        repo: 'https://github.com/vuejs-translations/docs-pl',
+        repo: 'https://github.com/vuejs-translations/docs-pl'
       },
       {
         link: '/translations/',
-        text: '幫助我們翻譯！',
+        text: 'Help Us Translate!',
         isTranslationsDesc: true
       }
     ],
@@ -730,81 +727,41 @@ export default defineConfigWithTheme<ThemeConfig>({
     algolia: {
       indexName: 'vuejs',
       appId: 'ML0LEBN7FQ',
-      apiKey: 'f49cbd92a74532cc55cfbffa5e5a7d01',
+      apiKey: '10e7a8b13e6aec4007343338ab134e05',
       searchParameters: {
         facetFilters: ['version:v3']
-      },
-      placeholder: '搜索文檔',
-      translations: {
-        button: {
-          buttonText: '搜索'
-        },
-        modal: {
-          searchBox: {
-            resetButtonTitle: '清除查詢條件',
-            resetButtonAriaLabel: '清除查詢條件',
-            cancelButtonText: '取消',
-            cancelButtonAriaLabel: '取消'
-          },
-          startScreen: {
-            recentSearchesTitle: '搜索歷史',
-            noRecentSearchesText: '暫無搜索歷史',
-            saveRecentSearchButtonTitle: '保存到搜索歷史',
-            removeRecentSearchButtonTitle: '從搜索歷史中移除',
-            favoriteSearchesTitle: '收藏',
-            removeFavoriteSearchButtonTitle: '從收藏中移除'
-          },
-          errorScreen: {
-            titleText: '無法獲取結果',
-            helpText: '你可能需要檢查你的網絡連接'
-          },
-          footer: {
-            selectText: '選擇',
-            navigateText: '切換',
-            closeText: '關閉',
-            searchByText: '搜索供應商'
-          },
-          noResultsScreen: {
-            noResultsText: '無法找到相關結果',
-            suggestedQueryText: '你可以嘗試查詢',
-            reportMissingResultsText: '你認為這個查詢應該有結果？',
-            reportMissingResultsLinkText: '向我們反饋'
-          }
-        }
       }
     },
 
-    // carbonAds: {
-    //   code: 'CEBDT27Y',
-    //   placement: 'vuejsorg'
-    // },
+    carbonAds: {
+      code: 'CEBDT27Y',
+      placement: 'vuejsorg'
+    },
 
     socialLinks: [
       { icon: 'github', link: 'https://github.com/vuejs/' },
-      { icon: 'twitter', link: 'https://twitter.com/vuejs' },
+      { icon: 'twitter', link: 'https://x.com/vuejs' },
       { icon: 'discord', link: 'https://discord.com/invite/vue' }
     ],
 
     editLink: {
-      repo: 'vuejs-translations/docs-zh-cn',
-      text: '在 GitHub 上編輯此頁'
+      repo: 'vuejs/docs',
+      text: 'Edit this page on GitHub'
     },
 
     footer: {
       license: {
-        text: '版權聲明',
-        link: 'https://github.com/vuejs-translations/docs-zh-hk#%E7%89%88%E6%9D%83%E5%A3%B0%E6%98%8E'
+        text: 'MIT License',
+        link: 'https://opensource.org/licenses/MIT'
       },
-      copyright:
-        '本中文文檔採用 知識共享署名-非商業性使用-相同方式共享 4.0 國際許可協議  (CC BY-NC-SA 4.0) 進行許可。'
+      copyright: `Copyright © 2014-${new Date().getFullYear()} Evan You`
     }
   },
 
   markdown: {
     theme: 'github-dark',
     config(md) {
-      md.use(headerPlugin)
-        .use(groupIconMdPlugin)
+      md.use(headerPlugin).use(groupIconMdPlugin)
       // .use(textAdPlugin)
     }
   },
